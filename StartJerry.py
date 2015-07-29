@@ -1,5 +1,7 @@
 import subprocess
 
+
+
 #get bytecode without any optimizations
 cmd = '/home/john/git/jerryscript/build/bin/debug.linux/jerry /home/john/workspace/ScriptForJerry/test.js --show-opcodes > /home/john/Documents/opcodes_for_test_js.txt'
 p = subprocess.Popen(cmd, shell=True)
