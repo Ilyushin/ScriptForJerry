@@ -1,0 +1,128 @@
+// var a=1;
+  0:                 meta   12  255          // [to be rewritten]
+// var b=2;
+// var o = {"x":1, "y":2};
+// var a = 5+3+2*5;
+// function f(a,b) { return a+2; }
+// f(2);
+// f(3,5);
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var a=1;
+  2:             var_decl                    // var a;
+// var b=2;
+  3:             var_decl                    // var b;
+// var o = {"x":1, "y":2};
+  4:             var_decl                    // var o;
+// var a = 5+3+2*5;
+// function f(a,b) { return a+2; }
+// f(2);
+// f(3,5);
+// var a=1;
+  5:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  6:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
+// var b=2;
+  7:           assignment  130    1          // tmp130 = 2: SMALLINT;
+  8:           assignment  254    6          // b = tmp130 : TYPEOF(tmp130);
+// var o = {"x":1, "y":2};
+  9:             obj_decl  255               // 
+ 10:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 11:           assignment  131    5          // tmp131 = 'x': STRING;
+ 12:                 meta    3  131          // 
+ 13:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 14:           assignment  131    5          // tmp131 = 'y': STRING;
+ 15:                 meta    3  131          // 
+  9:             obj_decl  130               //  // REWRITE
+ 16:           assignment  254    6          // o = tmp130 : TYPEOF(tmp130);
+// var a = 5+3+2*5;
+ 17:           assignment  130    1          // tmp130 = 5: SMALLINT;
+ 18:           assignment  131    1          // tmp131 = 3: SMALLINT;
+ 19:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 20:           assignment  133    1          // tmp133 = 2: SMALLINT;
+ 21:           assignment  134    1          // tmp134 = 5: SMALLINT;
+ 22:       multiplication  135  133          // tmp135 = tmp133 * tmp134;
+ 23:             addition  136  132          // tmp136 = tmp132 + tmp135;
+ 24:           assignment  254    6          // a = tmp136 : TYPEOF(tmp136);
+// function f(a,b) { return a+2; }
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  3:                 meta    7  255          // function end: 65538;
+  4:                 meta   12  255          // [to be rewritten]
+  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  5:         reg_var_decl  128               // var tmp128 .. tmp255;
+  6:           assignment  130    6          // tmp130 = a : TYPEOF(a);
+  7:           assignment  131    1          // tmp131 = 2: SMALLINT;
+  8:             addition  132  130          // tmp132 = tmp130 + tmp131;
+  9:               retval                    // return tmp132;
+  5:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 10:                  ret                    // ret;
+  3:                 meta    7    0          // function end: 11; // REWRITE
+// f(2);
+ 25:               call_n  255  254          // 
+ 26:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 27:                 meta    2  130          // 
+ 25:               call_n  130  254          //  // REWRITE
+// f(3,5);
+ 28:               call_n  255  254          // 
+ 29:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 30:                 meta    2  130          // 
+ 31:           assignment  130    1          // tmp130 = 5: SMALLINT;
+ 32:                 meta    2  130          // 
+ 28:               call_n  130  254          //  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+ 33:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] a : STRING
+0x84ec5c [  8] b : STRING
+0x84ec64 [  8] o : STRING
+0x84ec6c [  8] x : STRING
+0x84ec74 [  8] y : STRING
+0x84ec7c [  8] f : STRING
+0x84ec98 [ 40]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp136;
+  2:             var_decl                    // var a;
+  3:             var_decl                    // var b;
+  4:             var_decl                    // var o;
+  5:          func_decl_n    3               // 
+  6:                 meta    2    0          // 
+  7:                 meta    2    1          // function f (a, b);
+  8:                 meta    7    0          // function end: 16;
+  9:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 10:         reg_var_decl  128               // var tmp128 .. tmp132;
+ 11:           assignment  130    6          // tmp130 = a : TYPEOF(a);
+ 12:           assignment  131    1          // tmp131 = 2: SMALLINT;
+ 13:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 14:               retval                    // return tmp132;
+ 15:                  ret                    // ret;
+ 16:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 17:           assignment    0    6          // a = tmp130 : TYPEOF(tmp130);
+ 18:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 19:           assignment    1    6          // b = tmp130 : TYPEOF(tmp130);
+ 20:             obj_decl  130               // 
+ 21:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 22:           assignment  131    5          // tmp131 = 'x': STRING;
+ 23:                 meta    3  131          // 
+ 24:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 25:           assignment  131    5          // tmp131 = 'y': STRING;
+ 26:                 meta    3  131          // tmp130 = {tmp131:tmp130, tmp131:tmp130};
+ 27:           assignment    2    6          // o = tmp130 : TYPEOF(tmp130);
+ 28:           assignment  130    1          // tmp130 = 5: SMALLINT;
+ 29:           assignment  131    1          // tmp131 = 3: SMALLINT;
+ 30:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 31:           assignment  133    1          // tmp133 = 2: SMALLINT;
+ 32:           assignment  134    1          // tmp134 = 5: SMALLINT;
+ 33:       multiplication  135  133          // tmp135 = tmp133 * tmp134;
+ 34:             addition  136  132          // tmp136 = tmp132 + tmp135;
+ 35:           assignment    0    6          // a = tmp136 : TYPEOF(tmp136);
+ 36:               call_n  130    3          // 
+ 37:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 38:                 meta    2  130          // tmp130 = f (tmp130);
+ 39:               call_n  130    3          // 
+ 40:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 41:                 meta    2  130          // 
+ 42:           assignment  130    1          // tmp130 = 5: SMALLINT;
+ 43:                 meta    2  130          // tmp130 = f (tmp130, tmp130);
+ 44:                  ret                    // ret;
