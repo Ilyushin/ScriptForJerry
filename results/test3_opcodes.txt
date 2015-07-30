@@ -1,0 +1,32 @@
+// var a = 5+3+2*5;
+  0:                 meta   12  255          // [to be rewritten]
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var a = 5+3+2*5;
+  2:             var_decl                    // var a;
+// var a = 5+3+2*5;
+  3:           assignment  130    1          // tmp130 = 5: SMALLINT;
+  4:           assignment  131    1          // tmp131 = 3: SMALLINT;
+  5:             addition  132  130          // tmp132 = tmp130 + tmp131;
+  6:           assignment  133    1          // tmp133 = 2: SMALLINT;
+  7:           assignment  134    1          // tmp134 = 5: SMALLINT;
+  8:       multiplication  135  133          // tmp135 = tmp133 * tmp134;
+  9:             addition  136  132          // tmp136 = tmp132 + tmp135;
+ 10:           assignment  254    6          // a = tmp136 : TYPEOF(tmp136);
+  1:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+ 11:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] a : STRING
+0x84ec5c [ 36]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp136;
+  2:             var_decl                    // var a;
+  3:           assignment  130    1          // tmp130 = 5: SMALLINT;
+  4:           assignment  131    1          // tmp131 = 3: SMALLINT;
+  5:             addition  132  130          // tmp132 = tmp130 + tmp131;
+  6:           assignment  133    1          // tmp133 = 2: SMALLINT;
+  7:           assignment  134    1          // tmp134 = 5: SMALLINT;
+  8:       multiplication  135  133          // tmp135 = tmp133 * tmp134;
+  9:             addition  136  132          // tmp136 = tmp132 + tmp135;
+ 10:           assignment    0    6          // a = tmp136 : TYPEOF(tmp136);
+ 11:                  ret                    // ret;

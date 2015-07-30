@@ -1,0 +1,35 @@
+// var o = {"x":1, "y":2};
+  0:                 meta   12  255          // [to be rewritten]
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var o = {"x":1, "y":2};
+  2:             var_decl                    // var o;
+// var o = {"x":1, "y":2};
+  3:             obj_decl  255               // 
+  4:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  5:           assignment  131    5          // tmp131 = 'x': STRING;
+  6:                 meta    3  131          // 
+  7:           assignment  130    1          // tmp130 = 2: SMALLINT;
+  8:           assignment  131    5          // tmp131 = 'y': STRING;
+  9:                 meta    3  131          // 
+  3:             obj_decl  130               //  // REWRITE
+ 10:           assignment  254    6          // o = tmp130 : TYPEOF(tmp130);
+  1:         reg_var_decl  128               // var tmp128 .. tmp131; // REWRITE
+ 11:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] o : STRING
+0x84ec5c [  8] x : STRING
+0x84ec64 [  8] y : STRING
+0x84ec6c [ 20]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp131;
+  2:             var_decl                    // var o;
+  3:             obj_decl  130               // 
+  4:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  5:           assignment  131    5          // tmp131 = 'x': STRING;
+  6:                 meta    3  131          // 
+  7:           assignment  130    1          // tmp130 = 2: SMALLINT;
+  8:           assignment  131    5          // tmp131 = 'y': STRING;
+  9:                 meta    3  131          // tmp130 = {tmp131:tmp130, tmp131:tmp130};
+ 10:           assignment    0    6          // o = tmp130 : TYPEOF(tmp130);
+ 11:                  ret                    // ret;

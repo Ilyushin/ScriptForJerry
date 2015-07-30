@@ -1,0 +1,30 @@
+// var a=1;
+  0:                 meta   12  255          // [to be rewritten]
+// var b=2;
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var a=1;
+  2:             var_decl                    // var a;
+// var b=2;
+  3:             var_decl                    // var b;
+// var a=1;
+  4:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  5:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
+// var b=2;
+  6:           assignment  130    1          // tmp130 = 2: SMALLINT;
+  7:           assignment  254    6          // b = tmp130 : TYPEOF(tmp130);
+  1:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+  8:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] a : STRING
+0x84ec5c [  8] b : STRING
+0x84ec64 [ 28]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp130;
+  2:             var_decl                    // var a;
+  3:             var_decl                    // var b;
+  4:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  5:           assignment    0    6          // a = tmp130 : TYPEOF(tmp130);
+  6:           assignment  130    1          // tmp130 = 2: SMALLINT;
+  7:           assignment    1    6          // b = tmp130 : TYPEOF(tmp130);
+  8:                  ret                    // ret;
