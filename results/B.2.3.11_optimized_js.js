@@ -1,0 +1,1 @@
+assert.sameValue("_".small(),"<small>_</small>");assert.sameValue("<".small(),"<small><</small>");assert.sameValue(String.prototype.small.call(42),"<small>42</small>");assert["throws"](TypeError,function(){String.prototype.small.call(undefined)});assert["throws"](TypeError,function(){String.prototype.small.call(null)});assert.sameValue(String.prototype.small.length,0);

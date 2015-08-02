@@ -1,0 +1,242 @@
+// // Copyright (C) 2015 the V8 project authors. All rights reserved.
+// 
+// // This code is governed by the BSD license found in the LICENSE file.
+// 
+// /*---
+// 
+// if (compareArray([,], [,]) !== true) {
+  0:                 meta   12  255          // [to be rewritten]
+//   $ERROR('Sparse arrays of the same length are equivalent.');
+// }
+// if (compareArray([,], [,,]) !== false) {
+//   $ERROR('Sparse arrays of differing lengths are not equivalent.');
+// }
+// if (compareArray([,,], [,]) !== false) {
+//   $ERROR('Sparse arrays of differing lengths are not equivalent.');
+// }
+// if (compareArray([,], []) !== false) {
+//   $ERROR('Sparse arrays are not equivalent to empty arrays.');
+// }
+// if (compareArray([], [,]) !== false) {
+//   $ERROR('Sparse arrays are not equivalent to empty arrays.');
+// }
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+//   $ERROR('Sparse arrays of the same length are equivalent.');
+// }
+// if (compareArray([,], [,,]) !== false) {
+//   $ERROR('Sparse arrays of differing lengths are not equivalent.');
+// }
+// if (compareArray([,,], [,]) !== false) {
+//   $ERROR('Sparse arrays of differing lengths are not equivalent.');
+// }
+// if (compareArray([,], []) !== false) {
+//   $ERROR('Sparse arrays are not equivalent to empty arrays.');
+// }
+// if (compareArray([], [,]) !== false) {
+//   $ERROR('Sparse arrays are not equivalent to empty arrays.');
+// }
+// 
+  2:               call_n  255  254          // 
+  3:           array_decl  255               // 
+  4:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+  5:                 meta    2  130          // 
+  3:           array_decl  130               //  // REWRITE
+  6:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+  7:           array_decl  255               // 
+  8:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+  9:                 meta    2  130          // 
+  7:           array_decl  130               //  // REWRITE
+ 10:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+  2:               call_n  130  254          //  // REWRITE
+ 11:           assignment  131    0          // tmp131 = true: SIMPLE;
+ 12: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 13:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65548;
+//   $ERROR('Sparse arrays of the same length are equivalent.');
+ 14:               call_n  255  254          // 
+ 15:           assignment  130    5          // tmp130 = 'Sparse arrays of the same length are equivalent.': STRING;
+ 16:                 meta    2  130          // 
+ 14:               call_n  130  254          //  // REWRITE
+// }
+// if (compareArray([,], [,,]) !== false) {
+ 13:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 17; // REWRITE
+ 17:               call_n  255  254          // 
+ 18:           array_decl  255               // 
+ 19:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 20:                 meta    2  130          // 
+ 18:           array_decl  130               //  // REWRITE
+ 21:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+ 22:           array_decl  255               // 
+ 23:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 24:                 meta    2  130          // 
+ 25:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 26:                 meta    2  130          // 
+ 22:           array_decl  130               //  // REWRITE
+ 27:                 meta    2  130          // 
+ 17:               call_n  130  254          //  // REWRITE
+ 28:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 29: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 30:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65565;
+//   $ERROR('Sparse arrays of differing lengths are not equivalent.');
+ 31:               call_n  255  254          // 
+ 32:           assignment  130    5          // tmp130 = 'Sparse arrays of differing lengths are not equivalent.': STRING;
+ 33:                 meta    2  130          // 
+ 31:               call_n  130  254          //  // REWRITE
+// }
+// if (compareArray([,,], [,]) !== false) {
+ 30:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 34; // REWRITE
+ 34:               call_n  255  254          // 
+ 35:           array_decl  255               // 
+ 36:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 37:                 meta    2  130          // 
+ 38:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 39:                 meta    2  130          // 
+ 35:           array_decl  130               //  // REWRITE
+ 40:                 meta    2  130          // 
+ 41:           array_decl  255               // 
+ 42:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 43:                 meta    2  130          // 
+ 41:           array_decl  130               //  // REWRITE
+ 44:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+ 34:               call_n  130  254          //  // REWRITE
+ 45:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 46: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 47:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65582;
+//   $ERROR('Sparse arrays of differing lengths are not equivalent.');
+ 48:               call_n  255  254          // 
+ 49:           assignment  130    5          // tmp130 = 'Sparse arrays of differing lengths are not equivalent.': STRING;
+ 50:                 meta    2  130          // 
+ 48:               call_n  130  254          //  // REWRITE
+// }
+// if (compareArray([,], []) !== false) {
+ 47:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 51; // REWRITE
+ 51:               call_n  255  254          // 
+ 52:           array_decl  255               // 
+ 53:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 54:                 meta    2  130          // 
+ 52:           array_decl  130               //  // REWRITE
+ 55:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+ 56:           array_decl  255               // 
+ 56:           array_decl  130               // tmp130 = []; // REWRITE
+ 57:                 meta    2  130          // 
+ 51:               call_n  130  254          //  // REWRITE
+ 58:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 59: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 60:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65595;
+//   $ERROR('Sparse arrays are not equivalent to empty arrays.');
+ 61:               call_n  255  254          // 
+ 62:           assignment  130    5          // tmp130 = 'Sparse arrays are not equivalent to empty arrays.': STRING;
+ 63:                 meta    2  130          // 
+ 61:               call_n  130  254          //  // REWRITE
+// }
+// if (compareArray([], [,]) !== false) {
+ 60:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 64; // REWRITE
+ 64:               call_n  255  254          // 
+ 65:           array_decl  255               // 
+ 65:           array_decl  130               // tmp130 = []; // REWRITE
+ 66:                 meta    2  130          // 
+ 67:           array_decl  255               // 
+ 68:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 69:                 meta    2  130          // 
+ 67:           array_decl  130               //  // REWRITE
+ 70:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+ 64:               call_n  130  254          //  // REWRITE
+ 71:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 72: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 73:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65608;
+//   $ERROR('Sparse arrays are not equivalent to empty arrays.');
+ 74:               call_n  255  254          // 
+ 75:           assignment  130    5          // tmp130 = 'Sparse arrays are not equivalent to empty arrays.': STRING;
+ 76:                 meta    2  130          // 
+ 74:               call_n  130  254          //  // REWRITE
+// }
+// 
+ 73:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 77; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 77:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 20] compareArray : STRING
+0x84ec68 [ 12] $ERROR : STRING
+0x84ec74 [ 56] Sparse arrays of the same length are equivalent. : STRING
+0x84ecd4 [ 60] Sparse arrays of differing lengths are not equivalent. : STRING
+0x84ed24 [ 56] Sparse arrays are not equivalent to empty arrays. : STRING
+0x84ed70 [ 16]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp132;
+  2:               call_n  130    0          // 
+  3:           array_decl  130               // 
+  4:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+  5:                 meta    2  130          // tmp130 = [tmp130];
+  6:                 meta    2  130          // 
+  7:           array_decl  130               // 
+  8:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+  9:                 meta    2  130          // tmp130 = [tmp130];
+ 10:                 meta    2  130          // 
+ 11:           assignment  131    0          // tmp131 = true: SIMPLE;
+ 12: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 13:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 17;
+ 14:               call_n  130    1          // 
+ 15:           assignment  130    5          // tmp130 = 'Sparse arrays of the same length are equivalent.': STRING;
+ 16:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 17:               call_n  130    0          // 
+ 18:           array_decl  130               // 
+ 19:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 20:                 meta    2  130          // tmp130 = [tmp130];
+ 21:                 meta    2  130          // 
+ 22:           array_decl  130               // 
+ 23:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 24:                 meta    2  130          // 
+ 25:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 26:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+ 27:                 meta    2  130          // 
+ 28:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 29: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 30:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 34;
+ 31:               call_n  130    1          // 
+ 32:           assignment  130    5          // tmp130 = 'Sparse arrays of differing lengths are not equivalent.': STRING;
+ 33:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 34:               call_n  130    0          // 
+ 35:           array_decl  130               // 
+ 36:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 37:                 meta    2  130          // 
+ 38:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 39:                 meta    2  130          // tmp130 = [tmp130, tmp130];
+ 40:                 meta    2  130          // 
+ 41:           array_decl  130               // 
+ 42:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 43:                 meta    2  130          // tmp130 = [tmp130];
+ 44:                 meta    2  130          // 
+ 45:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 46: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 47:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 51;
+ 48:               call_n  130    1          // 
+ 49:           assignment  130    5          // tmp130 = 'Sparse arrays of differing lengths are not equivalent.': STRING;
+ 50:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 51:               call_n  130    0          // 
+ 52:           array_decl  130               // 
+ 53:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 54:                 meta    2  130          // tmp130 = [tmp130];
+ 55:                 meta    2  130          // 
+ 56:           array_decl  130               // tmp130 = [];
+ 57:                 meta    2  130          // 
+ 58:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 59: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 60:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 64;
+ 61:               call_n  130    1          // 
+ 62:           assignment  130    5          // tmp130 = 'Sparse arrays are not equivalent to empty arrays.': STRING;
+ 63:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 64:               call_n  130    0          // 
+ 65:           array_decl  130               // tmp130 = [];
+ 66:                 meta    2  130          // 
+ 67:           array_decl  130               // 
+ 68:           assignment  130    0          // tmp130 = undefined: SIMPLE;
+ 69:                 meta    2  130          // tmp130 = [tmp130];
+ 70:                 meta    2  130          // 
+ 71:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 72: not_equal_value_type  132  130          // tmp132 = tmp130 !== tmp131;
+ 73:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 77;
+ 74:               call_n  130    1          // 
+ 75:           assignment  130    5          // tmp130 = 'Sparse arrays are not equivalent to empty arrays.': STRING;
+ 76:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 77:                  ret                    // ret;

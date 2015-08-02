@@ -1,0 +1,169 @@
+// // Copyright (C) 2015 the V8 project authors. All rights reserved.
+// 
+// // This code is governed by the BSD license found in the LICENSE file.
+// 
+// /*---
+// 
+// var threw = false;
+  0:                 meta   12  255          // [to be rewritten]
+// try {
+//   assert.throws(Error, function() {});
+// } catch(err) {
+//   threw = true;
+//   if (err.constructor !== Test262Error) {
+//     $ERROR(
+//       'Expected a Test262Error, but a "' + err.constructor.name +
+//       '" was thrown.'
+//     );
+//   }
+// }
+// if (threw === false) {
+//   $ERROR('Expected a Test262Error, but no error was thrown.');
+// }
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+  2:             var_decl                    // var threw;
+// try {
+//   assert.throws(Error, function() {});
+// } catch(err) {
+//   threw = true;
+//   if (err.constructor !== Test262Error) {
+//     $ERROR(
+//       'Expected a Test262Error, but a "' + err.constructor.name +
+//       '" was thrown.'
+//     );
+//   }
+// }
+// if (threw === false) {
+//   $ERROR('Expected a Test262Error, but no error was thrown.');
+// }
+// 
+  3:           assignment  130    0          // tmp130 = false: SIMPLE;
+  4:           assignment  254    6          // threw = tmp130 : TYPEOF(tmp130);
+// try {
+  5:            try_block  255               // try (end: 65540);
+//   assert.throws(Error, function() {});
+  6:           assignment  130    5          // tmp130 = 'throws': STRING;
+  7:          prop_getter  131  254          // tmp131 = assert[tmp130];
+  8:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  9:               call_n  255  131          // 
+ 10:                 meta    1    1          // 
+ 11:                 meta    2  254          // 
+ 12:          func_expr_n  255  255          // 
+ 12:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 13:                 meta    7  255          // function end: 65548;
+ 14:                 meta   12  255          // [to be rewritten]
+ 14:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 15:         reg_var_decl  128               // var tmp128 .. tmp255;
+ 15:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 16:                  ret                    // ret;
+ 13:                 meta    7    0          // function end: 17; // REWRITE
+ 17:                 meta    2  133          // 
+  9:               call_n  133  131          //  // REWRITE
+// } catch(err) {
+  5:            try_block    0               // try (end: 18); // REWRITE
+ 18:                 meta    8  255          // catch end: 65553;
+ 19:                 meta    9  254          // catch (err);
+//   threw = true;
+ 20:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 21:           assignment  254    6          // threw = tmp130 : TYPEOF(tmp130);
+//   if (err.constructor !== Test262Error) {
+ 22:           assignment  130    5          // tmp130 = 'constructor': STRING;
+ 23:          prop_getter  131  254          // tmp131 = err[tmp130];
+ 24: not_equal_value_type  132  131          // tmp132 = tmp131 !== Test262Error;
+ 25:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65560;
+//     $ERROR(
+ 26:               call_n  255  254          // 
+//       'Expected a Test262Error, but a "' + err.constructor.name +
+ 27:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but a "': STRING;
+ 28:           assignment  131    5          // tmp131 = 'constructor': STRING;
+ 29:          prop_getter  132  254          // tmp132 = err[tmp131];
+ 30:           assignment  133    5          // tmp133 = 'name': STRING;
+ 31:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 32:             addition  135  130          // tmp135 = tmp130 + tmp134;
+//       '" was thrown.'
+ 33:           assignment  136    5          // tmp136 = '" was thrown.': STRING;
+//     );
+ 34:             addition  137  135          // tmp137 = tmp135 + tmp136;
+ 35:                 meta    2  137          // 
+ 26:               call_n  130  254          //  // REWRITE
+//   }
+// }
+ 25:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 36; // REWRITE
+ 18:                 meta    8    0          // catch end: 36; // REWRITE
+// if (threw === false) {
+ 36:                 meta   11  255          // end try
+ 37:           assignment  130    6          // tmp130 = threw : TYPEOF(threw);
+ 38:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 39:     equal_value_type  132  130          // tmp132 = tmp130 === tmp131;
+ 40:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65575;
+//   $ERROR('Expected a Test262Error, but no error was thrown.');
+ 41:               call_n  255  254          // 
+ 42:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but no error was thrown.': STRING;
+ 43:                 meta    2  130          // 
+ 41:               call_n  130  254          //  // REWRITE
+// }
+// 
+ 40:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 44; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp137; // REWRITE
+ 44:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] threw : STRING
+0x84ec60 [ 12] assert : STRING
+0x84ec6c [ 12] throws : STRING
+0x84ec78 [  4] Error : MAGIC STRING [id=37] 
+0x84ec7c [ 12] err : STRING
+0x84ec9c [  4] constructor : MAGIC STRING [id=3] 
+0x84eca0 [ 20] Test262Error : STRING
+0x84ecb4 [ 12] $ERROR : STRING
+0x84ecd4 [ 40] Expected a Test262Error, but a " : STRING
+0x84ecfc [  4] name : MAGIC STRING [id=197] 
+0x84ed14 [ 20] " was thrown. : STRING
+0x84ed28 [ 56] Expected a Test262Error, but no error was thrown. : STRING
+0x84ed74 [ 12]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp137;
+  2:             var_decl                    // var threw;
+  3:           assignment  130    0          // tmp130 = false: SIMPLE;
+  4:           assignment    0    6          // threw = tmp130 : TYPEOF(tmp130);
+  5:            try_block    0               // try (end: 18);
+  6:           assignment  130    5          // tmp130 = 'throws': STRING;
+  7:          prop_getter  131    2          // tmp131 = assert[tmp130];
+  8:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  9:               call_n  133  131          // 
+ 10:                 meta    1    1          // 
+ 11:                 meta    2    3          // 
+ 12:          func_expr_n  133  255          // tmp133 = function ();
+ 13:                 meta    7    0          // function end: 17;
+ 14:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 15:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 16:                  ret                    // ret;
+ 17:                 meta    2  133          // tmp133 = function (tmp133);
+ 18:                 meta    8    0          // catch end: 36;
+ 19:                 meta    9    4          // catch (err);
+ 20:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 21:           assignment    0    6          // threw = tmp130 : TYPEOF(tmp130);
+ 22:           assignment  130    5          // tmp130 = 'constructor': STRING;
+ 23:          prop_getter  131    4          // tmp131 = err[tmp130];
+ 24: not_equal_value_type  132  131          // tmp132 = tmp131 !== Test262Error;
+ 25:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 36;
+ 26:               call_n  130    7          // 
+ 27:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but a "': STRING;
+ 28:           assignment  131    5          // tmp131 = 'constructor': STRING;
+ 29:          prop_getter  132    4          // tmp132 = err[tmp131];
+ 30:           assignment  133    5          // tmp133 = 'name': STRING;
+ 31:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 32:             addition  135  130          // tmp135 = tmp130 + tmp134;
+ 33:           assignment  136    5          // tmp136 = '" was thrown.': STRING;
+ 34:             addition  137  135          // tmp137 = tmp135 + tmp136;
+ 35:                 meta    2  137          // tmp130 = $ERROR (tmp137);
+ 36:                 meta   11  255          // end try
+ 37:           assignment  130    6          // tmp130 = threw : TYPEOF(threw);
+ 38:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 39:     equal_value_type  132  130          // tmp132 = tmp130 === tmp131;
+ 40:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 44;
+ 41:               call_n  130    7          // 
+ 42:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but no error was thrown.': STRING;
+ 43:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 44:                  ret                    // ret;

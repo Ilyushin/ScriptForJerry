@@ -1,0 +1,95 @@
+// if(typeof Date.prototype.setYear!=="function")$ERROR('#1: typeof Date.prototype.setYear === "function". Actual: '+typeof Date.prototype.setYear);if(typeof Date.prototype["setYear"]!=="function")$ERROR('#2: typeof Date.prototype["setYear"] === "function". Actual: '+typeof Date.prototype["setYear"]);
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// if(typeof Date.prototype.setYear!=="function")$ERROR('#1: typeof Date.prototype.setYear === "function". Actual: '+typeof Date.prototype.setYear);if(typeof Date.prototype["setYear"]!=="function")$ERROR('#2: typeof Date.prototype["setYear"] === "function". Actual: '+typeof Date.prototype["setYear"]);
+// 
+// if(typeof Date.prototype.setYear!=="function")$ERROR('#1: typeof Date.prototype.setYear === "function". Actual: '+typeof Date.prototype.setYear);if(typeof Date.prototype["setYear"]!=="function")$ERROR('#2: typeof Date.prototype["setYear"] === "function". Actual: '+typeof Date.prototype["setYear"]);
+  2:           assignment  130    5          // tmp130 = 'prototype': STRING;
+  3:          prop_getter  131  254          // tmp131 = Date[tmp130];
+  4:           assignment  132    5          // tmp132 = 'setYear': STRING;
+  5:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+  6:               typeof  134               // tmp134 = typeof tmp133;
+  7:           assignment  135    5          // tmp135 = 'function': STRING;
+  8: not_equal_value_type  136  134          // tmp136 = tmp134 !== tmp135;
+  9:    is_false_jmp_down  136  255          // if (tmp136 == false) goto 65544;
+ 10:               call_n  255  254          // 
+ 11:           assignment  130    5          // tmp130 = '#1: typeof Date.prototype.setYear === "function". Actual: ': STRING;
+ 12:           assignment  131    5          // tmp131 = 'prototype': STRING;
+ 13:          prop_getter  132  254          // tmp132 = Date[tmp131];
+ 14:           assignment  133    5          // tmp133 = 'setYear': STRING;
+ 15:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 16:               typeof  135               // tmp135 = typeof tmp134;
+ 17:             addition  136  130          // tmp136 = tmp130 + tmp135;
+ 18:                 meta    2  136          // 
+ 10:               call_n  130  254          //  // REWRITE
+  9:    is_false_jmp_down  136    0          // if (tmp136 == false) goto 19; // REWRITE
+ 19:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 20:          prop_getter  131  254          // tmp131 = Date[tmp130];
+ 21:           assignment  132    5          // tmp132 = 'setYear': STRING;
+ 22:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 23:               typeof  134               // tmp134 = typeof tmp133;
+ 24:           assignment  135    5          // tmp135 = 'function': STRING;
+ 25: not_equal_value_type  136  134          // tmp136 = tmp134 !== tmp135;
+ 26:    is_false_jmp_down  136  255          // if (tmp136 == false) goto 65561;
+ 27:               call_n  255  254          // 
+ 28:           assignment  130    5          // tmp130 = '#2: typeof Date.prototype["setYear"] === "function". Actual: ': STRING;
+ 29:           assignment  131    5          // tmp131 = 'prototype': STRING;
+ 30:          prop_getter  132  254          // tmp132 = Date[tmp131];
+ 31:           assignment  133    5          // tmp133 = 'setYear': STRING;
+ 32:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 33:               typeof  135               // tmp135 = typeof tmp134;
+ 34:             addition  136  130          // tmp136 = tmp130 + tmp135;
+ 35:                 meta    2  136          // 
+ 27:               call_n  130  254          //  // REWRITE
+// 
+ 26:    is_false_jmp_down  136    0          // if (tmp136 == false) goto 36; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+ 36:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  4] Date : MAGIC STRING [id=34] 
+0x84ec58 [  4] prototype : MAGIC STRING [id=2] 
+0x84ec5c [ 16] setYear : STRING
+0x84ec6c [  4] function : MAGIC STRING [id=14] 
+0x84ec70 [ 12] $ERROR : STRING
+0x84ec7c [ 64] #1: typeof Date.prototype.setYear === "function". Actual:  : STRING
+0x84ece4 [ 68] #2: typeof Date.prototype["setYear"] === "function". Actual:  : STRING
+0x84ed3c [  4]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp136;
+  2:           assignment  130    5          // tmp130 = 'prototype': STRING;
+  3:          prop_getter  131    1          // tmp131 = Date[tmp130];
+  4:           assignment  132    5          // tmp132 = 'setYear': STRING;
+  5:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+  6:               typeof  134               // tmp134 = typeof tmp133;
+  7:           assignment  135    5          // tmp135 = 'function': STRING;
+  8: not_equal_value_type  136  134          // tmp136 = tmp134 !== tmp135;
+  9:    is_false_jmp_down  136    0          // if (tmp136 == false) goto 19;
+ 10:               call_n  130    4          // 
+ 11:           assignment  130    5          // tmp130 = '#1: typeof Date.prototype.setYear === "function". Actual: ': STRING;
+ 12:           assignment  131    5          // tmp131 = 'prototype': STRING;
+ 13:          prop_getter  132    1          // tmp132 = Date[tmp131];
+ 14:           assignment  133    5          // tmp133 = 'setYear': STRING;
+ 15:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 16:               typeof  135               // tmp135 = typeof tmp134;
+ 17:             addition  136  130          // tmp136 = tmp130 + tmp135;
+ 18:                 meta    2  136          // tmp130 = $ERROR (tmp136);
+ 19:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 20:          prop_getter  131    1          // tmp131 = Date[tmp130];
+ 21:           assignment  132    5          // tmp132 = 'setYear': STRING;
+ 22:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 23:               typeof  134               // tmp134 = typeof tmp133;
+ 24:           assignment  135    5          // tmp135 = 'function': STRING;
+ 25: not_equal_value_type  136  134          // tmp136 = tmp134 !== tmp135;
+ 26:    is_false_jmp_down  136    0          // if (tmp136 == false) goto 36;
+ 27:               call_n  130    4          // 
+ 28:           assignment  130    5          // tmp130 = '#2: typeof Date.prototype["setYear"] === "function". Actual: ': STRING;
+ 29:           assignment  131    5          // tmp131 = 'prototype': STRING;
+ 30:          prop_getter  132    1          // tmp132 = Date[tmp131];
+ 31:           assignment  133    5          // tmp133 = 'setYear': STRING;
+ 32:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 33:               typeof  135               // tmp135 = typeof tmp134;
+ 34:             addition  136  130          // tmp136 = tmp130 + tmp135;
+ 35:                 meta    2  136          // tmp130 = $ERROR (tmp136);
+ 36:                  ret                    // ret;

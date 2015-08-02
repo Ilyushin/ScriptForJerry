@@ -1,0 +1,341 @@
+// // Copyright (C) 2015 the V8 project authors. All rights reserved.
+// 
+// // This code is governed by the BSD license found in the LICENSE file.
+// 
+// /*---
+// 
+// assert.throws(Error, function() {
+  0:                 meta   12  255          // [to be rewritten]
+//   throw new Error();
+// });
+// assert.throws(EvalError, function() {
+//   throw new EvalError();
+// });
+// assert.throws(RangeError, function() {
+//   throw new RangeError();
+// });
+// assert.throws(ReferenceError, function() {
+//   throw new ReferenceError();
+// });
+// assert.throws(SyntaxError, function() {
+//   throw new SyntaxError();
+// });
+// assert.throws(TypeError, function() {
+//   throw new TypeError();
+// });
+// assert.throws(URIError, function() {
+//   throw new URIError();
+// });
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+//   throw new Error();
+// });
+// assert.throws(EvalError, function() {
+//   throw new EvalError();
+// });
+// assert.throws(RangeError, function() {
+//   throw new RangeError();
+// });
+// assert.throws(ReferenceError, function() {
+//   throw new ReferenceError();
+// });
+// assert.throws(SyntaxError, function() {
+//   throw new SyntaxError();
+// });
+// assert.throws(TypeError, function() {
+//   throw new TypeError();
+// });
+// assert.throws(URIError, function() {
+//   throw new URIError();
+// });
+// 
+  2:           assignment  130    5          // tmp130 = 'throws': STRING;
+  3:          prop_getter  131  254          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  255  131          // 
+  6:                 meta    1    1          // 
+  7:                 meta    2  254          // 
+  8:          func_expr_n  255  255          // 
+  8:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+  9:                 meta    7  255          // function end: 65544;
+//   throw new Error();
+ 10:                 meta   12  255          // [to be rewritten]
+// });
+ 10:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 11:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 12:          construct_n  255  254          // 
+ 12:          construct_n  130  254          // tmp130 = new Error; // REWRITE
+ 13:          throw_value                    // throw tmp130;
+// });
+ 11:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 14:                  ret                    // ret;
+  9:                 meta    7    0          // function end: 15; // REWRITE
+ 15:                 meta    2  133          // 
+  5:               call_n  133  131          //  // REWRITE
+// assert.throws(EvalError, function() {
+ 16:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 17:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 18:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 19:               call_n  255  131          // 
+ 20:                 meta    1    1          // 
+ 21:                 meta    2  254          // 
+ 22:          func_expr_n  255  255          // 
+ 22:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 23:                 meta    7  255          // function end: 65558;
+//   throw new EvalError();
+ 24:                 meta   12  255          // [to be rewritten]
+// });
+ 24:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 25:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 26:          construct_n  255  254          // 
+ 26:          construct_n  130  254          // tmp130 = new EvalError; // REWRITE
+ 27:          throw_value                    // throw tmp130;
+// });
+ 25:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 28:                  ret                    // ret;
+ 23:                 meta    7    0          // function end: 29; // REWRITE
+ 29:                 meta    2  133          // 
+ 19:               call_n  133  131          //  // REWRITE
+// assert.throws(RangeError, function() {
+ 30:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 31:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 32:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 33:               call_n  255  131          // 
+ 34:                 meta    1    1          // 
+ 35:                 meta    2  254          // 
+ 36:          func_expr_n  255  255          // 
+ 36:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 37:                 meta    7  255          // function end: 65572;
+//   throw new RangeError();
+ 38:                 meta   12  255          // [to be rewritten]
+// });
+ 38:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 39:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 40:          construct_n  255  254          // 
+ 40:          construct_n  130  254          // tmp130 = new RangeError; // REWRITE
+ 41:          throw_value                    // throw tmp130;
+// });
+ 39:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 42:                  ret                    // ret;
+ 37:                 meta    7    0          // function end: 43; // REWRITE
+ 43:                 meta    2  133          // 
+ 33:               call_n  133  131          //  // REWRITE
+// assert.throws(ReferenceError, function() {
+ 44:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 45:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 46:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 47:               call_n  255  131          // 
+ 48:                 meta    1    1          // 
+ 49:                 meta    2  254          // 
+ 50:          func_expr_n  255  255          // 
+ 50:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 51:                 meta    7  255          // function end: 65586;
+//   throw new ReferenceError();
+ 52:                 meta   12  255          // [to be rewritten]
+// });
+ 52:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 53:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 54:          construct_n  255  254          // 
+ 54:          construct_n  130  254          // tmp130 = new ReferenceError; // REWRITE
+ 55:          throw_value                    // throw tmp130;
+// });
+ 53:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 56:                  ret                    // ret;
+ 51:                 meta    7    0          // function end: 57; // REWRITE
+ 57:                 meta    2  133          // 
+ 47:               call_n  133  131          //  // REWRITE
+// assert.throws(SyntaxError, function() {
+ 58:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 59:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 60:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 61:               call_n  255  131          // 
+ 62:                 meta    1    1          // 
+ 63:                 meta    2  254          // 
+ 64:          func_expr_n  255  255          // 
+ 64:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 65:                 meta    7  255          // function end: 65600;
+//   throw new SyntaxError();
+ 66:                 meta   12  255          // [to be rewritten]
+// });
+ 66:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 67:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 68:          construct_n  255  254          // 
+ 68:          construct_n  130  254          // tmp130 = new SyntaxError; // REWRITE
+ 69:          throw_value                    // throw tmp130;
+// });
+ 67:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 70:                  ret                    // ret;
+ 65:                 meta    7    0          // function end: 71; // REWRITE
+ 71:                 meta    2  133          // 
+ 61:               call_n  133  131          //  // REWRITE
+// assert.throws(TypeError, function() {
+ 72:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 73:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 74:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 75:               call_n  255  131          // 
+ 76:                 meta    1    1          // 
+ 77:                 meta    2  254          // 
+ 78:          func_expr_n  255  255          // 
+ 78:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 79:                 meta    7  255          // function end: 65614;
+//   throw new TypeError();
+ 80:                 meta   12  255          // [to be rewritten]
+// });
+ 80:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 81:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 82:          construct_n  255  254          // 
+ 82:          construct_n  130  254          // tmp130 = new TypeError; // REWRITE
+ 83:          throw_value                    // throw tmp130;
+// });
+ 81:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 84:                  ret                    // ret;
+ 79:                 meta    7    0          // function end: 85; // REWRITE
+ 85:                 meta    2  133          // 
+ 75:               call_n  133  131          //  // REWRITE
+// assert.throws(URIError, function() {
+ 86:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 87:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 88:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 89:               call_n  255  131          // 
+ 90:                 meta    1    1          // 
+ 91:                 meta    2  254          // 
+ 92:          func_expr_n  255  255          // 
+ 92:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 93:                 meta    7  255          // function end: 65628;
+//   throw new URIError();
+ 94:                 meta   12  255          // [to be rewritten]
+// });
+ 94:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 95:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 96:          construct_n  255  254          // 
+ 96:          construct_n  130  254          // tmp130 = new URIError; // REWRITE
+ 97:          throw_value                    // throw tmp130;
+// });
+ 95:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 98:                  ret                    // ret;
+ 93:                 meta    7    0          // function end: 99; // REWRITE
+ 99:                 meta    2  133          // 
+ 89:               call_n  133  131          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133; // REWRITE
+100:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] assert : STRING
+0x84ec60 [ 12] throws : STRING
+0x84ec6c [  4] Error : MAGIC STRING [id=37] 
+0x84ec70 [  4] EvalError : MAGIC STRING [id=38] 
+0x84ec74 [  4] RangeError : MAGIC STRING [id=39] 
+0x84ec78 [  4] ReferenceError : MAGIC STRING [id=40] 
+0x84ec7c [  4] SyntaxError : MAGIC STRING [id=41] 
+0x84ec94 [  4] TypeError : MAGIC STRING [id=42] 
+0x84ec98 [  4] URIError : MAGIC STRING [id=43] 
+0x84ec9c [ 36]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133;
+  2:           assignment  130    5          // tmp130 = 'throws': STRING;
+  3:          prop_getter  131    1          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  133  131          // 
+  6:                 meta    1    1          // 
+  7:                 meta    2    2          // 
+  8:          func_expr_n  133  255          // tmp133 = function ();
+  9:                 meta    7    0          // function end: 15;
+ 10:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 11:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 12:          construct_n  130    2          // tmp130 = new Error;
+ 13:          throw_value                    // throw tmp130;
+ 14:                  ret                    // ret;
+ 15:                 meta    2  133          // tmp130 = new Error (tmp133);
+ 16:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 17:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 18:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 19:               call_n  133  131          // 
+ 20:                 meta    1    1          // 
+ 21:                 meta    2    3          // 
+ 22:          func_expr_n  133  255          // tmp133 = function ();
+ 23:                 meta    7    0          // function end: 29;
+ 24:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 25:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 26:          construct_n  130    3          // tmp130 = new EvalError;
+ 27:          throw_value                    // throw tmp130;
+ 28:                  ret                    // ret;
+ 29:                 meta    2  133          // tmp130 = new EvalError (tmp133);
+ 30:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 31:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 32:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 33:               call_n  133  131          // 
+ 34:                 meta    1    1          // 
+ 35:                 meta    2    4          // 
+ 36:          func_expr_n  133  255          // tmp133 = function ();
+ 37:                 meta    7    0          // function end: 43;
+ 38:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 39:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 40:          construct_n  130    4          // tmp130 = new RangeError;
+ 41:          throw_value                    // throw tmp130;
+ 42:                  ret                    // ret;
+ 43:                 meta    2  133          // tmp130 = new RangeError (tmp133);
+ 44:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 45:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 46:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 47:               call_n  133  131          // 
+ 48:                 meta    1    1          // 
+ 49:                 meta    2    5          // 
+ 50:          func_expr_n  133  255          // tmp133 = function ();
+ 51:                 meta    7    0          // function end: 57;
+ 52:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 53:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 54:          construct_n  130    5          // tmp130 = new ReferenceError;
+ 55:          throw_value                    // throw tmp130;
+ 56:                  ret                    // ret;
+ 57:                 meta    2  133          // tmp130 = new ReferenceError (tmp133);
+ 58:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 59:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 60:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 61:               call_n  133  131          // 
+ 62:                 meta    1    1          // 
+ 63:                 meta    2    6          // 
+ 64:          func_expr_n  133  255          // tmp133 = function ();
+ 65:                 meta    7    0          // function end: 71;
+ 66:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 67:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 68:          construct_n  130    0          // tmp130 = new SyntaxError;
+ 69:          throw_value                    // throw tmp130;
+ 70:                  ret                    // ret;
+ 71:                 meta    2  133          // tmp130 = new SyntaxError (tmp133);
+ 72:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 73:          prop_getter  131    2          // tmp131 = assert[tmp130];
+ 74:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 75:               call_n  133  131          // 
+ 76:                 meta    1    1          // 
+ 77:                 meta    2    3          // 
+ 78:          func_expr_n  133  255          // tmp133 = function ();
+ 79:                 meta    7    0          // function end: 85;
+ 80:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 81:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 82:          construct_n  130    3          // tmp130 = new TypeError;
+ 83:          throw_value                    // throw tmp130;
+ 84:                  ret                    // ret;
+ 85:                 meta    2  133          // tmp130 = new TypeError (tmp133);
+ 86:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 87:          prop_getter  131    2          // tmp131 = assert[tmp130];
+ 88:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 89:               call_n  133  131          // 
+ 90:                 meta    1    1          // 
+ 91:                 meta    2    4          // 
+ 92:          func_expr_n  133  255          // tmp133 = function ();
+ 93:                 meta    7    0          // function end: 99;
+ 94:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 95:         reg_var_decl  128               // var tmp128 .. tmp130;
+ 96:          construct_n  130    4          // tmp130 = new URIError;
+ 97:          throw_value                    // throw tmp130;
+ 98:                  ret                    // ret;
+ 99:                 meta    2  133          // tmp130 = new URIError (tmp133);
+100:                  ret                    // ret;

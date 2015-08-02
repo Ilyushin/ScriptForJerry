@@ -1,0 +1,291 @@
+// // Copyright (C) 2014 the V8 project authors. All rights reserved.
+// 
+// // This code is governed by the BSD license found in the LICENSE file.
+// 
+// // Tests taken from:
+// 
+// // http://mathias.html5.org/tests/javascript/string/
+// 
+// /*---
+// 
+// assert.sameValue('_'.bold(), '<b>_</b>');
+  0:                 meta   12  255          // [to be rewritten]
+// assert.sameValue('<'.bold(), '<b><</b>');
+// assert.sameValue(String.prototype.bold.call(0x2A), '<b>42</b>');
+// assert.throws(TypeError, function() {
+//   String.prototype.bold.call(undefined);
+// });
+// assert.throws(TypeError, function() {
+//   String.prototype.bold.call(null);
+// });
+// assert.sameValue(String.prototype.bold.length, 0);
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// assert.sameValue('<'.bold(), '<b><</b>');
+// assert.sameValue(String.prototype.bold.call(0x2A), '<b>42</b>');
+// assert.throws(TypeError, function() {
+//   String.prototype.bold.call(undefined);
+// });
+// assert.throws(TypeError, function() {
+//   String.prototype.bold.call(null);
+// });
+// assert.sameValue(String.prototype.bold.length, 0);
+// 
+  2:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+  3:          prop_getter  131  254          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  255  131          // 
+  6:                 meta    1    1          // 
+  7:           assignment  133    5          // tmp133 = '_': STRING;
+  8:           assignment  134    5          // tmp134 = 'bold': STRING;
+  9:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 10:               call_n  255  135          // 
+ 11:                 meta    1    1          // 
+ 10:               call_n  136  135          //  // REWRITE
+ 12:                 meta    2  136          // 
+ 13:           assignment  133    5          // tmp133 = '<b>_</b>': STRING;
+ 14:                 meta    2  133          // 
+  5:               call_n  133  131          //  // REWRITE
+// assert.sameValue('<'.bold(), '<b><</b>');
+ 15:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+ 16:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 17:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 18:               call_n  255  131          // 
+ 19:                 meta    1    1          // 
+ 20:           assignment  133    5          // tmp133 = '<': STRING;
+ 21:           assignment  134    5          // tmp134 = 'bold': STRING;
+ 22:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 23:               call_n  255  135          // 
+ 24:                 meta    1    1          // 
+ 23:               call_n  136  135          //  // REWRITE
+ 25:                 meta    2  136          // 
+ 26:           assignment  133    5          // tmp133 = '<b><</b>': STRING;
+ 27:                 meta    2  133          // 
+ 18:               call_n  133  131          //  // REWRITE
+// assert.sameValue(String.prototype.bold.call(0x2A), '<b>42</b>');
+ 28:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+ 29:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 30:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 31:               call_n  255  131          // 
+ 32:                 meta    1    1          // 
+ 33:           assignment  133    5          // tmp133 = 'prototype': STRING;
+ 34:          prop_getter  134  254          // tmp134 = String[tmp133];
+ 35:           assignment  135    5          // tmp135 = 'bold': STRING;
+ 36:          prop_getter  136  134          // tmp136 = tmp134[tmp135];
+ 37:           assignment  137    5          // tmp137 = 'call': STRING;
+ 38:          prop_getter  138  136          // tmp138 = tmp136[tmp137];
+ 39:               call_n  255  138          // 
+ 40:                 meta    1    1          // 
+ 41:           assignment  139    1          // tmp139 = 42: SMALLINT;
+ 42:                 meta    2  139          // 
+ 39:               call_n  139  138          //  // REWRITE
+ 43:                 meta    2  139          // tmp139 = tmp138 (this_arg = tmp136, tmp139, tmp139);
+ 44:           assignment  133    5          // tmp133 = '<b>42</b>': STRING;
+ 45:                 meta    2  133          // 
+ 31:               call_n  133  131          //  // REWRITE
+// assert.throws(TypeError, function() {
+ 46:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 47:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 48:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 49:               call_n  255  131          // 
+ 50:                 meta    1    1          // 
+ 51:                 meta    2  254          // 
+ 52:          func_expr_n  255  255          // 
+ 52:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 53:                 meta    7  255          // function end: 65588;
+//   String.prototype.bold.call(undefined);
+ 54:                 meta   12  255          // [to be rewritten]
+// });
+ 54:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 55:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 56:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 57:          prop_getter  131  254          // tmp131 = String[tmp130];
+ 58:           assignment  132    5          // tmp132 = 'bold': STRING;
+ 59:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 60:           assignment  134    5          // tmp134 = 'call': STRING;
+ 61:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 62:               call_n  255  135          // 
+ 63:                 meta    1    1          // 
+ 64:                 meta    2  254          // 
+ 62:               call_n  136  135          //  // REWRITE
+// });
+ 55:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+ 65:                  ret                    // ret;
+ 53:                 meta    7    0          // function end: 66; // REWRITE
+ 66:                 meta    2  133          // tmp136 = tmp135 (this_arg = tmp133, hz, tmp133);
+ 49:               call_n  133  131          //  // REWRITE
+// assert.throws(TypeError, function() {
+ 67:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 68:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 69:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 70:               call_n  255  131          // 
+ 71:                 meta    1    1          // 
+ 72:                 meta    2  254          // 
+ 73:          func_expr_n  255  255          // 
+ 73:          func_expr_n  133  255          // tmp133 = function (); // REWRITE
+ 74:                 meta    7  255          // function end: 65609;
+//   String.prototype.bold.call(null);
+ 75:                 meta   12  255          // [to be rewritten]
+// });
+ 75:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 76:         reg_var_decl  128               // var tmp128 .. tmp255;
+// });
+ 77:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 78:          prop_getter  131  254          // tmp131 = String[tmp130];
+ 79:           assignment  132    5          // tmp132 = 'bold': STRING;
+ 80:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 81:           assignment  134    5          // tmp134 = 'call': STRING;
+ 82:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 83:               call_n  255  135          // 
+ 84:                 meta    1    1          // 
+ 85:           assignment  136    0          // tmp136 = null: SIMPLE;
+ 86:                 meta    2  136          // 
+ 83:               call_n  136  135          //  // REWRITE
+// });
+ 76:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+ 87:                  ret                    // ret;
+ 74:                 meta    7    0          // function end: 88; // REWRITE
+ 88:                 meta    2  133          // tmp136 = tmp135 (this_arg = tmp133, tmp136, tmp133);
+ 70:               call_n  133  131          //  // REWRITE
+// assert.sameValue(String.prototype.bold.length, 0);
+ 89:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+ 90:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 91:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 92:               call_n  255  131          // 
+ 93:                 meta    1    1          // 
+ 94:           assignment  133    5          // tmp133 = 'prototype': STRING;
+ 95:          prop_getter  134  254          // tmp134 = String[tmp133];
+ 96:           assignment  135    5          // tmp135 = 'bold': STRING;
+ 97:          prop_getter  136  134          // tmp136 = tmp134[tmp135];
+ 98:           assignment  137    5          // tmp137 = 'length': STRING;
+ 99:          prop_getter  138  136          // tmp138 = tmp136[tmp137];
+100:                 meta    2  138          // 
+101:           assignment  133    1          // tmp133 = 0: SMALLINT;
+102:                 meta    2  133          // 
+ 92:               call_n  133  131          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp139; // REWRITE
+103:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] assert : STRING
+0x84ec60 [ 16] sameValue : STRING
+0x84ec70 [  8] _ : STRING
+0x84ec78 [ 12] bold : STRING
+0x84ec98 [ 16] <b>_</b> : STRING
+0x84eca8 [  8] < : STRING
+0x84ecb0 [ 16] <b><</b> : STRING
+0x84ecd4 [  4] String : MAGIC STRING [id=31] 
+0x84ecd8 [  4] prototype : MAGIC STRING [id=2] 
+0x84ecdc [  4] call : MAGIC STRING [id=193] 
+0x84ece0 [ 16] <b>42</b> : STRING
+0x84ecf0 [ 12] throws : STRING
+0x84ecfc [  4] TypeError : MAGIC STRING [id=42] 
+0x84ed14 [  4] undefined : MAGIC STRING [id=6] 
+0x84ed18 [  4] length : MAGIC STRING [id=15] 
+0x84ed1c [ 36]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp139;
+  2:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+  3:          prop_getter  131    1          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  133  131          // 
+  6:                 meta    1    1          // 
+  7:           assignment  133    5          // tmp133 = '_': STRING;
+  8:           assignment  134    5          // tmp134 = 'bold': STRING;
+  9:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 10:               call_n  136  135          // 
+ 11:                 meta    1    1          // tmp136 = tmp135 (this_arg = tmp133);
+ 12:                 meta    2  136          // 
+ 13:           assignment  133    5          // tmp133 = '<b>_</b>': STRING;
+ 14:                 meta    2  133          // 
+ 15:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+ 16:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 17:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 18:               call_n  133  131          // 
+ 19:                 meta    1    1          // 
+ 20:           assignment  133    5          // tmp133 = '<': STRING;
+ 21:           assignment  134    5          // tmp134 = 'bold': STRING;
+ 22:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 23:               call_n  136  135          // 
+ 24:                 meta    1    1          // tmp136 = tmp135 (this_arg = tmp133);
+ 25:                 meta    2  136          // 
+ 26:           assignment  133    5          // tmp133 = '<b><</b>': STRING;
+ 27:                 meta    2  133          // 
+ 28:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+ 29:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 30:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 31:               call_n  133  131          // 
+ 32:                 meta    1    1          // 
+ 33:           assignment  133    5          // tmp133 = 'prototype': STRING;
+ 34:          prop_getter  134    8          // tmp134 = String[tmp133];
+ 35:           assignment  135    5          // tmp135 = 'bold': STRING;
+ 36:          prop_getter  136  134          // tmp136 = tmp134[tmp135];
+ 37:           assignment  137    5          // tmp137 = 'call': STRING;
+ 38:          prop_getter  138  136          // tmp138 = tmp136[tmp137];
+ 39:               call_n  139  138          // 
+ 40:                 meta    1    1          // 
+ 41:           assignment  139    1          // tmp139 = 42: SMALLINT;
+ 42:                 meta    2  139          // tmp139 = tmp138 (this_arg = tmp136, tmp139);
+ 43:                 meta    2  139          // 
+ 44:           assignment  133    5          // tmp133 = '<b>42</b>': STRING;
+ 45:                 meta    2  133          // 
+ 46:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 47:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 48:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 49:               call_n  133  131          // 
+ 50:                 meta    1    1          // 
+ 51:                 meta    2   12          // 
+ 52:          func_expr_n  133  255          // tmp133 = function ();
+ 53:                 meta    7    0          // function end: 66;
+ 54:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 55:         reg_var_decl  128               // var tmp128 .. tmp136;
+ 56:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 57:          prop_getter  131    8          // tmp131 = String[tmp130];
+ 58:           assignment  132    5          // tmp132 = 'bold': STRING;
+ 59:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 60:           assignment  134    5          // tmp134 = 'call': STRING;
+ 61:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 62:               call_n  136  135          // 
+ 63:                 meta    1    1          // 
+ 64:                 meta    2    0          // tmp136 = tmp135 (this_arg = tmp133, undefined);
+ 65:                  ret                    // ret;
+ 66:                 meta    2  133          // 
+ 67:           assignment  130    5          // tmp130 = 'throws': STRING;
+ 68:          prop_getter  131    2          // tmp131 = assert[tmp130];
+ 69:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 70:               call_n  133  131          // 
+ 71:                 meta    1    1          // 
+ 72:                 meta    2    3          // 
+ 73:          func_expr_n  133  255          // tmp133 = function ();
+ 74:                 meta    7    0          // function end: 88;
+ 75:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 76:         reg_var_decl  128               // var tmp128 .. tmp136;
+ 77:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 78:          prop_getter  131    5          // tmp131 = String[tmp130];
+ 79:           assignment  132    5          // tmp132 = 'bold': STRING;
+ 80:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 81:           assignment  134    5          // tmp134 = 'call': STRING;
+ 82:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
+ 83:               call_n  136  135          // 
+ 84:                 meta    1    1          // 
+ 85:           assignment  136    0          // tmp136 = null: SIMPLE;
+ 86:                 meta    2  136          // tmp136 = tmp135 (this_arg = tmp133, tmp136);
+ 87:                  ret                    // ret;
+ 88:                 meta    2  133          // 
+ 89:           assignment  130    5          // tmp130 = 'sameValue': STRING;
+ 90:          prop_getter  131    2          // tmp131 = assert[tmp130];
+ 91:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 92:               call_n  133  131          // 
+ 93:                 meta    1    1          // 
+ 94:           assignment  133    5          // tmp133 = 'prototype': STRING;
+ 95:          prop_getter  134    5          // tmp134 = String[tmp133];
+ 96:           assignment  135    5          // tmp135 = 'bold': STRING;
+ 97:          prop_getter  136  134          // tmp136 = tmp134[tmp135];
+ 98:           assignment  137    5          // tmp137 = 'length': STRING;
+ 99:          prop_getter  138  136          // tmp138 = tmp136[tmp137];
+100:                 meta    2  138          // 
+101:           assignment  133    1          // tmp133 = 0: SMALLINT;
+102:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, tmp138, tmp133);
+103:                  ret                    // ret;

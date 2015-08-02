@@ -1,0 +1,39 @@
+// assert.notSameValue(0,-0);
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// assert.notSameValue(0,-0);
+// 
+// assert.notSameValue(0,-0);
+  2:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+  3:          prop_getter  131  254          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  255  131          // 
+  6:                 meta    1    1          // 
+  7:           assignment  133    1          // tmp133 = 0: SMALLINT;
+  8:                 meta    2  133          // 
+  9:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 10:          unary_minus  134               // tmp134 = -tmp133;
+ 11:                 meta    2  134          // 
+  5:               call_n  133  131          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 12:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] assert : STRING
+0x84ec60 [ 20] notSameValue : STRING
+0x84ec74 [ 12]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+  3:          prop_getter  131    1          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  133  131          // 
+  6:                 meta    1    1          // 
+  7:           assignment  133    1          // tmp133 = 0: SMALLINT;
+  8:                 meta    2  133          // 
+  9:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 10:          unary_minus  134               // tmp134 = -tmp133;
+ 11:                 meta    2  134          // tmp133 = tmp131 (this_arg = tmp132, tmp133, tmp134);
+ 12:                  ret                    // ret;

@@ -1,0 +1,1 @@
+if(typeof Date.prototype.setYear!=="function")$ERROR('#1: typeof Date.prototype.setYear === "function". Actual: '+typeof Date.prototype.setYear);if(typeof Date.prototype["setYear"]!=="function")$ERROR('#2: typeof Date.prototype["setYear"] === "function". Actual: '+typeof Date.prototype["setYear"]);

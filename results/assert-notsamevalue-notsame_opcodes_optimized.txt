@@ -1,0 +1,131 @@
+// assert.notSameValue(undefined,null);assert.notSameValue(null,undefined);assert.notSameValue(0,1);assert.notSameValue(1,0);assert.notSameValue("","s");assert.notSameValue("s","");
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// assert.notSameValue(undefined,null);assert.notSameValue(null,undefined);assert.notSameValue(0,1);assert.notSameValue(1,0);assert.notSameValue("","s");assert.notSameValue("s","");
+// 
+// assert.notSameValue(undefined,null);assert.notSameValue(null,undefined);assert.notSameValue(0,1);assert.notSameValue(1,0);assert.notSameValue("","s");assert.notSameValue("s","");
+  2:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+  3:          prop_getter  131  254          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  255  131          // 
+  6:                 meta    1    1          // 
+  7:                 meta    2  254          // 
+  8:           assignment  133    0          // tmp133 = null: SIMPLE;
+  9:                 meta    2  133          // 
+  5:               call_n  133  131          //  // REWRITE
+ 10:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 11:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 12:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 13:               call_n  255  131          // 
+ 14:                 meta    1    1          // 
+ 15:           assignment  133    0          // tmp133 = null: SIMPLE;
+ 16:                 meta    2  133          // 
+ 17:                 meta    2  254          // 
+ 13:               call_n  133  131          //  // REWRITE
+ 18:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 19:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 20:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 21:               call_n  255  131          // 
+ 22:                 meta    1    1          // 
+ 23:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 24:                 meta    2  133          // 
+ 25:           assignment  133    1          // tmp133 = 1: SMALLINT;
+ 26:                 meta    2  133          // 
+ 21:               call_n  133  131          //  // REWRITE
+ 27:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 28:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 29:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 30:               call_n  255  131          // 
+ 31:                 meta    1    1          // 
+ 32:           assignment  133    1          // tmp133 = 1: SMALLINT;
+ 33:                 meta    2  133          // 
+ 34:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 35:                 meta    2  133          // 
+ 30:               call_n  133  131          //  // REWRITE
+ 36:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 37:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 38:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 39:               call_n  255  131          // 
+ 40:                 meta    1    1          // 
+ 41:           assignment  133    5          // tmp133 = '': STRING;
+ 42:                 meta    2  133          // 
+ 43:           assignment  133    5          // tmp133 = 's': STRING;
+ 44:                 meta    2  133          // 
+ 39:               call_n  133  131          //  // REWRITE
+ 45:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 46:          prop_getter  131  254          // tmp131 = assert[tmp130];
+ 47:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 48:               call_n  255  131          // 
+ 49:                 meta    1    1          // 
+ 50:           assignment  133    5          // tmp133 = 's': STRING;
+ 51:                 meta    2  133          // 
+ 52:           assignment  133    5          // tmp133 = '': STRING;
+ 53:                 meta    2  133          // 
+ 48:               call_n  133  131          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133; // REWRITE
+ 54:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] assert : STRING
+0x84ec60 [ 20] notSameValue : STRING
+0x84ec74 [  4] undefined : MAGIC STRING [id=6] 
+0x84ec78 [  4]  : MAGIC STRING [id=218] 
+0x84ec7c [  8] s : STRING
+0x84ec98 [ 40]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133;
+  2:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+  3:          prop_getter  131    1          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  133  131          // 
+  6:                 meta    1    1          // 
+  7:                 meta    2    2          // 
+  8:           assignment  133    0          // tmp133 = null: SIMPLE;
+  9:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, undefined, tmp133);
+ 10:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 11:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 12:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 13:               call_n  133  131          // 
+ 14:                 meta    1    1          // 
+ 15:           assignment  133    0          // tmp133 = null: SIMPLE;
+ 16:                 meta    2  133          // 
+ 17:                 meta    2    2          // tmp133 = tmp131 (this_arg = tmp132, tmp133, undefined);
+ 18:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 19:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 20:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 21:               call_n  133  131          // 
+ 22:                 meta    1    1          // 
+ 23:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 24:                 meta    2  133          // 
+ 25:           assignment  133    1          // tmp133 = 1: SMALLINT;
+ 26:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, tmp133, tmp133);
+ 27:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 28:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 29:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 30:               call_n  133  131          // 
+ 31:                 meta    1    1          // 
+ 32:           assignment  133    1          // tmp133 = 1: SMALLINT;
+ 33:                 meta    2  133          // 
+ 34:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 35:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, tmp133, tmp133);
+ 36:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 37:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 38:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 39:               call_n  133  131          // 
+ 40:                 meta    1    1          // 
+ 41:           assignment  133    5          // tmp133 = '': STRING;
+ 42:                 meta    2  133          // 
+ 43:           assignment  133    5          // tmp133 = 's': STRING;
+ 44:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, tmp133, tmp133);
+ 45:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+ 46:          prop_getter  131    1          // tmp131 = assert[tmp130];
+ 47:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+ 48:               call_n  133  131          // 
+ 49:                 meta    1    1          // 
+ 50:           assignment  133    5          // tmp133 = 's': STRING;
+ 51:                 meta    2  133          // 
+ 52:           assignment  133    5          // tmp133 = '': STRING;
+ 53:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, tmp133, tmp133);
+ 54:                  ret                    // ret;

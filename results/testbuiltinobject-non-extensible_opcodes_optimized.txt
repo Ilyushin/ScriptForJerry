@@ -1,0 +1,120 @@
+// var threw=false;var obj={};Object.preventExtensions(obj);try{testBuiltInObject(obj)}catch(err){threw=true;if(err.constructor!==Test262Error)$ERROR('Expected a Test262Error, but a "'+err.constructor.name+'" was thrown.')}if(threw===false)$ERROR("Expected a Test262Error, but no error was thrown.");
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var threw=false;var obj={};Object.preventExtensions(obj);try{testBuiltInObject(obj)}catch(err){threw=true;if(err.constructor!==Test262Error)$ERROR('Expected a Test262Error, but a "'+err.constructor.name+'" was thrown.')}if(threw===false)$ERROR("Expected a Test262Error, but no error was thrown.");
+  2:             var_decl                    // var threw;
+  3:             var_decl                    // var obj;
+// 
+// var threw=false;var obj={};Object.preventExtensions(obj);try{testBuiltInObject(obj)}catch(err){threw=true;if(err.constructor!==Test262Error)$ERROR('Expected a Test262Error, but a "'+err.constructor.name+'" was thrown.')}if(threw===false)$ERROR("Expected a Test262Error, but no error was thrown.");
+  4:           assignment  130    0          // tmp130 = false: SIMPLE;
+  5:           assignment  254    6          // threw = tmp130 : TYPEOF(tmp130);
+  6:             obj_decl  255               // 
+  6:             obj_decl  130               // tmp130 = {}; // REWRITE
+  7:           assignment  254    6          // obj = tmp130 : TYPEOF(tmp130);
+  8:           assignment  130    5          // tmp130 = 'preventExtensions': STRING;
+  9:          prop_getter  131  254          // tmp131 = Object[tmp130];
+ 10:           assignment  132    6          // tmp132 = Object : TYPEOF(Object);
+ 11:               call_n  255  131          // 
+ 12:                 meta    1    1          // 
+ 13:                 meta    2  254          // 
+ 11:               call_n  133  131          //  // REWRITE
+ 14:            try_block  255               // try (end: 65549);
+ 15:               call_n  255  254          // 
+ 16:                 meta    2  254          // 
+ 15:               call_n  130  254          //  // REWRITE
+ 14:            try_block    0               // try (end: 17); // REWRITE
+ 17:                 meta    8  255          // catch end: 65552;
+ 18:                 meta    9  254          // catch (err);
+ 19:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 20:           assignment  254    6          // threw = tmp130 : TYPEOF(tmp130);
+ 21:           assignment  130    5          // tmp130 = 'constructor': STRING;
+ 22:          prop_getter  131  254          // tmp131 = err[tmp130];
+ 23: not_equal_value_type  132  131          // tmp132 = tmp131 !== Test262Error;
+ 24:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65559;
+ 25:               call_n  255  254          // 
+ 26:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but a "': STRING;
+ 27:           assignment  131    5          // tmp131 = 'constructor': STRING;
+ 28:          prop_getter  132  254          // tmp132 = err[tmp131];
+ 29:           assignment  133    5          // tmp133 = 'name': STRING;
+ 30:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 31:             addition  135  130          // tmp135 = tmp130 + tmp134;
+ 32:           assignment  136    5          // tmp136 = '" was thrown.': STRING;
+ 33:             addition  137  135          // tmp137 = tmp135 + tmp136;
+ 34:                 meta    2  137          // 
+ 25:               call_n  130  254          //  // REWRITE
+ 24:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 35; // REWRITE
+ 17:                 meta    8    0          // catch end: 35; // REWRITE
+ 35:                 meta   11  255          // end try
+ 36:           assignment  130    6          // tmp130 = threw : TYPEOF(threw);
+ 37:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 38:     equal_value_type  132  130          // tmp132 = tmp130 === tmp131;
+ 39:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65574;
+ 40:               call_n  255  254          // 
+ 41:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but no error was thrown.': STRING;
+ 42:                 meta    2  130          // 
+ 40:               call_n  130  254          //  // REWRITE
+// 
+ 39:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 43; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp137; // REWRITE
+ 43:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] threw : STRING
+0x84ec60 [ 12] obj : STRING
+0x84ec6c [  4] Object : MAGIC STRING [id=27] 
+0x84ec70 [  4] preventExtensions : MAGIC STRING [id=64] 
+0x84ec74 [ 24] testBuiltInObject : STRING
+0x84eca0 [ 12] err : STRING
+0x84ecac [  4] constructor : MAGIC STRING [id=3] 
+0x84ecb0 [ 20] Test262Error : STRING
+0x84ecd8 [ 12] $ERROR : STRING
+0x84ece4 [ 40] Expected a Test262Error, but a " : STRING
+0x84ed20 [  4] name : MAGIC STRING [id=197] 
+0x84ed24 [ 20] " was thrown. : STRING
+0x84ed38 [ 56] Expected a Test262Error, but no error was thrown. : STRING
+0x84ed98 [ 40]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp137;
+  2:             var_decl                    // var threw;
+  3:             var_decl                    // var obj;
+  4:           assignment  130    0          // tmp130 = false: SIMPLE;
+  5:           assignment    0    6          // threw = tmp130 : TYPEOF(tmp130);
+  6:             obj_decl  130               // tmp130 = {};
+  7:           assignment    1    6          // obj = tmp130 : TYPEOF(tmp130);
+  8:           assignment  130    5          // tmp130 = 'preventExtensions': STRING;
+  9:          prop_getter  131    3          // tmp131 = Object[tmp130];
+ 10:           assignment  132    6          // tmp132 = Object : TYPEOF(Object);
+ 11:               call_n  133  131          // 
+ 12:                 meta    1    1          // 
+ 13:                 meta    2    1          // tmp133 = tmp131 (this_arg = tmp132, obj);
+ 14:            try_block    0               // try (end: 17);
+ 15:               call_n  130    4          // 
+ 16:                 meta    2    1          // tmp130 = testBuiltInObject (obj);
+ 17:                 meta    8    0          // catch end: 35;
+ 18:                 meta    9    5          // catch (err);
+ 19:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 20:           assignment    0    6          // threw = tmp130 : TYPEOF(tmp130);
+ 21:           assignment  130    5          // tmp130 = 'constructor': STRING;
+ 22:          prop_getter  131    5          // tmp131 = err[tmp130];
+ 23: not_equal_value_type  132  131          // tmp132 = tmp131 !== Test262Error;
+ 24:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 35;
+ 25:               call_n  130    8          // 
+ 26:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but a "': STRING;
+ 27:           assignment  131    5          // tmp131 = 'constructor': STRING;
+ 28:          prop_getter  132    5          // tmp132 = err[tmp131];
+ 29:           assignment  133    5          // tmp133 = 'name': STRING;
+ 30:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 31:             addition  135  130          // tmp135 = tmp130 + tmp134;
+ 32:           assignment  136    5          // tmp136 = '" was thrown.': STRING;
+ 33:             addition  137  135          // tmp137 = tmp135 + tmp136;
+ 34:                 meta    2  137          // tmp130 = $ERROR (tmp137);
+ 35:                 meta   11  255          // end try
+ 36:           assignment  130    6          // tmp130 = threw : TYPEOF(threw);
+ 37:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 38:     equal_value_type  132  130          // tmp132 = tmp130 === tmp131;
+ 39:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 43;
+ 40:               call_n  130    8          // 
+ 41:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but no error was thrown.': STRING;
+ 42:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 43:                  ret                    // ret;

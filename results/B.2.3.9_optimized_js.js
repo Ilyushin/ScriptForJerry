@@ -1,0 +1,1 @@
+assert.sameValue("_".italics(),"<i>_</i>");assert.sameValue("<".italics(),"<i><</i>");assert.sameValue(String.prototype.italics.call(42),"<i>42</i>");assert["throws"](TypeError,function(){String.prototype.italics.call(undefined)});assert["throws"](TypeError,function(){String.prototype.italics.call(null)});assert.sameValue(String.prototype.italics.length,0);

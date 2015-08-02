@@ -1,0 +1,126 @@
+// var threw=false;try{$ERROR("This is a test message")}catch(err){threw=true;if(err.constructor!==Test262Error)throw new Error('Expected a Test262Error, but a "'+err.constructor.name+'" was thrown.');if(err.message!=="This is a test message")throw new Error("The error thrown did not define the specified message.");}if(threw===false)throw new Error("Expected a Test262Error, but no error was thrown.");
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var threw=false;try{$ERROR("This is a test message")}catch(err){threw=true;if(err.constructor!==Test262Error)throw new Error('Expected a Test262Error, but a "'+err.constructor.name+'" was thrown.');if(err.message!=="This is a test message")throw new Error("The error thrown did not define the specified message.");}if(threw===false)throw new Error("Expected a Test262Error, but no error was thrown.");
+  2:             var_decl                    // var threw;
+// 
+// var threw=false;try{$ERROR("This is a test message")}catch(err){threw=true;if(err.constructor!==Test262Error)throw new Error('Expected a Test262Error, but a "'+err.constructor.name+'" was thrown.');if(err.message!=="This is a test message")throw new Error("The error thrown did not define the specified message.");}if(threw===false)throw new Error("Expected a Test262Error, but no error was thrown.");
+  3:           assignment  130    0          // tmp130 = false: SIMPLE;
+  4:           assignment  254    6          // threw = tmp130 : TYPEOF(tmp130);
+  5:            try_block  255               // try (end: 65540);
+  6:               call_n  255  254          // 
+  7:           assignment  130    5          // tmp130 = 'This is a test message': STRING;
+  8:                 meta    2  130          // 
+  6:               call_n  130  254          //  // REWRITE
+  5:            try_block    0               // try (end: 9); // REWRITE
+  9:                 meta    8  255          // catch end: 65544;
+ 10:                 meta    9  254          // catch (err);
+ 11:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 12:           assignment  254    6          // threw = tmp130 : TYPEOF(tmp130);
+ 13:           assignment  130    5          // tmp130 = 'constructor': STRING;
+ 14:          prop_getter  131  254          // tmp131 = err[tmp130];
+ 15: not_equal_value_type  132  131          // tmp132 = tmp131 !== Test262Error;
+ 16:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65551;
+ 17:          construct_n  255  254          // 
+ 18:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but a "': STRING;
+ 19:           assignment  131    5          // tmp131 = 'constructor': STRING;
+ 20:          prop_getter  132  254          // tmp132 = err[tmp131];
+ 21:           assignment  133    5          // tmp133 = 'name': STRING;
+ 22:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 23:             addition  135  130          // tmp135 = tmp130 + tmp134;
+ 24:           assignment  136    5          // tmp136 = '" was thrown.': STRING;
+ 25:             addition  137  135          // tmp137 = tmp135 + tmp136;
+ 26:                 meta    2  137          // 
+ 17:          construct_n  130  254          //  // REWRITE
+ 27:          throw_value                    // throw tmp130;
+ 16:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 28; // REWRITE
+ 28:           assignment  130    5          // tmp130 = 'message': STRING;
+ 29:          prop_getter  131  254          // tmp131 = err[tmp130];
+ 30:           assignment  132    5          // tmp132 = 'This is a test message': STRING;
+ 31: not_equal_value_type  133  131          // tmp133 = tmp131 !== tmp132;
+ 32:    is_false_jmp_down  133  255          // if (tmp133 == false) goto 65567;
+ 33:          construct_n  255  254          // 
+ 34:           assignment  130    5          // tmp130 = 'The error thrown did not define the specified message.': STRING;
+ 35:                 meta    2  130          // 
+ 33:          construct_n  130  254          //  // REWRITE
+ 36:          throw_value                    // throw tmp130;
+ 32:    is_false_jmp_down  133    0          // if (tmp133 == false) goto 37; // REWRITE
+  9:                 meta    8    0          // catch end: 37; // REWRITE
+ 37:                 meta   11  255          // end try
+ 38:           assignment  130    6          // tmp130 = threw : TYPEOF(threw);
+ 39:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 40:     equal_value_type  132  130          // tmp132 = tmp130 === tmp131;
+ 41:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65576;
+ 42:          construct_n  255  254          // 
+ 43:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but no error was thrown.': STRING;
+ 44:                 meta    2  130          // 
+ 42:          construct_n  130  254          //  // REWRITE
+ 45:          throw_value                    // throw tmp130;
+// 
+ 41:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 46; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp137; // REWRITE
+ 46:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] threw : STRING
+0x84ec60 [ 12] $ERROR : STRING
+0x84ec6c [ 28] This is a test message : STRING
+0x84ec9c [ 12] err : STRING
+0x84eca8 [  4] constructor : MAGIC STRING [id=3] 
+0x84ecac [ 20] Test262Error : STRING
+0x84ecd4 [  4] Error : MAGIC STRING [id=37] 
+0x84ecd8 [ 40] Expected a Test262Error, but a " : STRING
+0x84ed14 [  4] name : MAGIC STRING [id=197] 
+0x84ed18 [ 20] " was thrown. : STRING
+0x84ed2c [  4] message : MAGIC STRING [id=198] 
+0x84ed30 [ 60] The error thrown did not define the specified message. : STRING
+0x84ed94 [ 56] Expected a Test262Error, but no error was thrown. : STRING
+0x84ede0 [ 32]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp137;
+  2:             var_decl                    // var threw;
+  3:           assignment  130    0          // tmp130 = false: SIMPLE;
+  4:           assignment    0    6          // threw = tmp130 : TYPEOF(tmp130);
+  5:            try_block    0               // try (end: 9);
+  6:               call_n  130    1          // 
+  7:           assignment  130    5          // tmp130 = 'This is a test message': STRING;
+  8:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+  9:                 meta    8    0          // catch end: 37;
+ 10:                 meta    9    3          // catch (err);
+ 11:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 12:           assignment    0    6          // threw = tmp130 : TYPEOF(tmp130);
+ 13:           assignment  130    5          // tmp130 = 'constructor': STRING;
+ 14:          prop_getter  131    3          // tmp131 = err[tmp130];
+ 15: not_equal_value_type  132  131          // tmp132 = tmp131 !== Test262Error;
+ 16:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 28;
+ 17:          construct_n  130    6          // 
+ 18:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but a "': STRING;
+ 19:           assignment  131    5          // tmp131 = 'constructor': STRING;
+ 20:          prop_getter  132    3          // tmp132 = err[tmp131];
+ 21:           assignment  133    5          // tmp133 = 'name': STRING;
+ 22:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 23:             addition  135  130          // tmp135 = tmp130 + tmp134;
+ 24:           assignment  136    5          // tmp136 = '" was thrown.': STRING;
+ 25:             addition  137  135          // tmp137 = tmp135 + tmp136;
+ 26:                 meta    2  137          // tmp130 = new Error (tmp137);
+ 27:          throw_value                    // throw tmp130;
+ 28:           assignment  130    5          // tmp130 = 'message': STRING;
+ 29:          prop_getter  131    3          // tmp131 = err[tmp130];
+ 30:           assignment  132    5          // tmp132 = 'This is a test message': STRING;
+ 31: not_equal_value_type  133  131          // tmp133 = tmp131 !== tmp132;
+ 32:    is_false_jmp_down  133    0          // if (tmp133 == false) goto 37;
+ 33:          construct_n  130    6          // 
+ 34:           assignment  130    5          // tmp130 = 'The error thrown did not define the specified message.': STRING;
+ 35:                 meta    2  130          // tmp130 = new Error (tmp130);
+ 36:          throw_value                    // throw tmp130;
+ 37:                 meta   11  255          // end try
+ 38:           assignment  130    6          // tmp130 = threw : TYPEOF(threw);
+ 39:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 40:     equal_value_type  132  130          // tmp132 = tmp130 === tmp131;
+ 41:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 46;
+ 42:          construct_n  130    6          // 
+ 43:           assignment  130    5          // tmp130 = 'Expected a Test262Error, but no error was thrown.': STRING;
+ 44:                 meta    2  130          // tmp130 = new Error (tmp130);
+ 45:          throw_value                    // throw tmp130;
+ 46:                  ret                    // ret;

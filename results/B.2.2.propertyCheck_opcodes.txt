@@ -1,0 +1,71 @@
+// // Copyright 2009 the Sputnik authors.  All rights reserved.
+// 
+// // This code is governed by the BSD license found in the LICENSE file.
+// 
+// /*---
+// 
+// if (typeof this.unescape  === "undefined")  $ERROR('#1: typeof this.unescape !== "undefined"');
+  0:                 meta   12  255          // [to be rewritten]
+// if (typeof this['unescape'] === "undefined")  $ERROR('#2: typeof this["unescape"] !== "undefined"');
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// if (typeof this['unescape'] === "undefined")  $ERROR('#2: typeof this["unescape"] !== "undefined"');
+// 
+  2:         this_binding                    // tmp130 = this;
+  3:           assignment  131    5          // tmp131 = 'unescape': STRING;
+  4:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+  5:               typeof  133               // tmp133 = typeof tmp132;
+  6:           assignment  134    5          // tmp134 = 'undefined': STRING;
+  7:     equal_value_type  135  133          // tmp135 = tmp133 === tmp134;
+  8:    is_false_jmp_down  135  255          // if (tmp135 == false) goto 65543;
+  9:               call_n  255  254          // 
+ 10:           assignment  130    5          // tmp130 = '#1: typeof this.unescape !== "undefined"': STRING;
+ 11:                 meta    2  130          // 
+  9:               call_n  130  254          //  // REWRITE
+// if (typeof this['unescape'] === "undefined")  $ERROR('#2: typeof this["unescape"] !== "undefined"');
+  8:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 12; // REWRITE
+ 12:         this_binding                    // tmp130 = this;
+ 13:           assignment  131    5          // tmp131 = 'unescape': STRING;
+ 14:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 15:               typeof  133               // tmp133 = typeof tmp132;
+ 16:           assignment  134    5          // tmp134 = 'undefined': STRING;
+ 17:     equal_value_type  135  133          // tmp135 = tmp133 === tmp134;
+ 18:    is_false_jmp_down  135  255          // if (tmp135 == false) goto 65553;
+ 19:               call_n  255  254          // 
+ 20:           assignment  130    5          // tmp130 = '#2: typeof this["unescape"] !== "undefined"': STRING;
+ 21:                 meta    2  130          // 
+ 19:               call_n  130  254          //  // REWRITE
+// 
+ 18:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 22; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp135; // REWRITE
+ 22:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 16] unescape : STRING
+0x84ec64 [  4] undefined : MAGIC STRING [id=6] 
+0x84ec68 [ 12] $ERROR : STRING
+0x84ec74 [ 48] #1: typeof this.unescape !== "undefined" : STRING
+0x84ecb8 [ 52] #2: typeof this["unescape"] !== "undefined" : STRING
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp135;
+  2:         this_binding                    // tmp130 = this;
+  3:           assignment  131    5          // tmp131 = 'unescape': STRING;
+  4:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+  5:               typeof  133               // tmp133 = typeof tmp132;
+  6:           assignment  134    5          // tmp134 = 'undefined': STRING;
+  7:     equal_value_type  135  133          // tmp135 = tmp133 === tmp134;
+  8:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 12;
+  9:               call_n  130    2          // 
+ 10:           assignment  130    5          // tmp130 = '#1: typeof this.unescape !== "undefined"': STRING;
+ 11:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 12:         this_binding                    // tmp130 = this;
+ 13:           assignment  131    5          // tmp131 = 'unescape': STRING;
+ 14:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 15:               typeof  133               // tmp133 = typeof tmp132;
+ 16:           assignment  134    5          // tmp134 = 'undefined': STRING;
+ 17:     equal_value_type  135  133          // tmp135 = tmp133 === tmp134;
+ 18:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 22;
+ 19:               call_n  130    2          // 
+ 20:           assignment  130    5          // tmp130 = '#2: typeof this["unescape"] !== "undefined"': STRING;
+ 21:                 meta    2  130          // tmp130 = $ERROR (tmp130);
+ 22:                  ret                    // ret;

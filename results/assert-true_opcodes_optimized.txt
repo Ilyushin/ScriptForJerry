@@ -1,0 +1,24 @@
+// assert(true);
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// assert(true);
+// 
+// assert(true);
+  2:               call_n  255  254          // 
+  3:           assignment  130    0          // tmp130 = true: SIMPLE;
+  4:                 meta    2  130          // 
+  2:               call_n  130  254          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+  5:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] assert : STRING
+0x84ec60 [ 32]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp130;
+  2:               call_n  130    0          // 
+  3:           assignment  130    0          // tmp130 = true: SIMPLE;
+  4:                 meta    2  130          // tmp130 = assert (tmp130);
+  5:                  ret                    // ret;

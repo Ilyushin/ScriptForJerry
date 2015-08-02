@@ -1,0 +1,183 @@
+// // Copyright (c) 2012 Ecma International.  All rights reserved.
+// 
+// // This code is governed by the BSD license found in the LICENSE file.
+// 
+// /*---
+// 
+// function testcase() {
+  0:                 meta   12  255          // [to be rewritten]
+//   var global = fnGlobalObject();
+//   var desc = Object.getOwnPropertyDescriptor(global,  "unescape");
+//   if (desc.value === global.unescape &&
+//       desc.writable === true &&
+//       desc.enumerable === false &&
+//       desc.configurable === true) {
+//     return true;
+//   }
+//  }
+// runTestCase(testcase);
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+//   var global = fnGlobalObject();
+//   var desc = Object.getOwnPropertyDescriptor(global,  "unescape");
+//   if (desc.value === global.unescape &&
+//       desc.writable === true &&
+//       desc.enumerable === false &&
+//       desc.configurable === true) {
+//     return true;
+//   }
+//  }
+// runTestCase(testcase);
+// 
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function testcase (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//   var global = fnGlobalObject();
+  2:                 meta   12  255          // [to be rewritten]
+//   var desc = Object.getOwnPropertyDescriptor(global,  "unescape");
+//   if (desc.value === global.unescape &&
+//       desc.writable === true &&
+//       desc.enumerable === false &&
+//       desc.configurable === true) {
+//     return true;
+//   }
+//  }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+  4:             var_decl                    // var global;
+//   var desc = Object.getOwnPropertyDescriptor(global,  "unescape");
+  5:             var_decl                    // var desc;
+//   if (desc.value === global.unescape &&
+//       desc.writable === true &&
+//       desc.enumerable === false &&
+//       desc.configurable === true) {
+//     return true;
+//   }
+//  }
+  6:               call_n  255  254          // 
+  6:               call_n  130  254          //  // REWRITE
+  7:           assignment  254    6          // global = tmp130 : TYPEOF(tmp130);
+//   var desc = Object.getOwnPropertyDescriptor(global,  "unescape");
+  8:           assignment  130    5          // tmp130 = 'getOwnPropertyDescriptor': STRING;
+  9:          prop_getter  131  254          // tmp131 = Object[tmp130];
+ 10:           assignment  132    6          // tmp132 = Object : TYPEOF(Object);
+ 11:               call_n  255  131          // 
+ 12:                 meta    1    1          // 
+ 13:                 meta    2  254          // 
+ 14:           assignment  133    5          // tmp133 = 'unescape': STRING;
+ 15:                 meta    2  133          // 
+ 11:               call_n  133  131          //  // REWRITE
+ 16:           assignment  254    6          // desc = tmp133 : TYPEOF(tmp133);
+//   if (desc.value === global.unescape &&
+ 17:           assignment  130    5          // tmp130 = 'value': STRING;
+ 18:          prop_getter  131  254          // tmp131 = desc[tmp130];
+ 19:           assignment  132    5          // tmp132 = 'unescape': STRING;
+ 20:          prop_getter  133  254          // tmp133 = global[tmp132];
+ 21:     equal_value_type  134  131          // tmp134 = tmp131 === tmp133;
+ 22:           assignment  135    6          // tmp135 = tmp134 : TYPEOF(tmp134);
+ 23:    is_false_jmp_down  135  255          // if (tmp135 == false) goto 65558;
+//       desc.writable === true &&
+ 24:           assignment  136    5          // tmp136 = 'writable': STRING;
+ 25:          prop_getter  137  254          // tmp137 = desc[tmp136];
+ 26:           assignment  138    0          // tmp138 = true: SIMPLE;
+ 27:     equal_value_type  139  137          // tmp139 = tmp137 === tmp138;
+ 28:           assignment  135    6          // tmp135 = tmp139 : TYPEOF(tmp139);
+ 29:    is_false_jmp_down  135  255          // if (tmp135 == false) goto 65564;
+//       desc.enumerable === false &&
+ 30:           assignment  140    5          // tmp140 = 'enumerable': STRING;
+ 31:          prop_getter  141  254          // tmp141 = desc[tmp140];
+ 32:           assignment  142    0          // tmp142 = false: SIMPLE;
+ 33:     equal_value_type  143  141          // tmp143 = tmp141 === tmp142;
+ 34:           assignment  135    6          // tmp135 = tmp143 : TYPEOF(tmp143);
+ 35:    is_false_jmp_down  135  255          // if (tmp135 == false) goto 65570;
+//       desc.configurable === true) {
+ 36:           assignment  144    5          // tmp144 = 'configurable': STRING;
+ 37:          prop_getter  145  254          // tmp145 = desc[tmp144];
+ 38:           assignment  146    0          // tmp146 = true: SIMPLE;
+ 39:     equal_value_type  147  145          // tmp147 = tmp145 === tmp146;
+ 40:           assignment  135    6          // tmp135 = tmp147 : TYPEOF(tmp147);
+ 23:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 41; // REWRITE
+ 29:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 41; // REWRITE
+ 35:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 41; // REWRITE
+ 41:    is_false_jmp_down  135  255          // if (tmp135 == false) goto 65576;
+//     return true;
+ 42:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 43:               retval                    // return tmp130;
+//   }
+//  }
+ 41:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 44; // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp147; // REWRITE
+ 44:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 45; // REWRITE
+// runTestCase(testcase);
+  2:               call_n  255  254          // 
+  3:                 meta    2  254          // 
+  2:               call_n  130  254          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+  4:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 16] testcase : STRING
+0x84ec64 [  4] global : MAGIC STRING [id=17] 
+0x84ec68 [ 20] fnGlobalObject : STRING
+0x84ec7c [ 12] desc : STRING
+0x84ec9c [  4] Object : MAGIC STRING [id=27] 
+0x84eca0 [  4] getOwnPropertyDescriptor : MAGIC STRING [id=57] 
+0x84eca4 [ 16] unescape : STRING
+0x84ecb4 [  4] value : MAGIC STRING [id=72] 
+0x84ecb8 [  4] writable : MAGIC STRING [id=69] 
+0x84ecbc [  4] enumerable : MAGIC STRING [id=70] 
+0x84ecd4 [  4] configurable : MAGIC STRING [id=71] 
+0x84ecd8 [ 20] runTestCase : STRING
+0x84ecec [ 20]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp130;
+  2:          func_decl_n    0               // function testcase ();
+  3:                 meta    7    0          // function end: 47;
+  4:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  5:         reg_var_decl  128               // var tmp128 .. tmp147;
+  6:             var_decl                    // var global;
+  7:             var_decl                    // var desc;
+  8:               call_n  130    3          // 
+  9:           assignment    1    6          // global = tmp130 : TYPEOF(tmp130);
+ 10:           assignment  130    5          // tmp130 = 'getOwnPropertyDescriptor': STRING;
+ 11:          prop_getter  131    5          // tmp131 = Object[tmp130];
+ 12:           assignment  132    6          // tmp132 = Object : TYPEOF(Object);
+ 13:               call_n  133  131          // 
+ 14:                 meta    1    1          // 
+ 15:                 meta    2    1          // 
+ 16:           assignment  133    5          // tmp133 = 'unescape': STRING;
+ 17:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, global, tmp133);
+ 18:           assignment    2    6          // desc = tmp133 : TYPEOF(tmp133);
+ 19:           assignment  130    5          // tmp130 = 'value': STRING;
+ 20:          prop_getter  131    2          // tmp131 = desc[tmp130];
+ 21:           assignment  132    5          // tmp132 = 'unescape': STRING;
+ 22:          prop_getter  133    1          // tmp133 = global[tmp132];
+ 23:     equal_value_type  134  131          // tmp134 = tmp131 === tmp133;
+ 24:           assignment  135    6          // tmp135 = tmp134 : TYPEOF(tmp134);
+ 25:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 43;
+ 26:           assignment  136    5          // tmp136 = 'writable': STRING;
+ 27:          prop_getter  137    2          // tmp137 = desc[tmp136];
+ 28:           assignment  138    0          // tmp138 = true: SIMPLE;
+ 29:     equal_value_type  139  137          // tmp139 = tmp137 === tmp138;
+ 30:           assignment  135    6          // tmp135 = tmp139 : TYPEOF(tmp139);
+ 31:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 43;
+ 32:           assignment  140    5          // tmp140 = 'enumerable': STRING;
+ 33:          prop_getter  141    2          // tmp141 = desc[tmp140];
+ 34:           assignment  142    0          // tmp142 = false: SIMPLE;
+ 35:     equal_value_type  143  141          // tmp143 = tmp141 === tmp142;
+ 36:           assignment  135    6          // tmp135 = tmp143 : TYPEOF(tmp143);
+ 37:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 43;
+ 38:           assignment  144    5          // tmp144 = 'configurable': STRING;
+ 39:          prop_getter  145    2          // tmp145 = desc[tmp144];
+ 40:           assignment  146    0          // tmp146 = true: SIMPLE;
+ 41:     equal_value_type  147  145          // tmp147 = tmp145 === tmp146;
+ 42:           assignment  135    6          // tmp135 = tmp147 : TYPEOF(tmp147);
+ 43:    is_false_jmp_down  135    0          // if (tmp135 == false) goto 46;
+ 44:           assignment  130    0          // tmp130 = true: SIMPLE;
+ 45:               retval                    // return tmp130;
+ 46:                  ret                    // ret;
+ 47:               call_n  130   11          // 
+ 48:                 meta    2    0          // tmp130 = runTestCase (testcase);
+ 49:                  ret                    // ret;

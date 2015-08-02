@@ -1,0 +1,1 @@
+assert.sameValue("_".bold(),"<b>_</b>");assert.sameValue("<".bold(),"<b><</b>");assert.sameValue(String.prototype.bold.call(42),"<b>42</b>");assert["throws"](TypeError,function(){String.prototype.bold.call(undefined)});assert["throws"](TypeError,function(){String.prototype.bold.call(null)});assert.sameValue(String.prototype.bold.length,0);

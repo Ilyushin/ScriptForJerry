@@ -1,0 +1,39 @@
+// assert.notSameValue({},{});
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// assert.notSameValue({},{});
+// 
+// assert.notSameValue({},{});
+  2:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+  3:          prop_getter  131  254          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  255  131          // 
+  6:                 meta    1    1          // 
+  7:             obj_decl  255               // 
+  7:             obj_decl  133               // tmp133 = {}; // REWRITE
+  8:                 meta    2  133          // 
+  9:             obj_decl  255               // 
+  9:             obj_decl  133               // tmp133 = {}; // REWRITE
+ 10:                 meta    2  133          // 
+  5:               call_n  133  131          //  // REWRITE
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133; // REWRITE
+ 11:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] assert : STRING
+0x84ec60 [ 20] notSameValue : STRING
+0x84ec74 [ 12]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133;
+  2:           assignment  130    5          // tmp130 = 'notSameValue': STRING;
+  3:          prop_getter  131    1          // tmp131 = assert[tmp130];
+  4:           assignment  132    6          // tmp132 = assert : TYPEOF(assert);
+  5:               call_n  133  131          // 
+  6:                 meta    1    1          // 
+  7:             obj_decl  133               // tmp133 = {};
+  8:                 meta    2  133          // 
+  9:             obj_decl  133               // tmp133 = {};
+ 10:                 meta    2  133          // tmp133 = {tmp133};
+ 11:                  ret                    // ret;
