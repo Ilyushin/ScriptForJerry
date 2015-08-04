@@ -1,240 +1,171 @@
-assert-false.js ,13.92 ,6189.88 ,146 ,114 ,44367.53 ,21.0
-assert-false.js ,26.04 ,3065.28 ,146 ,114 ,11671.43 ,21.0
-assert-false.js ,12.22 ,1475.27 ,146 ,100 ,11972.59 ,31.0
-assert-notsamevalue-nan.js ,12.74 ,6192.17 ,156 ,121 ,48504.16 ,22.0
-assert-notsamevalue-nan.js ,12.13 ,2490.28 ,156 ,122 ,20429.93 ,21.0
-assert-notsamevalue-nan.js ,11.81 ,1256.2 ,156 ,110 ,10536.75 ,29.0
-assert-notsamevalue-notsame.js ,12.14 ,5461.05 ,151 ,143 ,44883.94 ,5.0
-assert-notsamevalue-notsame.js ,12.22 ,2390.26 ,151 ,142 ,19460.23 ,5.0
-assert-notsamevalue-notsame.js ,12.25 ,1406.69 ,151 ,132 ,11383.18 ,12.0
-assert-notsamevalue-objects.js ,6.13 ,5480.48 ,44 ,40 ,89304.24 ,9.0
-assert-notsamevalue-objects.js ,6.2 ,2274.88 ,44 ,40 ,36591.61 ,9.0
-assert-notsamevalue-objects.js ,6.32 ,1767.13 ,44 ,40 ,27860.92 ,9.0
-assert-notsamevalue-zeros.js ,6.26 ,5360.55 ,44 ,40 ,85531.79 ,9.0
-assert-notsamevalue-zeros.js ,6.22 ,2395.59 ,44 ,40 ,38414.31 ,9.0
-assert-notsamevalue-zeros.js ,6.23 ,1326.68 ,44 ,40 ,21195.02 ,9.0
-assert-obj.js ,11.47 ,5391.18 ,147 ,113 ,46902.44 ,23.0
-assert-obj.js ,11.42 ,2709.54 ,147 ,113 ,23626.27 ,23.0
-assert-obj.js ,13.08 ,1426.86 ,147 ,101 ,10808.72 ,31.0
-assert-samevalue-nan.js ,6.2 ,6117.25 ,39 ,35 ,98565.32 ,10.0
-assert-samevalue-nan.js ,6.14 ,2267.94 ,39 ,35 ,36837.13 ,10.0
-assert-samevalue-nan.js ,6.08 ,1352.07 ,39 ,35 ,22137.99 ,10.0
-assert-samevalue-objects.js ,12.45 ,5681.07 ,161 ,126 ,45531.08 ,21.0
-assert-samevalue-objects.js ,12.12 ,2324.78 ,161 ,127 ,19081.35 ,21.0
-assert-samevalue-objects.js ,13.07 ,1414.86 ,161 ,115 ,10725.25 ,28.0
-assert-samevalue-same.js ,14.28 ,5897.17 ,183 ,165 ,41196.71 ,9.0
-assert-samevalue-same.js ,14.12 ,2849.19 ,183 ,166 ,20078.4 ,9.0
-assert-samevalue-same.js ,15.47 ,2787.53 ,183 ,155 ,17918.94 ,15.0
-assert-samevalue-zeros.js ,16.02 ,6342.66 ,161 ,126 ,39492.13 ,21.0
-assert-samevalue-zeros.js ,12.37 ,2736.88 ,161 ,127 ,22025.14 ,21.0
-assert-samevalue-zeros.js ,12.47 ,1314.34 ,161 ,115 ,10440.02 ,28.0
-assert-throws-custom.js ,8.72 ,5942.26 ,83 ,67 ,68045.18 ,19.0
-assert-throws-custom.js ,16.65 ,2486.7 ,83 ,68 ,14835.14 ,18.0
-assert-throws-custom.js ,10.64 ,1471.43 ,83 ,68 ,13729.23 ,18.0
-assert-throws-incorrect-ctor.js ,21.13 ,6247.2 ,184 ,141 ,29465.55 ,23.0
-assert-throws-incorrect-ctor.js ,34.97 ,2415.52 ,184 ,142 ,6807.41 ,22.0
-assert-throws-incorrect-ctor.js ,17.22 ,1549.66 ,184 ,130 ,8899.19 ,29.0
-assert-throws-native.js ,36.51 ,6128.65 ,342 ,264 ,16686.22 ,22.0
-assert-throws-native.js ,35.42 ,2562.18 ,342 ,264 ,7133.71 ,22.0
-assert-throws-native.js ,32.33 ,1736.57 ,342 ,264 ,5271.39 ,22.0
-assert-throws-no-arg.js ,13.62 ,5484.85 ,151 ,116 ,40170.56 ,23.0
-assert-throws-no-arg.js ,22.16 ,2898.98 ,151 ,117 ,12982.04 ,22.0
-assert-throws-no-arg.js ,19.04 ,1425.4 ,151 ,105 ,7386.34 ,30.0
-assert-throws-no-error.js ,15.83 ,7347.57 ,170 ,135 ,46315.48 ,20.0
-assert-throws-no-error.js ,20.67 ,3074.62 ,170 ,136 ,14774.79 ,20.0
-assert-throws-no-error.js ,24.04 ,3100.76 ,170 ,124 ,12798.34 ,27.0
-assert-throws-null.js ,31.78 ,9011.54 ,182 ,139 ,28256.01 ,23.0
-assert-throws-null.js ,12.68 ,3874.27 ,182 ,140 ,30454.18 ,23.0
-assert-throws-null.js ,19.41 ,1418.21 ,182 ,128 ,7206.59 ,29.0
-assert-throws-primitive.js ,17.0 ,8016.57 ,182 ,139 ,47056.29 ,23.0
-assert-throws-primitive.js ,20.5 ,2227.08 ,182 ,140 ,10763.8 ,23.0
-assert-throws-primitive.js ,18.82 ,2280.62 ,182 ,128 ,12018.07 ,29.0
-assert-throws-single-arg.js ,18.13 ,5906.44 ,167 ,132 ,32478.27 ,20.0
-assert-throws-single-arg.js ,14.11 ,2378.73 ,167 ,133 ,16758.47 ,20.0
-assert-throws-single-arg.js ,22.03 ,1804.87 ,167 ,121 ,8092.78 ,27.0
-assert-true.js ,6.27 ,5679.56 ,29 ,27 ,90483.09 ,6.0
-assert-true.js ,4.52 ,2183.21 ,29 ,27 ,48201.11 ,6.0
-assert-true.js ,4.77 ,1649.9 ,29 ,25 ,34489.1 ,13.0
-B.2.1.js ,13.08 ,5568.11 ,184 ,141 ,42469.65 ,23.0
-B.2.1.js ,13.34 ,2859.17 ,184 ,142 ,21333.06 ,22.0
-B.2.1.js ,13.82 ,1396.86 ,184 ,134 ,10007.53 ,27.0
-B.2.1.propertyCheck.js ,7.97 ,6164.37 ,73 ,74 ,77244.67 ,0
-B.2.1.propertyCheck.js ,10.63 ,2441.59 ,73 ,74 ,22868.86 ,0
-B.2.1.propertyCheck.js ,7.44 ,1615.51 ,73 ,66 ,21613.84 ,9.0
-B.2.2.1.1.js ,11.85 ,6402.72 ,149 ,123 ,53931.39 ,17.0
-B.2.2.1.1.js ,11.61 ,2532.03 ,149 ,124 ,21709.04 ,16.0
-B.2.2.1.1.js ,11.62 ,1358.95 ,149 ,124 ,11594.92 ,16.0
-B.2.2.1.2.js ,11.76 ,6212.87 ,149 ,123 ,52730.53 ,17.0
-B.2.2.1.2.js ,12.07 ,2445.29 ,149 ,124 ,20159.24 ,16.0
-B.2.2.1.2.js ,24.63 ,1766.61 ,149 ,124 ,7072.59 ,16.0
-B.2.2.js ,13.04 ,13261.77 ,184 ,141 ,101600.69 ,23.0
-B.2.2.js ,33.52 ,6729.38 ,184 ,142 ,19975.72 ,22.0
-B.2.2.js ,28.9 ,3300.01 ,184 ,134 ,11318.72 ,27.0
-B.2.2.propertyCheck.js ,17.51 ,7192.79 ,72 ,73 ,40978.18 ,0
-B.2.2.propertyCheck.js ,14.59 ,4207.91 ,72 ,73 ,28741.06 ,0
-B.2.2.propertyCheck.js ,7.29 ,3172.18 ,72 ,65 ,43414.13 ,9.0
-B.2.3.2.js ,32.57 ,14859.72 ,378 ,291 ,45523.95 ,23.0
-B.2.3.2.js ,41.93 ,4390.77 ,378 ,338 ,10371.67 ,10.0
-B.2.3.2.js ,56.77 ,1510.38 ,378 ,333 ,2560.52 ,11.0
-B.2.3.3.js ,26.84 ,9219.55 ,292 ,212 ,34250.04 ,27.0
-B.2.3.3.js ,21.62 ,2719.78 ,292 ,258 ,12479.93 ,11.0
-B.2.3.3.js ,28.68 ,1385.79 ,292 ,253 ,4731.9 ,13.0
-B.2.3.4.js ,35.72 ,6623.71 ,292 ,212 ,18443.42 ,27.0
-B.2.3.4.js ,19.86 ,2575.43 ,292 ,258 ,12867.93 ,11.0
-B.2.3.4.js ,35.1 ,1380.29 ,292 ,253 ,3832.45 ,13.0
-B.2.3.5.js ,34.07 ,5991.35 ,292 ,212 ,17485.41 ,27.0
-B.2.3.5.js ,30.56 ,2431.9 ,292 ,258 ,7857.79 ,11.0
-B.2.3.5.js ,27.74 ,1401.07 ,292 ,253 ,4950.72 ,13.0
-B.2.3.6.js ,36.4 ,7253.78 ,292 ,212 ,19827.97 ,27.0
-B.2.3.6.js ,40.8 ,2939.03 ,292 ,258 ,7103.5 ,11.0
-B.2.3.6.js ,26.81 ,1384.55 ,292 ,253 ,5064.3 ,13.0
-B.2.3.7.js ,31.83 ,6300.15 ,381 ,291 ,19693.12 ,23.0
-B.2.3.7.js ,34.63 ,2890.07 ,381 ,341 ,8245.57 ,10.0
-B.2.3.7.js ,53.71 ,1458.34 ,381 ,336 ,2615.21 ,11.0
-B.2.3.8.js ,37.43 ,6011.31 ,381 ,291 ,15960.14 ,23.0
-B.2.3.8.js ,27.0 ,2529.25 ,381 ,341 ,9267.59 ,10.0
-B.2.3.8.js ,39.84 ,2224.75 ,381 ,336 ,5484.21 ,11.0
-B.2.3.9.js ,25.81 ,8087.72 ,292 ,212 ,31235.61 ,27.0
-B.2.3.9.js ,28.59 ,3138.35 ,292 ,258 ,10877.09 ,11.0
-B.2.3.9.js ,36.13 ,1599.04 ,292 ,253 ,4325.8 ,13.0
-B.2.3.10.js ,31.13 ,6679.78 ,378 ,337 ,21357.69 ,10.0
-B.2.3.10.js ,25.32 ,2724.06 ,378 ,338 ,10658.53 ,10.0
-B.2.3.10.js ,30.45 ,1414.88 ,378 ,333 ,4546.57 ,11.0
-B.2.3.11.js ,24.29 ,5736.61 ,292 ,212 ,23517.17 ,27.0
-B.2.3.11.js ,38.8 ,2316.25 ,292 ,258 ,5869.72 ,11.0
-B.2.3.11.js ,28.07 ,1359.97 ,292 ,253 ,4744.92 ,13.0
-B.2.3.12.js ,28.81 ,6492.26 ,292 ,212 ,22434.74 ,27.0
-B.2.3.12.js ,34.3 ,4305.1 ,292 ,258 ,12451.31 ,11.0
-B.2.3.12.js ,40.16 ,2407.2 ,292 ,253 ,5894.02 ,13.0
-B.2.3.13.js ,32.41 ,5961.97 ,292 ,212 ,18295.46 ,27.0
-B.2.3.13.js ,22.32 ,3318.52 ,292 ,258 ,14767.92 ,11.0
-B.2.3.13.js ,29.16 ,1468.28 ,292 ,253 ,4935.25 ,13.0
-B.2.3.14.js ,30.2 ,6239.89 ,292 ,212 ,20561.89 ,27.0
-B.2.3.14.js ,26.25 ,2317.09 ,292 ,258 ,8727.01 ,11.0
-B.2.3.14.js ,31.61 ,1689.86 ,292 ,253 ,5245.97 ,13.0
-B.2.3.js ,13.5 ,6159.82 ,180 ,142 ,45528.3 ,21.0
-B.2.3.js ,15.59 ,2798.02 ,180 ,142 ,17847.53 ,21.0
-B.2.3.js ,13.1 ,1361.58 ,180 ,135 ,10293.74 ,25.0
-B.2.4.js ,13.05 ,5598.96 ,180 ,142 ,42803.91 ,21.0
-B.2.4.js ,29.12 ,2259.75 ,180 ,143 ,7660.13 ,20.0
-B.2.4.js ,12.7 ,1356.04 ,180 ,135 ,10577.48 ,25.0
-B.2.4.propertyCheck.js ,9.94 ,5817.19 ,103 ,104 ,58423.04 ,0
-B.2.4.propertyCheck.js ,10.42 ,2259.9 ,103 ,104 ,21588.1 ,0
-B.2.4.propertyCheck.js ,9.75 ,1405.4 ,103 ,96 ,14314.36 ,6.0
-B.2.5.js ,12.88 ,5671.43 ,180 ,142 ,43932.84 ,21.0
-B.2.5.js ,12.9 ,2244.27 ,180 ,143 ,17297.44 ,20.0
-B.2.5.js ,12.71 ,1357.9 ,180 ,135 ,10583.71 ,25.0
-B.2.5.propertyCheck.js ,9.99 ,5296.19 ,103 ,104 ,52914.91 ,0
-B.2.5.propertyCheck.js ,9.81 ,2365.0 ,103 ,104 ,24008.05 ,0
-B.2.5.propertyCheck.js ,10.11 ,1336.17 ,103 ,96 ,13116.32 ,6.0
-B.2.6.js ,14.43 ,5913.33 ,180 ,142 ,40879.42 ,21.0
-B.2.6.js ,13.29 ,2125.81 ,180 ,143 ,15895.56 ,20.0
-B.2.6.js ,12.89 ,1578.06 ,180 ,135 ,12142.51 ,25.0
-B.2.6.propertyCheck.js ,9.88 ,5604.83 ,103 ,104 ,56629.05 ,0
-B.2.6.propertyCheck.js ,10.18 ,2505.78 ,103 ,104 ,24514.73 ,0
-B.2.6.propertyCheck.js ,10.01 ,1287.02 ,103 ,96 ,12757.34 ,6.0
-B.RegExp.prototype.compile.js ,12.85 ,5698.08 ,180 ,142 ,44243.04 ,21.0
-B.RegExp.prototype.compile.js ,12.91 ,2710.87 ,180 ,143 ,20898.22 ,20.0
-B.RegExp.prototype.compile.js ,13.52 ,1340.31 ,180 ,135 ,9813.54 ,25.0
-compare-array-different-elements.js ,8.42 ,5293.03 ,96 ,87 ,62762.59 ,9.0
-compare-array-different-elements.js ,8.31 ,2308.9 ,96 ,97 ,27684.6 ,0
-compare-array-different-elements.js ,8.43 ,1336.47 ,96 ,80 ,15753.74 ,16.0
-compare-array-different-length.js ,8.68 ,5619.23 ,98 ,101 ,64637.67 ,0
-compare-array-different-length.js ,9.2 ,2286.99 ,98 ,101 ,24758.59 ,0
-compare-array-different-length.js ,8.28 ,1331.71 ,98 ,79 ,15983.45 ,19.0
-compare-array-empty.js ,5.94 ,5357.82 ,57 ,53 ,90098.99 ,7.0
-compare-array-empty.js ,6.14 ,2287.71 ,57 ,53 ,37159.12 ,7.0
-compare-array-empty.js ,6.13 ,1338.76 ,57 ,47 ,21739.48 ,17.0
-compare-array-same-elements-different-order.js ,10.95 ,5692.4 ,135 ,122 ,51885.39 ,9.0
-compare-array-same-elements-different-order.js ,10.72 ,2373.06 ,135 ,133 ,22036.75 ,1.0
-compare-array-same-elements-different-order.js ,11.08 ,1473.19 ,135 ,116 ,13195.94 ,14.0
-compare-array-same-elements-same-order.js ,16.54 ,5209.06 ,135 ,123 ,31393.71 ,8.0
-compare-array-same-elements-same-order.js ,10.81 ,2493.76 ,135 ,133 ,22969.01 ,1.0
-compare-array-same-elements-same-order.js ,16.25 ,1807.31 ,135 ,116 ,11021.91 ,14.0
-compare-array-sparse.js ,16.51 ,1421.27 ,243 ,2 ,8508.54 ,99.0
-compare-array-sparse.js ,22.29 ,1605.31 ,243 ,2 ,7101.93 ,99.0
-compare-array-sparse.js ,20.33 ,1571.48 ,243 ,2 ,7629.86 ,99.0
-error.js ,15.22 ,5647.58 ,182 ,131 ,37006.31 ,28.0
-error.js ,12.47 ,2258.82 ,182 ,131 ,18014.03 ,28.0
-error.js ,12.65 ,1417.3 ,182 ,127 ,11103.95 ,30.0
-propertyhelper-verifyconfigurable-configurable.js ,17.78 ,4977.43 ,83 ,67 ,27894.54 ,19.0
-propertyhelper-verifyconfigurable-configurable.js ,7.75 ,2265.92 ,83 ,69 ,29137.68 ,16.0
-propertyhelper-verifyconfigurable-configurable.js ,7.67 ,1609.74 ,83 ,67 ,20887.48 ,19.0
-propertyhelper-verifyconfigurable-not-configurable-not-strict.js ,14.29 ,5666.46 ,200 ,155 ,39553.32 ,22.0
-propertyhelper-verifyconfigurable-not-configurable-not-strict.js ,13.2 ,2554.67 ,200 ,156 ,19253.56 ,22.0
-propertyhelper-verifyconfigurable-not-configurable-not-strict.js ,13.8 ,1426.55 ,200 ,142 ,10237.32 ,29.0
-propertyhelper-verifyconfigurable-not-configurable-strict.js ,15.73 ,5448.15 ,200 ,155 ,34535.41 ,22.0
-propertyhelper-verifyconfigurable-not-configurable-strict.js ,13.32 ,2557.99 ,200 ,156 ,19104.13 ,22.0
-propertyhelper-verifyconfigurable-not-configurable-strict.js ,13.64 ,1366.12 ,200 ,142 ,9915.54 ,29.0
-propertyhelper-verifyenumerable-enumerable.js ,7.34 ,5256.22 ,83 ,67 ,71510.63 ,19.0
-propertyhelper-verifyenumerable-enumerable.js ,7.67 ,2301.64 ,83 ,69 ,29908.34 ,16.0
-propertyhelper-verifyenumerable-enumerable.js ,7.59 ,1324.77 ,83 ,67 ,17354.15 ,19.0
-propertyhelper-verifyenumerable-not-enumerable.js ,13.39 ,5425.66 ,200 ,155 ,40420.24 ,22.0
-propertyhelper-verifyenumerable-not-enumerable.js ,13.26 ,2335.99 ,200 ,156 ,17516.82 ,22.0
-propertyhelper-verifyenumerable-not-enumerable.js ,14.71 ,1399.69 ,200 ,142 ,9415.23 ,29.0
-propertyhelper-verifynotconfigurable-configurable.js ,13.64 ,5604.85 ,200 ,154 ,40991.28 ,23.0
-propertyhelper-verifynotconfigurable-configurable.js ,13.3 ,2252.3 ,200 ,156 ,16834.59 ,22.0
-propertyhelper-verifynotconfigurable-configurable.js ,13.61 ,1374.01 ,200 ,142 ,9995.59 ,29.0
-propertyhelper-verifynotconfigurable-not-configurable-not-strict.js ,7.57 ,5546.84 ,83 ,68 ,73173.98 ,18.0
-propertyhelper-verifynotconfigurable-not-configurable-not-strict.js ,7.68 ,2236.95 ,83 ,69 ,29026.95 ,16.0
-propertyhelper-verifynotconfigurable-not-configurable-not-strict.js ,7.24 ,1337.15 ,83 ,67 ,18368.92 ,19.0
-propertyhelper-verifynotconfigurable-not-configurable-strict.js ,7.48 ,5355.76 ,83 ,68 ,71501.07 ,18.0
-propertyhelper-verifynotconfigurable-not-configurable-strict.js ,7.41 ,2310.78 ,83 ,69 ,31084.62 ,16.0
-propertyhelper-verifynotconfigurable-not-configurable-strict.js ,7.47 ,1631.83 ,83 ,67 ,21745.11 ,19.0
-propertyhelper-verifynotenumerable-enumerable.js ,14.55 ,5220.56 ,200 ,154 ,35780.14 ,23.0
-propertyhelper-verifynotenumerable-enumerable.js ,13.68 ,2327.51 ,200 ,156 ,16913.96 ,22.0
-propertyhelper-verifynotenumerable-enumerable.js ,19.28 ,1733.7 ,200 ,142 ,8892.22 ,29.0
-propertyhelper-verifynotenumerable-not-enumerable.js ,7.75 ,5342.56 ,83 ,68 ,68836.26 ,18.0
-propertyhelper-verifynotenumerable-not-enumerable.js ,7.69 ,2416.56 ,83 ,69 ,31324.71 ,16.0
-propertyhelper-verifynotenumerable-not-enumerable.js ,7.38 ,1497.29 ,83 ,67 ,20188.48 ,19.0
-propertyhelper-verifynotwritable-not-writable-not-strict.js ,8.97 ,5290.8 ,122 ,99 ,58883.28 ,18.0
-propertyhelper-verifynotwritable-not-writable-not-strict.js ,13.65 ,2816.69 ,122 ,100 ,20535.09 ,18.0
-propertyhelper-verifynotwritable-not-writable-not-strict.js ,9.27 ,1376.69 ,122 ,94 ,14751.02 ,22.0
-propertyhelper-verifynotwritable-not-writable-strict.js ,9.43 ,5787.04 ,122 ,99 ,61268.4 ,18.0
-propertyhelper-verifynotwritable-not-writable-strict.js ,9.72 ,2384.04 ,122 ,100 ,24427.16 ,18.0
-propertyhelper-verifynotwritable-not-writable-strict.js ,9.63 ,1304.44 ,122 ,94 ,13445.59 ,22.0
-propertyhelper-verifynotwritable-writable.js ,13.72 ,5731.41 ,210 ,161 ,41674.13 ,23.0
-propertyhelper-verifynotwritable-writable.js ,13.99 ,2281.9 ,210 ,163 ,16210.94 ,22.0
-propertyhelper-verifynotwritable-writable.js ,14.04 ,1400.29 ,210 ,149 ,9873.58 ,29.0
-propertyhelper-verifywritable-not-writable-not-strict.js ,13.16 ,5782.97 ,200 ,155 ,43843.54 ,22.0
-propertyhelper-verifywritable-not-writable-not-strict.js ,13.4 ,2266.87 ,200 ,156 ,16816.94 ,22.0
-propertyhelper-verifywritable-not-writable-not-strict.js ,13.64 ,1707.38 ,200 ,142 ,12417.45 ,29.0
-propertyhelper-verifywritable-not-writable-strict.js ,13.36 ,5000.45 ,200 ,155 ,37328.52 ,22.0
-propertyhelper-verifywritable-not-writable-strict.js ,13.02 ,2272.45 ,200 ,156 ,17353.53 ,22.0
-propertyhelper-verifywritable-not-writable-strict.js ,17.07 ,1539.89 ,200 ,142 ,8921.03 ,29.0
-propertyhelper-verifywritable-writable.js ,9.16 ,5433.94 ,122 ,99 ,59222.49 ,18.0
-propertyhelper-verifywritable-writable.js ,9.4 ,2605.26 ,122 ,100 ,27615.53 ,18.0
-propertyhelper-verifywritable-writable.js ,9.2 ,1335.92 ,122 ,94 ,14420.87 ,22.0
-testbuiltinobject-function-badstring.js ,10.44 ,5564.23 ,150 ,118 ,53197.22 ,21.0
-testbuiltinobject-function-badstring.js ,18.02 ,2830.66 ,150 ,118 ,15608.44 ,21.0
-testbuiltinobject-function-badstring.js ,11.15 ,1399.3 ,150 ,104 ,12449.78 ,30.0
-testbuiltinobject-function-expected-length.js ,12.85 ,9448.89 ,180 ,145 ,73432.22 ,19.0
-testbuiltinobject-function-expected-length.js ,17.42 ,4699.77 ,180 ,150 ,26879.16 ,16.0
-testbuiltinobject-function-expected-length.js ,19.52 ,2217.11 ,180 ,134 ,11258.15 ,25.0
-testbuiltinobject-function-not-constructor-no-error.js ,12.48 ,7865.58 ,175 ,145 ,62925.48 ,17.0
-testbuiltinobject-function-not-constructor-no-error.js ,12.31 ,2317.14 ,175 ,145 ,18723.23 ,17.0
-testbuiltinobject-function-not-constructor-no-error.js ,12.21 ,1259.1 ,175 ,129 ,10212.04 ,26.0
-testbuiltinobject-function-not-constructor-no-typeerror.js ,13.12 ,5683.31 ,197 ,152 ,43217.91 ,22.0
-testbuiltinobject-function-not-constructor-no-typeerror.js ,13.45 ,2150.9 ,197 ,156 ,15891.82 ,20.0
-testbuiltinobject-function-not-constructor-no-typeerror.js ,13.09 ,1331.5 ,197 ,140 ,10071.89 ,28.0
-testbuiltinobject-non-extensible.js ,12.04 ,5628.46 ,173 ,133 ,46648.01 ,23.0
-testbuiltinobject-non-extensible.js ,11.95 ,2335.12 ,173 ,133 ,19440.75 ,23.0
-testbuiltinobject-non-extensible.js ,12.21 ,1285.92 ,173 ,121 ,10431.7 ,30.0
-testbuiltinobject-not-function-badstring.js ,11.57 ,5597.45 ,162 ,130 ,48279.0 ,19.0
-testbuiltinobject-not-function-badstring.js ,11.73 ,2341.41 ,162 ,130 ,19860.87 ,19.0
-testbuiltinobject-not-function-badstring.js ,11.56 ,1676.91 ,162 ,116 ,14406.14 ,28.0
-testbuiltinobject-prop-enumerable.js ,21.26 ,6024.6 ,335 ,290 ,28237.72 ,13.0
-testbuiltinobject-prop-enumerable.js ,21.48 ,2601.19 ,335 ,293 ,12009.82 ,12.0
-testbuiltinobject-prop-enumerable.js ,21.27 ,1336.42 ,335 ,259 ,6183.12 ,22.0
-testbuiltinobject-prop-missing.js ,18.26 ,5476.73 ,286 ,244 ,29893.04 ,14.0
-testbuiltinobject-prop-missing.js ,24.08 ,2854.36 ,286 ,247 ,11753.65 ,13.0
-testbuiltinobject-prop-missing.js ,18.25 ,1340.69 ,286 ,219 ,7246.25 ,23.0
-testbuiltinobject-prop-not-configurable.js ,23.79 ,7545.05 ,335 ,290 ,31615.22 ,13.0
-testbuiltinobject-prop-not-configurable.js ,28.73 ,4896.76 ,335 ,293 ,16944.07 ,12.0
-testbuiltinobject-prop-not-configurable.js ,25.86 ,2439.85 ,335 ,259 ,9334.84 ,22.0
-testbuiltinobject-prop-not-writable.js ,21.46 ,8846.11 ,335 ,290 ,41121.39 ,13.0
-testbuiltinobject-prop-not-writable.js ,21.37 ,2484.69 ,335 ,293 ,11527.0 ,12.0
-testbuiltinobject-prop-not-writable.js ,22.1 ,2231.11 ,335 ,259 ,9995.52 ,22.0
-testbuiltinobject-undefined.js ,19.74 ,12309.96 ,145 ,116 ,62260.49 ,20.0
-testbuiltinobject-undefined.js ,10.38 ,2268.97 ,145 ,116 ,21759.06 ,20.0
-testbuiltinobject-undefined.js ,21.18 ,2645.6 ,145 ,99 ,12391.03 ,31.0
+assert-false.js ,27.17 ,6099.93 ,10.57 ,146 ,114 ,22350.98 ,21.0
+assert-false.js ,10.35 ,2305.78 ,10.02 ,146 ,114 ,22178.07 ,21.0
+assert-false.js ,10.84 ,1622.02 ,10.18 ,146 ,100 ,14863.28 ,31.0
+assert-notsamevalue-nan.js ,13.99 ,5334.28 ,10.25 ,156 ,121 ,38029.24 ,22.0
+assert-notsamevalue-nan.js ,10.43 ,2393.55 ,10.53 ,156 ,122 ,22848.71 ,21.0
+assert-notsamevalue-nan.js ,10.69 ,1360.48 ,10.18 ,156 ,110 ,12626.66 ,29.0
+assert-notsamevalue-notsame.js ,12.38 ,5221.33 ,10.83 ,151 ,143 ,42075.53 ,5.0
+assert-notsamevalue-notsame.js ,10.54 ,2490.13 ,11.78 ,151 ,142 ,23525.52 ,5.0
+assert-notsamevalue-notsame.js ,11.44 ,1291.34 ,11.99 ,151 ,132 ,11187.94 ,12.0
+assert-notsamevalue-objects.js ,6.17 ,5064.53 ,4.79 ,44 ,40 ,81983.14 ,9.0
+assert-notsamevalue-objects.js ,4.58 ,2299.1 ,4.67 ,44 ,40 ,50098.69 ,9.0
+assert-notsamevalue-objects.js ,4.37 ,1311.68 ,4.59 ,44 ,40 ,29915.56 ,9.0
+assert-notsamevalue-zeros.js ,6.09 ,5272.25 ,5.02 ,44 ,40 ,86472.25 ,9.0
+assert-notsamevalue-zeros.js ,4.65 ,2113.05 ,4.67 ,44 ,40 ,45341.94 ,9.0
+assert-notsamevalue-zeros.js ,4.77 ,1271.1 ,4.56 ,44 ,40 ,26547.8 ,9.0
+assert-obj.js ,11.45 ,5617.17 ,9.84 ,147 ,113 ,48958.25 ,23.0
+assert-obj.js ,9.5 ,2373.95 ,10.7 ,147 ,113 ,24888.95 ,23.0
+assert-obj.js ,10.39 ,1257.48 ,9.78 ,147 ,101 ,12002.79 ,31.0
+assert-samevalue-nan.js ,5.4 ,5308.81 ,4.69 ,39 ,35 ,98211.3 ,10.0
+assert-samevalue-nan.js ,4.47 ,2237.91 ,4.7 ,39 ,35 ,49965.1 ,10.0
+assert-samevalue-nan.js ,4.55 ,1339.81 ,4.54 ,39 ,35 ,29346.37 ,10.0
+assert-samevalue-objects.js ,13.52 ,5496.82 ,10.54 ,161 ,126 ,40556.95 ,21.0
+assert-samevalue-objects.js ,10.46 ,2216.81 ,11.59 ,161 ,127 ,21093.21 ,21.0
+assert-samevalue-objects.js ,10.63 ,1310.95 ,10.18 ,161 ,115 ,12232.55 ,28.0
+assert-samevalue-same.js ,13.98 ,5420.38 ,12.55 ,183 ,165 ,38672.39 ,9.0
+assert-samevalue-same.js ,12.27 ,2301.54 ,13.13 ,183 ,166 ,18657.46 ,9.0
+assert-samevalue-same.js ,12.17 ,1583.35 ,23.39 ,183 ,155 ,12910.27 ,15.0
+assert-samevalue-zeros.js ,14.13 ,5252.9 ,10.65 ,161 ,126 ,37075.51 ,21.0
+assert-samevalue-zeros.js ,10.36 ,2304.97 ,11.11 ,161 ,127 ,22148.75 ,21.0
+assert-samevalue-zeros.js ,10.54 ,1546.37 ,10.06 ,161 ,115 ,14571.44 ,28.0
+assert-throws-custom.js ,8.65 ,5272.04 ,9.79 ,83 ,67 ,60848.44 ,19.0
+assert-throws-custom.js ,17.05 ,2687.62 ,9.39 ,83 ,68 ,15663.17 ,18.0
+assert-throws-custom.js ,15.11 ,1365.69 ,18.12 ,83 ,68 ,8938.32 ,18.0
+assert-throws-incorrect-ctor.js ,18.7 ,5330.8 ,21.0 ,184 ,141 ,28406.95 ,23.0
+assert-throws-incorrect-ctor.js ,28.33 ,2721.05 ,19.13 ,184 ,142 ,9504.84 ,22.0
+assert-throws-incorrect-ctor.js ,30.03 ,1458.92 ,25.56 ,184 ,130 ,4758.21 ,29.0
+assert-throws-native.js ,27.33 ,5907.59 ,21.73 ,342 ,264 ,21515.77 ,22.0
+assert-throws-native.js ,21.09 ,2270.47 ,35.85 ,342 ,264 ,10665.62 ,22.0
+assert-throws-native.js ,26.82 ,1395.24 ,33.44 ,342 ,264 ,5102.24 ,22.0
+assert-throws-no-arg.js ,14.31 ,5497.38 ,20.18 ,151 ,116 ,38316.35 ,23.0
+assert-throws-no-arg.js ,34.34 ,2616.35 ,23.67 ,151 ,117 ,7518.96 ,22.0
+assert-throws-no-arg.js ,13.27 ,1446.28 ,19.2 ,151 ,105 ,10798.87 ,30.0
+assert-throws-no-error.js ,23.06 ,5429.28 ,22.71 ,170 ,135 ,23444.15 ,20.0
+assert-throws-no-error.js ,23.25 ,2653.3 ,12.82 ,170 ,136 ,11312.04 ,20.0
+assert-throws-no-error.js ,20.09 ,1488.14 ,29.75 ,170 ,124 ,7307.37 ,27.0
+assert-throws-null.js ,20.57 ,6066.26 ,28.19 ,182 ,139 ,29390.81 ,23.0
+assert-throws-null.js ,17.65 ,2611.89 ,21.8 ,182 ,140 ,14698.24 ,23.0
+assert-throws-null.js ,19.89 ,1713.32 ,18.03 ,182 ,128 ,8513.98 ,29.0
+assert-throws-primitive.js ,19.63 ,6483.78 ,29.81 ,182 ,139 ,32929.95 ,23.0
+assert-throws-primitive.js ,28.44 ,2763.93 ,28.23 ,182 ,140 ,9618.46 ,23.0
+assert-throws-primitive.js ,24.52 ,1811.89 ,36.12 ,182 ,128 ,7289.44 ,29.0
+assert-throws-single-arg.js ,18.26 ,6426.59 ,20.83 ,167 ,132 ,35094.91 ,20.0
+assert-throws-single-arg.js ,13.92 ,3240.75 ,26.05 ,167 ,133 ,23181.25 ,20.0
+assert-throws-single-arg.js ,22.03 ,1486.07 ,16.77 ,167 ,121 ,6645.67 ,27.0
+assert-true.js ,10.96 ,6774.9 ,3.67 ,29 ,27 ,61714.78 ,6.0
+assert-true.js ,3.91 ,2766.63 ,4.78 ,29 ,27 ,70657.8 ,6.0
+assert-true.js ,3.77 ,1609.79 ,3.5 ,29 ,25 ,42600.0 ,13.0
+B.2.4.propertyCheck.js ,10.08 ,6774.67 ,10.58 ,103 ,104 ,67109.03 ,0
+B.2.4.propertyCheck.js ,8.78 ,2838.55 ,9.56 ,103 ,104 ,32229.73 ,0
+B.2.4.propertyCheck.js ,8.98 ,1796.02 ,9.31 ,103 ,96 ,19900.22 ,6.0
+B.2.5.propertyCheck.js ,10.18 ,6521.6 ,10.23 ,103 ,104 ,63962.87 ,0
+B.2.5.propertyCheck.js ,9.92 ,3057.59 ,10.63 ,103 ,104 ,30722.48 ,0
+B.2.5.propertyCheck.js ,8.89 ,1570.07 ,9.39 ,103 ,96 ,17561.08 ,6.0
+B.2.6.propertyCheck.js ,10.17 ,6705.6 ,9.96 ,103 ,104 ,65835.1 ,0
+B.2.6.propertyCheck.js ,8.99 ,2749.63 ,9.81 ,103 ,104 ,30485.43 ,0
+B.2.6.propertyCheck.js ,9.12 ,1511.56 ,9.67 ,103 ,96 ,16474.12 ,6.0
+B.RegExp.prototype.compile.js ,13.19 ,7235.25 ,11.62 ,180 ,142 ,54754.06 ,21.0
+B.RegExp.prototype.compile.js ,12.41 ,2887.46 ,11.3 ,180 ,143 ,23167.2 ,20.0
+B.RegExp.prototype.compile.js ,12.34 ,1800.79 ,11.35 ,180 ,135 ,14493.11 ,25.0
+compare-array-different-elements.js ,8.67 ,7200.36 ,7.9 ,96 ,87 ,82949.13 ,9.0
+compare-array-different-elements.js ,7.75 ,2705.35 ,9.93 ,96 ,97 ,34807.74 ,0
+compare-array-different-elements.js ,7.52 ,1672.15 ,7.42 ,96 ,80 ,22136.04 ,16.0
+compare-array-different-length.js ,8.83 ,6822.58 ,8.79 ,98 ,101 ,77165.91 ,0
+compare-array-different-length.js ,7.36 ,2866.13 ,18.3 ,98 ,101 ,38841.98 ,0
+compare-array-different-length.js ,22.56 ,1581.04 ,7.51 ,98 ,79 ,6908.16 ,19.0
+compare-array-empty.js ,6.27 ,6969.73 ,5.65 ,57 ,53 ,111059.97 ,7.0
+compare-array-empty.js ,5.08 ,2678.24 ,5.32 ,57 ,53 ,52621.26 ,7.0
+compare-array-empty.js ,5.07 ,1658.53 ,5.23 ,57 ,47 ,32612.62 ,17.0
+compare-array-same-elements-different-order.js ,11.26 ,7369.22 ,10.26 ,135 ,122 ,65346.0 ,9.0
+compare-array-same-elements-different-order.js ,10.22 ,2718.32 ,10.7 ,135 ,133 ,26498.04 ,1.0
+compare-array-same-elements-different-order.js ,9.95 ,1928.45 ,10.01 ,135 ,116 ,19281.41 ,14.0
+compare-array-same-elements-same-order.js ,11.34 ,6547.75 ,9.93 ,135 ,123 ,57640.3 ,8.0
+compare-array-same-elements-same-order.js ,10.04 ,2894.0 ,10.83 ,135 ,133 ,28724.7 ,1.0
+compare-array-same-elements-same-order.js ,10.08 ,1630.26 ,10.22 ,135 ,116 ,16073.21 ,14.0
+compare-array-sparse.js ,17.99 ,2053.67 ,162.02 ,243 ,2 ,11315.62 ,99.0
+compare-array-sparse.js ,21.47 ,1801.82 ,158.73 ,243 ,2 ,8292.27 ,99.0
+compare-array-sparse.js ,19.63 ,2092.28 ,144.59 ,243 ,2 ,10558.58 ,99.0
+error.js ,14.63 ,6642.32 ,16.31 ,182 ,131 ,45302.05 ,28.0
+error.js ,19.97 ,3156.57 ,14.41 ,182 ,131 ,15706.56 ,28.0
+error.js ,12.99 ,1564.82 ,11.52 ,182 ,127 ,11946.34 ,30.0
+propertyhelper-verifyconfigurable-configurable.js ,7.41 ,7310.86 ,6.57 ,83 ,67 ,98562.08 ,19.0
+propertyhelper-verifyconfigurable-configurable.js ,6.75 ,2996.68 ,6.66 ,83 ,69 ,44295.26 ,16.0
+propertyhelper-verifyconfigurable-configurable.js ,6.8 ,1781.92 ,6.17 ,83 ,67 ,26104.71 ,19.0
+propertyhelper-verifyconfigurable-not-configurable-not-strict.js ,14.07 ,6985.37 ,12.69 ,200 ,155 ,49547.26 ,22.0
+propertyhelper-verifyconfigurable-not-configurable-not-strict.js ,12.64 ,2852.62 ,14.24 ,200 ,156 ,22468.2 ,22.0
+propertyhelper-verifyconfigurable-not-configurable-not-strict.js ,15.2 ,1537.31 ,12.25 ,200 ,142 ,10013.88 ,29.0
+propertyhelper-verifyconfigurable-not-configurable-strict.js ,13.03 ,7153.55 ,12.78 ,200 ,155 ,54800.61 ,22.0
+propertyhelper-verifyconfigurable-not-configurable-strict.js ,12.39 ,2710.54 ,13.02 ,200 ,156 ,21776.84 ,22.0
+propertyhelper-verifyconfigurable-not-configurable-strict.js ,12.56 ,1555.09 ,12.44 ,200 ,142 ,12281.29 ,29.0
+propertyhelper-verifyenumerable-enumerable.js ,7.66 ,6649.11 ,6.22 ,83 ,67 ,86703.0 ,19.0
+propertyhelper-verifyenumerable-enumerable.js ,6.54 ,2855.74 ,10.75 ,83 ,69 ,43565.75 ,16.0
+propertyhelper-verifyenumerable-enumerable.js ,12.88 ,1885.42 ,6.3 ,83 ,67 ,14538.35 ,19.0
+propertyhelper-verifyenumerable-not-enumerable.js ,13.91 ,7415.89 ,16.86 ,200 ,155 ,53213.37 ,22.0
+propertyhelper-verifyenumerable-not-enumerable.js ,14.48 ,2762.39 ,12.58 ,200 ,156 ,18977.28 ,22.0
+propertyhelper-verifyenumerable-not-enumerable.js ,12.81 ,1628.6 ,14.54 ,200 ,142 ,12613.51 ,29.0
+propertyhelper-verifynotconfigurable-configurable.js ,17.73 ,7251.37 ,13.51 ,200 ,154 ,40798.87 ,23.0
+propertyhelper-verifynotconfigurable-configurable.js ,12.58 ,2928.62 ,12.9 ,200 ,156 ,23179.97 ,22.0
+propertyhelper-verifynotconfigurable-configurable.js ,13.1 ,1810.42 ,12.37 ,200 ,142 ,13720.0 ,29.0
+propertyhelper-verifynotconfigurable-not-configurable-not-strict.js ,7.91 ,7304.49 ,6.57 ,83 ,68 ,92245.01 ,18.0
+propertyhelper-verifynotconfigurable-not-configurable-not-strict.js ,7.77 ,2771.01 ,6.86 ,83 ,69 ,35562.93 ,16.0
+propertyhelper-verifynotconfigurable-not-configurable-not-strict.js ,6.44 ,1632.38 ,6.24 ,83 ,67 ,25247.52 ,19.0
+propertyhelper-verifynotconfigurable-not-configurable-strict.js ,7.87 ,6456.68 ,6.5 ,83 ,68 ,81941.68 ,18.0
+propertyhelper-verifynotconfigurable-not-configurable-strict.js ,6.75 ,2516.87 ,6.43 ,83 ,69 ,37186.96 ,16.0
+propertyhelper-verifynotconfigurable-not-configurable-strict.js ,6.5 ,1633.16 ,15.11 ,83 ,67 ,25025.54 ,19.0
+propertyhelper-verifynotenumerable-enumerable.js ,22.79 ,6860.86 ,12.4 ,200 ,154 ,30004.7 ,23.0
+propertyhelper-verifynotenumerable-enumerable.js ,12.61 ,2908.92 ,12.51 ,200 ,156 ,22968.36 ,22.0
+propertyhelper-verifynotenumerable-enumerable.js ,12.63 ,1592.4 ,23.84 ,200 ,142 ,12508.08 ,29.0
+propertyhelper-verifynotenumerable-not-enumerable.js ,9.08 ,6967.51 ,6.37 ,83 ,68 ,76634.69 ,18.0
+propertyhelper-verifynotenumerable-not-enumerable.js ,6.37 ,2631.4 ,6.55 ,83 ,69 ,41209.26 ,16.0
+propertyhelper-verifynotenumerable-not-enumerable.js ,6.53 ,1514.08 ,6.21 ,83 ,67 ,23086.52 ,19.0
+propertyhelper-verifynotwritable-not-writable-not-strict.js ,9.09 ,6869.55 ,8.46 ,122 ,99 ,75472.61 ,18.0
+propertyhelper-verifynotwritable-not-writable-not-strict.js ,8.58 ,2600.39 ,15.9 ,122 ,100 ,30207.58 ,18.0
+propertyhelper-verifynotwritable-not-writable-not-strict.js ,18.42 ,1605.72 ,8.62 ,122 ,94 ,8617.26 ,22.0
+propertyhelper-verifynotwritable-not-writable-strict.js ,9.59 ,6780.81 ,8.6 ,122 ,99 ,70607.09 ,18.0
+propertyhelper-verifynotwritable-not-writable-strict.js ,8.69 ,2832.74 ,8.81 ,122 ,100 ,32497.7 ,18.0
+propertyhelper-verifynotwritable-not-writable-strict.js ,8.69 ,1551.87 ,8.66 ,122 ,94 ,17758.11 ,22.0
+propertyhelper-verifynotwritable-writable.js ,14.1 ,7083.17 ,13.08 ,210 ,161 ,50135.25 ,23.0
+propertyhelper-verifynotwritable-writable.js ,12.97 ,2694.13 ,14.12 ,210 ,163 ,20672.01 ,22.0
+propertyhelper-verifynotwritable-writable.js ,14.25 ,1634.83 ,12.58 ,210 ,149 ,11372.49 ,29.0
+propertyhelper-verifywritable-not-writable-not-strict.js ,14.09 ,7059.21 ,12.65 ,200 ,155 ,50000.85 ,22.0
+propertyhelper-verifywritable-not-writable-not-strict.js ,12.48 ,2584.91 ,12.76 ,200 ,156 ,20612.42 ,22.0
+propertyhelper-verifywritable-not-writable-not-strict.js ,12.61 ,1843.32 ,12.06 ,200 ,142 ,14517.92 ,29.0
+propertyhelper-verifywritable-not-writable-strict.js ,13.89 ,7127.71 ,15.82 ,200 ,155 ,51215.41 ,22.0
+propertyhelper-verifywritable-not-writable-strict.js ,29.01 ,2842.39 ,13.08 ,200 ,156 ,9697.97 ,22.0
+propertyhelper-verifywritable-not-writable-strict.js ,12.31 ,1553.9 ,15.48 ,200 ,142 ,12523.07 ,29.0
+propertyhelper-verifywritable-writable.js ,10.78 ,7163.73 ,8.69 ,122 ,99 ,66353.9 ,18.0
+propertyhelper-verifywritable-writable.js ,8.67 ,2804.4 ,8.45 ,122 ,100 ,32246.02 ,18.0
+propertyhelper-verifywritable-writable.js ,8.39 ,1668.41 ,9.13 ,122 ,94 ,19785.7 ,22.0
+testbuiltinobject-function-badstring.js ,17.4 ,6813.08 ,10.08 ,150 ,118 ,39055.63 ,21.0
+testbuiltinobject-function-badstring.js ,9.97 ,3189.19 ,11.01 ,150 ,118 ,31887.86 ,21.0
+testbuiltinobject-function-badstring.js ,10.16 ,1613.05 ,9.58 ,150 ,104 ,15776.48 ,30.0
+testbuiltinobject-function-expected-length.js ,12.79 ,7040.95 ,11.86 ,180 ,145 ,54950.43 ,19.0
+testbuiltinobject-function-expected-length.js ,12.21 ,2870.47 ,12.32 ,180 ,150 ,23409.17 ,16.0
+testbuiltinobject-function-expected-length.js ,11.91 ,1620.03 ,11.56 ,180 ,134 ,13502.27 ,25.0
+testbuiltinobject-function-not-constructor-no-error.js ,12.58 ,6564.5 ,11.59 ,175 ,145 ,52082.03 ,17.0
+testbuiltinobject-function-not-constructor-no-error.js ,11.36 ,2971.23 ,20.56 ,175 ,145 ,26055.19 ,17.0
+testbuiltinobject-function-not-constructor-no-error.js ,18.57 ,1592.9 ,11.1 ,175 ,129 ,8477.81 ,26.0
+testbuiltinobject-function-not-constructor-no-typeerror.js ,13.44 ,6752.31 ,12.23 ,197 ,152 ,50140.4 ,22.0
+testbuiltinobject-function-not-constructor-no-typeerror.js ,12.25 ,2743.42 ,12.86 ,197 ,156 ,22295.27 ,20.0
+testbuiltinobject-function-not-constructor-no-typeerror.js ,12.23 ,1797.22 ,14.84 ,197 ,140 ,14595.18 ,28.0
+testbuiltinobject-non-extensible.js ,14.74 ,7033.02 ,11.17 ,173 ,133 ,47613.84 ,23.0
+testbuiltinobject-non-extensible.js ,10.93 ,2731.19 ,11.22 ,173 ,133 ,24888.01 ,23.0
+testbuiltinobject-non-extensible.js ,11.1 ,1872.14 ,17.63 ,173 ,121 ,16766.13 ,30.0
+testbuiltinobject-not-function-badstring.js ,16.23 ,7013.82 ,11.26 ,162 ,130 ,43115.16 ,19.0
+testbuiltinobject-not-function-badstring.js ,10.81 ,3067.83 ,11.07 ,162 ,130 ,28279.56 ,19.0
+testbuiltinobject-not-function-badstring.js ,10.75 ,1572.31 ,10.4 ,162 ,116 ,14526.14 ,28.0
+testbuiltinobject-prop-enumerable.js ,21.69 ,7194.96 ,28.31 ,335 ,290 ,33071.78 ,13.0
+testbuiltinobject-prop-enumerable.js ,20.91 ,2748.19 ,22.23 ,335 ,293 ,13042.95 ,12.0
+testbuiltinobject-prop-enumerable.js ,20.69 ,1592.41 ,19.63 ,335 ,259 ,7596.52 ,22.0
+testbuiltinobject-prop-missing.js ,19.28 ,7321.58 ,18.21 ,286 ,244 ,37875.0 ,14.0
+testbuiltinobject-prop-missing.js ,17.52 ,3015.07 ,18.54 ,286 ,247 ,17109.3 ,13.0
+testbuiltinobject-prop-missing.js ,17.61 ,1639.61 ,18.45 ,286 ,219 ,9210.68 ,23.0
+testbuiltinobject-prop-not-configurable.js ,21.3 ,7154.04 ,21.36 ,335 ,290 ,33487.04 ,13.0
+testbuiltinobject-prop-not-configurable.js ,20.36 ,2766.88 ,21.61 ,335 ,293 ,13489.78 ,12.0
+testbuiltinobject-prop-not-configurable.js ,20.18 ,1599.72 ,19.6 ,335 ,259 ,7827.25 ,22.0
+testbuiltinobject-prop-not-writable.js ,21.78 ,6688.33 ,21.09 ,335 ,290 ,30608.59 ,13.0
+testbuiltinobject-prop-not-writable.js ,20.5 ,2633.07 ,21.86 ,335 ,293 ,12744.24 ,12.0
+testbuiltinobject-prop-not-writable.js ,20.58 ,1748.23 ,19.92 ,335 ,259 ,8394.8 ,22.0
+testbuiltinobject-undefined.js ,10.95 ,6804.01 ,14.09 ,145 ,116 ,62037.08 ,20.0
+testbuiltinobject-undefined.js ,9.95 ,2903.27 ,10.26 ,145 ,116 ,29078.59 ,20.0
+testbuiltinobject-undefined.js ,9.83 ,1609.09 ,9.23 ,145 ,99 ,16269.18 ,31.0

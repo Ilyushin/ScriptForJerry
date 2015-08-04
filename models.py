@@ -1,7 +1,7 @@
 import os, time, subprocess, csv
 
 class analyzing_result:
-    path_file, file_name, time, time_closure, size, size_closure, increased_time, reduced_size = '','',0,0,0,0,0,0
+    path_file, file_name, time, time_closure, time_jerry, size, size_closure, increased_time, reduced_size = '','',0,0,0,0,0,0,0
     dir = os.path.dirname(__file__)
     path_jerry = os.path.join(dir, 'jerry')
     path_closure = os.path.join(dir, 'closure_compiler.jar')
@@ -39,13 +39,14 @@ class analyzing_result:
         cmd = self.path_jerry+' '+path_file2+' --show-opcodes > '+path_file3
         
         
-        start = time.time()
+        start1 = time.time()
         r2 = subprocess.call(cmd_closure, shell=True)
+        start2 = time.time()
         r3 = subprocess.call(cmd, shell=True)
-        
         end = time.time()
         
-        self.time_closure = round((end - start) * 1000, 2)
+        self.time_closure = round((end - start1) * 1000, 2)
+        self.time_jerry = round((end - start2) * 1000, 2)
         self.size_closure = self.get_file_len(path_file3) 
         
         diff_size = self.size - self.size_closure 
@@ -68,10 +69,12 @@ class analyzing_result:
         newStr.append(self.file_name)
         newStr.append(','+str(self.time))
         newStr.append(','+str(self.time_closure))
+        newStr.append(','+str(self.time_jerry))
         newStr.append(','+str(self.size))
         newStr.append(','+str(self.size_closure))
         newStr.append(','+str(self.increased_time))
-        newStr.append(','+str(self.reduced_size))        
+        newStr.append(','+str(self.reduced_size))
+                
         csv_writer.writerow(newStr)
         
         
