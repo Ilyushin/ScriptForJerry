@@ -1,1 +1,0 @@
-assert.sameValue("_".big(),"<big>_</big>");assert.sameValue("<".big(),"<big><</big>");assert.sameValue(String.prototype.big.call(42),"<big>42</big>");assert["throws"](TypeError,function(){String.prototype.big.call(undefined)});assert["throws"](TypeError,function(){String.prototype.big.call(null)});assert.sameValue(String.prototype.big.length,0);

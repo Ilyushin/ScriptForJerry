@@ -1,1 +1,0 @@
-assert.sameValue("_".blink(),"<blink>_</blink>");assert.sameValue("<".blink(),"<blink><</blink>");assert.sameValue(String.prototype.blink.call(42),"<blink>42</blink>");assert["throws"](TypeError,function(){String.prototype.blink.call(undefined)});assert["throws"](TypeError,function(){String.prototype.blink.call(null)});assert.sameValue(String.prototype.blink.length,0);

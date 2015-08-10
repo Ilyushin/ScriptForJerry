@@ -25,12 +25,12 @@ def start_processing():
         an_result.execut_scripts_closure(csv_writer)
         parent = tvResults.insert(parent_closure, 'end', text=an_result.file_name)
         tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
-        an_result = models.analyzing_result(i,'SIMPLE_OPTIMIZATIONS')
-        an_result.execut_scripts_closure(csv_writer)
-        tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
-        an_result = models.analyzing_result(i,'WHITESPACE_ONLY')
-        an_result.execut_scripts_closure(csv_writer)
-        tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
+#         an_result = models.analyzing_result(i,'SIMPLE_OPTIMIZATIONS')
+#         an_result.execut_scripts_closure(csv_writer)
+#         tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
+#         an_result = models.analyzing_result(i,'WHITESPACE_ONLY')
+#         an_result.execut_scripts_closure(csv_writer)
+#         tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
     csvfile.close()
     
 #set size of a main window

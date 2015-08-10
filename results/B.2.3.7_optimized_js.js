@@ -1,2 +1,0 @@
-assert.sameValue("_".fontcolor("b"),'<font color="b">_</font>');assert.sameValue("<".fontcolor("<"),'<font color="<"><</font>');assert.sameValue("_".fontcolor(42),'<font color="42">_</font>');assert.sameValue("_".fontcolor('"'),'<font color="&quot;">_</font>');assert.sameValue(String.prototype.fontcolor.call(42,42),'<font color="42">42</font>');assert["throws"](TypeError,function(){String.prototype.fontcolor.call(undefined)});assert["throws"](TypeError,function(){String.prototype.fontcolor.call(null)});
-assert.sameValue(String.prototype.fontcolor.length,1);

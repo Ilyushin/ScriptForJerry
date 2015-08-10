@@ -1,1 +1,0 @@
-assert.sameValue(NaN,NaN);

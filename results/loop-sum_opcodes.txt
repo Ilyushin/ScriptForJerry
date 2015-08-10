@@ -1,0 +1,67 @@
+// var count = 6000000;
+  0:                 meta   12  255          // [to be rewritten]
+// var sum = 0;
+// for (var i = 0; i < count; i++) {
+//     sum = i + count;
+// }
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// var count = 6000000;
+  2:             var_decl                    // var count;
+// var sum = 0;
+  3:             var_decl                    // var sum;
+// for (var i = 0; i < count; i++) {
+  4:             var_decl                    // var i;
+//     sum = i + count;
+// }
+// 
+// var count = 6000000;
+  5:           assignment  130    3          // tmp130 = 6000000: NUMBER;
+  6:           assignment  254    6          // count = tmp130 : TYPEOF(tmp130);
+// var sum = 0;
+  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  8:           assignment  254    6          // sum = tmp130 : TYPEOF(tmp130);
+// for (var i = 0; i < count; i++) {
+  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 10:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 11:             jmp_down  255               // goto 65546;
+//     sum = i + count;
+ 12:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 13:             addition  131  130          // tmp131 = tmp130 + count;
+ 14:           assignment  254    6          // sum = tmp131 : TYPEOF(tmp131);
+// }
+ 15:            post_incr  132               // tmp132 = i++;
+ 11:             jmp_down    0               // goto 16; // REWRITE
+ 16:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 17:            less_than  134  133          // tmp134 = tmp133 < count;
+ 18:       is_true_jmp_up  134    0          // if (tmp134) goto 12;
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 19:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] count : STRING
+0x84ec60 [ 12] 6000000 : NUMBER
+0x84ec6c [ 12] sum : STRING
+0x84ec78 [  4] i : MAGIC STRING [id=200] 
+0x84ec7c [  4]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:             var_decl                    // var count;
+  3:             var_decl                    // var sum;
+  4:             var_decl                    // var i;
+  5:           assignment  130    3          // tmp130 = 6000000: NUMBER;
+  6:           assignment    0    6          // count = tmp130 : TYPEOF(tmp130);
+  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  8:           assignment    1    6          // sum = tmp130 : TYPEOF(tmp130);
+  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 10:           assignment    2    6          // i = tmp130 : TYPEOF(tmp130);
+ 11:             jmp_down    0               // goto 16;
+ 12:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 13:             addition  131  130          // tmp131 = tmp130 + count;
+ 14:           assignment    1    6          // sum = tmp131 : TYPEOF(tmp131);
+ 15:            post_incr  132               // tmp132 = i++;
+ 16:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 17:            less_than  134  133          // tmp134 = tmp133 < count;
+ 18:       is_true_jmp_up  134    0          // if (tmp134) goto 12;
+ 19:                  ret                    // ret;

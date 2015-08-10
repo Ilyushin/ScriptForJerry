@@ -61,7 +61,7 @@ class analyzing_result:
     #calculate number of rows   
     def get_file_len(self, path_file):
         file_sourse = open(path_file, "r")
-        count_opcodes = len(file_sourse.read().split('\n'))
+        count_opcodes = len([i for i in file_sourse.read().split('\n') if i[:2] != "//"])
         file_sourse.close()
         return count_opcodes    
     def save_result(self, csv_writer):

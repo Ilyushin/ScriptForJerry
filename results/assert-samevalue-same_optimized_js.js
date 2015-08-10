@@ -1,1 +1,0 @@
-var obj;assert.sameValue(undefined,undefined);assert.sameValue(null,null);assert.sameValue(0,0);assert.sameValue(1,1);assert.sameValue("","");assert.sameValue("s","s");obj={};assert.sameValue(obj,obj);

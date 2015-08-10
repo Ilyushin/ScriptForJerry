@@ -1,1 +1,0 @@
-if(typeof Date.prototype.toGMTString!=="function")$ERROR('#1: typeof Date.prototype.toGMTString === "function". Actual: '+typeof Date.prototype.toGMTString);if(typeof Date.prototype["toGMTString"]!=="function")$ERROR('#2: typeof Date.prototype["toGMTString"] === "function". Actual: '+typeof Date.prototype["toGMTString"]);

@@ -1,0 +1,765 @@
+// /* The Great Computer Language Shootout
+// 
+// function fannkuch(n) {
+  0:                 meta   12  255          // [to be rewritten]
+//    var check = 0;
+//    var perm = Array(n);
+//    var perm1 = Array(n);
+//    var count = Array(n);
+//    var maxPerm = Array(n);
+//    var maxFlipsCount = 0;
+//    var m = n - 1;
+//    for (var i = 0; i < n; i++) perm1[i] = i;
+//    var r = n;
+//    while (true) {
+//       // write-out the first 30 permutations
+// 
+//       if (check < 30){
+//          var s = "";
+//          for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
+//          check++;
+//       }
+//       while (r != 1) { count[r - 1] = r; r--; }
+//       if (!(perm1[0] == 0 || perm1[m] == m)) {
+//          for (var i = 0; i < n; i++) perm[i] = perm1[i];
+//          var flipsCount = 0;
+//          var k;
+//          while (!((k = perm[0]) == 0)) {
+//             var k2 = (k + 1) >> 1;
+//             for (var i = 0; i < k2; i++) {
+//                var temp = perm[i]; perm[i] = perm[k - i]; perm[k - i] = temp;
+//             }
+//             flipsCount++;
+//          }
+//          if (flipsCount > maxFlipsCount) {
+//             maxFlipsCount = flipsCount;
+//             for (var i = 0; i < n; i++) maxPerm[i] = perm1[i];
+//          }
+//       }
+//       while (true) {
+//          if (r == n) return maxFlipsCount;
+//          var perm0 = perm1[0];
+//          var i = 0;
+//          while (i < r) {
+//             var j = i + 1;
+//             perm1[i] = perm1[j];
+//             i = j;
+//          }
+//          perm1[r] = perm0;
+//          count[r] = count[r] - 1;
+//          if (count[r] > 0) break;
+//          r++;
+//       }
+//    }
+// }
+// var n = 8;
+// var ret = fannkuch(n);
+// var expected = 22;
+// if (ret != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+//    var check = 0;
+//    var perm = Array(n);
+//    var perm1 = Array(n);
+//    var count = Array(n);
+//    var maxPerm = Array(n);
+//    var maxFlipsCount = 0;
+//    var m = n - 1;
+//    for (var i = 0; i < n; i++) perm1[i] = i;
+//    var r = n;
+//    while (true) {
+//       // write-out the first 30 permutations
+// 
+//       if (check < 30){
+//          var s = "";
+//          for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
+//          check++;
+//       }
+//       while (r != 1) { count[r - 1] = r; r--; }
+//       if (!(perm1[0] == 0 || perm1[m] == m)) {
+//          for (var i = 0; i < n; i++) perm[i] = perm1[i];
+//          var flipsCount = 0;
+//          var k;
+//          while (!((k = perm[0]) == 0)) {
+//             var k2 = (k + 1) >> 1;
+//             for (var i = 0; i < k2; i++) {
+//                var temp = perm[i]; perm[i] = perm[k - i]; perm[k - i] = temp;
+//             }
+//             flipsCount++;
+//          }
+//          if (flipsCount > maxFlipsCount) {
+//             maxFlipsCount = flipsCount;
+//             for (var i = 0; i < n; i++) maxPerm[i] = perm1[i];
+//          }
+//       }
+//       while (true) {
+//          if (r == n) return maxFlipsCount;
+//          var perm0 = perm1[0];
+//          var i = 0;
+//          while (i < r) {
+//             var j = i + 1;
+//             perm1[i] = perm1[j];
+//             i = j;
+//          }
+//          perm1[r] = perm0;
+//          count[r] = count[r] - 1;
+//          if (count[r] > 0) break;
+//          r++;
+//       }
+//    }
+// }
+// var n = 8;
+  2:             var_decl                    // var n;
+// var ret = fannkuch(n);
+  3:             var_decl                    // var ret;
+// var expected = 22;
+  4:             var_decl                    // var expected;
+// if (ret != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
+// 
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  2:                 meta    7  255          // function end: 65537;
+//    var check = 0;
+  3:                 meta   12  255          // [to be rewritten]
+//    var perm = Array(n);
+//    var perm1 = Array(n);
+//    var count = Array(n);
+//    var maxPerm = Array(n);
+//    var maxFlipsCount = 0;
+//    var m = n - 1;
+//    for (var i = 0; i < n; i++) perm1[i] = i;
+//    var r = n;
+//    while (true) {
+//       // write-out the first 30 permutations
+// 
+//       if (check < 30){
+//          var s = "";
+//          for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
+//          check++;
+//       }
+//       while (r != 1) { count[r - 1] = r; r--; }
+//       if (!(perm1[0] == 0 || perm1[m] == m)) {
+//          for (var i = 0; i < n; i++) perm[i] = perm1[i];
+//          var flipsCount = 0;
+//          var k;
+//          while (!((k = perm[0]) == 0)) {
+//             var k2 = (k + 1) >> 1;
+//             for (var i = 0; i < k2; i++) {
+//                var temp = perm[i]; perm[i] = perm[k - i]; perm[k - i] = temp;
+//             }
+//             flipsCount++;
+//          }
+//          if (flipsCount > maxFlipsCount) {
+//             maxFlipsCount = flipsCount;
+//             for (var i = 0; i < n; i++) maxPerm[i] = perm1[i];
+//          }
+//       }
+//       while (true) {
+//          if (r == n) return maxFlipsCount;
+//          var perm0 = perm1[0];
+//          var i = 0;
+//          while (i < r) {
+//             var j = i + 1;
+//             perm1[i] = perm1[j];
+//             i = j;
+//          }
+//          perm1[r] = perm0;
+//          count[r] = count[r] - 1;
+//          if (count[r] > 0) break;
+//          r++;
+//       }
+//    }
+// }
+  3:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  4:         reg_var_decl  128               // var tmp128 .. tmp255;
+  5:             var_decl                    // var check;
+//    var perm = Array(n);
+  6:             var_decl                    // var perm;
+//    var perm1 = Array(n);
+  7:             var_decl                    // var perm1;
+//    var count = Array(n);
+  8:             var_decl                    // var count;
+//    var maxPerm = Array(n);
+  9:             var_decl                    // var maxPerm;
+//    var maxFlipsCount = 0;
+ 10:             var_decl                    // var maxFlipsCount;
+//    var m = n - 1;
+ 11:             var_decl                    // var m;
+//    for (var i = 0; i < n; i++) perm1[i] = i;
+ 12:             var_decl                    // var i;
+//    var r = n;
+ 13:             var_decl                    // var r;
+//    while (true) {
+//       // write-out the first 30 permutations
+// 
+//       if (check < 30){
+//          var s = "";
+ 14:             var_decl                    // var s;
+//          for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
+//          check++;
+//       }
+//       while (r != 1) { count[r - 1] = r; r--; }
+//       if (!(perm1[0] == 0 || perm1[m] == m)) {
+//          for (var i = 0; i < n; i++) perm[i] = perm1[i];
+//          var flipsCount = 0;
+ 15:             var_decl                    // var flipsCount;
+//          var k;
+ 16:             var_decl                    // var k;
+//          while (!((k = perm[0]) == 0)) {
+//             var k2 = (k + 1) >> 1;
+ 17:             var_decl                    // var k2;
+//             for (var i = 0; i < k2; i++) {
+//                var temp = perm[i]; perm[i] = perm[k - i]; perm[k - i] = temp;
+ 18:             var_decl                    // var temp;
+//             }
+//             flipsCount++;
+//          }
+//          if (flipsCount > maxFlipsCount) {
+//             maxFlipsCount = flipsCount;
+//             for (var i = 0; i < n; i++) maxPerm[i] = perm1[i];
+//          }
+//       }
+//       while (true) {
+//          if (r == n) return maxFlipsCount;
+//          var perm0 = perm1[0];
+ 19:             var_decl                    // var perm0;
+//          var i = 0;
+//          while (i < r) {
+//             var j = i + 1;
+ 20:             var_decl                    // var j;
+//             perm1[i] = perm1[j];
+//             i = j;
+//          }
+//          perm1[r] = perm0;
+//          count[r] = count[r] - 1;
+//          if (count[r] > 0) break;
+//          r++;
+//       }
+//    }
+// }
+ 21:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 22:           assignment  254    6          // check = tmp130 : TYPEOF(tmp130);
+//    var perm = Array(n);
+ 23:               call_n  255  254          // 
+ 24:                 meta    2  254          // 
+ 23:               call_n  130  254          //  // REWRITE
+ 25:           assignment  254    6          // perm = tmp130 : TYPEOF(tmp130);
+//    var perm1 = Array(n);
+ 26:               call_n  255  254          // 
+ 27:                 meta    2  254          // 
+ 26:               call_n  130  254          //  // REWRITE
+ 28:           assignment  254    6          // perm1 = tmp130 : TYPEOF(tmp130);
+//    var count = Array(n);
+ 29:               call_n  255  254          // 
+ 30:                 meta    2  254          // 
+ 29:               call_n  130  254          //  // REWRITE
+ 31:           assignment  254    6          // count = tmp130 : TYPEOF(tmp130);
+//    var maxPerm = Array(n);
+ 32:               call_n  255  254          // 
+ 33:                 meta    2  254          // 
+ 32:               call_n  130  254          //  // REWRITE
+ 34:           assignment  254    6          // maxPerm = tmp130 : TYPEOF(tmp130);
+//    var maxFlipsCount = 0;
+ 35:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 36:           assignment  254    6          // maxFlipsCount = tmp130 : TYPEOF(tmp130);
+//    var m = n - 1;
+ 37:           assignment  130    6          // tmp130 = n : TYPEOF(n);
+ 38:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 39:         substraction  132  130          // tmp132 = tmp130 - tmp131;
+ 40:           assignment  254    6          // m = tmp132 : TYPEOF(tmp132);
+//    for (var i = 0; i < n; i++) perm1[i] = i;
+ 41:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 42:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 43:             jmp_down  255               // goto 65578;
+ 44:          prop_getter  130  254          // tmp130 = perm1[i];
+ 44:          prop_setter  254  254          // perm1[i] = i;
+ 45:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+ 46:            post_incr  132               // tmp132 = i++;
+ 43:             jmp_down    0               // goto 47; // REWRITE
+ 47:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 48:            less_than  134  133          // tmp134 = tmp133 < n;
+ 49:       is_true_jmp_up  134    0          // if (tmp134) goto 44;
+//    var r = n;
+ 50:           assignment  254    6          // r = n : TYPEOF(n);
+//    while (true) {
+ 51:             jmp_down  255               // goto 65586;
+//       // write-out the first 30 permutations
+// 
+//       if (check < 30){
+ 52:           assignment  130    6          // tmp130 = check : TYPEOF(check);
+ 53:           assignment  131    1          // tmp131 = 30: SMALLINT;
+ 54:            less_than  132  130          // tmp132 = tmp130 < tmp131;
+ 55:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65590;
+//          var s = "";
+ 56:           assignment  130    5          // tmp130 = '': STRING;
+ 57:           assignment  254    6          // s = tmp130 : TYPEOF(tmp130);
+//          for(var i=0; i<n; i++) s += (perm1[i]+1).toString();
+ 58:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 59:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 60:             jmp_down  255               // goto 65595;
+ 61:          prop_getter  130  254          // tmp130 = perm1[i];
+ 62:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 63:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 64:           assignment  133    5          // tmp133 = 'toString': STRING;
+ 65:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 66:               call_n  255  134          // 
+ 67:                 meta    1    1          // 
+ 66:               call_n  135  134          //  // REWRITE
+ 68:             addition  254  254          // s = s + tmp135;
+ 69:           assignment  136    6          // tmp136 = s : TYPEOF(s);
+ 70:            post_incr  137               // tmp137 = i++;
+ 60:             jmp_down    0               // goto 71; // REWRITE
+ 71:           assignment  138    6          // tmp138 = i : TYPEOF(i);
+ 72:            less_than  139  138          // tmp139 = tmp138 < n;
+ 73:       is_true_jmp_up  139    0          // if (tmp139) goto 61;
+//          check++;
+ 74:            post_incr  130               // tmp130 = check++;
+//       }
+//       while (r != 1) { count[r - 1] = r; r--; }
+ 55:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 75; // REWRITE
+ 75:             jmp_down  255               // goto 65610;
+ 76:           assignment  130    6          // tmp130 = r : TYPEOF(r);
+ 77:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 78:         substraction  132  130          // tmp132 = tmp130 - tmp131;
+ 79:          prop_getter  133  254          // tmp133 = count[tmp132];
+ 79:          prop_setter  254  132          // count[tmp132] = r;
+ 80:           assignment  134    6          // tmp134 = r : TYPEOF(r);
+ 81:            post_decr  130               // tmp130 = r--;
+ 75:             jmp_down    0               // goto 82; // REWRITE
+ 82:           assignment  131    6          // tmp131 = r : TYPEOF(r);
+ 83:           assignment  132    1          // tmp132 = 1: SMALLINT;
+ 84:      not_equal_value  133  131          // tmp133 = tmp131 != tmp132;
+ 85:       is_true_jmp_up  133    0          // if (tmp133) goto 76;
+//       if (!(perm1[0] == 0 || perm1[m] == m)) {
+ 86:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 87:          prop_getter  131  254          // tmp131 = perm1[tmp130];
+ 88:           assignment  132    1          // tmp132 = 0: SMALLINT;
+ 89:          equal_value  133  131          // tmp133 = tmp131 == tmp132;
+ 90:           assignment  134    6          // tmp134 = tmp133 : TYPEOF(tmp133);
+ 91:     is_true_jmp_down  134  255          // if (tmp134) goto 65626;
+ 92:          prop_getter  135  254          // tmp135 = perm1[m];
+ 93:          equal_value  136  135          // tmp136 = tmp135 == m;
+ 94:           assignment  134    6          // tmp134 = tmp136 : TYPEOF(tmp136);
+ 91:     is_true_jmp_down  134    0          // if (tmp134) goto 95; // REWRITE
+ 95:          logical_not  137               // tmp137 = ! tmp134;
+ 96:    is_false_jmp_down  137  255          // if (tmp137 == false) goto 65631;
+//          for (var i = 0; i < n; i++) perm[i] = perm1[i];
+ 97:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 98:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 99:             jmp_down  255               // goto 65634;
+100:          prop_getter  130  254          // tmp130 = perm[i];
+100:          prop_getter  131  254          // tmp131 = perm1[i];
+101:          prop_setter  254  254          // perm[i] = tmp131;
+102:            post_incr  132               // tmp132 = i++;
+ 99:             jmp_down    0               // goto 103; // REWRITE
+103:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+104:            less_than  134  133          // tmp134 = tmp133 < n;
+105:       is_true_jmp_up  134    0          // if (tmp134) goto 100;
+//          var flipsCount = 0;
+106:           assignment  130    1          // tmp130 = 0: SMALLINT;
+107:           assignment  254    6          // flipsCount = tmp130 : TYPEOF(tmp130);
+//          var k;
+//          while (!((k = perm[0]) == 0)) {
+108:             jmp_down  255               // goto 65643;
+//             var k2 = (k + 1) >> 1;
+109:           assignment  130    6          // tmp130 = k : TYPEOF(k);
+110:           assignment  131    1          // tmp131 = 1: SMALLINT;
+111:             addition  132  130          // tmp132 = tmp130 + tmp131;
+112:           assignment  133    1          // tmp133 = 1: SMALLINT;
+113:        b_shift_right  134  132          // tmp134 = tmp132 >> tmp133;
+114:           assignment  254    6          // k2 = tmp134 : TYPEOF(tmp134);
+//             for (var i = 0; i < k2; i++) {
+115:           assignment  130    1          // tmp130 = 0: SMALLINT;
+116:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+117:             jmp_down  255               // goto 65652;
+//                var temp = perm[i]; perm[i] = perm[k - i]; perm[k - i] = temp;
+118:          prop_getter  130  254          // tmp130 = perm[i];
+119:           assignment  254    6          // temp = tmp130 : TYPEOF(tmp130);
+120:          prop_getter  130  254          // tmp130 = perm[i];
+120:           assignment  131    6          // tmp131 = k : TYPEOF(k);
+121:         substraction  132  131          // tmp132 = tmp131 - i;
+122:          prop_getter  133  254          // tmp133 = perm[tmp132];
+123:          prop_setter  254  254          // perm[i] = tmp133;
+124:           assignment  130    6          // tmp130 = k : TYPEOF(k);
+125:         substraction  131  130          // tmp131 = tmp130 - i;
+126:          prop_getter  132  254          // tmp132 = perm[tmp131];
+126:          prop_setter  254  131          // perm[tmp131] = temp;
+127:           assignment  133    6          // tmp133 = temp : TYPEOF(temp);
+//             }
+128:            post_incr  134               // tmp134 = i++;
+117:             jmp_down    0               // goto 129; // REWRITE
+129:           assignment  135    6          // tmp135 = i : TYPEOF(i);
+130:            less_than  136  135          // tmp136 = tmp135 < k2;
+131:       is_true_jmp_up  136    0          // if (tmp136) goto 118;
+//             flipsCount++;
+132:            post_incr  130               // tmp130 = flipsCount++;
+//          }
+108:             jmp_down    0               // goto 133; // REWRITE
+133:           assignment  131    1          // tmp131 = 0: SMALLINT;
+134:          prop_getter  132  254          // tmp132 = perm[tmp131];
+135:           assignment  254    6          // k = tmp132 : TYPEOF(tmp132);
+136:           assignment  133    1          // tmp133 = 0: SMALLINT;
+137:          equal_value  134  132          // tmp134 = tmp132 == tmp133;
+138:          logical_not  135               // tmp135 = ! tmp134;
+139:       is_true_jmp_up  135    0          // if (tmp135) goto 109;
+//          if (flipsCount > maxFlipsCount) {
+140:           assignment  130    6          // tmp130 = flipsCount : TYPEOF(flipsCount);
+141:         greater_than  131  130          // tmp131 = tmp130 > maxFlipsCount;
+142:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65677;
+//             maxFlipsCount = flipsCount;
+143:           assignment  254    6          // maxFlipsCount = flipsCount : TYPEOF(flipsCount);
+144:           assignment  130    6          // tmp130 = flipsCount : TYPEOF(flipsCount);
+//             for (var i = 0; i < n; i++) maxPerm[i] = perm1[i];
+145:           assignment  130    1          // tmp130 = 0: SMALLINT;
+146:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+147:             jmp_down  255               // goto 65682;
+148:          prop_getter  130  254          // tmp130 = maxPerm[i];
+148:          prop_getter  131  254          // tmp131 = perm1[i];
+149:          prop_setter  254  254          // maxPerm[i] = tmp131;
+150:            post_incr  132               // tmp132 = i++;
+147:             jmp_down    0               // goto 151; // REWRITE
+151:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+152:            less_than  134  133          // tmp134 = tmp133 < n;
+153:       is_true_jmp_up  134    0          // if (tmp134) goto 148;
+//          }
+//       }
+142:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 154; // REWRITE
+//       while (true) {
+ 96:    is_false_jmp_down  137    0          // if (tmp137 == false) goto 154; // REWRITE
+154:             jmp_down  255               // goto 65689;
+//          if (r == n) return maxFlipsCount;
+155:           assignment  130    6          // tmp130 = r : TYPEOF(r);
+156:          equal_value  131  130          // tmp131 = tmp130 == n;
+157:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65692;
+158:               retval                    // return maxFlipsCount;
+//          var perm0 = perm1[0];
+157:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 159; // REWRITE
+159:           assignment  130    1          // tmp130 = 0: SMALLINT;
+160:          prop_getter  131  254          // tmp131 = perm1[tmp130];
+161:           assignment  254    6          // perm0 = tmp131 : TYPEOF(tmp131);
+//          var i = 0;
+162:           assignment  130    1          // tmp130 = 0: SMALLINT;
+163:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+//          while (i < r) {
+164:             jmp_down  255               // goto 65699;
+//             var j = i + 1;
+165:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+166:           assignment  131    1          // tmp131 = 1: SMALLINT;
+167:             addition  132  130          // tmp132 = tmp130 + tmp131;
+168:           assignment  254    6          // j = tmp132 : TYPEOF(tmp132);
+//             perm1[i] = perm1[j];
+169:          prop_getter  130  254          // tmp130 = perm1[i];
+169:          prop_getter  131  254          // tmp131 = perm1[j];
+170:          prop_setter  254  254          // perm1[i] = tmp131;
+//             i = j;
+171:           assignment  254    6          // i = j : TYPEOF(j);
+172:           assignment  130    6          // tmp130 = j : TYPEOF(j);
+//          }
+164:             jmp_down    0               // goto 173; // REWRITE
+173:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+174:            less_than  132  131          // tmp132 = tmp131 < r;
+175:       is_true_jmp_up  132    0          // if (tmp132) goto 165;
+//          perm1[r] = perm0;
+176:          prop_getter  130  254          // tmp130 = perm1[r];
+176:          prop_setter  254  254          // perm1[r] = perm0;
+177:           assignment  131    6          // tmp131 = perm0 : TYPEOF(perm0);
+//          count[r] = count[r] - 1;
+178:          prop_getter  130  254          // tmp130 = count[r];
+178:          prop_getter  131  254          // tmp131 = count[r];
+179:           assignment  132    1          // tmp132 = 1: SMALLINT;
+180:         substraction  133  131          // tmp133 = tmp131 - tmp132;
+181:          prop_setter  254  254          // count[r] = tmp133;
+//          if (count[r] > 0) break;
+182:          prop_getter  130  254          // tmp130 = count[r];
+183:           assignment  131    1          // tmp131 = 0: SMALLINT;
+184:         greater_than  132  130          // tmp132 = tmp130 > tmp131;
+185:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65720;
+186:             jmp_down  255               // goto 65721;
+//          r++;
+185:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 187; // REWRITE
+187:            post_incr  130               // tmp130 = r++;
+//       }
+154:             jmp_down    0               // goto 188; // REWRITE
+188:           assignment  131    0          // tmp131 = true: SIMPLE;
+189:       is_true_jmp_up  131    0          // if (tmp131) goto 155;
+186:             jmp_down    0               // goto 190; // REWRITE
+//    }
+ 51:             jmp_down    0               // goto 190; // REWRITE
+190:           assignment  132    0          // tmp132 = true: SIMPLE;
+191:       is_true_jmp_up  132    0          // if (tmp132) goto 52;
+// }
+  4:         reg_var_decl  128               // var tmp128 .. tmp139; // REWRITE
+192:                  ret                    // ret;
+  2:                 meta    7    0          // function end: 193; // REWRITE
+// var n = 8;
+  5:           assignment  130    1          // tmp130 = 8: SMALLINT;
+  6:           assignment  254    6          // n = tmp130 : TYPEOF(tmp130);
+// var ret = fannkuch(n);
+  7:               call_n  255  254          // 
+  8:                 meta    2  254          // 
+  7:               call_n  130  254          //  // REWRITE
+  9:           assignment  254    6          // ret = tmp130 : TYPEOF(tmp130);
+// var expected = 22;
+ 10:           assignment  130    1          // tmp130 = 22: SMALLINT;
+ 11:           assignment  254    6          // expected = tmp130 : TYPEOF(tmp130);
+// if (ret != expected)
+ 12:           assignment  130    6          // tmp130 = ret : TYPEOF(ret);
+ 13:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+ 14:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65549;
+//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
+ 15:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+ 16:             addition  131  130          // tmp131 = tmp130 + expected;
+ 17:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 18:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 19:             addition  134  133          // tmp134 = tmp133 + ret;
+ 20:          throw_value                    // throw tmp134;
+// 
+ 14:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 21; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 21:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 16] fannkuch : STRING
+0x84ec64 [  8] n : STRING
+0x84ec6c [ 12] check : STRING
+0x84ec78 [ 12] perm : STRING
+0x84ec98 [  4] Array : MAGIC STRING [id=29] 
+0x84ec9c [ 12] perm1 : STRING
+0x84eca8 [ 12] count : STRING
+0x84ecb4 [ 16] maxPerm : STRING
+0x84ecd8 [ 20] maxFlipsCount : STRING
+0x84ecec [  4] m : MAGIC STRING [id=201] 
+0x84ecf0 [  4] i : MAGIC STRING [id=200] 
+0x84ecf4 [  8] r : STRING
+0x84ecfc [  8] s : STRING
+0x84ed18 [  4]  : MAGIC STRING [id=218] 
+0x84ed1c [  4] toString : MAGIC STRING [id=103] 
+0x84ed20 [ 16] flipsCount : STRING
+0x84ed30 [  8] k : STRING
+0x84ed38 [  8] k2 : STRING
+0x84ed54 [ 12] temp : STRING
+0x84ed60 [ 12] perm0 : STRING
+0x84ed6c [  8] j : STRING
+0x84ed74 [ 12] ret : STRING
+0x84ed94 [ 16] expected : STRING
+0x84eda4 [ 36] ERROR: bad result: expected  : STRING
+0x84eddc [ 16]  but got  : STRING
+0x84edec [ 20]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:             var_decl                    // var n;
+  3:             var_decl                    // var ret;
+  4:             var_decl                    // var expected;
+  5:          func_decl_n    3               // 
+  6:                 meta    2    0          // function fannkuch (n);
+  7:                 meta    7    0          // function end: 198;
+  8:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  9:         reg_var_decl  128               // var tmp128 .. tmp139;
+ 10:             var_decl                    // var check;
+ 11:             var_decl                    // var perm;
+ 12:             var_decl                    // var perm1;
+ 13:             var_decl                    // var count;
+ 14:             var_decl                    // var maxPerm;
+ 15:             var_decl                    // var maxFlipsCount;
+ 16:             var_decl                    // var m;
+ 17:             var_decl                    // var i;
+ 18:             var_decl                    // var r;
+ 19:             var_decl                    // var s;
+ 20:             var_decl                    // var flipsCount;
+ 21:             var_decl                    // var k;
+ 22:             var_decl                    // var k2;
+ 23:             var_decl                    // var temp;
+ 24:             var_decl                    // var perm0;
+ 25:             var_decl                    // var j;
+ 26:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 27:           assignment    4    6          // check = tmp130 : TYPEOF(tmp130);
+ 28:               call_n  130   20          // 
+ 29:                 meta    2    0          // tmp130 = Array (n);
+ 30:           assignment    5    6          // perm = tmp130 : TYPEOF(tmp130);
+ 31:               call_n  130   20          // 
+ 32:                 meta    2    0          // tmp130 = Array (n);
+ 33:           assignment    6    6          // perm1 = tmp130 : TYPEOF(tmp130);
+ 34:               call_n  130   20          // 
+ 35:                 meta    2    0          // tmp130 = Array (n);
+ 36:           assignment    7    6          // count = tmp130 : TYPEOF(tmp130);
+ 37:               call_n  130   20          // 
+ 38:                 meta    2    0          // tmp130 = Array (n);
+ 39:           assignment    8    6          // maxPerm = tmp130 : TYPEOF(tmp130);
+ 40:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 41:           assignment    9    6          // maxFlipsCount = tmp130 : TYPEOF(tmp130);
+ 42:           assignment  130    6          // tmp130 = n : TYPEOF(n);
+ 43:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 44:         substraction  132  130          // tmp132 = tmp130 - tmp131;
+ 45:           assignment   10    6          // m = tmp132 : TYPEOF(tmp132);
+ 46:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 47:           assignment   11    6          // i = tmp130 : TYPEOF(tmp130);
+ 48:             jmp_down    0               // goto 52;
+ 49:          prop_setter    6   11          // perm1[i] = i;
+ 50:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+ 51:            post_incr  132               // tmp132 = i++;
+ 52:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 53:            less_than  134  133          // tmp134 = tmp133 < n;
+ 54:       is_true_jmp_up  134    0          // if (tmp134) goto 49;
+ 55:           assignment   12    6          // r = n : TYPEOF(n);
+ 56:             jmp_down    0               // goto 195;
+ 57:           assignment  130    6          // tmp130 = check : TYPEOF(check);
+ 58:           assignment  131    1          // tmp131 = 30: SMALLINT;
+ 59:            less_than  132  130          // tmp132 = tmp130 < tmp131;
+ 60:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 80;
+ 61:           assignment  130    5          // tmp130 = '': STRING;
+ 62:           assignment   13    6          // s = tmp130 : TYPEOF(tmp130);
+ 63:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 64:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+ 65:             jmp_down    0               // goto 76;
+ 66:          prop_getter  130    1          // tmp130 = perm1[i];
+ 67:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 68:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 69:           assignment  133    5          // tmp133 = 'toString': STRING;
+ 70:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 71:               call_n  135  134          // 
+ 72:                 meta    1    1          // tmp135 = tmp134 (this_arg = tmp132);
+ 73:             addition    3    3          // s = s + tmp135;
+ 74:           assignment  136    6          // tmp136 = s : TYPEOF(s);
+ 75:            post_incr  137               // tmp137 = i++;
+ 76:           assignment  138    6          // tmp138 = i : TYPEOF(i);
+ 77:            less_than  139  138          // tmp139 = tmp138 < n;
+ 78:       is_true_jmp_up  139    0          // if (tmp139) goto 66;
+ 79:            post_incr  130               // tmp130 = check++;
+ 80:             jmp_down    0               // goto 87;
+ 81:           assignment  130    6          // tmp130 = r : TYPEOF(r);
+ 82:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 83:         substraction  132  130          // tmp132 = tmp130 - tmp131;
+ 84:          prop_setter    7  132          // count[tmp132] = r;
+ 85:           assignment  134    6          // tmp134 = r : TYPEOF(r);
+ 86:            post_decr  130               // tmp130 = r--;
+ 87:           assignment  131    6          // tmp131 = r : TYPEOF(r);
+ 88:           assignment  132    1          // tmp132 = 1: SMALLINT;
+ 89:      not_equal_value  133  131          // tmp133 = tmp131 != tmp132;
+ 90:       is_true_jmp_up  133    0          // if (tmp133) goto 81;
+ 91:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 92:          prop_getter  131    1          // tmp131 = perm1[tmp130];
+ 93:           assignment  132    1          // tmp132 = 0: SMALLINT;
+ 94:          equal_value  133  131          // tmp133 = tmp131 == tmp132;
+ 95:           assignment  134    6          // tmp134 = tmp133 : TYPEOF(tmp133);
+ 96:     is_true_jmp_down  134    0          // if (tmp134) goto 100;
+ 97:          prop_getter  135    1          // tmp135 = perm1[m];
+ 98:          equal_value  136  135          // tmp136 = tmp135 == m;
+ 99:           assignment  134    6          // tmp134 = tmp136 : TYPEOF(tmp136);
+100:          logical_not  137               // tmp137 = ! tmp134;
+101:    is_false_jmp_down  137    0          // if (tmp137 == false) goto 159;
+102:           assignment  130    1          // tmp130 = 0: SMALLINT;
+103:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+104:             jmp_down    0               // goto 108;
+105:          prop_getter  131    1          // tmp131 = perm1[i];
+106:          prop_setter    9    0          // perm[i] = tmp131;
+107:            post_incr  132               // tmp132 = i++;
+108:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+109:            less_than  134  133          // tmp134 = tmp133 < n;
+110:       is_true_jmp_up  134    0          // if (tmp134) goto 105;
+111:           assignment  130    1          // tmp130 = 0: SMALLINT;
+112:           assignment   10    6          // flipsCount = tmp130 : TYPEOF(tmp130);
+113:             jmp_down    0               // goto 138;
+114:           assignment  130    6          // tmp130 = k : TYPEOF(k);
+115:           assignment  131    1          // tmp131 = 1: SMALLINT;
+116:             addition  132  130          // tmp132 = tmp130 + tmp131;
+117:           assignment  133    1          // tmp133 = 1: SMALLINT;
+118:        b_shift_right  134  132          // tmp134 = tmp132 >> tmp133;
+119:           assignment   12    6          // k2 = tmp134 : TYPEOF(tmp134);
+120:           assignment  130    1          // tmp130 = 0: SMALLINT;
+121:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+122:             jmp_down    0               // goto 134;
+123:          prop_getter  130    9          // tmp130 = perm[i];
+124:           assignment   13    6          // temp = tmp130 : TYPEOF(tmp130);
+125:           assignment  131    6          // tmp131 = k : TYPEOF(k);
+126:         substraction  132  131          // tmp132 = tmp131 - i;
+127:          prop_getter  133    9          // tmp133 = perm[tmp132];
+128:          prop_setter    0    1          // perm[i] = tmp133;
+129:           assignment  130    6          // tmp130 = k : TYPEOF(k);
+130:         substraction  131  130          // tmp131 = tmp130 - i;
+131:          prop_setter    0  131          // perm[tmp131] = temp;
+132:           assignment  133    6          // tmp133 = temp : TYPEOF(temp);
+133:            post_incr  134               // tmp134 = i++;
+134:           assignment  135    6          // tmp135 = i : TYPEOF(i);
+135:            less_than  136  135          // tmp136 = tmp135 < k2;
+136:       is_true_jmp_up  136    0          // if (tmp136) goto 123;
+137:            post_incr  130               // tmp130 = flipsCount++;
+138:           assignment  131    1          // tmp131 = 0: SMALLINT;
+139:          prop_getter  132    0          // tmp132 = perm[tmp131];
+140:           assignment    2    6          // k = tmp132 : TYPEOF(tmp132);
+141:           assignment  133    1          // tmp133 = 0: SMALLINT;
+142:          equal_value  134  132          // tmp134 = tmp132 == tmp133;
+143:          logical_not  135               // tmp135 = ! tmp134;
+144:       is_true_jmp_up  135    0          // if (tmp135) goto 114;
+145:           assignment  130    6          // tmp130 = flipsCount : TYPEOF(flipsCount);
+146:         greater_than  131  130          // tmp131 = tmp130 > maxFlipsCount;
+147:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 159;
+148:           assignment    6    6          // maxFlipsCount = flipsCount : TYPEOF(flipsCount);
+149:           assignment  130    6          // tmp130 = flipsCount : TYPEOF(flipsCount);
+150:           assignment  130    1          // tmp130 = 0: SMALLINT;
+151:           assignment    1    6          // i = tmp130 : TYPEOF(tmp130);
+152:             jmp_down    0               // goto 156;
+153:          prop_getter  131    7          // tmp131 = perm1[i];
+154:          prop_setter    8    1          // maxPerm[i] = tmp131;
+155:            post_incr  132               // tmp132 = i++;
+156:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+157:            less_than  134  133          // tmp134 = tmp133 < n;
+158:       is_true_jmp_up  134    0          // if (tmp134) goto 153;
+159:             jmp_down    0               // goto 193;
+160:           assignment  130    6          // tmp130 = r : TYPEOF(r);
+161:          equal_value  131  130          // tmp131 = tmp130 == n;
+162:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 164;
+163:               retval                    // return maxFlipsCount;
+164:           assignment  130    1          // tmp130 = 0: SMALLINT;
+165:          prop_getter  131    7          // tmp131 = perm1[tmp130];
+166:           assignment   11    6          // perm0 = tmp131 : TYPEOF(tmp131);
+167:           assignment  130    1          // tmp130 = 0: SMALLINT;
+168:           assignment    1    6          // i = tmp130 : TYPEOF(tmp130);
+169:             jmp_down    0               // goto 178;
+170:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+171:           assignment  131    1          // tmp131 = 1: SMALLINT;
+172:             addition  132  130          // tmp132 = tmp130 + tmp131;
+173:           assignment   12    6          // j = tmp132 : TYPEOF(tmp132);
+174:          prop_getter  131    7          // tmp131 = perm1[j];
+175:          prop_setter    7    1          // perm1[i] = tmp131;
+176:           assignment    1    6          // i = j : TYPEOF(j);
+177:           assignment  130    6          // tmp130 = j : TYPEOF(j);
+178:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+179:            less_than  132  131          // tmp132 = tmp131 < r;
+180:       is_true_jmp_up  132    0          // if (tmp132) goto 170;
+181:          prop_setter    7   10          // perm1[r] = perm0;
+182:           assignment  131    6          // tmp131 = perm0 : TYPEOF(perm0);
+183:          prop_getter  131   13          // tmp131 = count[r];
+184:           assignment  132    1          // tmp132 = 1: SMALLINT;
+185:         substraction  133  131          // tmp133 = tmp131 - tmp132;
+186:          prop_setter   13   10          // count[r] = tmp133;
+187:          prop_getter  130   13          // tmp130 = count[r];
+188:           assignment  131    1          // tmp131 = 0: SMALLINT;
+189:         greater_than  132  130          // tmp132 = tmp130 > tmp131;
+190:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 192;
+191:             jmp_down    0               // goto 195;
+192:            post_incr  130               // tmp130 = r++;
+193:           assignment  131    0          // tmp131 = true: SIMPLE;
+194:       is_true_jmp_up  131    0          // if (tmp131) goto 160;
+195:           assignment  132    0          // tmp132 = true: SIMPLE;
+196:       is_true_jmp_up  132    0          // if (tmp132) goto 57;
+197:                  ret                    // ret;
+198:           assignment  130    1          // tmp130 = 8: SMALLINT;
+199:           assignment    1    6          // n = tmp130 : TYPEOF(tmp130);
+200:               call_n  130    2          // 
+201:                 meta    2    1          // tmp130 = fannkuch (n);
+202:           assignment    3    6          // ret = tmp130 : TYPEOF(tmp130);
+203:           assignment  130    1          // tmp130 = 22: SMALLINT;
+204:           assignment    4    6          // expected = tmp130 : TYPEOF(tmp130);
+205:           assignment  130    6          // tmp130 = ret : TYPEOF(ret);
+206:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+207:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 214;
+208:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+209:             addition  131  130          // tmp131 = tmp130 + expected;
+210:           assignment  132    5          // tmp132 = ' but got ': STRING;
+211:             addition  133  131          // tmp133 = tmp131 + tmp132;
+212:             addition  134  133          // tmp134 = tmp133 + ret;
+213:          throw_value                    // throw tmp134;
+214:                  ret                    // ret;

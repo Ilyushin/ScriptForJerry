@@ -1,0 +1,291 @@
+// // Copyright (c) 2004 by Arthur Langereis (arthur_ext at domain xfinitegames, tld com)
+// 
+// var result = 0;
+  0:                 meta   12  255          // [to be rewritten]
+// // 1 op = 2 assigns, 16 compare/branches, 8 ANDs, (0-8) ADDs, 8 SHLs
+// 
+// // O(n)
+// 
+// function bitsinbyte(b) {
+// var m = 1, c = 0;
+// while(m<0x100) {
+// if(b & m) c++;
+// m <<= 1;
+// }
+// return c;
+// }
+// function TimeFunc(func) {
+// var x, y, t;
+// var sum = 0;
+// for(var x=0; x<350; x++)
+// for(var y=0; y<256; y++) sum += func(y);
+// return sum;
+// }
+// result = TimeFunc(bitsinbyte);
+// var expected = 358400;
+// if (result != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+  2:             var_decl                    // var result;
+// // 1 op = 2 assigns, 16 compare/branches, 8 ANDs, (0-8) ADDs, 8 SHLs
+// 
+// // O(n)
+// 
+// function bitsinbyte(b) {
+// var m = 1, c = 0;
+// while(m<0x100) {
+// if(b & m) c++;
+// m <<= 1;
+// }
+// return c;
+// }
+// function TimeFunc(func) {
+// var x, y, t;
+// var sum = 0;
+// for(var x=0; x<350; x++)
+// for(var y=0; y<256; y++) sum += func(y);
+// return sum;
+// }
+// result = TimeFunc(bitsinbyte);
+// var expected = 358400;
+  3:             var_decl                    // var expected;
+// if (result != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+// 
+  4:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  5:           assignment  254    6          // result = tmp130 : TYPEOF(tmp130);
+// // 1 op = 2 assigns, 16 compare/branches, 8 ANDs, (0-8) ADDs, 8 SHLs
+// 
+// // O(n)
+// 
+// function bitsinbyte(b) {
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  2:                 meta    7  255          // function end: 65537;
+// var m = 1, c = 0;
+  3:                 meta   12  255          // [to be rewritten]
+// while(m<0x100) {
+// if(b & m) c++;
+// m <<= 1;
+// }
+// return c;
+// }
+  3:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  4:         reg_var_decl  128               // var tmp128 .. tmp255;
+  5:             var_decl                    // var m;
+  6:             var_decl                    // var c;
+// while(m<0x100) {
+// if(b & m) c++;
+// m <<= 1;
+// }
+// return c;
+// }
+  7:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  8:           assignment  254    6          // m = tmp130 : TYPEOF(tmp130);
+  9:           assignment  131    1          // tmp131 = 0: SMALLINT;
+ 10:           assignment  254    6          // c = tmp131 : TYPEOF(tmp131);
+// while(m<0x100) {
+ 11:             jmp_down  255               // goto 65546;
+// if(b & m) c++;
+ 12:           assignment  130    6          // tmp130 = b : TYPEOF(b);
+ 13:                b_and  131  130          // tmp131 = tmp130 & m;
+ 14:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65549;
+ 15:            post_incr  130               // tmp130 = c++;
+// m <<= 1;
+ 14:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 16; // REWRITE
+ 16:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 17:         b_shift_left  254  254          // m = m << tmp130;
+ 18:           assignment  131    6          // tmp131 = m : TYPEOF(m);
+// }
+ 11:             jmp_down    0               // goto 19; // REWRITE
+ 19:           assignment  132    6          // tmp132 = m : TYPEOF(m);
+ 20:           assignment  133    3          // tmp133 = 256: NUMBER;
+ 21:            less_than  134  132          // tmp134 = tmp132 < tmp133;
+ 22:       is_true_jmp_up  134    0          // if (tmp134) goto 12;
+// return c;
+ 23:               retval                    // return c;
+// }
+  4:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 24:                  ret                    // ret;
+  2:                 meta    7    0          // function end: 25; // REWRITE
+// function TimeFunc(func) {
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  2:                 meta    7  255          // function end: 65537;
+// var x, y, t;
+  3:                 meta   12  255          // [to be rewritten]
+// var sum = 0;
+// for(var x=0; x<350; x++)
+// for(var y=0; y<256; y++) sum += func(y);
+// return sum;
+// }
+  3:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  4:         reg_var_decl  128               // var tmp128 .. tmp255;
+  5:             var_decl                    // var x;
+  6:             var_decl                    // var y;
+  7:             var_decl                    // var t;
+// var sum = 0;
+  8:             var_decl                    // var sum;
+// for(var x=0; x<350; x++)
+// for(var y=0; y<256; y++) sum += func(y);
+// return sum;
+// }
+// var sum = 0;
+  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 10:           assignment  254    6          // sum = tmp130 : TYPEOF(tmp130);
+// for(var x=0; x<350; x++)
+// for(var y=0; y<256; y++) sum += func(y);
+ 11:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 12:           assignment  254    6          // x = tmp130 : TYPEOF(tmp130);
+ 13:             jmp_down  255               // goto 65548;
+ 14:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 15:           assignment  254    6          // y = tmp130 : TYPEOF(tmp130);
+ 16:             jmp_down  255               // goto 65551;
+ 17:               call_n  255  254          // 
+ 18:                 meta    2  254          // 
+ 17:               call_n  130  254          //  // REWRITE
+ 19:             addition  254  254          // sum = sum + tmp130;
+ 20:           assignment  131    6          // tmp131 = sum : TYPEOF(sum);
+ 21:            post_incr  132               // tmp132 = y++;
+ 16:             jmp_down    0               // goto 22; // REWRITE
+ 22:           assignment  133    6          // tmp133 = y : TYPEOF(y);
+ 23:           assignment  134    3          // tmp134 = 256: NUMBER;
+ 24:            less_than  135  133          // tmp135 = tmp133 < tmp134;
+ 25:       is_true_jmp_up  135    0          // if (tmp135) goto 17;
+ 26:            post_incr  136               // tmp136 = x++;
+ 13:             jmp_down    0               // goto 27; // REWRITE
+ 27:           assignment  137    6          // tmp137 = x : TYPEOF(x);
+ 28:           assignment  138    3          // tmp138 = 350: NUMBER;
+ 29:            less_than  139  137          // tmp139 = tmp137 < tmp138;
+ 30:       is_true_jmp_up  139    0          // if (tmp139) goto 14;
+// return sum;
+ 31:               retval                    // return sum;
+// }
+  4:         reg_var_decl  128               // var tmp128 .. tmp139; // REWRITE
+ 32:                  ret                    // ret;
+  2:                 meta    7    0          // function end: 33; // REWRITE
+// result = TimeFunc(bitsinbyte);
+  6:               call_n  255  254          // 
+  7:                 meta    2  254          // 
+  6:               call_n  130  254          //  // REWRITE
+  8:           assignment  254    6          // result = tmp130 : TYPEOF(tmp130);
+// var expected = 358400;
+  9:           assignment  130    3          // tmp130 = 358400: NUMBER;
+ 10:           assignment  254    6          // expected = tmp130 : TYPEOF(tmp130);
+// if (result != expected)
+ 11:           assignment  130    6          // tmp130 = result : TYPEOF(result);
+ 12:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+ 13:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65548;
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+ 14:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+ 15:             addition  131  130          // tmp131 = tmp130 + expected;
+ 16:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 17:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 18:             addition  134  133          // tmp134 = tmp133 + result;
+ 19:          throw_value                    // throw tmp134;
+// 
+ 13:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 20; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 20:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] result : STRING
+0x84ec60 [ 16] bitsinbyte : STRING
+0x84ec70 [  8] b : STRING
+0x84ec78 [  4] m : MAGIC STRING [id=201] 
+0x84ec7c [  8] c : STRING
+0x84ec98 [ 12] 256 : NUMBER
+0x84eca4 [ 16] TimeFunc : STRING
+0x84ecb4 [ 12] func : STRING
+0x84ecd4 [  8] x : STRING
+0x84ecdc [  8] y : STRING
+0x84ece4 [  8] t : STRING
+0x84ecec [ 12] sum : STRING
+0x84ecf8 [ 12] 350 : NUMBER
+0x84ed18 [ 16] expected : STRING
+0x84ed28 [ 12] 358400 : NUMBER
+0x84ed34 [ 36] ERROR: bad result: expected  : STRING
+0x84ed6c [ 16]  but got  : STRING
+0x84ed7c [  4]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:             var_decl                    // var result;
+  3:             var_decl                    // var expected;
+  4:          func_decl_n    2               // 
+  5:                 meta    2    3          // function bitsinbyte (b);
+  6:                 meta    7    0          // function end: 29;
+  7:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  8:         reg_var_decl  128               // var tmp128 .. tmp134;
+  9:             var_decl                    // var m;
+ 10:             var_decl                    // var c;
+ 11:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 12:           assignment    4    6          // m = tmp130 : TYPEOF(tmp130);
+ 13:           assignment  131    1          // tmp131 = 0: SMALLINT;
+ 14:           assignment    5    6          // c = tmp131 : TYPEOF(tmp131);
+ 15:             jmp_down    0               // goto 23;
+ 16:           assignment  130    6          // tmp130 = b : TYPEOF(b);
+ 17:                b_and  131  130          // tmp131 = tmp130 & m;
+ 18:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 20;
+ 19:            post_incr  130               // tmp130 = c++;
+ 20:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 21:         b_shift_left    4    4          // m = m << tmp130;
+ 22:           assignment  131    6          // tmp131 = m : TYPEOF(m);
+ 23:           assignment  132    6          // tmp132 = m : TYPEOF(m);
+ 24:           assignment  133    3          // tmp133 = 256: NUMBER;
+ 25:            less_than  134  132          // tmp134 = tmp132 < tmp133;
+ 26:       is_true_jmp_up  134    0          // if (tmp134) goto 16;
+ 27:               retval                    // return c;
+ 28:                  ret                    // ret;
+ 29:          func_decl_n    7               // 
+ 30:                 meta    2    8          // function TimeFunc (func);
+ 31:                 meta    7    0          // function end: 62;
+ 32:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 33:         reg_var_decl  128               // var tmp128 .. tmp139;
+ 34:             var_decl                    // var x;
+ 35:             var_decl                    // var y;
+ 36:             var_decl                    // var t;
+ 37:             var_decl                    // var sum;
+ 38:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 39:           assignment   12    6          // sum = tmp130 : TYPEOF(tmp130);
+ 40:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 41:           assignment    9    6          // x = tmp130 : TYPEOF(tmp130);
+ 42:             jmp_down    0               // goto 56;
+ 43:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 44:           assignment   10    6          // y = tmp130 : TYPEOF(tmp130);
+ 45:             jmp_down    0               // goto 51;
+ 46:               call_n  130    8          // 
+ 47:                 meta    2   10          // tmp130 = func (y);
+ 48:             addition   12   12          // sum = sum + tmp130;
+ 49:           assignment  131    6          // tmp131 = sum : TYPEOF(sum);
+ 50:            post_incr  132               // tmp132 = y++;
+ 51:           assignment  133    6          // tmp133 = y : TYPEOF(y);
+ 52:           assignment  134    3          // tmp134 = 256: NUMBER;
+ 53:            less_than  135  133          // tmp135 = tmp133 < tmp134;
+ 54:       is_true_jmp_up  135    0          // if (tmp135) goto 46;
+ 55:            post_incr  136               // tmp136 = x++;
+ 56:           assignment  137    6          // tmp137 = x : TYPEOF(x);
+ 57:           assignment  138    3          // tmp138 = 350: NUMBER;
+ 58:            less_than  139  137          // tmp139 = tmp137 < tmp138;
+ 59:       is_true_jmp_up  139    0          // if (tmp139) goto 43;
+ 60:               retval                    // return sum;
+ 61:                  ret                    // ret;
+ 62:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 63:           assignment    0    6          // result = tmp130 : TYPEOF(tmp130);
+ 64:               call_n  130    0          // 
+ 65:                 meta    2    1          // tmp130 = TimeFunc (bitsinbyte);
+ 66:           assignment    2    6          // result = tmp130 : TYPEOF(tmp130);
+ 67:           assignment  130    3          // tmp130 = 358400: NUMBER;
+ 68:           assignment    4    6          // expected = tmp130 : TYPEOF(tmp130);
+ 69:           assignment  130    6          // tmp130 = result : TYPEOF(result);
+ 70:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+ 71:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 78;
+ 72:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+ 73:             addition  131  130          // tmp131 = tmp130 + expected;
+ 74:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 75:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 76:             addition  134  133          // tmp134 = tmp133 + result;
+ 77:          throw_value                    // throw tmp134;
+ 78:                  ret                    // ret;

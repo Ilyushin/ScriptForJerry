@@ -1,1 +1,0 @@
-if(typeof Date.prototype.getYear!=="function")$ERROR('#1: typeof Date.prototype.getYear === "function". Actual: '+typeof Date.prototype.getYear);if(typeof Date.prototype["getYear"]!=="function")$ERROR('#2: typeof Date.prototype["getYear"] === "function". Actual: '+typeof Date.prototype["getYear"]);
