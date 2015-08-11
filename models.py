@@ -53,7 +53,7 @@ class analyzing_result:
         if diff_size > 0:
             self.reduced_size = round((diff_size*100)/self.size,2) 
             
-        diff_time = self.time_closure-self.time
+        diff_time = self.time-self.time_jerry
         self.increased_time = round((diff_time*100)/self.time,2)
         
         self.save_result(csv_writer)
