@@ -1,4 +1,4 @@
- import sys, subprocess, os, csv
+import sys, subprocess, os, csv
 
 if len(sys.argv) == 1:
     #set parameters
@@ -7,6 +7,7 @@ if len(sys.argv) == 1:
     path_jerry = path_jerry = os.path.join(dir, 'jerry_opcodes')
     path_result_folder = os.path.join(dir, 'results')
     path_tests = "/home/john/git/ScriptForJerry/test_closure_jerry/test_files"
+    #path_tests = "/home/john/git/Test"
     
     tests = []
     for fn in os.listdir(path_tests):
