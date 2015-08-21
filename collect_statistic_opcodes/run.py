@@ -1,4 +1,4 @@
-import sys, subprocess, os
+ import sys, subprocess, os, csv
 
 if len(sys.argv) == 1:
     #set parameters
@@ -12,14 +12,26 @@ if len(sys.argv) == 1:
     for fn in os.listdir(path_tests):
        if fn.lower().endswith('.js'):
            tests.append(path_tests+'/'+fn)
-           
+     
+    results = []       
     if tests:
         for test in tests:
             file_name = os.path.basename(test)
             cmd = path_jerry + ' ' + test+' >'+path_result_folder+'/'+file_name.split('.')[0]+'.csv'
             print 'start - '+test
             r = subprocess.call(cmd, shell=True)
+            results.append(path_result_folder+'/'+file_name.split('.')[0]+'.csv')
             print 'end - '+test
+            
+    #optimize the result
+    for path_csv in results:
+        with open(path_csv, 'rb') as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=',')
+            result_dict = {}
+            for row in csv_reader:
+                
+    
+    
          
     print 'success'
             
