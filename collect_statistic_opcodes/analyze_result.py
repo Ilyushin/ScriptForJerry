@@ -36,7 +36,7 @@ def process_data(path):
             else: 
                 data = row               
                                  
-            id = int(data[2])    
+            id = int(data[2])-1    
             result_dict.setdefault(id,[data[0],0,0,0,0])
             #number
             result_dict[id][1] += 1
