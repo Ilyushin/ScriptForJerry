@@ -2,4 +2,6 @@
 
 All scripts wrote on Python.
 
-Run the script - python run.py
+##1. Collecting statistic of working for opcodes
+##2. Testing Google Closure and JerryScript engine
+##3. Testing Google Closure and V8 engine

@@ -2,13 +2,11 @@ import sys, subprocess, os, csv
 
 if len(sys.argv) == 1:
     #set parameters
-    #path_tests = os.path.abspath(sys.argv[1])
     dir = os.path.dirname(__file__)
     path_jerry = path_jerry = os.path.join(dir, 'jerry_opcodes')
     path_result_folder = os.path.join(dir, 'results')
-    path_tests = "/home/john/git/ScriptForJerry/test_closure_jerry/test_files"
-    #path_tests = "/home/john/git/Test"
-    
+    path_tests = os.path.join(dir,'test_files')
+        
     tests = []
     for fn in os.listdir(path_tests):
        if fn.lower().endswith('.js'):
