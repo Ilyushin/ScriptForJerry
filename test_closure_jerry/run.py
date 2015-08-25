@@ -1,4 +1,4 @@
-import tkFileDialog, tkMessageBox, models, csv, os
+import tkFileDialog, tkMessageBox, models, csv, os, threading
 from Tkinter import *
 from ttk import Treeview
 
@@ -9,6 +9,12 @@ def choosing_file():
         lbPaths.delete(0, END)       
         for item in files:
             lbPaths.insert(END,item) 
+            
+def processing_test(path, log):
+    an_result = models.analyzing_result(path,'ADVANCED_OPTIMIZATIONS')
+    an_result.execut_scripts_closure(log)
+    parent = tvResults.insert(parent_closure, 'end', text=an_result.file_name)
+    tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.decreased_time, an_result.reduced_size))
 
 def start_processing():
     temp_list = list(lbPaths.get(0, END))
@@ -20,18 +26,14 @@ def start_processing():
     csvfile = open(path_result_folder+'/result.csv', 'w+')
     csv_writer = csv.writer(csvfile, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ', quotechar='') 
     
-    for i in temp_list: 
-        an_result = models.analyzing_result(i,'ADVANCED_OPTIMIZATIONS')
-        an_result.execut_scripts_closure(csv_writer)
-        parent = tvResults.insert(parent_closure, 'end', text=an_result.file_name)
-        tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.decreased_time, an_result.reduced_size))
-#         an_result = models.analyzing_result(i,'SIMPLE_OPTIMIZATIONS')
-#         an_result.execut_scripts_closure(csv_writer)
-#         tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
-#         an_result = models.analyzing_result(i,'WHITESPACE_ONLY')
-#         an_result.execut_scripts_closure(csv_writer)
-#         tvResults.insert(parent, 'end', text=an_result.file_name, values=(an_result.time, an_result.time_closure, an_result.size, an_result.size_closure, an_result.increased_time, an_result.reduced_size))
+    for i in temp_list:
+        threading.Thread(target=processing_test, args=(path,csv_writer,)).start() 
+         
     csvfile.close()
+    
+
+    
+    
     
 #set size of a main window
 root.geometry("1320x500")
