@@ -1,0 +1,461 @@
+// /*
+// 
+// var loops = 15
+  0:                 meta   12  255          // [to be rewritten]
+// var nx = 120
+// var nz = 120
+// function morph(a, f) {
+//     var PI2nx = Math.PI * 8/nx
+//     var sin = Math.sin
+//     var f30 = -(50 * sin(f*Math.PI*2))
+//     
+//     for (var i = 0; i < nz; ++i) {
+//         for (var j = 0; j < nx; ++j) {
+//             a[3*(i*nx+j)+1]    = sin((j-1) * PI2nx ) * -f30
+//         }
+//     }
+// }
+//     
+// var a = Array()
+// for (var i=0; i < nx*nz*3; ++i) 
+//     a[i] = 0
+// for (var i = 0; i < loops; ++i) {
+//     morph(a, i/loops)
+// }
+// testOutput = 0;
+// for (var i = 0; i < nx; i++)
+//     testOutput += a[3*(i*nx+i)+1];
+// a = null;
+// // This has to be an approximate test since ECMAscript doesn't formally specify
+// 
+// // what sin() returns. Even if it did specify something like for example what Java 7
+// 
+// // says - that sin() has to return a value within 1 ulp of exact - then we still
+// 
+// // would not be able to do an exact test here since that would allow for just enough
+// 
+// // low-bit slop to create possibly big errors due to testOutput being a sum.
+// 
+// var epsilon = 1e-13;
+// if (Math.abs(testOutput) >= epsilon)
+//     throw "Error: bad test output: expected magnitude below " + epsilon + " but got " + testOutput;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+  2:             var_decl                    // var loops;
+// var nx = 120
+  3:             var_decl                    // var nx;
+// var nz = 120
+  4:             var_decl                    // var nz;
+// function morph(a, f) {
+//     var PI2nx = Math.PI * 8/nx
+//     var sin = Math.sin
+//     var f30 = -(50 * sin(f*Math.PI*2))
+//     
+//     for (var i = 0; i < nz; ++i) {
+//         for (var j = 0; j < nx; ++j) {
+//             a[3*(i*nx+j)+1]    = sin((j-1) * PI2nx ) * -f30
+//         }
+//     }
+// }
+//     
+// var a = Array()
+  5:             var_decl                    // var a;
+// for (var i=0; i < nx*nz*3; ++i) 
+  6:             var_decl                    // var i;
+//     a[i] = 0
+// for (var i = 0; i < loops; ++i) {
+//     morph(a, i/loops)
+// }
+// testOutput = 0;
+// for (var i = 0; i < nx; i++)
+//     testOutput += a[3*(i*nx+i)+1];
+// a = null;
+// // This has to be an approximate test since ECMAscript doesn't formally specify
+// 
+// // what sin() returns. Even if it did specify something like for example what Java 7
+// 
+// // says - that sin() has to return a value within 1 ulp of exact - then we still
+// 
+// // would not be able to do an exact test here since that would allow for just enough
+// 
+// // low-bit slop to create possibly big errors due to testOutput being a sum.
+// 
+// var epsilon = 1e-13;
+  7:             var_decl                    // var epsilon;
+// if (Math.abs(testOutput) >= epsilon)
+//     throw "Error: bad test output: expected magnitude below " + epsilon + " but got " + testOutput;
+// 
+  8:           assignment  130    1          // tmp130 = 15: SMALLINT;
+// var nx = 120
+  9:           assignment  254    6          // loops = tmp130 : TYPEOF(tmp130);
+ 10:           assignment  130    1          // tmp130 = 120: SMALLINT;
+// var nz = 120
+ 11:           assignment  254    6          // nx = tmp130 : TYPEOF(tmp130);
+ 12:           assignment  130    1          // tmp130 = 120: SMALLINT;
+// function morph(a, f) {
+ 13:           assignment  254    6          // nz = tmp130 : TYPEOF(tmp130);
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  3:                 meta    7  255          // function end: 65538;
+//     var PI2nx = Math.PI * 8/nx
+  4:                 meta   12  255          // [to be rewritten]
+//     var sin = Math.sin
+//     var f30 = -(50 * sin(f*Math.PI*2))
+//     
+//     for (var i = 0; i < nz; ++i) {
+//         for (var j = 0; j < nx; ++j) {
+//             a[3*(i*nx+j)+1]    = sin((j-1) * PI2nx ) * -f30
+//         }
+//     }
+// }
+  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  5:         reg_var_decl  128               // var tmp128 .. tmp255;
+  6:             var_decl                    // var PI2nx;
+//     var sin = Math.sin
+  7:             var_decl                    // var sin;
+//     var f30 = -(50 * sin(f*Math.PI*2))
+  8:             var_decl                    // var f30;
+//     
+//     for (var i = 0; i < nz; ++i) {
+  9:             var_decl                    // var i;
+//         for (var j = 0; j < nx; ++j) {
+ 10:             var_decl                    // var j;
+//             a[3*(i*nx+j)+1]    = sin((j-1) * PI2nx ) * -f30
+//         }
+//     }
+// }
+ 11:           assignment  130    5          // tmp130 = 'PI': STRING;
+ 12:          prop_getter  131  254          // tmp131 = Math[tmp130];
+ 13:           assignment  132    1          // tmp132 = 8: SMALLINT;
+ 14:       multiplication  133  131          // tmp133 = tmp131 * tmp132;
+//     var sin = Math.sin
+ 15:             division  134  133          // tmp134 = tmp133 / nx;
+ 16:           assignment  254    6          // PI2nx = tmp134 : TYPEOF(tmp134);
+ 17:           assignment  130    5          // tmp130 = 'sin': STRING;
+//     var f30 = -(50 * sin(f*Math.PI*2))
+ 18:          prop_getter  131  254          // tmp131 = Math[tmp130];
+ 19:           assignment  254    6          // sin = tmp131 : TYPEOF(tmp131);
+ 20:           assignment  130    1          // tmp130 = 50: SMALLINT;
+ 21:               call_n  255  254          // 
+ 22:           assignment  131    6          // tmp131 = f : TYPEOF(f);
+ 23:           assignment  132    5          // tmp132 = 'PI': STRING;
+ 24:          prop_getter  133  254          // tmp133 = Math[tmp132];
+ 25:       multiplication  134  131          // tmp134 = tmp131 * tmp133;
+ 26:           assignment  135    1          // tmp135 = 2: SMALLINT;
+ 27:       multiplication  136  134          // tmp136 = tmp134 * tmp135;
+ 28:                 meta    2  136          // 
+ 21:               call_n  131  254          //  // REWRITE
+ 29:       multiplication  132  130          // tmp132 = tmp130 * tmp131;
+//     
+//     for (var i = 0; i < nz; ++i) {
+ 30:          unary_minus  133               // tmp133 = -tmp132;
+ 31:           assignment  254    6          // f30 = tmp133 : TYPEOF(tmp133);
+ 32:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 33:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 34:             jmp_down  255               // goto 65569;
+//         for (var j = 0; j < nx; ++j) {
+ 35:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 36:           assignment  254    6          // j = tmp130 : TYPEOF(tmp130);
+ 37:             jmp_down  255               // goto 65572;
+//             a[3*(i*nx+j)+1]    = sin((j-1) * PI2nx ) * -f30
+ 38:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 39:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+ 40:       multiplication  132  131          // tmp132 = tmp131 * nx;
+ 41:             addition  133  132          // tmp133 = tmp132 + j;
+ 42:       multiplication  134  130          // tmp134 = tmp130 * tmp133;
+ 43:           assignment  135    1          // tmp135 = 1: SMALLINT;
+ 44:             addition  136  134          // tmp136 = tmp134 + tmp135;
+ 45:          prop_getter  137  254          // tmp137 = a[tmp136];
+ 45:               call_n  255  254          // 
+ 46:           assignment  138    6          // tmp138 = j : TYPEOF(j);
+ 47:           assignment  139    1          // tmp139 = 1: SMALLINT;
+ 48:         substraction  140  138          // tmp140 = tmp138 - tmp139;
+ 49:       multiplication  141  140          // tmp141 = tmp140 * PI2nx;
+ 50:                 meta    2  141          // 
+ 45:               call_n  138  254          //  // REWRITE
+//         }
+ 51:          unary_minus  139               // tmp139 = -f30;
+ 52:       multiplication  140  138          // tmp140 = tmp138 * tmp139;
+ 53:          prop_setter  254  136          // a[tmp136] = tmp140;
+ 54:             pre_incr  141               // tmp141 = ++j;
+ 37:             jmp_down    0               // goto 55; // REWRITE
+ 55:           assignment  142    6          // tmp142 = j : TYPEOF(j);
+ 56:            less_than  143  142          // tmp143 = tmp142 < nx;
+ 57:       is_true_jmp_up  143    0          // if (tmp143) goto 38;
+//     }
+ 58:             pre_incr  144               // tmp144 = ++i;
+ 34:             jmp_down    0               // goto 59; // REWRITE
+ 59:           assignment  145    6          // tmp145 = i : TYPEOF(i);
+ 60:            less_than  146  145          // tmp146 = tmp145 < nz;
+ 61:       is_true_jmp_up  146    0          // if (tmp146) goto 35;
+// }
+  5:         reg_var_decl  128               // var tmp128 .. tmp146; // REWRITE
+ 62:                  ret                    // ret;
+  3:                 meta    7    0          // function end: 63; // REWRITE
+//     
+// var a = Array()
+ 14:               call_n  255  254          // 
+ 14:               call_n  130  254          //  // REWRITE
+// for (var i=0; i < nx*nz*3; ++i) 
+ 15:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
+//     a[i] = 0
+ 16:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 17:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 18:             jmp_down  255               // goto 65553;
+ 19:          prop_getter  130  254          // tmp130 = a[i];
+ 19:           assignment  131    1          // tmp131 = 0: SMALLINT;
+// for (var i = 0; i < loops; ++i) {
+ 20:          prop_setter  254  254          // a[i] = tmp131;
+ 21:             pre_incr  132               // tmp132 = ++i;
+ 18:             jmp_down    0               // goto 22; // REWRITE
+ 22:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 23:           assignment  134    6          // tmp134 = nx : TYPEOF(nx);
+ 24:       multiplication  135  134          // tmp135 = tmp134 * nz;
+ 25:           assignment  136    1          // tmp136 = 3: SMALLINT;
+ 26:       multiplication  137  135          // tmp137 = tmp135 * tmp136;
+ 27:            less_than  138  133          // tmp138 = tmp133 < tmp137;
+ 28:       is_true_jmp_up  138    0          // if (tmp138) goto 19;
+ 29:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 30:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 31:             jmp_down  255               // goto 65566;
+//     morph(a, i/loops)
+ 32:               call_n  255  254          // 
+ 33:                 meta    2  254          // 
+ 34:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 35:             division  131  130          // tmp131 = tmp130 / loops;
+ 36:                 meta    2  131          // 
+ 32:               call_n  130  254          //  // REWRITE
+// }
+ 37:             pre_incr  131               // tmp131 = ++i;
+ 31:             jmp_down    0               // goto 38; // REWRITE
+ 38:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+ 39:            less_than  133  132          // tmp133 = tmp132 < loops;
+ 40:       is_true_jmp_up  133    0          // if (tmp133) goto 32;
+// testOutput = 0;
+ 41:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 42:           assignment  254    6          // testOutput = tmp130 : TYPEOF(tmp130);
+// for (var i = 0; i < nx; i++)
+//     testOutput += a[3*(i*nx+i)+1];
+ 43:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 44:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 45:             jmp_down  255               // goto 65580;
+ 46:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 47:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+ 48:       multiplication  132  131          // tmp132 = tmp131 * nx;
+ 49:             addition  133  132          // tmp133 = tmp132 + i;
+ 50:       multiplication  134  130          // tmp134 = tmp130 * tmp133;
+ 51:           assignment  135    1          // tmp135 = 1: SMALLINT;
+ 52:             addition  136  134          // tmp136 = tmp134 + tmp135;
+ 53:          prop_getter  137  254          // tmp137 = a[tmp136];
+ 54:             addition  254  254          // testOutput = testOutput + tmp137;
+ 55:           assignment  138    6          // tmp138 = testOutput : TYPEOF(testOutput);
+ 56:            post_incr  139               // tmp139 = i++;
+ 45:             jmp_down    0               // goto 57; // REWRITE
+ 57:           assignment  140    6          // tmp140 = i : TYPEOF(i);
+ 58:            less_than  141  140          // tmp141 = tmp140 < nx;
+ 59:       is_true_jmp_up  141    0          // if (tmp141) goto 46;
+// a = null;
+ 60:           assignment  130    0          // tmp130 = null: SIMPLE;
+ 61:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
+// // This has to be an approximate test since ECMAscript doesn't formally specify
+// 
+// // what sin() returns. Even if it did specify something like for example what Java 7
+// 
+// // says - that sin() has to return a value within 1 ulp of exact - then we still
+// 
+// // would not be able to do an exact test here since that would allow for just enough
+// 
+// // low-bit slop to create possibly big errors due to testOutput being a sum.
+// 
+// var epsilon = 1e-13;
+ 62:           assignment  130    3          // tmp130 = 1e-13: NUMBER;
+ 63:           assignment  254    6          // epsilon = tmp130 : TYPEOF(tmp130);
+// if (Math.abs(testOutput) >= epsilon)
+ 64:           assignment  130    5          // tmp130 = 'abs': STRING;
+ 65:          prop_getter  131  254          // tmp131 = Math[tmp130];
+ 66:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
+ 67:               call_n  255  131          // 
+ 68:                 meta    1    1          // 
+ 69:                 meta    2  254          // 
+ 67:               call_n  133  131          //  // REWRITE
+ 70: greater_or_equal_than  134  133          // tmp134 = tmp133 >= epsilon;
+ 71:    is_false_jmp_down  134  255          // if (tmp134 == false) goto 65606;
+//     throw "Error: bad test output: expected magnitude below " + epsilon + " but got " + testOutput;
+ 72:           assignment  130    5          // tmp130 = 'Error: bad test output: expected magnitude below ': STRING;
+ 73:             addition  131  130          // tmp131 = tmp130 + epsilon;
+ 74:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 75:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 76:             addition  134  133          // tmp134 = tmp133 + testOutput;
+ 77:          throw_value                    // throw tmp134;
+// 
+ 71:    is_false_jmp_down  134    0          // if (tmp134 == false) goto 78; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp141; // REWRITE
+ 78:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] loops : STRING
+0x84ec60 [  8] nx : STRING
+0x84ec68 [  8] nz : STRING
+0x84ec70 [ 12] morph : STRING
+0x84ec7c [  8] a : STRING
+0x84ec98 [  8] f : STRING
+0x84eca0 [ 12] PI2nx : STRING
+0x84ecac [  4] Math : MAGIC STRING [id=44] 
+0x84ecb0 [  4] PI : MAGIC STRING [id=80] 
+0x84ecb4 [  4] sin : MAGIC STRING [id=98] 
+0x84ecb8 [ 12] f30 : STRING
+0x84ecd8 [  4] i : MAGIC STRING [id=200] 
+0x84ecdc [  8] j : STRING
+0x84ece4 [  4] Array : MAGIC STRING [id=29] 
+0x84ece8 [ 16] testOutput : STRING
+0x84ecf8 [ 16] epsilon : STRING
+0x84ed1c [ 12] 1e-13 : NUMBER
+0x84ed28 [  4] abs : MAGIC STRING [id=83] 
+0x84ed2c [ 56] Error: bad test output: expected magnitude below  : STRING
+0x84ed78 [ 16]  but got  : STRING
+0x84ed9c [ 36]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp141;
+  2:             var_decl                    // var loops;
+  3:             var_decl                    // var nx;
+  4:             var_decl                    // var nz;
+  5:             var_decl                    // var a;
+  6:             var_decl                    // var i;
+  7:             var_decl                    // var epsilon;
+  8:          func_decl_n    6               // 
+  9:                 meta    2    3          // 
+ 10:                 meta    2    7          // function morph (a, f);
+ 11:                 meta    7    0          // function end: 71;
+ 12:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 13:         reg_var_decl  128               // var tmp128 .. tmp146;
+ 14:             var_decl                    // var PI2nx;
+ 15:             var_decl                    // var sin;
+ 16:             var_decl                    // var f30;
+ 17:             var_decl                    // var i;
+ 18:             var_decl                    // var j;
+ 19:           assignment  130    5          // tmp130 = 'PI': STRING;
+ 20:          prop_getter  131   13          // tmp131 = Math[tmp130];
+ 21:           assignment  132    1          // tmp132 = 8: SMALLINT;
+ 22:       multiplication  133  131          // tmp133 = tmp131 * tmp132;
+ 23:             division  134  133          // tmp134 = tmp133 / nx;
+ 24:           assignment    8    6          // PI2nx = tmp134 : TYPEOF(tmp134);
+ 25:           assignment  130    5          // tmp130 = 'sin': STRING;
+ 26:          prop_getter  131   13          // tmp131 = Math[tmp130];
+ 27:           assignment    9    6          // sin = tmp131 : TYPEOF(tmp131);
+ 28:           assignment  130    1          // tmp130 = 50: SMALLINT;
+ 29:               call_n  131    9          // 
+ 30:           assignment  131    6          // tmp131 = f : TYPEOF(f);
+ 31:           assignment  132    5          // tmp132 = 'PI': STRING;
+ 32:          prop_getter  133   13          // tmp133 = Math[tmp132];
+ 33:       multiplication  134  131          // tmp134 = tmp131 * tmp133;
+ 34:           assignment  135    1          // tmp135 = 2: SMALLINT;
+ 35:       multiplication  136  134          // tmp136 = tmp134 * tmp135;
+ 36:                 meta    2  136          // tmp131 = sin (tmp136);
+ 37:       multiplication  132  130          // tmp132 = tmp130 * tmp131;
+ 38:          unary_minus  133               // tmp133 = -tmp132;
+ 39:           assignment   10    6          // f30 = tmp133 : TYPEOF(tmp133);
+ 40:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 41:           assignment    4    6          // i = tmp130 : TYPEOF(tmp130);
+ 42:             jmp_down    0               // goto 67;
+ 43:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 44:           assignment   11    6          // j = tmp130 : TYPEOF(tmp130);
+ 45:             jmp_down    0               // goto 63;
+ 46:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 47:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+ 48:       multiplication  132  131          // tmp132 = tmp131 * nx;
+ 49:             addition  133  132          // tmp133 = tmp132 + j;
+ 50:       multiplication  134  130          // tmp134 = tmp130 * tmp133;
+ 51:           assignment  135    1          // tmp135 = 1: SMALLINT;
+ 52:             addition  136  134          // tmp136 = tmp134 + tmp135;
+ 53:               call_n  138    9          // 
+ 54:           assignment  138    6          // tmp138 = j : TYPEOF(j);
+ 55:           assignment  139    1          // tmp139 = 1: SMALLINT;
+ 56:         substraction  140  138          // tmp140 = tmp138 - tmp139;
+ 57:       multiplication  141  140          // tmp141 = tmp140 * PI2nx;
+ 58:                 meta    2  141          // tmp138 = sin (tmp141);
+ 59:          unary_minus  139               // tmp139 = -f30;
+ 60:       multiplication  140  138          // tmp140 = tmp138 * tmp139;
+ 61:          prop_setter    3  136          // a[tmp136] = tmp140;
+ 62:             pre_incr  141               // tmp141 = ++j;
+ 63:           assignment  142    6          // tmp142 = j : TYPEOF(j);
+ 64:            less_than  143  142          // tmp143 = tmp142 < nx;
+ 65:       is_true_jmp_up  143    0          // if (tmp143) goto 46;
+ 66:             pre_incr  144               // tmp144 = ++i;
+ 67:           assignment  145    6          // tmp145 = i : TYPEOF(i);
+ 68:            less_than  146  145          // tmp146 = tmp145 < nz;
+ 69:       is_true_jmp_up  146    0          // if (tmp146) goto 43;
+ 70:                  ret                    // ret;
+ 71:           assignment  130    1          // tmp130 = 15: SMALLINT;
+ 72:           assignment    3    6          // loops = tmp130 : TYPEOF(tmp130);
+ 73:           assignment  130    1          // tmp130 = 120: SMALLINT;
+ 74:           assignment    0    6          // nx = tmp130 : TYPEOF(tmp130);
+ 75:           assignment  130    1          // tmp130 = 120: SMALLINT;
+ 76:           assignment    2    6          // nz = tmp130 : TYPEOF(tmp130);
+ 77:               call_n  130    4          // 
+ 78:           assignment    5    6          // a = tmp130 : TYPEOF(tmp130);
+ 79:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 80:           assignment    1    6          // i = tmp130 : TYPEOF(tmp130);
+ 81:             jmp_down    0               // goto 85;
+ 82:           assignment  131    1          // tmp131 = 0: SMALLINT;
+ 83:          prop_setter    5    1          // a[i] = tmp131;
+ 84:             pre_incr  132               // tmp132 = ++i;
+ 85:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 86:           assignment  134    6          // tmp134 = nx : TYPEOF(nx);
+ 87:       multiplication  135  134          // tmp135 = tmp134 * nz;
+ 88:           assignment  136    1          // tmp136 = 3: SMALLINT;
+ 89:       multiplication  137  135          // tmp137 = tmp135 * tmp136;
+ 90:            less_than  138  133          // tmp138 = tmp133 < tmp137;
+ 91:       is_true_jmp_up  138    0          // if (tmp138) goto 82;
+ 92:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 93:           assignment    1    6          // i = tmp130 : TYPEOF(tmp130);
+ 94:             jmp_down    0               // goto 101;
+ 95:               call_n  130    6          // 
+ 96:                 meta    2    5          // 
+ 97:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 98:             division  131  130          // tmp131 = tmp130 / loops;
+ 99:                 meta    2  131          // tmp130 = morph (a, tmp131);
+100:             pre_incr  131               // tmp131 = ++i;
+101:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+102:            less_than  133  132          // tmp133 = tmp132 < loops;
+103:       is_true_jmp_up  133    0          // if (tmp133) goto 95;
+104:           assignment  130    1          // tmp130 = 0: SMALLINT;
+105:           assignment    7    6          // testOutput = tmp130 : TYPEOF(tmp130);
+106:           assignment  130    1          // tmp130 = 0: SMALLINT;
+107:           assignment    1    6          // i = tmp130 : TYPEOF(tmp130);
+108:             jmp_down    0               // goto 120;
+109:           assignment  130    1          // tmp130 = 3: SMALLINT;
+110:           assignment  131    6          // tmp131 = i : TYPEOF(i);
+111:       multiplication  132  131          // tmp132 = tmp131 * nx;
+112:             addition  133  132          // tmp133 = tmp132 + i;
+113:       multiplication  134  130          // tmp134 = tmp130 * tmp133;
+114:           assignment  135    1          // tmp135 = 1: SMALLINT;
+115:             addition  136  134          // tmp136 = tmp134 + tmp135;
+116:          prop_getter  137    5          // tmp137 = a[tmp136];
+117:             addition    7    7          // testOutput = testOutput + tmp137;
+118:           assignment  138    6          // tmp138 = testOutput : TYPEOF(testOutput);
+119:            post_incr  139               // tmp139 = i++;
+120:           assignment  140    6          // tmp140 = i : TYPEOF(i);
+121:            less_than  141  140          // tmp141 = tmp140 < nx;
+122:       is_true_jmp_up  141    0          // if (tmp141) goto 109;
+123:           assignment  130    0          // tmp130 = null: SIMPLE;
+124:           assignment    5    6          // a = tmp130 : TYPEOF(tmp130);
+125:           assignment  130    3          // tmp130 = 1e-13: NUMBER;
+126:           assignment    9    6          // epsilon = tmp130 : TYPEOF(tmp130);
+127:           assignment  130    5          // tmp130 = 'abs': STRING;
+128:          prop_getter  131    0          // tmp131 = Math[tmp130];
+129:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
+130:               call_n  133  131          // 
+131:                 meta    1    1          // 
+132:                 meta    2    1          // tmp133 = tmp131 (this_arg = tmp132, testOutput);
+133: greater_or_equal_than  134  133          // tmp134 = tmp133 >= epsilon;
+134:    is_false_jmp_down  134    0          // if (tmp134 == false) goto 141;
+135:           assignment  130    5          // tmp130 = 'Error: bad test output: expected magnitude below ': STRING;
+136:             addition  131  130          // tmp131 = tmp130 + epsilon;
+137:           assignment  132    5          // tmp132 = ' but got ': STRING;
+138:             addition  133  131          // tmp133 = tmp131 + tmp132;
+139:             addition  134  133          // tmp134 = tmp133 + testOutput;
+140:          throw_value                    // throw tmp134;
+141:                  ret                    // ret;
+Error: ERR_OUT_OF_MEMORY

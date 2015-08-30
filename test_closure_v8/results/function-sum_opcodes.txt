@@ -1,0 +1,101 @@
+// function f(x, y, z)
+  0:                 meta   12  255          // [to be rewritten]
+// {
+//     return x + y + z;
+// }
+// for (var i = 0; i < 2500000; ++i)
+//     f(1, 2, 3);
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// function f(x, y, z)
+// {
+//     return x + y + z;
+// }
+// for (var i = 0; i < 2500000; ++i)
+  2:             var_decl                    // var i;
+//     f(1, 2, 3);
+// 
+// function f(x, y, z)
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  3:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  4:                 meta    7  255          // function end: 65539;
+// {
+//     return x + y + z;
+  5:                 meta   12  255          // [to be rewritten]
+// }
+  5:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  6:         reg_var_decl  128               // var tmp128 .. tmp255;
+// }
+  7:           assignment  130    6          // tmp130 = x : TYPEOF(x);
+  8:             addition  131  130          // tmp131 = tmp130 + y;
+  9:             addition  132  131          // tmp132 = tmp131 + z;
+ 10:               retval                    // return tmp132;
+// }
+  6:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 11:                  ret                    // ret;
+  4:                 meta    7    0          // function end: 12; // REWRITE
+// for (var i = 0; i < 2500000; ++i)
+//     f(1, 2, 3);
+  3:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  4:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+  5:             jmp_down  255               // goto 65540;
+  6:               call_n  255  254          // 
+  7:           assignment  130    1          // tmp130 = 1: SMALLINT;
+  8:                 meta    2  130          // 
+  9:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 10:                 meta    2  130          // 
+ 11:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 12:                 meta    2  130          // 
+  6:               call_n  130  254          //  // REWRITE
+ 13:             pre_incr  131               // tmp131 = ++i;
+  5:             jmp_down    0               // goto 14; // REWRITE
+ 14:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+ 15:           assignment  133    3          // tmp133 = 2500000: NUMBER;
+ 16:            less_than  134  132          // tmp134 = tmp132 < tmp133;
+ 17:       is_true_jmp_up  134    0          // if (tmp134) goto 6;
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 18:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] f : STRING
+0x84ec5c [  8] x : STRING
+0x84ec64 [  8] y : STRING
+0x84ec6c [  8] z : STRING
+0x84ec74 [  4] i : MAGIC STRING [id=200] 
+0x84ec78 [ 12] 2500000 : NUMBER
+0x84ec98 [ 40]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:             var_decl                    // var i;
+  3:          func_decl_n    1               // 
+  4:                 meta    2    2          // 
+  5:                 meta    2    3          // 
+  6:                 meta    2    4          // function f (x, y, z);
+  7:                 meta    7    0          // function end: 15;
+  8:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  9:         reg_var_decl  128               // var tmp128 .. tmp132;
+ 10:           assignment  130    6          // tmp130 = x : TYPEOF(x);
+ 11:             addition  131  130          // tmp131 = tmp130 + y;
+ 12:             addition  132  131          // tmp132 = tmp131 + z;
+ 13:               retval                    // return tmp132;
+ 14:                  ret                    // ret;
+ 15:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 16:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+ 17:             jmp_down    0               // goto 26;
+ 18:               call_n  130    1          // 
+ 19:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 20:                 meta    2  130          // 
+ 21:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 22:                 meta    2  130          // 
+ 23:           assignment  130    1          // tmp130 = 3: SMALLINT;
+ 24:                 meta    2  130          // tmp130 = f (tmp130, tmp130, tmp130);
+ 25:             pre_incr  131               // tmp131 = ++i;
+ 26:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+ 27:           assignment  133    3          // tmp133 = 2500000: NUMBER;
+ 28:            less_than  134  132          // tmp134 = tmp132 < tmp133;
+ 29:       is_true_jmp_up  134    0          // if (tmp134) goto 18;
+ 30:                  ret                    // ret;

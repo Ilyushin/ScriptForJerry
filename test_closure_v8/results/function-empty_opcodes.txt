@@ -1,0 +1,67 @@
+// function f()
+  0:                 meta   12  255          // [to be rewritten]
+// {
+// }
+// for (var i = 0; i < 4000000; ++i)
+//     f();
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// function f()
+// {
+// }
+// for (var i = 0; i < 4000000; ++i)
+  2:             var_decl                    // var i;
+//     f();
+// 
+// function f()
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function f (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+// {
+// }
+  2:                 meta   12  255          // [to be rewritten]
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+  3:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+  4:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 5; // REWRITE
+// for (var i = 0; i < 4000000; ++i)
+//     f();
+  3:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  4:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+  5:             jmp_down  255               // goto 65540;
+  6:               call_n  255  254          // 
+  6:               call_n  130  254          //  // REWRITE
+  7:             pre_incr  131               // tmp131 = ++i;
+  5:             jmp_down    0               // goto 8; // REWRITE
+  8:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+  9:           assignment  133    3          // tmp133 = 4000000: NUMBER;
+ 10:            less_than  134  132          // tmp134 = tmp132 < tmp133;
+ 11:       is_true_jmp_up  134    0          // if (tmp134) goto 6;
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 12:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] f : STRING
+0x84ec5c [  4] i : MAGIC STRING [id=200] 
+0x84ec60 [ 12] 4000000 : NUMBER
+0x84ec6c [ 20]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:             var_decl                    // var i;
+  3:          func_decl_n    1               // function f ();
+  4:                 meta    7    0          // function end: 8;
+  5:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  6:         reg_var_decl  128               // var tmp128 .. tmp130;
+  7:                  ret                    // ret;
+  8:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  9:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+ 10:             jmp_down    0               // goto 13;
+ 11:               call_n  130    1          // 
+ 12:             pre_incr  131               // tmp131 = ++i;
+ 13:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+ 14:           assignment  133    3          // tmp133 = 4000000: NUMBER;
+ 15:            less_than  134  132          // tmp134 = tmp132 < tmp133;
+ 16:       is_true_jmp_up  134    0          // if (tmp134) goto 11;
+ 17:                  ret                    // ret;

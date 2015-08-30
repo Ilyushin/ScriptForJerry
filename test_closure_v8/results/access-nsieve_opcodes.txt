@@ -1,0 +1,473 @@
+// // The Great Computer Language Shootout
+// 
+// // http://shootout.alioth.debian.org/
+// 
+// //
+// 
+// // modified by Isaac Gouy
+// 
+// function pad(number,width){
+  0:                 meta   12  255          // [to be rewritten]
+//    var s = number.toString();
+//    var prefixWidth = width - s.length;
+//    if (prefixWidth>0){
+//       for (var i=1; i<=prefixWidth; i++) s = " " + s;
+//    }
+//    return s;
+// }
+// function nsieve(m, isPrime){
+//    var i, k, count;
+//    for (i=2; i<=m; i++) { isPrime[i] = true; }
+//    count = 0;
+//    for (i=2; i<=m; i++){
+//       if (isPrime[i]) {
+//          for (k=i+i; k<=m; k+=i) isPrime[k] = false;
+//          count++;
+//       }
+//    }
+//    return count;
+// }
+// function sieve() {
+//     var sum = 0;
+//     for (var i = 1; i <= 3; i++ ) {
+//         var m = (1<<i)*10000;
+//         var flags = Array(m+1);
+//         sum += nsieve(m, flags);
+//     }
+//     return sum;
+// }
+// var result = sieve();
+// var expected = 14302;
+// if (result != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+//    var s = number.toString();
+//    var prefixWidth = width - s.length;
+//    if (prefixWidth>0){
+//       for (var i=1; i<=prefixWidth; i++) s = " " + s;
+//    }
+//    return s;
+// }
+// function nsieve(m, isPrime){
+//    var i, k, count;
+//    for (i=2; i<=m; i++) { isPrime[i] = true; }
+//    count = 0;
+//    for (i=2; i<=m; i++){
+//       if (isPrime[i]) {
+//          for (k=i+i; k<=m; k+=i) isPrime[k] = false;
+//          count++;
+//       }
+//    }
+//    return count;
+// }
+// function sieve() {
+//     var sum = 0;
+//     for (var i = 1; i <= 3; i++ ) {
+//         var m = (1<<i)*10000;
+//         var flags = Array(m+1);
+//         sum += nsieve(m, flags);
+//     }
+//     return sum;
+// }
+// var result = sieve();
+  2:             var_decl                    // var result;
+// var expected = 14302;
+  3:             var_decl                    // var expected;
+// if (result != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+// 
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  3:                 meta    7  255          // function end: 65538;
+//    var s = number.toString();
+  4:                 meta   12  255          // [to be rewritten]
+//    var prefixWidth = width - s.length;
+//    if (prefixWidth>0){
+//       for (var i=1; i<=prefixWidth; i++) s = " " + s;
+//    }
+//    return s;
+// }
+  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  5:         reg_var_decl  128               // var tmp128 .. tmp255;
+  6:             var_decl                    // var s;
+//    var prefixWidth = width - s.length;
+  7:             var_decl                    // var prefixWidth;
+//    if (prefixWidth>0){
+//       for (var i=1; i<=prefixWidth; i++) s = " " + s;
+  8:             var_decl                    // var i;
+//    }
+//    return s;
+// }
+  9:           assignment  130    5          // tmp130 = 'toString': STRING;
+ 10:          prop_getter  131  254          // tmp131 = number[tmp130];
+ 11:           assignment  132    6          // tmp132 = number : TYPEOF(number);
+ 12:               call_n  255  131          // 
+ 13:                 meta    1    1          // 
+ 12:               call_n  133  131          //  // REWRITE
+ 14:           assignment  254    6          // s = tmp133 : TYPEOF(tmp133);
+//    var prefixWidth = width - s.length;
+ 15:           assignment  130    6          // tmp130 = width : TYPEOF(width);
+ 16:           assignment  131    5          // tmp131 = 'length': STRING;
+ 17:          prop_getter  132  254          // tmp132 = s[tmp131];
+ 18:         substraction  133  130          // tmp133 = tmp130 - tmp132;
+ 19:           assignment  254    6          // prefixWidth = tmp133 : TYPEOF(tmp133);
+//    if (prefixWidth>0){
+ 20:           assignment  130    6          // tmp130 = prefixWidth : TYPEOF(prefixWidth);
+ 21:           assignment  131    1          // tmp131 = 0: SMALLINT;
+ 22:         greater_than  132  130          // tmp132 = tmp130 > tmp131;
+ 23:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65558;
+//       for (var i=1; i<=prefixWidth; i++) s = " " + s;
+ 24:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 25:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 26:             jmp_down  255               // goto 65561;
+ 27:           assignment  130    5          // tmp130 = ' ': STRING;
+ 28:             addition  131  130          // tmp131 = tmp130 + s;
+ 29:           assignment  254    6          // s = tmp131 : TYPEOF(tmp131);
+ 30:            post_incr  132               // tmp132 = i++;
+ 26:             jmp_down    0               // goto 31; // REWRITE
+ 31:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 32:   less_or_equal_than  134  133          // tmp134 = tmp133 <= prefixWidth;
+ 33:       is_true_jmp_up  134    0          // if (tmp134) goto 27;
+//    }
+//    return s;
+ 23:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 34; // REWRITE
+ 34:               retval                    // return s;
+// }
+  5:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 35:                  ret                    // ret;
+  3:                 meta    7    0          // function end: 36; // REWRITE
+// function nsieve(m, isPrime){
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  3:                 meta    7  255          // function end: 65538;
+//    var i, k, count;
+  4:                 meta   12  255          // [to be rewritten]
+//    for (i=2; i<=m; i++) { isPrime[i] = true; }
+//    count = 0;
+//    for (i=2; i<=m; i++){
+//       if (isPrime[i]) {
+//          for (k=i+i; k<=m; k+=i) isPrime[k] = false;
+//          count++;
+//       }
+//    }
+//    return count;
+// }
+  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  5:         reg_var_decl  128               // var tmp128 .. tmp255;
+  6:             var_decl                    // var i;
+  7:             var_decl                    // var k;
+  8:             var_decl                    // var count;
+//    for (i=2; i<=m; i++) { isPrime[i] = true; }
+//    count = 0;
+//    for (i=2; i<=m; i++){
+//       if (isPrime[i]) {
+//          for (k=i+i; k<=m; k+=i) isPrime[k] = false;
+//          count++;
+//       }
+//    }
+//    return count;
+// }
+//    for (i=2; i<=m; i++) { isPrime[i] = true; }
+  9:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 10:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 11:             jmp_down  255               // goto 65546;
+ 12:          prop_getter  130  254          // tmp130 = isPrime[i];
+ 12:           assignment  131    0          // tmp131 = true: SIMPLE;
+ 13:          prop_setter  254  254          // isPrime[i] = tmp131;
+ 14:            post_incr  132               // tmp132 = i++;
+ 11:             jmp_down    0               // goto 15; // REWRITE
+ 15:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 16:   less_or_equal_than  134  133          // tmp134 = tmp133 <= m;
+ 17:       is_true_jmp_up  134    0          // if (tmp134) goto 12;
+//    count = 0;
+ 18:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 19:           assignment  254    6          // count = tmp130 : TYPEOF(tmp130);
+//    for (i=2; i<=m; i++){
+ 20:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 21:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 22:             jmp_down  255               // goto 65557;
+//       if (isPrime[i]) {
+ 23:          prop_getter  130  254          // tmp130 = isPrime[i];
+ 24:    is_false_jmp_down  130  255          // if (tmp130 == false) goto 65559;
+//          for (k=i+i; k<=m; k+=i) isPrime[k] = false;
+ 25:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 26:             addition  131  130          // tmp131 = tmp130 + i;
+ 27:           assignment  254    6          // k = tmp131 : TYPEOF(tmp131);
+ 28:             jmp_down  255               // goto 65563;
+ 29:          prop_getter  130  254          // tmp130 = isPrime[k];
+ 29:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 30:          prop_setter  254  254          // isPrime[k] = tmp131;
+ 31:             addition  254  254          // k = k + i;
+ 28:             jmp_down    0               // goto 32; // REWRITE
+ 32:           assignment  132    6          // tmp132 = k : TYPEOF(k);
+ 33:   less_or_equal_than  133  132          // tmp133 = tmp132 <= m;
+ 34:       is_true_jmp_up  133    0          // if (tmp133) goto 29;
+//          count++;
+ 35:            post_incr  130               // tmp130 = count++;
+//       }
+//    }
+ 24:    is_false_jmp_down  130    0          // if (tmp130 == false) goto 36; // REWRITE
+ 36:            post_incr  131               // tmp131 = i++;
+ 22:             jmp_down    0               // goto 37; // REWRITE
+ 37:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+ 38:   less_or_equal_than  133  132          // tmp133 = tmp132 <= m;
+ 39:       is_true_jmp_up  133    0          // if (tmp133) goto 23;
+//    return count;
+ 40:               retval                    // return count;
+// }
+  5:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 41:                  ret                    // ret;
+  3:                 meta    7    0          // function end: 42; // REWRITE
+// function sieve() {
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function sieve (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//     var sum = 0;
+  2:                 meta   12  255          // [to be rewritten]
+//     for (var i = 1; i <= 3; i++ ) {
+//         var m = (1<<i)*10000;
+//         var flags = Array(m+1);
+//         sum += nsieve(m, flags);
+//     }
+//     return sum;
+// }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+  4:             var_decl                    // var sum;
+//     for (var i = 1; i <= 3; i++ ) {
+  5:             var_decl                    // var i;
+//         var m = (1<<i)*10000;
+  6:             var_decl                    // var m;
+//         var flags = Array(m+1);
+  7:             var_decl                    // var flags;
+//         sum += nsieve(m, flags);
+//     }
+//     return sum;
+// }
+  8:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  9:           assignment  254    6          // sum = tmp130 : TYPEOF(tmp130);
+//     for (var i = 1; i <= 3; i++ ) {
+ 10:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 11:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 12:             jmp_down  255               // goto 65547;
+//         var m = (1<<i)*10000;
+ 13:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 14:         b_shift_left  131  130          // tmp131 = tmp130 << i;
+ 15:           assignment  132    3          // tmp132 = 10000: NUMBER;
+ 16:       multiplication  133  131          // tmp133 = tmp131 * tmp132;
+ 17:           assignment  254    6          // m = tmp133 : TYPEOF(tmp133);
+//         var flags = Array(m+1);
+ 18:               call_n  255  254          // 
+ 19:           assignment  130    6          // tmp130 = m : TYPEOF(m);
+ 20:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 21:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 22:                 meta    2  132          // 
+ 18:               call_n  130  254          //  // REWRITE
+ 23:           assignment  254    6          // flags = tmp130 : TYPEOF(tmp130);
+//         sum += nsieve(m, flags);
+ 24:               call_n  255  254          // 
+ 25:                 meta    2  254          // 
+ 26:                 meta    2  254          // 
+ 24:               call_n  130  254          //  // REWRITE
+ 27:             addition  254  254          // sum = sum + tmp130;
+ 28:           assignment  131    6          // tmp131 = sum : TYPEOF(sum);
+//     }
+ 29:            post_incr  132               // tmp132 = i++;
+ 12:             jmp_down    0               // goto 30; // REWRITE
+ 30:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 31:           assignment  134    1          // tmp134 = 3: SMALLINT;
+ 32:   less_or_equal_than  135  133          // tmp135 = tmp133 <= tmp134;
+ 33:       is_true_jmp_up  135    0          // if (tmp135) goto 13;
+//     return sum;
+ 34:               retval                    // return sum;
+// }
+  3:         reg_var_decl  128               // var tmp128 .. tmp135; // REWRITE
+ 35:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 36; // REWRITE
+// var result = sieve();
+  4:               call_n  255  254          // 
+  4:               call_n  130  254          //  // REWRITE
+  5:           assignment  254    6          // result = tmp130 : TYPEOF(tmp130);
+// var expected = 14302;
+  6:           assignment  130    3          // tmp130 = 14302: NUMBER;
+  7:           assignment  254    6          // expected = tmp130 : TYPEOF(tmp130);
+// if (result != expected)
+  8:           assignment  130    6          // tmp130 = result : TYPEOF(result);
+  9:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+ 10:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65545;
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+ 11:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+ 12:             addition  131  130          // tmp131 = tmp130 + expected;
+ 13:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 14:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 15:             addition  134  133          // tmp134 = tmp133 + result;
+ 16:          throw_value                    // throw tmp134;
+// 
+ 10:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 17; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 17:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 12] pad : STRING
+0x84ec60 [  4] number : MAGIC STRING [id=11] 
+0x84ec64 [ 12] width : STRING
+0x84ec70 [  8] s : STRING
+0x84ec78 [  4] toString : MAGIC STRING [id=103] 
+0x84ec7c [ 20] prefixWidth : STRING
+0x84eca4 [  4] length : MAGIC STRING [id=15] 
+0x84eca8 [  4] i : MAGIC STRING [id=200] 
+0x84ecac [  4]   : MAGIC STRING [id=217] 
+0x84ecb0 [ 12] nsieve : STRING
+0x84ecbc [  4] m : MAGIC STRING [id=201] 
+0x84ecd4 [ 16] isPrime : STRING
+0x84ece4 [  8] k : STRING
+0x84ecec [ 12] count : STRING
+0x84ecf8 [ 12] sieve : STRING
+0x84ed18 [ 12] sum : STRING
+0x84ed24 [ 12] 10000 : NUMBER
+0x84ed30 [ 12] flags : STRING
+0x84ed3c [  4] Array : MAGIC STRING [id=29] 
+0x84ed54 [ 12] result : STRING
+0x84ed60 [ 16] expected : STRING
+0x84ed70 [ 12] 14302 : NUMBER
+0x84ed7c [ 36] ERROR: bad result: expected  : STRING
+0x84edb4 [ 16]  but got  : STRING
+0x84edd8 [ 40]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp134;
+  2:             var_decl                    // var result;
+  3:             var_decl                    // var expected;
+  4:          func_decl_n    2               // 
+  5:                 meta    2    3          // 
+  6:                 meta    2    4          // function pad (number, width);
+  7:                 meta    7    0          // function end: 40;
+  8:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  9:         reg_var_decl  128               // var tmp128 .. tmp134;
+ 10:             var_decl                    // var s;
+ 11:             var_decl                    // var prefixWidth;
+ 12:             var_decl                    // var i;
+ 13:           assignment  130    5          // tmp130 = 'toString': STRING;
+ 14:          prop_getter  131    3          // tmp131 = number[tmp130];
+ 15:           assignment  132    6          // tmp132 = number : TYPEOF(number);
+ 16:               call_n  133  131          // 
+ 17:                 meta    1    1          // tmp133 = tmp131 (this_arg = tmp132);
+ 18:           assignment    5    6          // s = tmp133 : TYPEOF(tmp133);
+ 19:           assignment  130    6          // tmp130 = width : TYPEOF(width);
+ 20:           assignment  131    5          // tmp131 = 'length': STRING;
+ 21:          prop_getter  132    5          // tmp132 = s[tmp131];
+ 22:         substraction  133  130          // tmp133 = tmp130 - tmp132;
+ 23:           assignment    6    6          // prefixWidth = tmp133 : TYPEOF(tmp133);
+ 24:           assignment  130    6          // tmp130 = prefixWidth : TYPEOF(prefixWidth);
+ 25:           assignment  131    1          // tmp131 = 0: SMALLINT;
+ 26:         greater_than  132  130          // tmp132 = tmp130 > tmp131;
+ 27:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 38;
+ 28:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 29:           assignment    7    6          // i = tmp130 : TYPEOF(tmp130);
+ 30:             jmp_down    0               // goto 35;
+ 31:           assignment  130    5          // tmp130 = ' ': STRING;
+ 32:             addition  131  130          // tmp131 = tmp130 + s;
+ 33:           assignment    5    6          // s = tmp131 : TYPEOF(tmp131);
+ 34:            post_incr  132               // tmp132 = i++;
+ 35:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 36:   less_or_equal_than  134  133          // tmp134 = tmp133 <= prefixWidth;
+ 37:       is_true_jmp_up  134    0          // if (tmp134) goto 31;
+ 38:               retval                    // return s;
+ 39:                  ret                    // ret;
+ 40:          func_decl_n   11               // 
+ 41:                 meta    2   12          // 
+ 42:                 meta    2   13          // function nsieve (m, isPrime);
+ 43:                 meta    7    0          // function end: 82;
+ 44:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 45:         reg_var_decl  128               // var tmp128 .. tmp134;
+ 46:             var_decl                    // var i;
+ 47:             var_decl                    // var k;
+ 48:             var_decl                    // var count;
+ 49:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 50:           assignment    7    6          // i = tmp130 : TYPEOF(tmp130);
+ 51:             jmp_down    0               // goto 55;
+ 52:           assignment  131    0          // tmp131 = true: SIMPLE;
+ 53:          prop_setter   13    7          // isPrime[i] = tmp131;
+ 54:            post_incr  132               // tmp132 = i++;
+ 55:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 56:   less_or_equal_than  134  133          // tmp134 = tmp133 <= m;
+ 57:       is_true_jmp_up  134    0          // if (tmp134) goto 52;
+ 58:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 59:           assignment   15    6          // count = tmp130 : TYPEOF(tmp130);
+ 60:           assignment  130    1          // tmp130 = 2: SMALLINT;
+ 61:           assignment    7    6          // i = tmp130 : TYPEOF(tmp130);
+ 62:             jmp_down    0               // goto 77;
+ 63:          prop_getter  130   13          // tmp130 = isPrime[i];
+ 64:    is_false_jmp_down  130    0          // if (tmp130 == false) goto 76;
+ 65:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 66:             addition  131  130          // tmp131 = tmp130 + i;
+ 67:           assignment    1    6          // k = tmp131 : TYPEOF(tmp131);
+ 68:             jmp_down    0               // goto 72;
+ 69:           assignment  131    0          // tmp131 = false: SIMPLE;
+ 70:          prop_setter    2    1          // isPrime[k] = tmp131;
+ 71:             addition    1    1          // k = k + i;
+ 72:           assignment  132    6          // tmp132 = k : TYPEOF(k);
+ 73:   less_or_equal_than  133  132          // tmp133 = tmp132 <= m;
+ 74:       is_true_jmp_up  133    0          // if (tmp133) goto 69;
+ 75:            post_incr  130               // tmp130 = count++;
+ 76:            post_incr  131               // tmp131 = i++;
+ 77:           assignment  132    6          // tmp132 = i : TYPEOF(i);
+ 78:   less_or_equal_than  133  132          // tmp133 = tmp132 <= m;
+ 79:       is_true_jmp_up  133    0          // if (tmp133) goto 63;
+ 80:               retval                    // return count;
+ 81:                  ret                    // ret;
+ 82:          func_decl_n    5               // function sieve ();
+ 83:                 meta    7    0          // function end: 118;
+ 84:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 85:         reg_var_decl  128               // var tmp128 .. tmp135;
+ 86:             var_decl                    // var sum;
+ 87:             var_decl                    // var i;
+ 88:             var_decl                    // var m;
+ 89:             var_decl                    // var flags;
+ 90:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 91:           assignment    6    6          // sum = tmp130 : TYPEOF(tmp130);
+ 92:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 93:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+ 94:             jmp_down    0               // goto 112;
+ 95:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 96:         b_shift_left  131  130          // tmp131 = tmp130 << i;
+ 97:           assignment  132    3          // tmp132 = 10000: NUMBER;
+ 98:       multiplication  133  131          // tmp133 = tmp131 * tmp132;
+ 99:           assignment    3    6          // m = tmp133 : TYPEOF(tmp133);
+100:               call_n  130    9          // 
+101:           assignment  130    6          // tmp130 = m : TYPEOF(m);
+102:           assignment  131    1          // tmp131 = 1: SMALLINT;
+103:             addition  132  130          // tmp132 = tmp130 + tmp131;
+104:                 meta    2  132          // tmp130 = Array (tmp132);
+105:           assignment    7    6          // flags = tmp130 : TYPEOF(tmp130);
+106:               call_n  130   10          // 
+107:                 meta    2    3          // 
+108:                 meta    2    7          // tmp130 = nsieve (m, flags);
+109:             addition    6    6          // sum = sum + tmp130;
+110:           assignment  131    6          // tmp131 = sum : TYPEOF(sum);
+111:            post_incr  132               // tmp132 = i++;
+112:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+113:           assignment  134    1          // tmp134 = 3: SMALLINT;
+114:   less_or_equal_than  135  133          // tmp135 = tmp133 <= tmp134;
+115:       is_true_jmp_up  135    0          // if (tmp135) goto 95;
+116:               retval                    // return sum;
+117:                  ret                    // ret;
+118:               call_n  130    5          // 
+119:           assignment   11    6          // result = tmp130 : TYPEOF(tmp130);
+120:           assignment  130    3          // tmp130 = 14302: NUMBER;
+121:           assignment   13    6          // expected = tmp130 : TYPEOF(tmp130);
+122:           assignment  130    6          // tmp130 = result : TYPEOF(result);
+123:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+124:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 131;
+125:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+126:             addition  131  130          // tmp131 = tmp130 + expected;
+127:           assignment  132    5          // tmp132 = ' but got ': STRING;
+128:             addition  133  131          // tmp133 = tmp131 + tmp132;
+129:             addition  134  133          // tmp134 = tmp133 + result;
+130:          throw_value                    // throw tmp134;
+131:                  ret                    // ret;
+Error: ERR_OUT_OF_MEMORY

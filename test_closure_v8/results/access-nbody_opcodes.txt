@@ -1,0 +1,2170 @@
+// /* The Great Computer Language Shootout
+// 
+// var PI = 3.141592653589793;
+  0:                 meta   12  255          // [to be rewritten]
+// var SOLAR_MASS = 4 * PI * PI;
+// var DAYS_PER_YEAR = 365.24;
+// function Body(x,y,z,vx,vy,vz,mass){
+//    this.x = x;
+//    this.y = y;
+//    this.z = z;
+//    this.vx = vx;
+//    this.vy = vy;
+//    this.vz = vz;
+//    this.mass = mass;
+// }
+// Body.prototype.offsetMomentum = function(px,py,pz) {
+//    this.vx = -px / SOLAR_MASS;
+//    this.vy = -py / SOLAR_MASS;
+//    this.vz = -pz / SOLAR_MASS;
+//    return this;
+// }
+// function Jupiter(){
+//    return new Body(
+//       4.84143144246472090e+00,
+//       -1.16032004402742839e+00,
+//       -1.03622044471123109e-01,
+//       1.66007664274403694e-03 * DAYS_PER_YEAR,
+//       7.69901118419740425e-03 * DAYS_PER_YEAR,
+//       -6.90460016972063023e-05 * DAYS_PER_YEAR,
+//       9.54791938424326609e-04 * SOLAR_MASS
+//    );
+// }
+// function Saturn(){
+//    return new Body(
+//       8.34336671824457987e+00,
+//       4.12479856412430479e+00,
+//       -4.03523417114321381e-01,
+//       -2.76742510726862411e-03 * DAYS_PER_YEAR,
+//       4.99852801234917238e-03 * DAYS_PER_YEAR,
+//       2.30417297573763929e-05 * DAYS_PER_YEAR,
+//       2.85885980666130812e-04 * SOLAR_MASS
+//    );
+// }
+// function Uranus(){
+//    return new Body(
+//       1.28943695621391310e+01,
+//       -1.51111514016986312e+01,
+//       -2.23307578892655734e-01,
+//       2.96460137564761618e-03 * DAYS_PER_YEAR,
+//       2.37847173959480950e-03 * DAYS_PER_YEAR,
+//       -2.96589568540237556e-05 * DAYS_PER_YEAR,
+//       4.36624404335156298e-05 * SOLAR_MASS
+//    );
+// }
+// function Neptune(){
+//    return new Body(
+//       1.53796971148509165e+01,
+//       -2.59193146099879641e+01,
+//       1.79258772950371181e-01,
+//       2.68067772490389322e-03 * DAYS_PER_YEAR,
+//       1.62824170038242295e-03 * DAYS_PER_YEAR,
+//       -9.51592254519715870e-05 * DAYS_PER_YEAR,
+//       5.15138902046611451e-05 * SOLAR_MASS
+//    );
+// }
+// function Sun(){
+//    return new Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
+// }
+// function NBodySystem(bodies){
+//    this.bodies = bodies;
+//    var px = 0.0;
+//    var py = 0.0;
+//    var pz = 0.0;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++){
+//       var b = this.bodies[i];
+//       var m = b.mass;
+//       px += b.vx * m;
+//       py += b.vy * m;
+//       pz += b.vz * m;
+//    }
+//    this.bodies[0].offsetMomentum(px,py,pz);
+// }
+// NBodySystem.prototype.advance = function(dt){
+//    var dx, dy, dz, distance, mag;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++) {
+//       var bodyi = this.bodies[i];
+//       for (var j=i+1; j<size; j++) {
+//          var bodyj = this.bodies[j];
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          mag = dt / (distance * distance * distance);
+//          bodyi.vx -= dx * bodyj.mass * mag;
+//          bodyi.vy -= dy * bodyj.mass * mag;
+//          bodyi.vz -= dz * bodyj.mass * mag;
+//          bodyj.vx += dx * bodyi.mass * mag;
+//          bodyj.vy += dy * bodyi.mass * mag;
+//          bodyj.vz += dz * bodyi.mass * mag;
+//       }
+//    }
+//    for (var i=0; i<size; i++) {
+//       var body = this.bodies[i];
+//       body.x += dt * body.vx;
+//       body.y += dt * body.vy;
+//       body.z += dt * body.vz;
+//    }
+// }
+// NBodySystem.prototype.energy = function(){
+//    var dx, dy, dz, distance;
+//    var e = 0.0;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++) {
+//       var bodyi = this.bodies[i];
+//       e += 0.5 * bodyi.mass *
+//          ( bodyi.vx * bodyi.vx
+//          + bodyi.vy * bodyi.vy
+//          + bodyi.vz * bodyi.vz );
+//       for (var j=i+1; j<size; j++) {
+//          var bodyj = this.bodies[j];
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          e -= (bodyi.mass * bodyj.mass) / distance;
+//       }
+//    }
+//    return e;
+// }
+// var ret = 0;
+// for ( var n = 3; n <= 24; n *= 2 ) {
+//     (function(){
+//         var bodies = new NBodySystem( Array(
+//            Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
+//         ));
+//         var max = n * 100;
+//         
+//         ret += bodies.energy();
+//         for (var i=0; i<max; i++){
+//             bodies.advance(0.01);
+//         }
+//         ret += bodies.energy();
+//     })();
+// }
+// var expected = -1.3524862408537381;
+// if (ret != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+  2:             var_decl                    // var PI;
+// var SOLAR_MASS = 4 * PI * PI;
+  3:             var_decl                    // var SOLAR_MASS;
+// var DAYS_PER_YEAR = 365.24;
+  4:             var_decl                    // var DAYS_PER_YEAR;
+// function Body(x,y,z,vx,vy,vz,mass){
+//    this.x = x;
+//    this.y = y;
+//    this.z = z;
+//    this.vx = vx;
+//    this.vy = vy;
+//    this.vz = vz;
+//    this.mass = mass;
+// }
+// Body.prototype.offsetMomentum = function(px,py,pz) {
+//    this.vx = -px / SOLAR_MASS;
+//    this.vy = -py / SOLAR_MASS;
+//    this.vz = -pz / SOLAR_MASS;
+//    return this;
+// }
+// function Jupiter(){
+//    return new Body(
+//       4.84143144246472090e+00,
+//       -1.16032004402742839e+00,
+//       -1.03622044471123109e-01,
+//       1.66007664274403694e-03 * DAYS_PER_YEAR,
+//       7.69901118419740425e-03 * DAYS_PER_YEAR,
+//       -6.90460016972063023e-05 * DAYS_PER_YEAR,
+//       9.54791938424326609e-04 * SOLAR_MASS
+//    );
+// }
+// function Saturn(){
+//    return new Body(
+//       8.34336671824457987e+00,
+//       4.12479856412430479e+00,
+//       -4.03523417114321381e-01,
+//       -2.76742510726862411e-03 * DAYS_PER_YEAR,
+//       4.99852801234917238e-03 * DAYS_PER_YEAR,
+//       2.30417297573763929e-05 * DAYS_PER_YEAR,
+//       2.85885980666130812e-04 * SOLAR_MASS
+//    );
+// }
+// function Uranus(){
+//    return new Body(
+//       1.28943695621391310e+01,
+//       -1.51111514016986312e+01,
+//       -2.23307578892655734e-01,
+//       2.96460137564761618e-03 * DAYS_PER_YEAR,
+//       2.37847173959480950e-03 * DAYS_PER_YEAR,
+//       -2.96589568540237556e-05 * DAYS_PER_YEAR,
+//       4.36624404335156298e-05 * SOLAR_MASS
+//    );
+// }
+// function Neptune(){
+//    return new Body(
+//       1.53796971148509165e+01,
+//       -2.59193146099879641e+01,
+//       1.79258772950371181e-01,
+//       2.68067772490389322e-03 * DAYS_PER_YEAR,
+//       1.62824170038242295e-03 * DAYS_PER_YEAR,
+//       -9.51592254519715870e-05 * DAYS_PER_YEAR,
+//       5.15138902046611451e-05 * SOLAR_MASS
+//    );
+// }
+// function Sun(){
+//    return new Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
+// }
+// function NBodySystem(bodies){
+//    this.bodies = bodies;
+//    var px = 0.0;
+//    var py = 0.0;
+//    var pz = 0.0;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++){
+//       var b = this.bodies[i];
+//       var m = b.mass;
+//       px += b.vx * m;
+//       py += b.vy * m;
+//       pz += b.vz * m;
+//    }
+//    this.bodies[0].offsetMomentum(px,py,pz);
+// }
+// NBodySystem.prototype.advance = function(dt){
+//    var dx, dy, dz, distance, mag;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++) {
+//       var bodyi = this.bodies[i];
+//       for (var j=i+1; j<size; j++) {
+//          var bodyj = this.bodies[j];
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          mag = dt / (distance * distance * distance);
+//          bodyi.vx -= dx * bodyj.mass * mag;
+//          bodyi.vy -= dy * bodyj.mass * mag;
+//          bodyi.vz -= dz * bodyj.mass * mag;
+//          bodyj.vx += dx * bodyi.mass * mag;
+//          bodyj.vy += dy * bodyi.mass * mag;
+//          bodyj.vz += dz * bodyi.mass * mag;
+//       }
+//    }
+//    for (var i=0; i<size; i++) {
+//       var body = this.bodies[i];
+//       body.x += dt * body.vx;
+//       body.y += dt * body.vy;
+//       body.z += dt * body.vz;
+//    }
+// }
+// NBodySystem.prototype.energy = function(){
+//    var dx, dy, dz, distance;
+//    var e = 0.0;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++) {
+//       var bodyi = this.bodies[i];
+//       e += 0.5 * bodyi.mass *
+//          ( bodyi.vx * bodyi.vx
+//          + bodyi.vy * bodyi.vy
+//          + bodyi.vz * bodyi.vz );
+//       for (var j=i+1; j<size; j++) {
+//          var bodyj = this.bodies[j];
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          e -= (bodyi.mass * bodyj.mass) / distance;
+//       }
+//    }
+//    return e;
+// }
+// var ret = 0;
+  5:             var_decl                    // var ret;
+// for ( var n = 3; n <= 24; n *= 2 ) {
+  6:             var_decl                    // var n;
+//     (function(){
+//         var bodies = new NBodySystem( Array(
+//            Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
+//         ));
+//         var max = n * 100;
+//         
+//         ret += bodies.energy();
+//         for (var i=0; i<max; i++){
+//             bodies.advance(0.01);
+//         }
+//         ret += bodies.energy();
+//     })();
+// }
+// var expected = -1.3524862408537381;
+  7:             var_decl                    // var expected;
+// if (ret != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
+// 
+  8:           assignment  130    3          // tmp130 = 3.141592653589793: NUMBER;
+  9:           assignment  254    6          // PI = tmp130 : TYPEOF(tmp130);
+// var SOLAR_MASS = 4 * PI * PI;
+ 10:           assignment  130    1          // tmp130 = 4: SMALLINT;
+ 11:       multiplication  131  130          // tmp131 = tmp130 * PI;
+ 12:       multiplication  132  131          // tmp132 = tmp131 * PI;
+ 13:           assignment  254    6          // SOLAR_MASS = tmp132 : TYPEOF(tmp132);
+// var DAYS_PER_YEAR = 365.24;
+ 14:           assignment  130    3          // tmp130 = 365.24: NUMBER;
+ 15:           assignment  254    6          // DAYS_PER_YEAR = tmp130 : TYPEOF(tmp130);
+// function Body(x,y,z,vx,vy,vz,mass){
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  3:                 meta    2  254          // 
+  4:                 meta    2  254          // 
+  5:                 meta    2  254          // 
+  6:                 meta    2  254          // 
+  7:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  8:                 meta    7  255          // function end: 65543;
+//    this.x = x;
+  9:                 meta   12  255          // [to be rewritten]
+//    this.y = y;
+//    this.z = z;
+//    this.vx = vx;
+//    this.vy = vy;
+//    this.vz = vz;
+//    this.mass = mass;
+// }
+  9:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 10:         reg_var_decl  128               // var tmp128 .. tmp255;
+//    this.y = y;
+//    this.z = z;
+//    this.vx = vx;
+//    this.vy = vy;
+//    this.vz = vz;
+//    this.mass = mass;
+// }
+ 11:         this_binding                    // tmp130 = this;
+ 12:           assignment  131    5          // tmp131 = 'x': STRING;
+ 13:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 13:          prop_setter  130  131          // tmp130[tmp131] = x;
+//    this.y = y;
+ 14:         this_binding                    // tmp130 = this;
+ 15:           assignment  131    5          // tmp131 = 'y': STRING;
+ 16:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 16:          prop_setter  130  131          // tmp130[tmp131] = y;
+//    this.z = z;
+ 17:         this_binding                    // tmp130 = this;
+ 18:           assignment  131    5          // tmp131 = 'z': STRING;
+ 19:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 19:          prop_setter  130  131          // tmp130[tmp131] = z;
+//    this.vx = vx;
+ 20:         this_binding                    // tmp130 = this;
+ 21:           assignment  131    5          // tmp131 = 'vx': STRING;
+ 22:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 22:          prop_setter  130  131          // tmp130[tmp131] = vx;
+//    this.vy = vy;
+ 23:         this_binding                    // tmp130 = this;
+ 24:           assignment  131    5          // tmp131 = 'vy': STRING;
+ 25:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 25:          prop_setter  130  131          // tmp130[tmp131] = vy;
+//    this.vz = vz;
+ 26:         this_binding                    // tmp130 = this;
+ 27:           assignment  131    5          // tmp131 = 'vz': STRING;
+ 28:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 28:          prop_setter  130  131          // tmp130[tmp131] = vz;
+//    this.mass = mass;
+ 29:         this_binding                    // tmp130 = this;
+ 30:           assignment  131    5          // tmp131 = 'mass': STRING;
+ 31:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 31:          prop_setter  130  131          // tmp130[tmp131] = mass;
+// }
+ 10:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 32:                  ret                    // ret;
+  8:                 meta    7    0          // function end: 33; // REWRITE
+// Body.prototype.offsetMomentum = function(px,py,pz) {
+ 16:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 17:          prop_getter  131  254          // tmp131 = Body[tmp130];
+ 18:           assignment  132    5          // tmp132 = 'offsetMomentum': STRING;
+ 19:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 19:          func_expr_n  255  255          // 
+ 20:                 meta    2  254          // 
+ 21:                 meta    2  254          // 
+ 22:                 meta    2  254          // 
+ 19:          func_expr_n  134  255          //  // REWRITE
+ 23:                 meta    7  255          // function end: 65558;
+//    this.vx = -px / SOLAR_MASS;
+ 24:                 meta   12  255          // [to be rewritten]
+//    this.vy = -py / SOLAR_MASS;
+//    this.vz = -pz / SOLAR_MASS;
+//    return this;
+// }
+ 24:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 25:         reg_var_decl  128               // var tmp128 .. tmp255;
+//    this.vy = -py / SOLAR_MASS;
+//    this.vz = -pz / SOLAR_MASS;
+//    return this;
+// }
+ 26:         this_binding                    // tmp130 = this;
+ 27:           assignment  131    5          // tmp131 = 'vx': STRING;
+ 28:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 28:          unary_minus  133               // tmp133 = -px;
+ 29:             division  134  133          // tmp134 = tmp133 / SOLAR_MASS;
+ 30:          prop_setter  130  131          // tmp130[tmp131] = tmp134;
+//    this.vy = -py / SOLAR_MASS;
+ 31:         this_binding                    // tmp130 = this;
+ 32:           assignment  131    5          // tmp131 = 'vy': STRING;
+ 33:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 33:          unary_minus  133               // tmp133 = -py;
+ 34:             division  134  133          // tmp134 = tmp133 / SOLAR_MASS;
+ 35:          prop_setter  130  131          // tmp130[tmp131] = tmp134;
+//    this.vz = -pz / SOLAR_MASS;
+ 36:         this_binding                    // tmp130 = this;
+ 37:           assignment  131    5          // tmp131 = 'vz': STRING;
+ 38:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 38:          unary_minus  133               // tmp133 = -pz;
+ 39:             division  134  133          // tmp134 = tmp133 / SOLAR_MASS;
+ 40:          prop_setter  130  131          // tmp130[tmp131] = tmp134;
+//    return this;
+ 41:         this_binding                    // tmp130 = this;
+ 42:               retval                    // return tmp130;
+// }
+ 25:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
+ 43:                  ret                    // ret;
+ 23:                 meta    7    0          // function end: 44; // REWRITE
+// function Jupiter(){
+ 44:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function Jupiter (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//    return new Body(
+  2:                 meta   12  255          // [to be rewritten]
+//       4.84143144246472090e+00,
+//       -1.16032004402742839e+00,
+//       -1.03622044471123109e-01,
+//       1.66007664274403694e-03 * DAYS_PER_YEAR,
+//       7.69901118419740425e-03 * DAYS_PER_YEAR,
+//       -6.90460016972063023e-05 * DAYS_PER_YEAR,
+//       9.54791938424326609e-04 * SOLAR_MASS
+//    );
+// }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+//       4.84143144246472090e+00,
+//       -1.16032004402742839e+00,
+//       -1.03622044471123109e-01,
+//       1.66007664274403694e-03 * DAYS_PER_YEAR,
+//       7.69901118419740425e-03 * DAYS_PER_YEAR,
+//       -6.90460016972063023e-05 * DAYS_PER_YEAR,
+//       9.54791938424326609e-04 * SOLAR_MASS
+//    );
+// }
+  4:          construct_n  255  254          // 
+//       4.84143144246472090e+00,
+  5:           assignment  130    3          // tmp130 = 4.841431442464721: NUMBER;
+  6:                 meta    2  130          // 
+//       -1.16032004402742839e+00,
+  7:           assignment  130    3          // tmp130 = 1.1603200440274283: NUMBER;
+  8:          unary_minus  131               // tmp131 = -tmp130;
+  9:                 meta    2  131          // 
+//       -1.03622044471123109e-01,
+ 10:           assignment  130    3          // tmp130 = 0.10362204447112311: NUMBER;
+ 11:          unary_minus  131               // tmp131 = -tmp130;
+ 12:                 meta    2  131          // 
+//       1.66007664274403694e-03 * DAYS_PER_YEAR,
+ 13:           assignment  130    3          // tmp130 = 0.001660076642744037: NUMBER;
+ 14:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 15:                 meta    2  131          // 
+//       7.69901118419740425e-03 * DAYS_PER_YEAR,
+ 16:           assignment  130    3          // tmp130 = 0.007699011184197404: NUMBER;
+ 17:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 18:                 meta    2  131          // 
+//       -6.90460016972063023e-05 * DAYS_PER_YEAR,
+ 19:           assignment  130    3          // tmp130 = 0.0000690460016972063: NUMBER;
+ 20:          unary_minus  131               // tmp131 = -tmp130;
+ 21:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+ 22:                 meta    2  132          // 
+//       9.54791938424326609e-04 * SOLAR_MASS
+ 23:           assignment  130    3          // tmp130 = 0.0009547919384243266: NUMBER;
+//    );
+ 24:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+ 25:                 meta    2  131          // 
+  4:          construct_n  130  254          //  // REWRITE
+ 26:               retval                    // return tmp130;
+// }
+  3:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 27:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 28; // REWRITE
+// function Saturn(){
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function Saturn (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//    return new Body(
+  2:                 meta   12  255          // [to be rewritten]
+//       8.34336671824457987e+00,
+//       4.12479856412430479e+00,
+//       -4.03523417114321381e-01,
+//       -2.76742510726862411e-03 * DAYS_PER_YEAR,
+//       4.99852801234917238e-03 * DAYS_PER_YEAR,
+//       2.30417297573763929e-05 * DAYS_PER_YEAR,
+//       2.85885980666130812e-04 * SOLAR_MASS
+//    );
+// }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+//       8.34336671824457987e+00,
+//       4.12479856412430479e+00,
+//       -4.03523417114321381e-01,
+//       -2.76742510726862411e-03 * DAYS_PER_YEAR,
+//       4.99852801234917238e-03 * DAYS_PER_YEAR,
+//       2.30417297573763929e-05 * DAYS_PER_YEAR,
+//       2.85885980666130812e-04 * SOLAR_MASS
+//    );
+// }
+  4:          construct_n  255  254          // 
+//       8.34336671824457987e+00,
+  5:           assignment  130    3          // tmp130 = 8.34336671824458: NUMBER;
+  6:                 meta    2  130          // 
+//       4.12479856412430479e+00,
+  7:           assignment  130    3          // tmp130 = 4.124798564124305: NUMBER;
+  8:                 meta    2  130          // 
+//       -4.03523417114321381e-01,
+  9:           assignment  130    3          // tmp130 = 0.4035234171143214: NUMBER;
+ 10:          unary_minus  131               // tmp131 = -tmp130;
+ 11:                 meta    2  131          // 
+//       -2.76742510726862411e-03 * DAYS_PER_YEAR,
+ 12:           assignment  130    3          // tmp130 = 0.002767425107268624: NUMBER;
+ 13:          unary_minus  131               // tmp131 = -tmp130;
+ 14:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+ 15:                 meta    2  132          // 
+//       4.99852801234917238e-03 * DAYS_PER_YEAR,
+ 16:           assignment  130    3          // tmp130 = 0.004998528012349172: NUMBER;
+ 17:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 18:                 meta    2  131          // 
+//       2.30417297573763929e-05 * DAYS_PER_YEAR,
+ 19:           assignment  130    3          // tmp130 = 0.000023041729757376393: NUMBER;
+ 20:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 21:                 meta    2  131          // 
+//       2.85885980666130812e-04 * SOLAR_MASS
+ 22:           assignment  130    3          // tmp130 = 0.0002858859806661308: NUMBER;
+//    );
+ 23:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+ 24:                 meta    2  131          // 
+  4:          construct_n  130  254          //  // REWRITE
+ 25:               retval                    // return tmp130;
+// }
+  3:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 26:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 27; // REWRITE
+// function Uranus(){
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function Uranus (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//    return new Body(
+  2:                 meta   12  255          // [to be rewritten]
+//       1.28943695621391310e+01,
+//       -1.51111514016986312e+01,
+//       -2.23307578892655734e-01,
+//       2.96460137564761618e-03 * DAYS_PER_YEAR,
+//       2.37847173959480950e-03 * DAYS_PER_YEAR,
+//       -2.96589568540237556e-05 * DAYS_PER_YEAR,
+//       4.36624404335156298e-05 * SOLAR_MASS
+//    );
+// }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+//       1.28943695621391310e+01,
+//       -1.51111514016986312e+01,
+//       -2.23307578892655734e-01,
+//       2.96460137564761618e-03 * DAYS_PER_YEAR,
+//       2.37847173959480950e-03 * DAYS_PER_YEAR,
+//       -2.96589568540237556e-05 * DAYS_PER_YEAR,
+//       4.36624404335156298e-05 * SOLAR_MASS
+//    );
+// }
+  4:          construct_n  255  254          // 
+//       1.28943695621391310e+01,
+  5:           assignment  130    3          // tmp130 = 12.894369562139131: NUMBER;
+  6:                 meta    2  130          // 
+//       -1.51111514016986312e+01,
+  7:           assignment  130    3          // tmp130 = 15.111151401698631: NUMBER;
+  8:          unary_minus  131               // tmp131 = -tmp130;
+  9:                 meta    2  131          // 
+//       -2.23307578892655734e-01,
+ 10:           assignment  130    3          // tmp130 = 0.22330757889265573: NUMBER;
+ 11:          unary_minus  131               // tmp131 = -tmp130;
+ 12:                 meta    2  131          // 
+//       2.96460137564761618e-03 * DAYS_PER_YEAR,
+ 13:           assignment  130    3          // tmp130 = 0.002964601375647616: NUMBER;
+ 14:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 15:                 meta    2  131          // 
+//       2.37847173959480950e-03 * DAYS_PER_YEAR,
+ 16:           assignment  130    3          // tmp130 = 0.0023784717395948095: NUMBER;
+ 17:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 18:                 meta    2  131          // 
+//       -2.96589568540237556e-05 * DAYS_PER_YEAR,
+ 19:           assignment  130    3          // tmp130 = 0.000029658956854023755: NUMBER;
+ 20:          unary_minus  131               // tmp131 = -tmp130;
+ 21:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+ 22:                 meta    2  132          // 
+//       4.36624404335156298e-05 * SOLAR_MASS
+ 23:           assignment  130    3          // tmp130 = 0.00004366244043351563: NUMBER;
+//    );
+ 24:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+ 25:                 meta    2  131          // 
+  4:          construct_n  130  254          //  // REWRITE
+ 26:               retval                    // return tmp130;
+// }
+  3:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 27:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 28; // REWRITE
+// function Neptune(){
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function Neptune (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//    return new Body(
+  2:                 meta   12  255          // [to be rewritten]
+//       1.53796971148509165e+01,
+//       -2.59193146099879641e+01,
+//       1.79258772950371181e-01,
+//       2.68067772490389322e-03 * DAYS_PER_YEAR,
+//       1.62824170038242295e-03 * DAYS_PER_YEAR,
+//       -9.51592254519715870e-05 * DAYS_PER_YEAR,
+//       5.15138902046611451e-05 * SOLAR_MASS
+//    );
+// }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+//       1.53796971148509165e+01,
+//       -2.59193146099879641e+01,
+//       1.79258772950371181e-01,
+//       2.68067772490389322e-03 * DAYS_PER_YEAR,
+//       1.62824170038242295e-03 * DAYS_PER_YEAR,
+//       -9.51592254519715870e-05 * DAYS_PER_YEAR,
+//       5.15138902046611451e-05 * SOLAR_MASS
+//    );
+// }
+  4:          construct_n  255  254          // 
+//       1.53796971148509165e+01,
+  5:           assignment  130    3          // tmp130 = 15.379697114850916: NUMBER;
+  6:                 meta    2  130          // 
+//       -2.59193146099879641e+01,
+  7:           assignment  130    3          // tmp130 = 25.919314609987964: NUMBER;
+  8:          unary_minus  131               // tmp131 = -tmp130;
+  9:                 meta    2  131          // 
+//       1.79258772950371181e-01,
+ 10:           assignment  130    3          // tmp130 = 0.17925877295037118: NUMBER;
+ 11:                 meta    2  130          // 
+//       2.68067772490389322e-03 * DAYS_PER_YEAR,
+ 12:           assignment  130    3          // tmp130 = 0.0026806777249038932: NUMBER;
+ 13:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 14:                 meta    2  131          // 
+//       1.62824170038242295e-03 * DAYS_PER_YEAR,
+ 15:           assignment  130    3          // tmp130 = 0.001628241700382423: NUMBER;
+ 16:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 17:                 meta    2  131          // 
+//       -9.51592254519715870e-05 * DAYS_PER_YEAR,
+ 18:           assignment  130    3          // tmp130 = 0.00009515922545197159: NUMBER;
+ 19:          unary_minus  131               // tmp131 = -tmp130;
+ 20:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+ 21:                 meta    2  132          // 
+//       5.15138902046611451e-05 * SOLAR_MASS
+ 22:           assignment  130    3          // tmp130 = 0.000051513890204661145: NUMBER;
+//    );
+ 23:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+ 24:                 meta    2  131          // 
+  4:          construct_n  130  254          //  // REWRITE
+ 25:               retval                    // return tmp130;
+// }
+  3:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+ 26:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 27; // REWRITE
+// function Sun(){
+  0:          func_decl_n  254               // 
+  0:          func_decl_n  254               // function Sun (); // REWRITE
+  1:                 meta    7  255          // function end: 65536;
+//    return new Body(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SOLAR_MASS);
+  2:                 meta   12  255          // [to be rewritten]
+// }
+  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128               // var tmp128 .. tmp255;
+// }
+  4:          construct_n  255  254          // 
+  5:           assignment  130    3          // tmp130 = 0: NUMBER;
+  6:                 meta    2  130          // 
+  7:           assignment  130    3          // tmp130 = 0: NUMBER;
+  8:                 meta    2  130          // 
+  9:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 10:                 meta    2  130          // 
+ 11:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 12:                 meta    2  130          // 
+ 13:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 14:                 meta    2  130          // 
+ 15:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 16:                 meta    2  130          // 
+ 17:                 meta    2  254          // 
+  4:          construct_n  130  254          //  // REWRITE
+ 18:               retval                    // return tmp130;
+// }
+  3:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
+ 19:                  ret                    // ret;
+  1:                 meta    7    0          // function end: 20; // REWRITE
+// function NBodySystem(bodies){
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  2:                 meta    7  255          // function end: 65537;
+//    this.bodies = bodies;
+  3:                 meta   12  255          // [to be rewritten]
+//    var px = 0.0;
+//    var py = 0.0;
+//    var pz = 0.0;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++){
+//       var b = this.bodies[i];
+//       var m = b.mass;
+//       px += b.vx * m;
+//       py += b.vy * m;
+//       pz += b.vz * m;
+//    }
+//    this.bodies[0].offsetMomentum(px,py,pz);
+// }
+  3:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  4:         reg_var_decl  128               // var tmp128 .. tmp255;
+//    var px = 0.0;
+  5:             var_decl                    // var px;
+//    var py = 0.0;
+  6:             var_decl                    // var py;
+//    var pz = 0.0;
+  7:             var_decl                    // var pz;
+//    var size = this.bodies.length;
+  8:             var_decl                    // var size;
+//    for (var i=0; i<size; i++){
+  9:             var_decl                    // var i;
+//       var b = this.bodies[i];
+ 10:             var_decl                    // var b;
+//       var m = b.mass;
+ 11:             var_decl                    // var m;
+//       px += b.vx * m;
+//       py += b.vy * m;
+//       pz += b.vz * m;
+//    }
+//    this.bodies[0].offsetMomentum(px,py,pz);
+// }
+ 12:         this_binding                    // tmp130 = this;
+ 13:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 14:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 14:          prop_setter  130  131          // tmp130[tmp131] = bodies;
+//    var px = 0.0;
+ 15:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 16:           assignment  254    6          // px = tmp130 : TYPEOF(tmp130);
+//    var py = 0.0;
+ 17:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 18:           assignment  254    6          // py = tmp130 : TYPEOF(tmp130);
+//    var pz = 0.0;
+ 19:           assignment  130    3          // tmp130 = 0: NUMBER;
+ 20:           assignment  254    6          // pz = tmp130 : TYPEOF(tmp130);
+//    var size = this.bodies.length;
+ 21:         this_binding                    // tmp130 = this;
+ 22:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 23:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 24:           assignment  133    5          // tmp133 = 'length': STRING;
+ 25:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 26:           assignment  254    6          // size = tmp134 : TYPEOF(tmp134);
+//    for (var i=0; i<size; i++){
+ 27:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 28:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 29:             jmp_down  255               // goto 65564;
+//       var b = this.bodies[i];
+ 30:         this_binding                    // tmp130 = this;
+ 31:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 32:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 33:          prop_getter  133  132          // tmp133 = tmp132[i];
+ 34:           assignment  254    6          // b = tmp133 : TYPEOF(tmp133);
+//       var m = b.mass;
+ 35:           assignment  130    5          // tmp130 = 'mass': STRING;
+ 36:          prop_getter  131  254          // tmp131 = b[tmp130];
+ 37:           assignment  254    6          // m = tmp131 : TYPEOF(tmp131);
+//       px += b.vx * m;
+ 38:           assignment  130    5          // tmp130 = 'vx': STRING;
+ 39:          prop_getter  131  254          // tmp131 = b[tmp130];
+ 40:       multiplication  132  131          // tmp132 = tmp131 * m;
+ 41:             addition  254  254          // px = px + tmp132;
+ 42:           assignment  133    6          // tmp133 = px : TYPEOF(px);
+//       py += b.vy * m;
+ 43:           assignment  130    5          // tmp130 = 'vy': STRING;
+ 44:          prop_getter  131  254          // tmp131 = b[tmp130];
+ 45:       multiplication  132  131          // tmp132 = tmp131 * m;
+ 46:             addition  254  254          // py = py + tmp132;
+ 47:           assignment  133    6          // tmp133 = py : TYPEOF(py);
+//       pz += b.vz * m;
+ 48:           assignment  130    5          // tmp130 = 'vz': STRING;
+ 49:          prop_getter  131  254          // tmp131 = b[tmp130];
+ 50:       multiplication  132  131          // tmp132 = tmp131 * m;
+ 51:             addition  254  254          // pz = pz + tmp132;
+ 52:           assignment  133    6          // tmp133 = pz : TYPEOF(pz);
+//    }
+ 53:            post_incr  134               // tmp134 = i++;
+ 29:             jmp_down    0               // goto 54; // REWRITE
+ 54:           assignment  135    6          // tmp135 = i : TYPEOF(i);
+ 55:            less_than  136  135          // tmp136 = tmp135 < size;
+ 56:       is_true_jmp_up  136    0          // if (tmp136) goto 30;
+//    this.bodies[0].offsetMomentum(px,py,pz);
+ 57:         this_binding                    // tmp130 = this;
+ 58:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 59:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 60:           assignment  133    1          // tmp133 = 0: SMALLINT;
+ 61:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 62:           assignment  135    5          // tmp135 = 'offsetMomentum': STRING;
+ 63:          prop_getter  136  134          // tmp136 = tmp134[tmp135];
+ 64:               call_n  255  136          // 
+ 65:                 meta    1    1          // 
+ 66:                 meta    2  254          // 
+ 67:                 meta    2  254          // 
+ 68:                 meta    2  254          // 
+ 64:               call_n  137  136          //  // REWRITE
+// }
+  4:         reg_var_decl  128               // var tmp128 .. tmp137; // REWRITE
+ 69:                  ret                    // ret;
+  2:                 meta    7    0          // function end: 70; // REWRITE
+// NBodySystem.prototype.advance = function(dt){
+ 45:           assignment  130    5          // tmp130 = 'prototype': STRING;
+ 46:          prop_getter  131  254          // tmp131 = NBodySystem[tmp130];
+ 47:           assignment  132    5          // tmp132 = 'advance': STRING;
+ 48:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+ 48:          func_expr_n  255  255          // 
+ 49:                 meta    2  254          // 
+ 48:          func_expr_n  134  255          //  // REWRITE
+ 50:                 meta    7  255          // function end: 65585;
+//    var dx, dy, dz, distance, mag;
+ 51:                 meta   12  255          // [to be rewritten]
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++) {
+//       var bodyi = this.bodies[i];
+//       for (var j=i+1; j<size; j++) {
+//          var bodyj = this.bodies[j];
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          mag = dt / (distance * distance * distance);
+//          bodyi.vx -= dx * bodyj.mass * mag;
+//          bodyi.vy -= dy * bodyj.mass * mag;
+//          bodyi.vz -= dz * bodyj.mass * mag;
+//          bodyj.vx += dx * bodyi.mass * mag;
+//          bodyj.vy += dy * bodyi.mass * mag;
+//          bodyj.vz += dz * bodyi.mass * mag;
+//       }
+//    }
+//    for (var i=0; i<size; i++) {
+//       var body = this.bodies[i];
+//       body.x += dt * body.vx;
+//       body.y += dt * body.vy;
+//       body.z += dt * body.vz;
+//    }
+// }
+ 51:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+ 52:         reg_var_decl  128               // var tmp128 .. tmp255;
+ 53:             var_decl                    // var dx;
+ 54:             var_decl                    // var dy;
+ 55:             var_decl                    // var dz;
+ 56:             var_decl                    // var distance;
+ 57:             var_decl                    // var mag;
+//    var size = this.bodies.length;
+ 58:             var_decl                    // var size;
+//    for (var i=0; i<size; i++) {
+ 59:             var_decl                    // var i;
+//       var bodyi = this.bodies[i];
+ 60:             var_decl                    // var bodyi;
+//       for (var j=i+1; j<size; j++) {
+ 61:             var_decl                    // var j;
+//          var bodyj = this.bodies[j];
+ 62:             var_decl                    // var bodyj;
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          mag = dt / (distance * distance * distance);
+//          bodyi.vx -= dx * bodyj.mass * mag;
+//          bodyi.vy -= dy * bodyj.mass * mag;
+//          bodyi.vz -= dz * bodyj.mass * mag;
+//          bodyj.vx += dx * bodyi.mass * mag;
+//          bodyj.vy += dy * bodyi.mass * mag;
+//          bodyj.vz += dz * bodyi.mass * mag;
+//       }
+//    }
+//    for (var i=0; i<size; i++) {
+//       var body = this.bodies[i];
+ 63:             var_decl                    // var body;
+//       body.x += dt * body.vx;
+//       body.y += dt * body.vy;
+//       body.z += dt * body.vz;
+//    }
+// }
+//    var size = this.bodies.length;
+ 64:         this_binding                    // tmp130 = this;
+ 65:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 66:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 67:           assignment  133    5          // tmp133 = 'length': STRING;
+ 68:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+ 69:           assignment  254    6          // size = tmp134 : TYPEOF(tmp134);
+//    for (var i=0; i<size; i++) {
+ 70:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 71:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 72:             jmp_down  255               // goto 65607;
+//       var bodyi = this.bodies[i];
+ 73:         this_binding                    // tmp130 = this;
+ 74:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 75:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 76:          prop_getter  133  132          // tmp133 = tmp132[i];
+ 77:           assignment  254    6          // bodyi = tmp133 : TYPEOF(tmp133);
+//       for (var j=i+1; j<size; j++) {
+ 78:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+ 79:           assignment  131    1          // tmp131 = 1: SMALLINT;
+ 80:             addition  132  130          // tmp132 = tmp130 + tmp131;
+ 81:           assignment  254    6          // j = tmp132 : TYPEOF(tmp132);
+ 82:             jmp_down  255               // goto 65617;
+//          var bodyj = this.bodies[j];
+ 83:         this_binding                    // tmp130 = this;
+ 84:           assignment  131    5          // tmp131 = 'bodies': STRING;
+ 85:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 86:          prop_getter  133  132          // tmp133 = tmp132[j];
+ 87:           assignment  254    6          // bodyj = tmp133 : TYPEOF(tmp133);
+//          dx = bodyi.x - bodyj.x;
+ 88:           assignment  130    5          // tmp130 = 'x': STRING;
+ 89:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+ 90:           assignment  132    5          // tmp132 = 'x': STRING;
+ 91:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+ 92:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+ 93:           assignment  254    6          // dx = tmp134 : TYPEOF(tmp134);
+//          dy = bodyi.y - bodyj.y;
+ 94:           assignment  130    5          // tmp130 = 'y': STRING;
+ 95:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+ 96:           assignment  132    5          // tmp132 = 'y': STRING;
+ 97:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+ 98:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+ 99:           assignment  254    6          // dy = tmp134 : TYPEOF(tmp134);
+//          dz = bodyi.z - bodyj.z;
+100:           assignment  130    5          // tmp130 = 'z': STRING;
+101:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+102:           assignment  132    5          // tmp132 = 'z': STRING;
+103:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+104:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+105:           assignment  254    6          // dz = tmp134 : TYPEOF(tmp134);
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+106:           assignment  130    5          // tmp130 = 'sqrt': STRING;
+107:          prop_getter  131  254          // tmp131 = Math[tmp130];
+108:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
+109:               call_n  255  131          // 
+110:                 meta    1    1          // 
+111:           assignment  133    6          // tmp133 = dx : TYPEOF(dx);
+112:       multiplication  134  133          // tmp134 = tmp133 * dx;
+113:           assignment  135    6          // tmp135 = dy : TYPEOF(dy);
+114:       multiplication  136  135          // tmp136 = tmp135 * dy;
+115:             addition  137  134          // tmp137 = tmp134 + tmp136;
+116:           assignment  138    6          // tmp138 = dz : TYPEOF(dz);
+117:       multiplication  139  138          // tmp139 = tmp138 * dz;
+118:             addition  140  137          // tmp140 = tmp137 + tmp139;
+119:                 meta    2  140          // 
+109:               call_n  133  131          //  // REWRITE
+120:           assignment  254    6          // distance = tmp133 : TYPEOF(tmp133);
+//          mag = dt / (distance * distance * distance);
+121:           assignment  130    6          // tmp130 = dt : TYPEOF(dt);
+122:           assignment  131    6          // tmp131 = distance : TYPEOF(distance);
+123:       multiplication  132  131          // tmp132 = tmp131 * distance;
+124:       multiplication  133  132          // tmp133 = tmp132 * distance;
+125:             division  134  130          // tmp134 = tmp130 / tmp133;
+126:           assignment  254    6          // mag = tmp134 : TYPEOF(tmp134);
+//          bodyi.vx -= dx * bodyj.mass * mag;
+127:           assignment  130    5          // tmp130 = 'vx': STRING;
+128:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+128:           assignment  132    6          // tmp132 = dx : TYPEOF(dx);
+129:           assignment  133    5          // tmp133 = 'mass': STRING;
+130:          prop_getter  134  254          // tmp134 = bodyj[tmp133];
+131:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+132:       multiplication  136  135          // tmp136 = tmp135 * mag;
+133:          prop_getter  137  254          // tmp137 = bodyi[tmp130];
+134:         substraction  137  137          // tmp137 = tmp137 - tmp136;
+135:          prop_setter  254  130          // bodyi[tmp130] = tmp137;
+//          bodyi.vy -= dy * bodyj.mass * mag;
+136:           assignment  130    5          // tmp130 = 'vy': STRING;
+137:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+137:           assignment  132    6          // tmp132 = dy : TYPEOF(dy);
+138:           assignment  133    5          // tmp133 = 'mass': STRING;
+139:          prop_getter  134  254          // tmp134 = bodyj[tmp133];
+140:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+141:       multiplication  136  135          // tmp136 = tmp135 * mag;
+142:          prop_getter  137  254          // tmp137 = bodyi[tmp130];
+143:         substraction  137  137          // tmp137 = tmp137 - tmp136;
+144:          prop_setter  254  130          // bodyi[tmp130] = tmp137;
+//          bodyi.vz -= dz * bodyj.mass * mag;
+145:           assignment  130    5          // tmp130 = 'vz': STRING;
+146:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+146:           assignment  132    6          // tmp132 = dz : TYPEOF(dz);
+147:           assignment  133    5          // tmp133 = 'mass': STRING;
+148:          prop_getter  134  254          // tmp134 = bodyj[tmp133];
+149:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+150:       multiplication  136  135          // tmp136 = tmp135 * mag;
+151:          prop_getter  137  254          // tmp137 = bodyi[tmp130];
+152:         substraction  137  137          // tmp137 = tmp137 - tmp136;
+153:          prop_setter  254  130          // bodyi[tmp130] = tmp137;
+//          bodyj.vx += dx * bodyi.mass * mag;
+154:           assignment  130    5          // tmp130 = 'vx': STRING;
+155:          prop_getter  131  254          // tmp131 = bodyj[tmp130];
+155:           assignment  132    6          // tmp132 = dx : TYPEOF(dx);
+156:           assignment  133    5          // tmp133 = 'mass': STRING;
+157:          prop_getter  134  254          // tmp134 = bodyi[tmp133];
+158:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+159:       multiplication  136  135          // tmp136 = tmp135 * mag;
+160:          prop_getter  137  254          // tmp137 = bodyj[tmp130];
+161:             addition  137  137          // tmp137 = tmp137 + tmp136;
+162:          prop_setter  254  130          // bodyj[tmp130] = tmp137;
+//          bodyj.vy += dy * bodyi.mass * mag;
+163:           assignment  130    5          // tmp130 = 'vy': STRING;
+164:          prop_getter  131  254          // tmp131 = bodyj[tmp130];
+164:           assignment  132    6          // tmp132 = dy : TYPEOF(dy);
+165:           assignment  133    5          // tmp133 = 'mass': STRING;
+166:          prop_getter  134  254          // tmp134 = bodyi[tmp133];
+167:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+168:       multiplication  136  135          // tmp136 = tmp135 * mag;
+169:          prop_getter  137  254          // tmp137 = bodyj[tmp130];
+170:             addition  137  137          // tmp137 = tmp137 + tmp136;
+171:          prop_setter  254  130          // bodyj[tmp130] = tmp137;
+//          bodyj.vz += dz * bodyi.mass * mag;
+172:           assignment  130    5          // tmp130 = 'vz': STRING;
+173:          prop_getter  131  254          // tmp131 = bodyj[tmp130];
+173:           assignment  132    6          // tmp132 = dz : TYPEOF(dz);
+174:           assignment  133    5          // tmp133 = 'mass': STRING;
+175:          prop_getter  134  254          // tmp134 = bodyi[tmp133];
+176:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+177:       multiplication  136  135          // tmp136 = tmp135 * mag;
+178:          prop_getter  137  254          // tmp137 = bodyj[tmp130];
+179:             addition  137  137          // tmp137 = tmp137 + tmp136;
+180:          prop_setter  254  130          // bodyj[tmp130] = tmp137;
+//       }
+181:            post_incr  138               // tmp138 = j++;
+ 82:             jmp_down    0               // goto 182; // REWRITE
+182:           assignment  139    6          // tmp139 = j : TYPEOF(j);
+183:            less_than  140  139          // tmp140 = tmp139 < size;
+184:       is_true_jmp_up  140    0          // if (tmp140) goto 83;
+//    }
+185:            post_incr  141               // tmp141 = i++;
+ 72:             jmp_down    0               // goto 186; // REWRITE
+186:           assignment  142    6          // tmp142 = i : TYPEOF(i);
+187:            less_than  143  142          // tmp143 = tmp142 < size;
+188:       is_true_jmp_up  143    0          // if (tmp143) goto 73;
+//    for (var i=0; i<size; i++) {
+189:           assignment  130    1          // tmp130 = 0: SMALLINT;
+190:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+191:             jmp_down  255               // goto 65726;
+//       var body = this.bodies[i];
+192:         this_binding                    // tmp130 = this;
+193:           assignment  131    5          // tmp131 = 'bodies': STRING;
+194:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+195:          prop_getter  133  132          // tmp133 = tmp132[i];
+196:           assignment  254    6          // body = tmp133 : TYPEOF(tmp133);
+//       body.x += dt * body.vx;
+197:           assignment  130    5          // tmp130 = 'x': STRING;
+198:          prop_getter  131  254          // tmp131 = body[tmp130];
+198:           assignment  132    6          // tmp132 = dt : TYPEOF(dt);
+199:           assignment  133    5          // tmp133 = 'vx': STRING;
+200:          prop_getter  134  254          // tmp134 = body[tmp133];
+201:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+202:          prop_getter  136  254          // tmp136 = body[tmp130];
+203:             addition  136  136          // tmp136 = tmp136 + tmp135;
+204:          prop_setter  254  130          // body[tmp130] = tmp136;
+//       body.y += dt * body.vy;
+205:           assignment  130    5          // tmp130 = 'y': STRING;
+206:          prop_getter  131  254          // tmp131 = body[tmp130];
+206:           assignment  132    6          // tmp132 = dt : TYPEOF(dt);
+207:           assignment  133    5          // tmp133 = 'vy': STRING;
+208:          prop_getter  134  254          // tmp134 = body[tmp133];
+209:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+210:          prop_getter  136  254          // tmp136 = body[tmp130];
+211:             addition  136  136          // tmp136 = tmp136 + tmp135;
+212:          prop_setter  254  130          // body[tmp130] = tmp136;
+//       body.z += dt * body.vz;
+213:           assignment  130    5          // tmp130 = 'z': STRING;
+214:          prop_getter  131  254          // tmp131 = body[tmp130];
+214:           assignment  132    6          // tmp132 = dt : TYPEOF(dt);
+215:           assignment  133    5          // tmp133 = 'vz': STRING;
+216:          prop_getter  134  254          // tmp134 = body[tmp133];
+217:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+218:          prop_getter  136  254          // tmp136 = body[tmp130];
+219:             addition  136  136          // tmp136 = tmp136 + tmp135;
+220:          prop_setter  254  130          // body[tmp130] = tmp136;
+//    }
+221:            post_incr  137               // tmp137 = i++;
+191:             jmp_down    0               // goto 222; // REWRITE
+222:           assignment  138    6          // tmp138 = i : TYPEOF(i);
+223:            less_than  139  138          // tmp139 = tmp138 < size;
+224:       is_true_jmp_up  139    0          // if (tmp139) goto 192;
+// }
+ 52:         reg_var_decl  128               // var tmp128 .. tmp143; // REWRITE
+225:                  ret                    // ret;
+ 50:                 meta    7    0          // function end: 226; // REWRITE
+// NBodySystem.prototype.energy = function(){
+226:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
+227:           assignment  130    5          // tmp130 = 'prototype': STRING;
+228:          prop_getter  131  254          // tmp131 = NBodySystem[tmp130];
+229:           assignment  132    5          // tmp132 = 'energy': STRING;
+230:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
+230:          func_expr_n  255  255          // 
+230:          func_expr_n  134  255          // tmp134 = function (); // REWRITE
+231:                 meta    7  255          // function end: 65766;
+//    var dx, dy, dz, distance;
+232:                 meta   12  255          // [to be rewritten]
+//    var e = 0.0;
+//    var size = this.bodies.length;
+//    for (var i=0; i<size; i++) {
+//       var bodyi = this.bodies[i];
+//       e += 0.5 * bodyi.mass *
+//          ( bodyi.vx * bodyi.vx
+//          + bodyi.vy * bodyi.vy
+//          + bodyi.vz * bodyi.vz );
+//       for (var j=i+1; j<size; j++) {
+//          var bodyj = this.bodies[j];
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          e -= (bodyi.mass * bodyj.mass) / distance;
+//       }
+//    }
+//    return e;
+// }
+232:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+233:         reg_var_decl  128               // var tmp128 .. tmp255;
+234:             var_decl                    // var dx;
+235:             var_decl                    // var dy;
+236:             var_decl                    // var dz;
+237:             var_decl                    // var distance;
+//    var e = 0.0;
+238:             var_decl                    // var e;
+//    var size = this.bodies.length;
+239:             var_decl                    // var size;
+//    for (var i=0; i<size; i++) {
+240:             var_decl                    // var i;
+//       var bodyi = this.bodies[i];
+241:             var_decl                    // var bodyi;
+//       e += 0.5 * bodyi.mass *
+//          ( bodyi.vx * bodyi.vx
+//          + bodyi.vy * bodyi.vy
+//          + bodyi.vz * bodyi.vz );
+//       for (var j=i+1; j<size; j++) {
+242:             var_decl                    // var j;
+//          var bodyj = this.bodies[j];
+243:             var_decl                    // var bodyj;
+//          dx = bodyi.x - bodyj.x;
+//          dy = bodyi.y - bodyj.y;
+//          dz = bodyi.z - bodyj.z;
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+//          e -= (bodyi.mass * bodyj.mass) / distance;
+//       }
+//    }
+//    return e;
+// }
+//    var e = 0.0;
+244:           assignment  130    3          // tmp130 = 0: NUMBER;
+245:           assignment  254    6          // e = tmp130 : TYPEOF(tmp130);
+//    var size = this.bodies.length;
+246:         this_binding                    // tmp130 = this;
+247:           assignment  131    5          // tmp131 = 'bodies': STRING;
+248:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+249:           assignment  133    5          // tmp133 = 'length': STRING;
+250:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+251:           assignment  254    6          // size = tmp134 : TYPEOF(tmp134);
+//    for (var i=0; i<size; i++) {
+252:           assignment  130    1          // tmp130 = 0: SMALLINT;
+253:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+254:             jmp_down  255               // goto 65789;
+//       var bodyi = this.bodies[i];
+255:         this_binding                    // tmp130 = this;
+256:           assignment  131    5          // tmp131 = 'bodies': STRING;
+257:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+258:          prop_getter  133  132          // tmp133 = tmp132[i];
+259:           assignment  254    6          // bodyi = tmp133 : TYPEOF(tmp133);
+//       e += 0.5 * bodyi.mass *
+260:           assignment  130    3          // tmp130 = 0.5: NUMBER;
+261:           assignment  131    5          // tmp131 = 'mass': STRING;
+262:          prop_getter  132  254          // tmp132 = bodyi[tmp131];
+263:       multiplication  133  130          // tmp133 = tmp130 * tmp132;
+//          ( bodyi.vx * bodyi.vx
+264:           assignment  134    5          // tmp134 = 'vx': STRING;
+265:          prop_getter  135  254          // tmp135 = bodyi[tmp134];
+266:           assignment  136    5          // tmp136 = 'vx': STRING;
+//          + bodyi.vy * bodyi.vy
+267:          prop_getter  137  254          // tmp137 = bodyi[tmp136];
+268:       multiplication  138  135          // tmp138 = tmp135 * tmp137;
+269:           assignment  139    5          // tmp139 = 'vy': STRING;
+270:          prop_getter  140  254          // tmp140 = bodyi[tmp139];
+271:           assignment  141    5          // tmp141 = 'vy': STRING;
+//          + bodyi.vz * bodyi.vz );
+272:          prop_getter  142  254          // tmp142 = bodyi[tmp141];
+273:       multiplication  143  140          // tmp143 = tmp140 * tmp142;
+274:             addition  144  138          // tmp144 = tmp138 + tmp143;
+275:           assignment  145    5          // tmp145 = 'vz': STRING;
+276:          prop_getter  146  254          // tmp146 = bodyi[tmp145];
+277:           assignment  147    5          // tmp147 = 'vz': STRING;
+278:          prop_getter  148  254          // tmp148 = bodyi[tmp147];
+279:       multiplication  149  146          // tmp149 = tmp146 * tmp148;
+280:             addition  150  144          // tmp150 = tmp144 + tmp149;
+281:       multiplication  151  133          // tmp151 = tmp133 * tmp150;
+282:             addition  254  254          // e = e + tmp151;
+283:           assignment  152    6          // tmp152 = e : TYPEOF(e);
+//       for (var j=i+1; j<size; j++) {
+284:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+285:           assignment  131    1          // tmp131 = 1: SMALLINT;
+286:             addition  132  130          // tmp132 = tmp130 + tmp131;
+287:           assignment  254    6          // j = tmp132 : TYPEOF(tmp132);
+288:             jmp_down  255               // goto 65823;
+//          var bodyj = this.bodies[j];
+289:         this_binding                    // tmp130 = this;
+290:           assignment  131    5          // tmp131 = 'bodies': STRING;
+291:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+292:          prop_getter  133  132          // tmp133 = tmp132[j];
+293:           assignment  254    6          // bodyj = tmp133 : TYPEOF(tmp133);
+//          dx = bodyi.x - bodyj.x;
+294:           assignment  130    5          // tmp130 = 'x': STRING;
+295:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+296:           assignment  132    5          // tmp132 = 'x': STRING;
+297:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+298:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+299:           assignment  254    6          // dx = tmp134 : TYPEOF(tmp134);
+//          dy = bodyi.y - bodyj.y;
+300:           assignment  130    5          // tmp130 = 'y': STRING;
+301:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+302:           assignment  132    5          // tmp132 = 'y': STRING;
+303:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+304:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+305:           assignment  254    6          // dy = tmp134 : TYPEOF(tmp134);
+//          dz = bodyi.z - bodyj.z;
+306:           assignment  130    5          // tmp130 = 'z': STRING;
+307:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+308:           assignment  132    5          // tmp132 = 'z': STRING;
+309:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+310:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+311:           assignment  254    6          // dz = tmp134 : TYPEOF(tmp134);
+//          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+312:           assignment  130    5          // tmp130 = 'sqrt': STRING;
+313:          prop_getter  131  254          // tmp131 = Math[tmp130];
+314:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
+315:               call_n  255  131          // 
+316:                 meta    1    1          // 
+317:           assignment  133    6          // tmp133 = dx : TYPEOF(dx);
+318:       multiplication  134  133          // tmp134 = tmp133 * dx;
+319:           assignment  135    6          // tmp135 = dy : TYPEOF(dy);
+320:       multiplication  136  135          // tmp136 = tmp135 * dy;
+321:             addition  137  134          // tmp137 = tmp134 + tmp136;
+322:           assignment  138    6          // tmp138 = dz : TYPEOF(dz);
+323:       multiplication  139  138          // tmp139 = tmp138 * dz;
+324:             addition  140  137          // tmp140 = tmp137 + tmp139;
+325:                 meta    2  140          // 
+315:               call_n  133  131          //  // REWRITE
+326:           assignment  254    6          // distance = tmp133 : TYPEOF(tmp133);
+//          e -= (bodyi.mass * bodyj.mass) / distance;
+327:           assignment  130    5          // tmp130 = 'mass': STRING;
+328:          prop_getter  131  254          // tmp131 = bodyi[tmp130];
+329:           assignment  132    5          // tmp132 = 'mass': STRING;
+330:          prop_getter  133  254          // tmp133 = bodyj[tmp132];
+331:       multiplication  134  131          // tmp134 = tmp131 * tmp133;
+332:             division  135  134          // tmp135 = tmp134 / distance;
+333:         substraction  254  254          // e = e - tmp135;
+334:           assignment  136    6          // tmp136 = e : TYPEOF(e);
+//       }
+335:            post_incr  137               // tmp137 = j++;
+288:             jmp_down    0               // goto 336; // REWRITE
+336:           assignment  138    6          // tmp138 = j : TYPEOF(j);
+337:            less_than  139  138          // tmp139 = tmp138 < size;
+338:       is_true_jmp_up  139    0          // if (tmp139) goto 289;
+//    }
+339:            post_incr  140               // tmp140 = i++;
+254:             jmp_down    0               // goto 340; // REWRITE
+340:           assignment  141    6          // tmp141 = i : TYPEOF(i);
+341:            less_than  142  141          // tmp142 = tmp141 < size;
+342:       is_true_jmp_up  142    0          // if (tmp142) goto 255;
+//    return e;
+343:               retval                    // return e;
+// }
+233:         reg_var_decl  128               // var tmp128 .. tmp152; // REWRITE
+344:                  ret                    // ret;
+231:                 meta    7    0          // function end: 345; // REWRITE
+// var ret = 0;
+345:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
+346:           assignment  130    1          // tmp130 = 0: SMALLINT;
+347:           assignment  254    6          // ret = tmp130 : TYPEOF(tmp130);
+// for ( var n = 3; n <= 24; n *= 2 ) {
+348:           assignment  130    1          // tmp130 = 3: SMALLINT;
+349:           assignment  254    6          // n = tmp130 : TYPEOF(tmp130);
+350:             jmp_down  255               // goto 65885;
+//     (function(){
+351:          func_expr_n  255  255          // 
+351:          func_expr_n  130  255          // tmp130 = function (); // REWRITE
+352:                 meta    7  255          // function end: 65887;
+//         var bodies = new NBodySystem( Array(
+353:                 meta   12  255          // [to be rewritten]
+//            Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
+//         ));
+//         var max = n * 100;
+//         
+//         ret += bodies.energy();
+//         for (var i=0; i<max; i++){
+//             bodies.advance(0.01);
+//         }
+//         ret += bodies.energy();
+//     })();
+353:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+354:         reg_var_decl  128               // var tmp128 .. tmp255;
+355:             var_decl                    // var bodies;
+//            Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
+//         ));
+//         var max = n * 100;
+356:             var_decl                    // var max;
+//         
+//         ret += bodies.energy();
+//         for (var i=0; i<max; i++){
+357:             var_decl                    // var i;
+//             bodies.advance(0.01);
+//         }
+//         ret += bodies.energy();
+//     })();
+358:          construct_n  255  254          // 
+359:               call_n  255  254          // 
+//            Sun(),Jupiter(),Saturn(),Uranus(),Neptune()
+360:               call_n  255  254          // 
+360:               call_n  130  254          //  // REWRITE
+361:                 meta    2  130          // 
+362:               call_n  255  254          // 
+362:               call_n  130  254          //  // REWRITE
+363:                 meta    2  130          // 
+364:               call_n  255  254          // 
+364:               call_n  130  254          //  // REWRITE
+365:                 meta    2  130          // 
+366:               call_n  255  254          // 
+366:               call_n  130  254          //  // REWRITE
+367:                 meta    2  130          // 
+368:               call_n  255  254          // 
+368:               call_n  130  254          //  // REWRITE
+//         ));
+369:                 meta    2  130          // 
+359:               call_n  130  254          //  // REWRITE
+370:                 meta    2  130          // 
+358:          construct_n  130  254          //  // REWRITE
+371:           assignment  254    6          // bodies = tmp130 : TYPEOF(tmp130);
+//         var max = n * 100;
+372:           assignment  130    6          // tmp130 = n : TYPEOF(n);
+373:           assignment  131    1          // tmp131 = 100: SMALLINT;
+374:       multiplication  132  130          // tmp132 = tmp130 * tmp131;
+375:           assignment  254    6          // max = tmp132 : TYPEOF(tmp132);
+//         
+//         ret += bodies.energy();
+376:           assignment  130    5          // tmp130 = 'energy': STRING;
+377:          prop_getter  131  254          // tmp131 = bodies[tmp130];
+378:           assignment  132    6          // tmp132 = bodies : TYPEOF(bodies);
+379:               call_n  255  131          // 
+380:                 meta    1    1          // 
+379:               call_n  133  131          //  // REWRITE
+381:             addition  254  254          // ret = ret + tmp133;
+382:           assignment  134    6          // tmp134 = ret : TYPEOF(ret);
+//         for (var i=0; i<max; i++){
+383:           assignment  130    1          // tmp130 = 0: SMALLINT;
+384:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+385:             jmp_down  255               // goto 65920;
+//             bodies.advance(0.01);
+386:           assignment  130    5          // tmp130 = 'advance': STRING;
+387:          prop_getter  131  254          // tmp131 = bodies[tmp130];
+388:           assignment  132    6          // tmp132 = bodies : TYPEOF(bodies);
+389:               call_n  255  131          // 
+390:                 meta    1    1          // 
+391:           assignment  133    3          // tmp133 = 0.01: NUMBER;
+392:                 meta    2  133          // 
+389:               call_n  133  131          //  // REWRITE
+//         }
+393:            post_incr  134               // tmp134 = i++;
+385:             jmp_down    0               // goto 394; // REWRITE
+394:           assignment  135    6          // tmp135 = i : TYPEOF(i);
+395:            less_than  136  135          // tmp136 = tmp135 < max;
+396:       is_true_jmp_up  136    0          // if (tmp136) goto 386;
+//         ret += bodies.energy();
+397:           assignment  130    5          // tmp130 = 'energy': STRING;
+398:          prop_getter  131  254          // tmp131 = bodies[tmp130];
+399:           assignment  132    6          // tmp132 = bodies : TYPEOF(bodies);
+400:               call_n  255  131          // 
+401:                 meta    1    1          // 
+400:               call_n  133  131          //  // REWRITE
+402:             addition  254  254          // ret = ret + tmp133;
+403:           assignment  134    6          // tmp134 = ret : TYPEOF(ret);
+//     })();
+354:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+404:                  ret                    // ret;
+352:                 meta    7    0          // function end: 405; // REWRITE
+405:               call_n  255  130          // 
+405:               call_n  131  130          //  // REWRITE
+// }
+406:           assignment  132    1          // tmp132 = 2: SMALLINT;
+407:       multiplication  254  254          // n = n * tmp132;
+350:             jmp_down    0               // goto 408; // REWRITE
+408:           assignment  133    6          // tmp133 = n : TYPEOF(n);
+409:           assignment  134    1          // tmp134 = 24: SMALLINT;
+410:   less_or_equal_than  135  133          // tmp135 = tmp133 <= tmp134;
+411:       is_true_jmp_up  135    0          // if (tmp135) goto 351;
+// var expected = -1.3524862408537381;
+412:           assignment  130    3          // tmp130 = 1.3524862408537381: NUMBER;
+413:          unary_minus  131               // tmp131 = -tmp130;
+414:           assignment  254    6          // expected = tmp131 : TYPEOF(tmp131);
+// if (ret != expected)
+415:           assignment  130    6          // tmp130 = ret : TYPEOF(ret);
+416:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+417:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65952;
+//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
+418:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+419:             addition  131  130          // tmp131 = tmp130 + expected;
+420:           assignment  132    5          // tmp132 = ' but got ': STRING;
+421:             addition  133  131          // tmp133 = tmp131 + tmp132;
+422:             addition  134  133          // tmp134 = tmp133 + ret;
+423:          throw_value                    // throw tmp134;
+// 
+417:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 424; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp135; // REWRITE
+424:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  4] PI : MAGIC STRING [id=80] 
+0x84ec58 [ 12] 3.141592653589793åˆ : NUMBER
+0x84ec64 [ 16] SOLAR_MASS : STRING
+0x84ec74 [ 20] DAYS_PER_YEAR : STRING
+0x84ec9c [ 12] 365.24 : NUMBER
+0x84eca8 [ 12] Body : STRING
+0x84ecb4 [  8] x : STRING
+0x84ecbc [  8] y : STRING
+0x84ecd8 [  8] z : STRING
+0x84ece0 [  8] vx : STRING
+0x84ece8 [  8] vy : STRING
+0x84ecf0 [  8] vz : STRING
+0x84ecf8 [ 12] mass : STRING
+0x84ed18 [  4] prototype : MAGIC STRING [id=2] 
+0x84ed1c [ 20] offsetMomentum : STRING
+0x84ed30 [  8] px : STRING
+0x84ed38 [  8] py : STRING
+0x84ed54 [  8] pz : STRING
+0x84ed5c [ 16] Jupiter : STRING
+0x84ed6c [ 12] 4.841431442464721 : NUMBER
+0x84ed78 [ 12] 1.1603200440274283 : NUMBER
+0x84ed98 [ 12] 0.10362204447112311 : NUMBER
+0x84eda4 [ 12] 0.001660076642744037 : NUMBER
+0x84edb0 [ 12] 0.007699011184197404 : NUMBER
+0x84edbc [ 12] 0.0000690460016972063 : NUMBER
+0x84eddc [ 12] 0.0009547919384243266 : NUMBER
+0x84ede8 [ 12] Saturn : STRING
+0x84edf4 [ 12] 8.34336671824458 : NUMBER
+0x84ee14 [ 12] 4.124798564124305 : NUMBER
+0x84ee20 [ 12] 0.4035234171143214 : NUMBER
+0x84ee2c [ 12] 0.002767425107268624 : NUMBER
+0x84ee38 [ 12] 0.004998528012349172 : NUMBER
+0x84ee58 [ 12] 0.000023041729757376393 : NUMBER
+0x84ee64 [ 12] 0.000285885980666130893 : NUMBER
+0x84ee70 [ 12] Uranus : STRING
+0x84ee7c [ 12] 12.894369562139131 : NUMBER
+0x84ee9c [ 12] 15.111151401698631 : NUMBER
+0x84eea8 [ 12] 0.22330757889265573 : NUMBER
+0x84eeb4 [ 12] 0.002964601375647616 : NUMBER
+0x84eed4 [ 12] 0.0023784717395948095 : NUMBER
+0x84eee0 [ 12] 0.000029658956854023755 : NUMBER
+0x84eeec [ 12] 0.000043662440433515635 : NUMBER
+0x84eef8 [ 16] Neptune : STRING
+0x84ef1c [ 12] 15.379697114850916 : NUMBER
+0x84ef28 [ 12] 25.919314609987964 : NUMBER
+0x84ef34 [ 12] 0.17925877295037118 : NUMBER
+0x84ef54 [ 12] 0.0026806777249038932 : NUMBER
+0x84ef60 [ 12] 0.0016282417003824232 : NUMBER
+0x84ef6c [ 12] 0.00009515922545197159 : NUMBER
+0x84ef78 [ 12] 0.000051513890204661145 : NUMBER
+0x84ef98 [ 12] Sun : STRING
+0x84efa4 [ 12] 0ï„ : NUMBER
+0x84efb0 [ 20] NBodySystem : STRING
+0x84efd8 [ 12] bodies : STRING
+0x84efe4 [ 12] size : STRING
+0x84eff0 [  4] length : MAGIC STRING [id=15] 
+0x84eff4 [  4] i : MAGIC STRING [id=200] 
+0x84eff8 [  8] b : STRING
+0x84f014 [  4] m : MAGIC STRING [id=201] 
+0x84f018 [ 16] advance : STRING
+0x84f028 [  8] dt : STRING
+0x84f030 [  8] dx : STRING
+0x84f038 [  8] dy : STRING
+0x84f054 [  8] dz : STRING
+0x84f05c [ 16] distance : STRING
+0x84f06c [ 12] mag : STRING
+0x84f078 [ 12] bodyi : STRING
+0x84f098 [  8] j : STRING
+0x84f0a0 [ 12] bodyj : STRING
+0x84f0ac [  4] Math : MAGIC STRING [id=44] 
+0x84f0b0 [  4] sqrt : MAGIC STRING [id=99] 
+0x84f0b4 [ 12] body : STRING
+0x84f0d4 [ 12] energy : STRING
+0x84f0e0 [  8] e : STRING
+0x84f0e8 [ 12] 0.5 : NUMBER
+0x84f0f4 [ 12] ret : STRING
+0x84f114 [  8] n : STRING
+0x84f11c [  4] Array : MAGIC STRING [id=29] 
+0x84f120 [  4] max : MAGIC STRING [id=93] 
+0x84f124 [ 12] 0.01 : NUMBER
+0x84f130 [ 16] expected : STRING
+0x84f154 [ 12] 1.3524862408537381 : NUMBER
+0x84f160 [ 36] ERROR: bad result: expected  : STRING
+0x84f198 [ 16]  but got  : STRING
+0x84f1a8 [ 24]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp135;
+  2:             var_decl                    // var PI;
+  3:             var_decl                    // var SOLAR_MASS;
+  4:             var_decl                    // var DAYS_PER_YEAR;
+  5:             var_decl                    // var ret;
+  6:             var_decl                    // var n;
+  7:             var_decl                    // var expected;
+  8:          func_decl_n    6               // 
+  9:                 meta    2    7          // 
+ 10:                 meta    2    8          // 
+ 11:                 meta    2    9          // 
+ 12:                 meta    2   10          // 
+ 13:                 meta    2   11          // 
+ 14:                 meta    2   12          // 
+ 15:                 meta    2   13          // function Body (x, y, z, vx, vy, vz, mass);
+ 16:                 meta    7    0          // function end: 41;
+ 17:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 18:         reg_var_decl  128               // var tmp128 .. tmp132;
+ 19:         this_binding                    // tmp130 = this;
+ 20:           assignment  131    5          // tmp131 = 'x': STRING;
+ 21:          prop_setter  130  131          // tmp130[tmp131] = x;
+ 22:         this_binding                    // tmp130 = this;
+ 23:           assignment  131    5          // tmp131 = 'y': STRING;
+ 24:          prop_setter  130  131          // tmp130[tmp131] = y;
+ 25:         this_binding                    // tmp130 = this;
+ 26:           assignment  131    5          // tmp131 = 'z': STRING;
+ 27:          prop_setter  130  131          // tmp130[tmp131] = z;
+ 28:         this_binding                    // tmp130 = this;
+ 29:           assignment  131    5          // tmp131 = 'vx': STRING;
+ 30:          prop_setter  130  131          // tmp130[tmp131] = vx;
+ 31:         this_binding                    // tmp130 = this;
+ 32:           assignment  131    5          // tmp131 = 'vy': STRING;
+ 33:          prop_setter  130  131          // tmp130[tmp131] = vy;
+ 34:         this_binding                    // tmp130 = this;
+ 35:           assignment  131    5          // tmp131 = 'vz': STRING;
+ 36:          prop_setter  130  131          // tmp130[tmp131] = vz;
+ 37:         this_binding                    // tmp130 = this;
+ 38:           assignment  131    5          // tmp131 = 'mass': STRING;
+ 39:          prop_setter  130  131          // tmp130[tmp131] = mass;
+ 40:                  ret                    // ret;
+ 41:          func_decl_n   14               // function Jupiter ();
+ 42:                 meta    7    0          // function end: 69;
+ 43:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 44:         reg_var_decl  128               // var tmp128 .. tmp132;
+ 45:          construct_n  130    6          // 
+ 46:           assignment  130    3          // tmp130 = 4.841431442464721: NUMBER;
+ 47:                 meta    2  130          // 
+ 48:           assignment  130    3          // tmp130 = 1.1603200440274283: NUMBER;
+ 49:          unary_minus  131               // tmp131 = -tmp130;
+ 50:                 meta    2  131          // 
+ 51:           assignment  130    3          // tmp130 = 0.10362204447112311: NUMBER;
+ 52:          unary_minus  131               // tmp131 = -tmp130;
+ 53:                 meta    2  131          // 
+ 54:           assignment  130    3          // tmp130 = 0.001660076642744037: NUMBER;
+ 55:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 56:                 meta    2  131          // 
+ 57:           assignment  130    3          // tmp130 = 0.007699011184197404: NUMBER;
+ 58:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 59:                 meta    2  131          // 
+ 60:           assignment  130    3          // tmp130 = 0.0000690460016972063: NUMBER;
+ 61:          unary_minus  131               // tmp131 = -tmp130;
+ 62:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+ 63:                 meta    2  132          // 
+ 64:           assignment  130    3          // tmp130 = 0.0009547919384243266: NUMBER;
+ 65:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+ 66:                 meta    2  131          // tmp130 = new Body (tmp130, tmp131, tmp131, tmp131, tmp131, tmp132, tmp131);
+ 67:               retval                    // return tmp130;
+ 68:                  ret                    // ret;
+ 69:          func_decl_n    2               // function Saturn ();
+ 70:                 meta    7    0          // function end: 96;
+ 71:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 72:         reg_var_decl  128               // var tmp128 .. tmp132;
+ 73:          construct_n  130    3          // 
+ 74:           assignment  130    3          // tmp130 = 8.34336671824458: NUMBER;
+ 75:                 meta    2  130          // 
+ 76:           assignment  130    3          // tmp130 = 4.124798564124305: NUMBER;
+ 77:                 meta    2  130          // 
+ 78:           assignment  130    3          // tmp130 = 0.4035234171143214: NUMBER;
+ 79:          unary_minus  131               // tmp131 = -tmp130;
+ 80:                 meta    2  131          // 
+ 81:           assignment  130    3          // tmp130 = 0.002767425107268624: NUMBER;
+ 82:          unary_minus  131               // tmp131 = -tmp130;
+ 83:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+ 84:                 meta    2  132          // 
+ 85:           assignment  130    3          // tmp130 = 0.004998528012349172: NUMBER;
+ 86:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 87:                 meta    2  131          // 
+ 88:           assignment  130    3          // tmp130 = 0.000023041729757376393: NUMBER;
+ 89:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+ 90:                 meta    2  131          // 
+ 91:           assignment  130    3          // tmp130 = 0.0002858859806661308: NUMBER;
+ 92:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+ 93:                 meta    2  131          // tmp130 = new Body (tmp130, tmp130, tmp131, tmp132, tmp131, tmp131, tmp131);
+ 94:               retval                    // return tmp130;
+ 95:                  ret                    // ret;
+ 96:          func_decl_n   12               // function Uranus ();
+ 97:                 meta    7    0          // function end: 124;
+ 98:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+ 99:         reg_var_decl  128               // var tmp128 .. tmp132;
+100:          construct_n  130    3          // 
+101:           assignment  130    3          // tmp130 = 12.894369562139131: NUMBER;
+102:                 meta    2  130          // 
+103:           assignment  130    3          // tmp130 = 15.111151401698631: NUMBER;
+104:          unary_minus  131               // tmp131 = -tmp130;
+105:                 meta    2  131          // 
+106:           assignment  130    3          // tmp130 = 0.22330757889265573: NUMBER;
+107:          unary_minus  131               // tmp131 = -tmp130;
+108:                 meta    2  131          // 
+109:           assignment  130    3          // tmp130 = 0.002964601375647616: NUMBER;
+110:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+111:                 meta    2  131          // 
+112:           assignment  130    3          // tmp130 = 0.0023784717395948095: NUMBER;
+113:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+114:                 meta    2  131          // 
+115:           assignment  130    3          // tmp130 = 0.000029658956854023755: NUMBER;
+116:          unary_minus  131               // tmp131 = -tmp130;
+117:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+118:                 meta    2  132          // 
+119:           assignment  130    3          // tmp130 = 0.00004366244043351563: NUMBER;
+120:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+121:                 meta    2  131          // tmp130 = new Body (tmp130, tmp131, tmp131, tmp131, tmp131, tmp132, tmp131);
+122:               retval                    // return tmp130;
+123:                  ret                    // ret;
+124:          func_decl_n   20               // function Neptune ();
+125:                 meta    7    0          // function end: 151;
+126:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+127:         reg_var_decl  128               // var tmp128 .. tmp132;
+128:          construct_n  130    0          // 
+129:           assignment  130    3          // tmp130 = 15.379697114850916: NUMBER;
+130:                 meta    2  130          // 
+131:           assignment  130    3          // tmp130 = 25.919314609987964: NUMBER;
+132:          unary_minus  131               // tmp131 = -tmp130;
+133:                 meta    2  131          // 
+134:           assignment  130    3          // tmp130 = 0.17925877295037118: NUMBER;
+135:                 meta    2  130          // 
+136:           assignment  130    3          // tmp130 = 0.0026806777249038932: NUMBER;
+137:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+138:                 meta    2  131          // 
+139:           assignment  130    3          // tmp130 = 0.001628241700382423: NUMBER;
+140:       multiplication  131  130          // tmp131 = tmp130 * DAYS_PER_YEAR;
+141:                 meta    2  131          // 
+142:           assignment  130    3          // tmp130 = 0.00009515922545197159: NUMBER;
+143:          unary_minus  131               // tmp131 = -tmp130;
+144:       multiplication  132  131          // tmp132 = tmp131 * DAYS_PER_YEAR;
+145:                 meta    2  132          // 
+146:           assignment  130    3          // tmp130 = 0.000051513890204661145: NUMBER;
+147:       multiplication  131  130          // tmp131 = tmp130 * SOLAR_MASS;
+148:                 meta    2  131          // tmp130 = new Body (tmp130, tmp131, tmp130, tmp131, tmp131, tmp132, tmp131);
+149:               retval                    // return tmp130;
+150:                  ret                    // ret;
+151:          func_decl_n   10               // function Sun ();
+152:                 meta    7    0          // function end: 171;
+153:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+154:         reg_var_decl  128               // var tmp128 .. tmp130;
+155:          construct_n  130    0          // 
+156:           assignment  130    3          // tmp130 = 0: NUMBER;
+157:                 meta    2  130          // 
+158:           assignment  130    3          // tmp130 = 0: NUMBER;
+159:                 meta    2  130          // 
+160:           assignment  130    3          // tmp130 = 0: NUMBER;
+161:                 meta    2  130          // 
+162:           assignment  130    3          // tmp130 = 0: NUMBER;
+163:                 meta    2  130          // 
+164:           assignment  130    3          // tmp130 = 0: NUMBER;
+165:                 meta    2  130          // 
+166:           assignment  130    3          // tmp130 = 0: NUMBER;
+167:                 meta    2  130          // 
+168:                 meta    2    9          // tmp130 = new Body (tmp130, tmp130, tmp130, tmp130, tmp130, tmp130, SOLAR_MASS);
+169:               retval                    // return tmp130;
+170:                  ret                    // ret;
+171:          func_decl_n   12               // 
+172:                 meta    2   13          // function NBodySystem (bodies);
+173:                 meta    7    0          // function end: 241;
+174:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+175:         reg_var_decl  128               // var tmp128 .. tmp137;
+176:             var_decl                    // var px;
+177:             var_decl                    // var py;
+178:             var_decl                    // var pz;
+179:             var_decl                    // var size;
+180:             var_decl                    // var i;
+181:             var_decl                    // var b;
+182:             var_decl                    // var m;
+183:         this_binding                    // tmp130 = this;
+184:           assignment  131    5          // tmp131 = 'bodies': STRING;
+185:          prop_setter  130  131          // tmp130[tmp131] = bodies;
+186:           assignment  130    3          // tmp130 = 0: NUMBER;
+187:           assignment   14    6          // px = tmp130 : TYPEOF(tmp130);
+188:           assignment  130    3          // tmp130 = 0: NUMBER;
+189:           assignment   15    6          // py = tmp130 : TYPEOF(tmp130);
+190:           assignment  130    3          // tmp130 = 0: NUMBER;
+191:           assignment   16    6          // pz = tmp130 : TYPEOF(tmp130);
+192:         this_binding                    // tmp130 = this;
+193:           assignment  131    5          // tmp131 = 'bodies': STRING;
+194:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+195:           assignment  133    5          // tmp133 = 'length': STRING;
+196:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+197:           assignment    2    6          // size = tmp134 : TYPEOF(tmp134);
+198:           assignment  130    1          // tmp130 = 0: SMALLINT;
+199:           assignment    3    6          // i = tmp130 : TYPEOF(tmp130);
+200:             jmp_down    0               // goto 225;
+201:         this_binding                    // tmp130 = this;
+202:           assignment  131    5          // tmp131 = 'bodies': STRING;
+203:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+204:          prop_getter  133  132          // tmp133 = tmp132[i];
+205:           assignment    4    6          // b = tmp133 : TYPEOF(tmp133);
+206:           assignment  130    5          // tmp130 = 'mass': STRING;
+207:          prop_getter  131    4          // tmp131 = b[tmp130];
+208:           assignment    6    6          // m = tmp131 : TYPEOF(tmp131);
+209:           assignment  130    5          // tmp130 = 'vx': STRING;
+210:          prop_getter  131    4          // tmp131 = b[tmp130];
+211:       multiplication  132  131          // tmp132 = tmp131 * m;
+212:             addition    8    8          // px = px + tmp132;
+213:           assignment  133    6          // tmp133 = px : TYPEOF(px);
+214:           assignment  130    5          // tmp130 = 'vy': STRING;
+215:          prop_getter  131    4          // tmp131 = b[tmp130];
+216:       multiplication  132  131          // tmp132 = tmp131 * m;
+217:             addition   10   10          // py = py + tmp132;
+218:           assignment  133    6          // tmp133 = py : TYPEOF(py);
+219:           assignment  130    5          // tmp130 = 'vz': STRING;
+220:          prop_getter  131    4          // tmp131 = b[tmp130];
+221:       multiplication  132  131          // tmp132 = tmp131 * m;
+222:             addition   12   12          // pz = pz + tmp132;
+223:           assignment  133    6          // tmp133 = pz : TYPEOF(pz);
+224:            post_incr  134               // tmp134 = i++;
+225:           assignment  135    6          // tmp135 = i : TYPEOF(i);
+226:            less_than  136  135          // tmp136 = tmp135 < size;
+227:       is_true_jmp_up  136    0          // if (tmp136) goto 201;
+228:         this_binding                    // tmp130 = this;
+229:           assignment  131    5          // tmp131 = 'bodies': STRING;
+230:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+231:           assignment  133    1          // tmp133 = 0: SMALLINT;
+232:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+233:           assignment  135    5          // tmp135 = 'offsetMomentum': STRING;
+234:          prop_getter  136  134          // tmp136 = tmp134[tmp135];
+235:               call_n  137  136          // 
+236:                 meta    1    1          // 
+237:                 meta    2    8          // 
+238:                 meta    2   10          // 
+239:                 meta    2   12          // tmp137 = tmp136 (this_arg = tmp134, px, py, pz);
+240:                  ret                    // ret;
+241:           assignment  130    3          // tmp130 = 3.141592653589793: NUMBER;
+242:           assignment   15    6          // PI = tmp130 : TYPEOF(tmp130);
+243:           assignment  130    1          // tmp130 = 4: SMALLINT;
+244:       multiplication  131  130          // tmp131 = tmp130 * PI;
+245:       multiplication  132  131          // tmp132 = tmp131 * PI;
+246:           assignment   16    6          // SOLAR_MASS = tmp132 : TYPEOF(tmp132);
+247:           assignment  130    3          // tmp130 = 365.24: NUMBER;
+248:           assignment   18    6          // DAYS_PER_YEAR = tmp130 : TYPEOF(tmp130);
+249:           assignment  130    5          // tmp130 = 'prototype': STRING;
+250:          prop_getter  131   20          // tmp131 = Body[tmp130];
+251:           assignment  132    5          // tmp132 = 'offsetMomentum': STRING;
+252:          func_expr_n  134  255          // 
+253:                 meta    2    8          // 
+254:                 meta    2   10          // 
+255:                 meta    2   12          // tmp134 = function (px, py, pz);
+256:                 meta    7    0          // function end: 277;
+257:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+258:         reg_var_decl  128               // var tmp128 .. tmp134;
+259:         this_binding                    // tmp130 = this;
+260:           assignment  131    5          // tmp131 = 'vx': STRING;
+261:          unary_minus  133               // tmp133 = -px;
+262:             division  134  133          // tmp134 = tmp133 / SOLAR_MASS;
+263:          prop_setter  130  131          // tmp130[tmp131] = tmp134;
+264:         this_binding                    // tmp130 = this;
+265:           assignment  131    5          // tmp131 = 'vy': STRING;
+266:          unary_minus  133               // tmp133 = -py;
+267:             division  134  133          // tmp134 = tmp133 / SOLAR_MASS;
+268:          prop_setter  130  131          // tmp130[tmp131] = tmp134;
+269:         this_binding                    // tmp130 = this;
+270:           assignment  131    5          // tmp131 = 'vz': STRING;
+271:          unary_minus  133               // tmp133 = -pz;
+272:             division  134  133          // tmp134 = tmp133 / SOLAR_MASS;
+273:          prop_setter  130  131          // tmp130[tmp131] = tmp134;
+274:         this_binding                    // tmp130 = this;
+275:               retval                    // return tmp130;
+276:                  ret                    // ret;
+277:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
+278:           assignment  130    5          // tmp130 = 'prototype': STRING;
+279:          prop_getter  131    8          // tmp131 = NBodySystem[tmp130];
+280:           assignment  132    5          // tmp132 = 'advance': STRING;
+281:          func_expr_n  134  255          // 
+282:                 meta    2   10          // tmp134 = function (dt);
+283:                 meta    7    0          // function end: 459;
+284:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+285:         reg_var_decl  128               // var tmp128 .. tmp143;
+286:             var_decl                    // var dx;
+287:             var_decl                    // var dy;
+288:             var_decl                    // var dz;
+289:             var_decl                    // var distance;
+290:             var_decl                    // var mag;
+291:             var_decl                    // var size;
+292:             var_decl                    // var i;
+293:             var_decl                    // var bodyi;
+294:             var_decl                    // var j;
+295:             var_decl                    // var bodyj;
+296:             var_decl                    // var body;
+297:         this_binding                    // tmp130 = this;
+298:           assignment  131    5          // tmp131 = 'bodies': STRING;
+299:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+300:           assignment  133    5          // tmp133 = 'length': STRING;
+301:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+302:           assignment   16    6          // size = tmp134 : TYPEOF(tmp134);
+303:           assignment  130    1          // tmp130 = 0: SMALLINT;
+304:           assignment   17    6          // i = tmp130 : TYPEOF(tmp130);
+305:             jmp_down    0               // goto 419;
+306:         this_binding                    // tmp130 = this;
+307:           assignment  131    5          // tmp131 = 'bodies': STRING;
+308:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+309:          prop_getter  133  132          // tmp133 = tmp132[i];
+310:           assignment   18    6          // bodyi = tmp133 : TYPEOF(tmp133);
+311:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+312:           assignment  131    1          // tmp131 = 1: SMALLINT;
+313:             addition  132  130          // tmp132 = tmp130 + tmp131;
+314:           assignment   19    6          // j = tmp132 : TYPEOF(tmp132);
+315:             jmp_down    0               // goto 415;
+316:         this_binding                    // tmp130 = this;
+317:           assignment  131    5          // tmp131 = 'bodies': STRING;
+318:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+319:          prop_getter  133  132          // tmp133 = tmp132[j];
+320:           assignment    0    6          // bodyj = tmp133 : TYPEOF(tmp133);
+321:           assignment  130    5          // tmp130 = 'x': STRING;
+322:          prop_getter  131    2          // tmp131 = bodyi[tmp130];
+323:           assignment  132    5          // tmp132 = 'x': STRING;
+324:          prop_getter  133    0          // tmp133 = bodyj[tmp132];
+325:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+326:           assignment    3    6          // dx = tmp134 : TYPEOF(tmp134);
+327:           assignment  130    5          // tmp130 = 'y': STRING;
+328:          prop_getter  131    2          // tmp131 = bodyi[tmp130];
+329:           assignment  132    5          // tmp132 = 'y': STRING;
+330:          prop_getter  133    0          // tmp133 = bodyj[tmp132];
+331:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+332:           assignment    5    6          // dy = tmp134 : TYPEOF(tmp134);
+333:           assignment  130    5          // tmp130 = 'z': STRING;
+334:          prop_getter  131    2          // tmp131 = bodyi[tmp130];
+335:           assignment  132    5          // tmp132 = 'z': STRING;
+336:          prop_getter  133    0          // tmp133 = bodyj[tmp132];
+337:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+338:           assignment    7    6          // dz = tmp134 : TYPEOF(tmp134);
+339:           assignment  130    5          // tmp130 = 'sqrt': STRING;
+340:          prop_getter  131    9          // tmp131 = Math[tmp130];
+341:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
+342:               call_n  133  131          // 
+343:                 meta    1    1          // 
+344:           assignment  133    6          // tmp133 = dx : TYPEOF(dx);
+345:       multiplication  134  133          // tmp134 = tmp133 * dx;
+346:           assignment  135    6          // tmp135 = dy : TYPEOF(dy);
+347:       multiplication  136  135          // tmp136 = tmp135 * dy;
+348:             addition  137  134          // tmp137 = tmp134 + tmp136;
+349:           assignment  138    6          // tmp138 = dz : TYPEOF(dz);
+350:       multiplication  139  138          // tmp139 = tmp138 * dz;
+351:             addition  140  137          // tmp140 = tmp137 + tmp139;
+352:                 meta    2  140          // tmp133 = tmp131 (this_arg = tmp132, tmp140);
+353:           assignment   10    6          // distance = tmp133 : TYPEOF(tmp133);
+354:           assignment  130    6          // tmp130 = dt : TYPEOF(dt);
+355:           assignment  131    6          // tmp131 = distance : TYPEOF(distance);
+356:       multiplication  132  131          // tmp132 = tmp131 * distance;
+357:       multiplication  133  132          // tmp133 = tmp132 * distance;
+358:             division  134  130          // tmp134 = tmp130 / tmp133;
+359:           assignment   12    6          // mag = tmp134 : TYPEOF(tmp134);
+360:           assignment  130    5          // tmp130 = 'vx': STRING;
+361:           assignment  132    6          // tmp132 = dx : TYPEOF(dx);
+362:           assignment  133    5          // tmp133 = 'mass': STRING;
+363:          prop_getter  134    0          // tmp134 = bodyj[tmp133];
+364:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+365:       multiplication  136  135          // tmp136 = tmp135 * mag;
+366:          prop_getter  137    2          // tmp137 = bodyi[tmp130];
+367:         substraction  137  137          // tmp137 = tmp137 - tmp136;
+368:          prop_setter    2  130          // bodyi[tmp130] = tmp137;
+369:           assignment  130    5          // tmp130 = 'vy': STRING;
+370:           assignment  132    6          // tmp132 = dy : TYPEOF(dy);
+371:           assignment  133    5          // tmp133 = 'mass': STRING;
+372:          prop_getter  134    0          // tmp134 = bodyj[tmp133];
+373:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+374:       multiplication  136  135          // tmp136 = tmp135 * mag;
+375:          prop_getter  137    2          // tmp137 = bodyi[tmp130];
+376:         substraction  137  137          // tmp137 = tmp137 - tmp136;
+377:          prop_setter    2  130          // bodyi[tmp130] = tmp137;
+378:           assignment  130    5          // tmp130 = 'vz': STRING;
+379:           assignment  132    6          // tmp132 = dz : TYPEOF(dz);
+380:           assignment  133    5          // tmp133 = 'mass': STRING;
+381:          prop_getter  134    0          // tmp134 = bodyj[tmp133];
+382:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+383:       multiplication  136  135          // tmp136 = tmp135 * mag;
+384:          prop_getter  137    0          // tmp137 = bodyi[tmp130];
+385:         substraction  137  137          // tmp137 = tmp137 - tmp136;
+386:          prop_setter    0  130          // bodyi[tmp130] = tmp137;
+387:           assignment  130    5          // tmp130 = 'vx': STRING;
+388:           assignment  132    6          // tmp132 = dx : TYPEOF(dx);
+389:           assignment  133    5          // tmp133 = 'mass': STRING;
+390:          prop_getter  134    0          // tmp134 = bodyi[tmp133];
+391:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+392:       multiplication  136  135          // tmp136 = tmp135 * mag;
+393:          prop_getter  137    5          // tmp137 = bodyj[tmp130];
+394:             addition  137  137          // tmp137 = tmp137 + tmp136;
+395:          prop_setter    5  130          // bodyj[tmp130] = tmp137;
+396:           assignment  130    5          // tmp130 = 'vy': STRING;
+397:           assignment  132    6          // tmp132 = dy : TYPEOF(dy);
+398:           assignment  133    5          // tmp133 = 'mass': STRING;
+399:          prop_getter  134    0          // tmp134 = bodyi[tmp133];
+400:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+401:       multiplication  136  135          // tmp136 = tmp135 * mag;
+402:          prop_getter  137    5          // tmp137 = bodyj[tmp130];
+403:             addition  137  137          // tmp137 = tmp137 + tmp136;
+404:          prop_setter    5  130          // bodyj[tmp130] = tmp137;
+405:           assignment  130    5          // tmp130 = 'vz': STRING;
+406:           assignment  132    6          // tmp132 = dz : TYPEOF(dz);
+407:           assignment  133    5          // tmp133 = 'mass': STRING;
+408:          prop_getter  134    0          // tmp134 = bodyi[tmp133];
+409:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+410:       multiplication  136  135          // tmp136 = tmp135 * mag;
+411:          prop_getter  137    5          // tmp137 = bodyj[tmp130];
+412:             addition  137  137          // tmp137 = tmp137 + tmp136;
+413:          prop_setter    5  130          // bodyj[tmp130] = tmp137;
+414:            post_incr  138               // tmp138 = j++;
+415:           assignment  139    6          // tmp139 = j : TYPEOF(j);
+416:            less_than  140  139          // tmp140 = tmp139 < size;
+417:       is_true_jmp_up  140    0          // if (tmp140) goto 316;
+418:            post_incr  141               // tmp141 = i++;
+419:           assignment  142    6          // tmp142 = i : TYPEOF(i);
+420:            less_than  143  142          // tmp143 = tmp142 < size;
+421:       is_true_jmp_up  143    0          // if (tmp143) goto 306;
+422:           assignment  130    1          // tmp130 = 0: SMALLINT;
+423:           assignment   12    6          // i = tmp130 : TYPEOF(tmp130);
+424:             jmp_down    0               // goto 455;
+425:         this_binding                    // tmp130 = this;
+426:           assignment  131    5          // tmp131 = 'bodies': STRING;
+427:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+428:          prop_getter  133  132          // tmp133 = tmp132[i];
+429:           assignment   14    6          // body = tmp133 : TYPEOF(tmp133);
+430:           assignment  130    5          // tmp130 = 'x': STRING;
+431:           assignment  132    6          // tmp132 = dt : TYPEOF(dt);
+432:           assignment  133    5          // tmp133 = 'vx': STRING;
+433:          prop_getter  134   14          // tmp134 = body[tmp133];
+434:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+435:          prop_getter  136   14          // tmp136 = body[tmp130];
+436:             addition  136  136          // tmp136 = tmp136 + tmp135;
+437:          prop_setter   14  130          // body[tmp130] = tmp136;
+438:           assignment  130    5          // tmp130 = 'y': STRING;
+439:           assignment  132    6          // tmp132 = dt : TYPEOF(dt);
+440:           assignment  133    5          // tmp133 = 'vy': STRING;
+441:          prop_getter  134   14          // tmp134 = body[tmp133];
+442:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+443:          prop_getter  136   14          // tmp136 = body[tmp130];
+444:             addition  136  136          // tmp136 = tmp136 + tmp135;
+445:          prop_setter   14  130          // body[tmp130] = tmp136;
+446:           assignment  130    5          // tmp130 = 'z': STRING;
+447:           assignment  132    6          // tmp132 = dt : TYPEOF(dt);
+448:           assignment  133    5          // tmp133 = 'vz': STRING;
+449:          prop_getter  134    1          // tmp134 = body[tmp133];
+450:       multiplication  135  132          // tmp135 = tmp132 * tmp134;
+451:          prop_getter  136    1          // tmp136 = body[tmp130];
+452:             addition  136  136          // tmp136 = tmp136 + tmp135;
+453:          prop_setter    1  130          // body[tmp130] = tmp136;
+454:            post_incr  137               // tmp137 = i++;
+455:           assignment  138    6          // tmp138 = i : TYPEOF(i);
+456:            less_than  139  138          // tmp139 = tmp138 < size;
+457:       is_true_jmp_up  139    0          // if (tmp139) goto 425;
+458:                  ret                    // ret;
+459:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
+460:           assignment  130    5          // tmp130 = 'prototype': STRING;
+461:          prop_getter  131    5          // tmp131 = NBodySystem[tmp130];
+462:           assignment  132    5          // tmp132 = 'energy': STRING;
+463:          func_expr_n  134  255          // tmp134 = function ();
+464:                 meta    7    0          // function end: 578;
+465:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+466:         reg_var_decl  128               // var tmp128 .. tmp152;
+467:             var_decl                    // var dx;
+468:             var_decl                    // var dy;
+469:             var_decl                    // var dz;
+470:             var_decl                    // var distance;
+471:             var_decl                    // var e;
+472:             var_decl                    // var size;
+473:             var_decl                    // var i;
+474:             var_decl                    // var bodyi;
+475:             var_decl                    // var j;
+476:             var_decl                    // var bodyj;
+477:           assignment  130    3          // tmp130 = 0: NUMBER;
+478:           assignment   11    6          // e = tmp130 : TYPEOF(tmp130);
+479:         this_binding                    // tmp130 = this;
+480:           assignment  131    5          // tmp131 = 'bodies': STRING;
+481:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+482:           assignment  133    5          // tmp133 = 'length': STRING;
+483:          prop_getter  134  132          // tmp134 = tmp132[tmp133];
+484:           assignment    3    6          // size = tmp134 : TYPEOF(tmp134);
+485:           assignment  130    1          // tmp130 = 0: SMALLINT;
+486:           assignment    2    6          // i = tmp130 : TYPEOF(tmp130);
+487:             jmp_down    0               // goto 573;
+488:         this_binding                    // tmp130 = this;
+489:           assignment  131    5          // tmp131 = 'bodies': STRING;
+490:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+491:          prop_getter  133  132          // tmp133 = tmp132[i];
+492:           assignment   12    6          // bodyi = tmp133 : TYPEOF(tmp133);
+493:           assignment  130    3          // tmp130 = 0.5: NUMBER;
+494:           assignment  131    5          // tmp131 = 'mass': STRING;
+495:          prop_getter  132   12          // tmp132 = bodyi[tmp131];
+496:       multiplication  133  130          // tmp133 = tmp130 * tmp132;
+497:           assignment  134    5          // tmp134 = 'vx': STRING;
+498:          prop_getter  135   12          // tmp135 = bodyi[tmp134];
+499:           assignment  136    5          // tmp136 = 'vx': STRING;
+500:          prop_getter  137   12          // tmp137 = bodyi[tmp136];
+501:       multiplication  138  135          // tmp138 = tmp135 * tmp137;
+502:           assignment  139    5          // tmp139 = 'vy': STRING;
+503:          prop_getter  140   12          // tmp140 = bodyi[tmp139];
+504:           assignment  141    5          // tmp141 = 'vy': STRING;
+505:          prop_getter  142   12          // tmp142 = bodyi[tmp141];
+506:       multiplication  143  140          // tmp143 = tmp140 * tmp142;
+507:             addition  144  138          // tmp144 = tmp138 + tmp143;
+508:           assignment  145    5          // tmp145 = 'vz': STRING;
+509:          prop_getter  146   12          // tmp146 = bodyi[tmp145];
+510:           assignment  147    5          // tmp147 = 'vz': STRING;
+511:          prop_getter  148   12          // tmp148 = bodyi[tmp147];
+512:       multiplication  149  146          // tmp149 = tmp146 * tmp148;
+513:             addition  150  144          // tmp150 = tmp144 + tmp149;
+514:       multiplication  151  133          // tmp151 = tmp133 * tmp150;
+515:             addition    0    0          // e = e + tmp151;
+516:           assignment  152    6          // tmp152 = e : TYPEOF(e);
+517:           assignment  130    6          // tmp130 = i : TYPEOF(i);
+518:           assignment  131    1          // tmp131 = 1: SMALLINT;
+519:             addition  132  130          // tmp132 = tmp130 + tmp131;
+520:           assignment    2    6          // j = tmp132 : TYPEOF(tmp132);
+521:             jmp_down    0               // goto 569;
+522:         this_binding                    // tmp130 = this;
+523:           assignment  131    5          // tmp131 = 'bodies': STRING;
+524:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+525:          prop_getter  133  132          // tmp133 = tmp132[j];
+526:           assignment    4    6          // bodyj = tmp133 : TYPEOF(tmp133);
+527:           assignment  130    5          // tmp130 = 'x': STRING;
+528:          prop_getter  131    6          // tmp131 = bodyi[tmp130];
+529:           assignment  132    5          // tmp132 = 'x': STRING;
+530:          prop_getter  133    4          // tmp133 = bodyj[tmp132];
+531:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+532:           assignment    7    6          // dx = tmp134 : TYPEOF(tmp134);
+533:           assignment  130    5          // tmp130 = 'y': STRING;
+534:          prop_getter  131    6          // tmp131 = bodyi[tmp130];
+535:           assignment  132    5          // tmp132 = 'y': STRING;
+536:          prop_getter  133    4          // tmp133 = bodyj[tmp132];
+537:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+538:           assignment    9    6          // dy = tmp134 : TYPEOF(tmp134);
+539:           assignment  130    5          // tmp130 = 'z': STRING;
+540:          prop_getter  131    6          // tmp131 = bodyi[tmp130];
+541:           assignment  132    5          // tmp132 = 'z': STRING;
+542:          prop_getter  133    4          // tmp133 = bodyj[tmp132];
+543:         substraction  134  131          // tmp134 = tmp131 - tmp133;
+544:           assignment   11    6          // dz = tmp134 : TYPEOF(tmp134);
+545:           assignment  130    5          // tmp130 = 'sqrt': STRING;
+546:          prop_getter  131   13          // tmp131 = Math[tmp130];
+547:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
+548:               call_n  133  131          // 
+549:                 meta    1    1          // 
+550:           assignment  133    6          // tmp133 = dx : TYPEOF(dx);
+551:       multiplication  134  133          // tmp134 = tmp133 * dx;
+552:           assignment  135    6          // tmp135 = dy : TYPEOF(dy);
+553:       multiplication  136  135          // tmp136 = tmp135 * dy;
+554:             addition  137  134          // tmp137 = tmp134 + tmp136;
+555:           assignment  138    6          // tmp138 = dz : TYPEOF(dz);
+556:       multiplication  139  138          // tmp139 = tmp138 * dz;
+557:             addition  140  137          // tmp140 = tmp137 + tmp139;
+558:                 meta    2  140          // tmp133 = tmp131 (this_arg = tmp132, tmp140);
+559:           assignment   14    6          // distance = tmp133 : TYPEOF(tmp133);
+560:           assignment  130    5          // tmp130 = 'mass': STRING;
+561:          prop_getter  131    6          // tmp131 = bodyi[tmp130];
+562:           assignment  132    5          // tmp132 = 'mass': STRING;
+563:          prop_getter  133    4          // tmp133 = bodyj[tmp132];
+564:       multiplication  134  131          // tmp134 = tmp131 * tmp133;
+565:             division  135  134          // tmp135 = tmp134 / distance;
+566:         substraction    0    0          // e = e - tmp135;
+567:           assignment  136    6          // tmp136 = e : TYPEOF(e);
+568:            post_incr  137               // tmp137 = j++;
+569:           assignment  138    6          // tmp138 = j : TYPEOF(j);
+570:            less_than  139  138          // tmp139 = tmp138 < size;
+571:       is_true_jmp_up  139    0          // if (tmp139) goto 522;
+572:            post_incr  140               // tmp140 = i++;
+573:           assignment  141    6          // tmp141 = i : TYPEOF(i);
+574:            less_than  142  141          // tmp142 = tmp141 < size;
+575:       is_true_jmp_up  142    0          // if (tmp142) goto 488;
+576:               retval                    // return e;
+577:                  ret                    // ret;
+578:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
+579:           assignment  130    1          // tmp130 = 0: SMALLINT;
+580:           assignment    1    6          // ret = tmp130 : TYPEOF(tmp130);
+581:           assignment  130    1          // tmp130 = 3: SMALLINT;
+582:           assignment    2    6          // n = tmp130 : TYPEOF(tmp130);
+583:             jmp_down    0               // goto 641;
+584:          func_expr_n  130  255          // tmp130 = function ();
+585:                 meta    7    0          // function end: 638;
+586:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+587:         reg_var_decl  128               // var tmp128 .. tmp136;
+588:             var_decl                    // var bodies;
+589:             var_decl                    // var max;
+590:             var_decl                    // var i;
+591:          construct_n  130    6          // 
+592:               call_n  130    7          // 
+593:               call_n  130    8          // 
+594:                 meta    2  130          // 
+595:               call_n  130    9          // 
+596:                 meta    2  130          // 
+597:               call_n  130   10          // 
+598:                 meta    2  130          // 
+599:               call_n  130   11          // 
+600:                 meta    2  130          // 
+601:               call_n  130   12          // 
+602:                 meta    2  130          // 
+603:                 meta    2  130          // 
+604:           assignment    3    6          // bodies = tmp130 : TYPEOF(tmp130);
+605:           assignment  130    6          // tmp130 = n : TYPEOF(n);
+606:           assignment  131    1          // tmp131 = 100: SMALLINT;
+607:       multiplication  132  130          // tmp132 = tmp130 * tmp131;
+608:           assignment    4    6          // max = tmp132 : TYPEOF(tmp132);
+609:           assignment  130    5          // tmp130 = 'energy': STRING;
+610:          prop_getter  131    3          // tmp131 = bodies[tmp130];
+611:           assignment  132    6          // tmp132 = bodies : TYPEOF(bodies);
+612:               call_n  133  131          // 
+613:                 meta    1    1          // tmp133 = tmp131 (this_arg = tmp132);
+614:             addition    1    1          // ret = ret + tmp133;
+615:           assignment  134    6          // tmp134 = ret : TYPEOF(ret);
+616:           assignment  130    1          // tmp130 = 0: SMALLINT;
+617:           assignment    5    6          // i = tmp130 : TYPEOF(tmp130);
+618:             jmp_down    0               // goto 627;
+619:           assignment  130    5          // tmp130 = 'advance': STRING;
+620:          prop_getter  131    3          // tmp131 = bodies[tmp130];
+621:           assignment  132    6          // tmp132 = bodies : TYPEOF(bodies);
+622:               call_n  133  131          // 
+623:                 meta    1    1          // 
+624:           assignment  133    3          // tmp133 = 0.01: NUMBER;
+625:                 meta    2  133          // tmp133 = tmp131 (this_arg = tmp132, tmp133);
+626:            post_incr  134               // tmp134 = i++;
+627:           assignment  135    6          // tmp135 = i : TYPEOF(i);
+628:            less_than  136  135          // tmp136 = tmp135 < max;
+629:       is_true_jmp_up  136    0          // if (tmp136) goto 619;
+630:           assignment  130    5          // tmp130 = 'energy': STRING;
+631:          prop_getter  131    3          // tmp131 = bodies[tmp130];
+632:           assignment  132    6          // tmp132 = bodies : TYPEOF(bodies);
+633:               call_n  133  131          // 
+634:                 meta    1    1          // tmp133 = tmp131 (this_arg = tmp132);
+635:             addition    1    1          // ret = ret + tmp133;
+636:           assignment  134    6          // tmp134 = ret : TYPEOF(ret);
+637:                  ret                    // ret;
+638:               call_n  131  130          // 
+639:           assignment  132    1          // tmp132 = 2: SMALLINT;
+640:       multiplication    0    0          // n = n * tmp132;
+641:           assignment  133    6          // tmp133 = n : TYPEOF(n);
+642:           assignment  134    1          // tmp134 = 24: SMALLINT;
+643:   less_or_equal_than  135  133          // tmp135 = tmp133 <= tmp134;
+644:       is_true_jmp_up  135    0          // if (tmp135) goto 584;
+645:           assignment  130    3          // tmp130 = 1.3524862408537381: NUMBER;
+646:          unary_minus  131               // tmp131 = -tmp130;
+647:           assignment    2    6          // expected = tmp131 : TYPEOF(tmp131);
+648:           assignment  130    6          // tmp130 = ret : TYPEOF(ret);
+649:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+650:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 657;
+651:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+652:             addition  131  130          // tmp131 = tmp130 + expected;
+653:           assignment  132    5          // tmp132 = ' but got ': STRING;
+654:             addition  133  131          // tmp133 = tmp131 + tmp132;
+655:             addition  134  133          // tmp134 = tmp133 + ret;
+656:          throw_value                    // throw tmp134;
+657:                  ret                    // ret;

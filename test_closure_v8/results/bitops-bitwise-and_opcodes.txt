@@ -1,0 +1,99 @@
+// /*
+// 
+// bitwiseAndValue = 4294967296;
+  0:                 meta   12  255          // [to be rewritten]
+// for (var i = 0; i < 600000; i++)
+//     bitwiseAndValue = bitwiseAndValue & i;
+// var result = bitwiseAndValue;
+// var expected = 0;
+// if (result != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// for (var i = 0; i < 600000; i++)
+  2:             var_decl                    // var i;
+//     bitwiseAndValue = bitwiseAndValue & i;
+// var result = bitwiseAndValue;
+  3:             var_decl                    // var result;
+// var expected = 0;
+  4:             var_decl                    // var expected;
+// if (result != expected)
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+// 
+  5:           assignment  130    3          // tmp130 = 4294967296: NUMBER;
+  6:           assignment  254    6          // bitwiseAndValue = tmp130 : TYPEOF(tmp130);
+// for (var i = 0; i < 600000; i++)
+//     bitwiseAndValue = bitwiseAndValue & i;
+  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  8:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+  9:             jmp_down  255               // goto 65544;
+ 10:           assignment  130    6          // tmp130 = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+ 11:                b_and  131  130          // tmp131 = tmp130 & i;
+ 12:           assignment  254    6          // bitwiseAndValue = tmp131 : TYPEOF(tmp131);
+ 13:            post_incr  132               // tmp132 = i++;
+  9:             jmp_down    0               // goto 14; // REWRITE
+ 14:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 15:           assignment  134    3          // tmp134 = 600000: NUMBER;
+ 16:            less_than  135  133          // tmp135 = tmp133 < tmp134;
+ 17:       is_true_jmp_up  135    0          // if (tmp135) goto 10;
+// var result = bitwiseAndValue;
+ 18:           assignment  254    6          // result = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+// var expected = 0;
+ 19:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 20:           assignment  254    6          // expected = tmp130 : TYPEOF(tmp130);
+// if (result != expected)
+ 21:           assignment  130    6          // tmp130 = result : TYPEOF(result);
+ 22:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+ 23:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65558;
+//     throw "ERROR: bad result: expected " + expected + " but got " + result;
+ 24:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+ 25:             addition  131  130          // tmp131 = tmp130 + expected;
+ 26:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 27:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 28:             addition  134  133          // tmp134 = tmp133 + result;
+ 29:          throw_value                    // throw tmp134;
+// 
+ 23:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 30; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp135; // REWRITE
+ 30:                  ret                    // ret;
+LITERALS:
+0x84ec54 [ 24] bitwiseAndValue : STRING
+0x84ec6c [ 12] 4294967296„ : NUMBER
+0x84ec78 [  4] i : MAGIC STRING [id=200] 
+0x84ec7c [ 12] 6000007296„ : NUMBER
+0x84ec9c [ 12] result : STRING
+0x84eca8 [ 16] expected : STRING
+0x84ecb8 [ 36] ERROR: bad result: expected  : STRING
+0x84ecf0 [ 16]  but got  : STRING
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp135;
+  2:             var_decl                    // var i;
+  3:             var_decl                    // var result;
+  4:             var_decl                    // var expected;
+  5:           assignment  130    3          // tmp130 = 4294967296: NUMBER;
+  6:           assignment    4    6          // bitwiseAndValue = tmp130 : TYPEOF(tmp130);
+  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  8:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
+  9:             jmp_down    0               // goto 14;
+ 10:           assignment  130    6          // tmp130 = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+ 11:                b_and  131  130          // tmp131 = tmp130 & i;
+ 12:           assignment    4    6          // bitwiseAndValue = tmp131 : TYPEOF(tmp131);
+ 13:            post_incr  132               // tmp132 = i++;
+ 14:           assignment  133    6          // tmp133 = i : TYPEOF(i);
+ 15:           assignment  134    3          // tmp134 = 600000: NUMBER;
+ 16:            less_than  135  133          // tmp135 = tmp133 < tmp134;
+ 17:       is_true_jmp_up  135    0          // if (tmp135) goto 10;
+ 18:           assignment    1    6          // result = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+ 19:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 20:           assignment    2    6          // expected = tmp130 : TYPEOF(tmp130);
+ 21:           assignment  130    6          // tmp130 = result : TYPEOF(result);
+ 22:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
+ 23:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 30;
+ 24:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
+ 25:             addition  131  130          // tmp131 = tmp130 + expected;
+ 26:           assignment  132    5          // tmp132 = ' but got ': STRING;
+ 27:             addition  133  131          // tmp133 = tmp131 + tmp132;
+ 28:             addition  134  133          // tmp134 = tmp133 + result;
+ 29:          throw_value                    // throw tmp134;
+ 30:                  ret                    // ret;

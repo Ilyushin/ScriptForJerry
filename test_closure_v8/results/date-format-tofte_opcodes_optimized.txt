@@ -1,0 +1,152 @@
+// function d(a,c){for(var b=0;b<a.length;b++)if(a[b]==c)return!0;return!1}function e(a){var c="aABdDFgGhHijlLmMnOrsStUwWyYz".split("");a=a.split("");for(var b=0;a[b];)"\\"==a[b]?a.splice(b,1):d(c,a[b])&&(a[b]=eval(a[b]+"()")),b++}var f=new Date("1/1/2007 1:11:11");for(i=0;500>i;++i)e("Y-m-d"),e("l, F d, Y g:i:s A"),f.setTime(f.getTime()+84266956);
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    2          // [no 'arguments']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// function d(a,c){for(var b=0;b<a.length;b++)if(a[b]==c)return!0;return!1}function e(a){var c="aABdDFgGhHijlLmMnOrsStUwWyYz".split("");a=a.split("");for(var b=0;a[b];)"\\"==a[b]?a.splice(b,1):d(c,a[b])&&(a[b]=eval(a[b]+"()")),b++}var f=new Date("1/1/2007 1:11:11");for(i=0;500>i;++i)e("Y-m-d"),e("l, F d, Y g:i:s A"),f.setTime(f.getTime()+84266956);
+  2:             var_decl                    // var f;
+// 
+// function d(a,c){for(var b=0;b<a.length;b++)if(a[b]==c)return!0;return!1}function e(a){var c="aABdDFgGhHijlLmMnOrsStUwWyYz".split("");a=a.split("");for(var b=0;a[b];)"\\"==a[b]?a.splice(b,1):d(c,a[b])&&(a[b]=eval(a[b]+"()")),b++}var f=new Date("1/1/2007 1:11:11");for(i=0;500>i;++i)e("Y-m-d"),e("l, F d, Y g:i:s A"),f.setTime(f.getTime()+84266956);
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  2:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  3:                 meta    7  255          // function end: 65538;
+  4:                 meta   12  255          // [to be rewritten]
+  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  5:         reg_var_decl  128               // var tmp128 .. tmp255;
+  6:             var_decl                    // var b;
+  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  8:           assignment  254    6          // b = tmp130 : TYPEOF(tmp130);
+  9:             jmp_down  255               // goto 65544;
+ 10:          prop_getter  130  254          // tmp130 = a[b];
+ 11:          equal_value  131  130          // tmp131 = tmp130 == c;
+ 12:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65547;
+ 13:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 14:          logical_not  131               // tmp131 = ! tmp130;
+ 15:               retval                    // return tmp131;
+ 12:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 16; // REWRITE
+ 16:            post_incr  132               // tmp132 = b++;
+  9:             jmp_down    0               // goto 17; // REWRITE
+ 17:           assignment  133    6          // tmp133 = b : TYPEOF(b);
+ 18:           assignment  134    5          // tmp134 = 'length': STRING;
+ 19:          prop_getter  135  254          // tmp135 = a[tmp134];
+ 20:            less_than  136  133          // tmp136 = tmp133 < tmp135;
+ 21:       is_true_jmp_up  136    0          // if (tmp136) goto 10;
+ 22:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 23:          logical_not  131               // tmp131 = ! tmp130;
+ 24:               retval                    // return tmp131;
+  5:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
+ 25:                  ret                    // ret;
+  3:                 meta    7    0          // function end: 26; // REWRITE
+  0:          func_decl_n  254               // 
+  1:                 meta    2  254          // 
+  0:          func_decl_n  254               //  // REWRITE
+  2:                 meta    7  255          // function end: 65537;
+  3:                 meta   12  255          // [to be rewritten]
+  3:                 meta   12    2          // [no 'arguments']  // REWRITE
+  4:         reg_var_decl  128               // var tmp128 .. tmp255;
+  5:             var_decl                    // var c;
+  6:             var_decl                    // var b;
+  7:           assignment  130    5          // tmp130 = 'aABdDFgGhHijlLmMnOrsStUwWyYz': STRING;
+  8:           assignment  131    5          // tmp131 = 'split': STRING;
+  9:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
+ 10:               call_n  255  132          // 
+ 11:                 meta    1    1          // 
+ 12:           assignment  133    5          // tmp133 = '': STRING;
+ 13:                 meta    2  133          // 
+ 10:               call_n  133  132          //  // REWRITE
+ 14:           assignment  254    6          // c = tmp133 : TYPEOF(tmp133);
+ 15:           assignment  130    5          // tmp130 = 'split': STRING;
+ 16:          prop_getter  131  254          // tmp131 = a[tmp130];
+ 17:           assignment  132    6          // tmp132 = a : TYPEOF(a);
+ 18:               call_n  255  131          // 
+ 19:                 meta    1    1          // 
+ 20:           assignment  133    5          // tmp133 = '': STRING;
+ 21:                 meta    2  133          // 
+ 18:               call_n  133  131          //  // REWRITE
+ 22:           assignment  254    6          // a = tmp133 : TYPEOF(tmp133);
+ 23:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 24:           assignment  254    6          // b = tmp130 : TYPEOF(tmp130);
+ 25:             jmp_down  255               // goto 65560;
+ 26:           assignment  130    5          // tmp130 = '\': STRING;
+ 27:          prop_getter  131  254          // tmp131 = a[b];
+ 28:          equal_value  132  130          // tmp132 = tmp130 == tmp131;
+ 29:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65564;
+ 30:           assignment  133    5          // tmp133 = 'splice': STRING;
+ 31:          prop_getter  134  254          // tmp134 = a[tmp133];
+ 32:           assignment  135    6          // tmp135 = a : TYPEOF(a);
+ 33:               call_n  255  134          // 
+ 34:                 meta    1    1          // 
+ 35:                 meta    2  254          // 
+ 36:           assignment  136    1          // tmp136 = 1: SMALLINT;
+ 37:                 meta    2  136          // 
+ 33:               call_n  136  134          //  // REWRITE
+ 38:           assignment  137    6          // tmp137 = tmp136 : TYPEOF(tmp136);
+ 39:             jmp_down  255               // goto 65574;
+ 29:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 40; // REWRITE
+ 40:               call_n  255  254          // 
+ 41:                 meta    2  254          // 
+ 42:          prop_getter  138  254          // tmp138 = a[b];
+ 43:                 meta    2  138          // 
+ 40:               call_n  138  254          //  // REWRITE
+ 44:           assignment  139    6          // tmp139 = tmp138 : TYPEOF(tmp138);
+ 45:    is_false_jmp_down  139  255          // if (tmp139 == false) goto 65580;
+ 46:          prop_getter  140  254          // tmp140 = a[b];
+ 46:               call_n  255  254          // 
+ 47:                 meta    1    2          // 
+ 48:          prop_getter  141  254          // tmp141 = a[b];
+ 49:           assignment  142    5          // tmp142 = '()': STRING;
+ 50:             addition  143  141          // tmp143 = tmp141 + tmp142;
+ 51:                 meta    2  143          // 
+ 46:               call_n  141  254          //  // REWRITE
+ 52:          prop_setter  254  254          // a[b] = tmp141;
+ 53:           assignment  139    6          // tmp139 = tmp141 : TYPEOF(tmp141);
+ 45:    is_false_jmp_down  139    0          // if (tmp139 == false) goto 54; // REWRITE
+ 54:           assignment  137    6          // tmp137 = tmp139 : TYPEOF(tmp139);
+ 39:             jmp_down    0               // goto 55; // REWRITE
+ 55:            post_incr  142               // tmp142 = b++;
+ 25:             jmp_down    0               // goto 56; // REWRITE
+ 56:          prop_getter  143  254          // tmp143 = a[b];
+ 57:       is_true_jmp_up  143    0          // if (tmp143) goto 26;
+ 58:          construct_n  255  254          // 
+ 59:           assignment  130    5          // tmp130 = '1/1/2007 1:11:11': STRING;
+ 60:                 meta    2  130          // 
+ 58:          construct_n  130  254          //  // REWRITE
+ 61:           assignment  254    6          // f = tmp130 : TYPEOF(tmp130);
+ 62:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 63:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
+ 64:             jmp_down  255               // goto 65599;
+ 65:               call_n  255  254          // 
+ 66:           assignment  130    5          // tmp130 = 'Y-m-d': STRING;
+ 67:                 meta    2  130          // 
+ 65:               call_n  130  254          //  // REWRITE
+ 68:               call_n  255  254          // 
+ 69:           assignment  131    5          // tmp131 = 'l, F d, Y g:i:s A': STRING;
+ 70:                 meta    2  131          // 
+ 68:               call_n  131  254          //  // REWRITE
+ 71:           assignment  132    5          // tmp132 = 'setTime': STRING;
+ 72:          prop_getter  133  254          // tmp133 = f[tmp132];
+ 73:           assignment  134    6          // tmp134 = f : TYPEOF(f);
+ 74:               call_n  255  133          // 
+ 75:                 meta    1    1          // 
+ 76:           assignment  135    5          // tmp135 = 'getTime': STRING;
+ 77:          prop_getter  136  254          // tmp136 = f[tmp135];
+ 78:           assignment  137    6          // tmp137 = f : TYPEOF(f);
+ 79:               call_n  255  136          // 
+ 80:                 meta    1    1          // 
+ 79:               call_n  138  136          //  // REWRITE
+ 81:           assignment  139    3          // tmp139 = 84266956: NUMBER;
+ 82:             addition  140  138          // tmp140 = tmp138 + tmp139;
+ 83:                 meta    2  140          // 
+ 74:               call_n  135  133          //  // REWRITE
+ 84:             pre_incr  136               // tmp136 = ++i;
+ 64:             jmp_down    0               // goto 85; // REWRITE
+ 85:           assignment  137    3          // tmp137 = 500: NUMBER;
+ 86:         greater_than  138  137          // tmp138 = tmp137 > i;
+ 87:       is_true_jmp_up  138    0          // if (tmp138) goto 65;
+// 
+  4:         reg_var_decl  128               // var tmp128 .. tmp143; // REWRITE
+
+^
+ERROR: Ln 2, Col 1: Expected '}' token

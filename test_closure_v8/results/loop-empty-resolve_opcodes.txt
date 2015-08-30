@@ -1,0 +1,38 @@
+// for (x = 0; x < 1200000; ++x)
+  0:                 meta   12  255          // [to be rewritten]
+//     ;
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// for (x = 0; x < 1200000; ++x)
+//     ;
+// 
+// for (x = 0; x < 1200000; ++x)
+//     ;
+  2:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  3:           assignment  254    6          // x = tmp130 : TYPEOF(tmp130);
+  4:             jmp_down  255               // goto 65539;
+  5:             pre_incr  130               // tmp130 = ++x;
+  4:             jmp_down    0               // goto 6; // REWRITE
+  6:           assignment  131    6          // tmp131 = x : TYPEOF(x);
+  7:           assignment  132    3          // tmp132 = 1200000: NUMBER;
+  8:            less_than  133  131          // tmp133 = tmp131 < tmp132;
+  9:       is_true_jmp_up  133    0          // if (tmp133) goto 5;
+// 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133; // REWRITE
+ 10:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] x : STRING
+0x84ec5c [ 12] 1200000 : NUMBER
+0x84ec68 [ 24]  : EMPTY RECORD
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp133;
+  2:           assignment  130    1          // tmp130 = 0: SMALLINT;
+  3:           assignment    0    6          // x = tmp130 : TYPEOF(tmp130);
+  4:             jmp_down    0               // goto 6;
+  5:             pre_incr  130               // tmp130 = ++x;
+  6:           assignment  131    6          // tmp131 = x : TYPEOF(x);
+  7:           assignment  132    3          // tmp132 = 1200000: NUMBER;
+  8:            less_than  133  131          // tmp133 = tmp131 < tmp132;
+  9:       is_true_jmp_up  133    0          // if (tmp133) goto 5;
+ 10:                  ret                    // ret;

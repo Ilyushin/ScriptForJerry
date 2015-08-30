@@ -1,0 +1,312 @@
+// for(var a=0,b=1024;16384>=b;b*=2){var c=a,d=b;a2=a3=a4=a5=a6=a7=a8=a9=0;for(var e=-1,f=k3=sk=ck=0,g=1;g<=d;g++)f=g*g,k3=f*g,sk=Math.sin(g),ck=Math.cos(g),e=-e,a2+=Math.pow(g,-.5),a3+=1/(g*(g+1)),a4+=1/(k3*sk*sk),a5+=1/(k3*ck*ck),a6+=1/g,a7+=1/f,a8+=e/g,a9+=e/(2*g-1);a=c+(a6+a7+a8+a9)}if(60.08994194659945!=a)throw"ERROR: bad result: expected 60.08994194659945 but got "+a;
+  0:                 meta   12  255          // [to be rewritten]
+// 
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp255;
+// for(var a=0,b=1024;16384>=b;b*=2){var c=a,d=b;a2=a3=a4=a5=a6=a7=a8=a9=0;for(var e=-1,f=k3=sk=ck=0,g=1;g<=d;g++)f=g*g,k3=f*g,sk=Math.sin(g),ck=Math.cos(g),e=-e,a2+=Math.pow(g,-.5),a3+=1/(g*(g+1)),a4+=1/(k3*sk*sk),a5+=1/(k3*ck*ck),a6+=1/g,a7+=1/f,a8+=e/g,a9+=e/(2*g-1);a=c+(a6+a7+a8+a9)}if(60.08994194659945!=a)throw"ERROR: bad result: expected 60.08994194659945 but got "+a;
+  2:             var_decl                    // var a;
+  3:             var_decl                    // var b;
+  4:             var_decl                    // var c;
+  5:             var_decl                    // var d;
+  6:             var_decl                    // var e;
+  7:             var_decl                    // var f;
+  8:             var_decl                    // var g;
+// 
+// for(var a=0,b=1024;16384>=b;b*=2){var c=a,d=b;a2=a3=a4=a5=a6=a7=a8=a9=0;for(var e=-1,f=k3=sk=ck=0,g=1;g<=d;g++)f=g*g,k3=f*g,sk=Math.sin(g),ck=Math.cos(g),e=-e,a2+=Math.pow(g,-.5),a3+=1/(g*(g+1)),a4+=1/(k3*sk*sk),a5+=1/(k3*ck*ck),a6+=1/g,a7+=1/f,a8+=e/g,a9+=e/(2*g-1);a=c+(a6+a7+a8+a9)}if(60.08994194659945!=a)throw"ERROR: bad result: expected 60.08994194659945 but got "+a;
+  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 10:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
+ 11:           assignment  131    3          // tmp131 = 1024: NUMBER;
+ 12:           assignment  254    6          // b = tmp131 : TYPEOF(tmp131);
+ 13:             jmp_down  255               // goto 65548;
+ 14:           assignment  254    6          // c = a : TYPEOF(a);
+ 15:           assignment  254    6          // d = b : TYPEOF(b);
+ 16:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 17:           assignment  254    6          // a9 = tmp130 : TYPEOF(tmp130);
+ 18:           assignment  254    6          // a8 = tmp130 : TYPEOF(tmp130);
+ 19:           assignment  254    6          // a7 = tmp130 : TYPEOF(tmp130);
+ 20:           assignment  254    6          // a6 = tmp130 : TYPEOF(tmp130);
+ 21:           assignment  254    6          // a5 = tmp130 : TYPEOF(tmp130);
+ 22:           assignment  254    6          // a4 = tmp130 : TYPEOF(tmp130);
+ 23:           assignment  254    6          // a3 = tmp130 : TYPEOF(tmp130);
+ 24:           assignment  254    6          // a2 = tmp130 : TYPEOF(tmp130);
+ 25:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 26:          unary_minus  131               // tmp131 = -tmp130;
+ 27:           assignment  254    6          // e = tmp131 : TYPEOF(tmp131);
+ 28:           assignment  132    1          // tmp132 = 0: SMALLINT;
+ 29:           assignment  254    6          // ck = tmp132 : TYPEOF(tmp132);
+ 30:           assignment  254    6          // sk = tmp132 : TYPEOF(tmp132);
+ 31:           assignment  254    6          // k3 = tmp132 : TYPEOF(tmp132);
+ 32:           assignment  254    6          // f = tmp132 : TYPEOF(tmp132);
+ 33:           assignment  133    1          // tmp133 = 1: SMALLINT;
+ 34:           assignment  254    6          // g = tmp133 : TYPEOF(tmp133);
+ 35:             jmp_down  255               // goto 65570;
+ 36:           assignment  130    6          // tmp130 = g : TYPEOF(g);
+ 37:       multiplication  131  130          // tmp131 = tmp130 * g;
+ 38:           assignment  254    6          // f = tmp131 : TYPEOF(tmp131);
+ 39:           assignment  132    6          // tmp132 = f : TYPEOF(f);
+ 40:       multiplication  133  132          // tmp133 = tmp132 * g;
+ 41:           assignment  254    6          // k3 = tmp133 : TYPEOF(tmp133);
+ 42:           assignment  134    5          // tmp134 = 'sin': STRING;
+ 43:          prop_getter  135  254          // tmp135 = Math[tmp134];
+ 44:           assignment  136    6          // tmp136 = Math : TYPEOF(Math);
+ 45:               call_n  255  135          // 
+ 46:                 meta    1    1          // 
+ 47:                 meta    2  254          // 
+ 45:               call_n  137  135          //  // REWRITE
+ 48:           assignment  254    6          // sk = tmp137 : TYPEOF(tmp137);
+ 49:           assignment  138    5          // tmp138 = 'cos': STRING;
+ 50:          prop_getter  139  254          // tmp139 = Math[tmp138];
+ 51:           assignment  140    6          // tmp140 = Math : TYPEOF(Math);
+ 52:               call_n  255  139          // 
+ 53:                 meta    1    1          // 
+ 54:                 meta    2  254          // 
+ 52:               call_n  141  139          //  // REWRITE
+ 55:           assignment  254    6          // ck = tmp141 : TYPEOF(tmp141);
+ 56:          unary_minus  142               // tmp142 = -e;
+ 57:           assignment  254    6          // e = tmp142 : TYPEOF(tmp142);
+ 58:           assignment  143    5          // tmp143 = 'pow': STRING;
+ 59:          prop_getter  144  254          // tmp144 = Math[tmp143];
+ 60:           assignment  145    6          // tmp145 = Math : TYPEOF(Math);
+ 61:               call_n  255  144          // 
+ 62:                 meta    1    1          // 
+ 63:                 meta    2  254          // 
+ 64:           assignment  146    3          // tmp146 = 0.5: NUMBER;
+ 65:          unary_minus  147               // tmp147 = -tmp146;
+ 66:                 meta    2  147          // 
+ 61:               call_n  146  144          //  // REWRITE
+ 67:             addition  254  254          // a2 = a2 + tmp146;
+ 68:           assignment  147    6          // tmp147 = a2 : TYPEOF(a2);
+ 69:           assignment  148    1          // tmp148 = 1: SMALLINT;
+ 70:           assignment  149    6          // tmp149 = g : TYPEOF(g);
+ 71:           assignment  150    6          // tmp150 = g : TYPEOF(g);
+ 72:           assignment  151    1          // tmp151 = 1: SMALLINT;
+ 73:             addition  152  150          // tmp152 = tmp150 + tmp151;
+ 74:       multiplication  153  149          // tmp153 = tmp149 * tmp152;
+ 75:             division  154  148          // tmp154 = tmp148 / tmp153;
+ 76:             addition  254  254          // a3 = a3 + tmp154;
+ 77:           assignment  155    6          // tmp155 = a3 : TYPEOF(a3);
+ 78:           assignment  156    1          // tmp156 = 1: SMALLINT;
+ 79:           assignment  157    6          // tmp157 = k3 : TYPEOF(k3);
+ 80:       multiplication  158  157          // tmp158 = tmp157 * sk;
+ 81:       multiplication  159  158          // tmp159 = tmp158 * sk;
+ 82:             division  160  156          // tmp160 = tmp156 / tmp159;
+ 83:             addition  254  254          // a4 = a4 + tmp160;
+ 84:           assignment  161    6          // tmp161 = a4 : TYPEOF(a4);
+ 85:           assignment  162    1          // tmp162 = 1: SMALLINT;
+ 86:           assignment  163    6          // tmp163 = k3 : TYPEOF(k3);
+ 87:       multiplication  164  163          // tmp164 = tmp163 * ck;
+ 88:       multiplication  165  164          // tmp165 = tmp164 * ck;
+ 89:             division  166  162          // tmp166 = tmp162 / tmp165;
+ 90:             addition  254  254          // a5 = a5 + tmp166;
+ 91:           assignment  167    6          // tmp167 = a5 : TYPEOF(a5);
+ 92:           assignment  168    1          // tmp168 = 1: SMALLINT;
+ 93:             division  169  168          // tmp169 = tmp168 / g;
+ 94:             addition  254  254          // a6 = a6 + tmp169;
+ 95:           assignment  170    6          // tmp170 = a6 : TYPEOF(a6);
+ 96:           assignment  171    1          // tmp171 = 1: SMALLINT;
+ 97:             division  172  171          // tmp172 = tmp171 / f;
+ 98:             addition  254  254          // a7 = a7 + tmp172;
+ 99:           assignment  173    6          // tmp173 = a7 : TYPEOF(a7);
+100:           assignment  174    6          // tmp174 = e : TYPEOF(e);
+101:             division  175  174          // tmp175 = tmp174 / g;
+102:             addition  254  254          // a8 = a8 + tmp175;
+103:           assignment  176    6          // tmp176 = a8 : TYPEOF(a8);
+104:           assignment  177    6          // tmp177 = e : TYPEOF(e);
+105:           assignment  178    1          // tmp178 = 2: SMALLINT;
+106:       multiplication  179  178          // tmp179 = tmp178 * g;
+107:           assignment  180    1          // tmp180 = 1: SMALLINT;
+108:         substraction  181  179          // tmp181 = tmp179 - tmp180;
+109:             division  182  177          // tmp182 = tmp177 / tmp181;
+110:             addition  254  254          // a9 = a9 + tmp182;
+111:           assignment  183    6          // tmp183 = a9 : TYPEOF(a9);
+112:            post_incr  184               // tmp184 = g++;
+ 35:             jmp_down    0               // goto 113; // REWRITE
+113:           assignment  185    6          // tmp185 = g : TYPEOF(g);
+114:   less_or_equal_than  186  185          // tmp186 = tmp185 <= d;
+115:       is_true_jmp_up  186    0          // if (tmp186) goto 36;
+116:           assignment  130    6          // tmp130 = c : TYPEOF(c);
+117:           assignment  131    6          // tmp131 = a6 : TYPEOF(a6);
+118:             addition  132  131          // tmp132 = tmp131 + a7;
+119:             addition  133  132          // tmp133 = tmp132 + a8;
+120:             addition  134  133          // tmp134 = tmp133 + a9;
+121:             addition  135  130          // tmp135 = tmp130 + tmp134;
+122:           assignment  254    6          // a = tmp135 : TYPEOF(tmp135);
+123:           assignment  136    1          // tmp136 = 2: SMALLINT;
+124:       multiplication  254  254          // b = b * tmp136;
+ 13:             jmp_down    0               // goto 125; // REWRITE
+125:           assignment  137    3          // tmp137 = 16384: NUMBER;
+126: greater_or_equal_than  138  137          // tmp138 = tmp137 >= b;
+127:       is_true_jmp_up  138    0          // if (tmp138) goto 14;
+128:           assignment  130    3          // tmp130 = 60.08994194659945: NUMBER;
+129:      not_equal_value  131  130          // tmp131 = tmp130 != a;
+130:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65665;
+131:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected 60.08994194659945 but got ': STRING;
+132:             addition  131  130          // tmp131 = tmp130 + a;
+133:          throw_value                    // throw tmp131;
+// 
+130:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 134; // REWRITE
+  1:         reg_var_decl  128               // var tmp128 .. tmp186; // REWRITE
+134:                  ret                    // ret;
+LITERALS:
+0x84ec54 [  8] a : STRING
+0x84ec5c [  8] b : STRING
+0x84ec64 [ 12] 1024 : NUMBER
+0x84ec70 [ 12] 16384 : NUMBER
+0x84ec7c [  8] c : STRING
+0x84ec98 [  8] d : STRING
+0x84eca0 [  8] a2 : STRING
+0x84eca8 [  8] a3 : STRING
+0x84ecb0 [  8] a4 : STRING
+0x84ecb8 [  8] a5 : STRING
+0x84ecd4 [  8] a6 : STRING
+0x84ecdc [  8] a7 : STRING
+0x84ece4 [  8] a8 : STRING
+0x84ecec [  8] a9 : STRING
+0x84ecf4 [  8] e : STRING
+0x84ecfc [  8] f : STRING
+0x84ed18 [  8] k3 : STRING
+0x84ed20 [  8] sk : STRING
+0x84ed28 [  8] ck : STRING
+0x84ed30 [  4] g : MAGIC STRING [id=199] 
+0x84ed34 [  4] Math : MAGIC STRING [id=44] 
+0x84ed38 [  4] sin : MAGIC STRING [id=98] 
+0x84ed3c [  4] cos : MAGIC STRING [id=89] 
+0x84ed54 [  4] pow : MAGIC STRING [id=95] 
+0x84ed58 [ 12] 0.5 : NUMBER
+0x84ed64 [ 12] 60.08994194659945 : NUMBER
+0x84ed70 [ 60] ERROR: bad result: expected 60.08994194659945 but got  : STRING
+  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128               // var tmp128 .. tmp186;
+  2:             var_decl                    // var a;
+  3:             var_decl                    // var b;
+  4:             var_decl                    // var c;
+  5:             var_decl                    // var d;
+  6:             var_decl                    // var e;
+  7:             var_decl                    // var f;
+  8:             var_decl                    // var g;
+  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 10:           assignment    0    6          // a = tmp130 : TYPEOF(tmp130);
+ 11:           assignment  131    3          // tmp131 = 1024: NUMBER;
+ 12:           assignment    1    6          // b = tmp131 : TYPEOF(tmp131);
+ 13:             jmp_down    0               // goto 125;
+ 14:           assignment    2    6          // c = a : TYPEOF(a);
+ 15:           assignment    3    6          // d = b : TYPEOF(b);
+ 16:           assignment  130    1          // tmp130 = 0: SMALLINT;
+ 17:           assignment    8    6          // a9 = tmp130 : TYPEOF(tmp130);
+ 18:           assignment    9    6          // a8 = tmp130 : TYPEOF(tmp130);
+ 19:           assignment   10    6          // a7 = tmp130 : TYPEOF(tmp130);
+ 20:           assignment   11    6          // a6 = tmp130 : TYPEOF(tmp130);
+ 21:           assignment   12    6          // a5 = tmp130 : TYPEOF(tmp130);
+ 22:           assignment   13    6          // a4 = tmp130 : TYPEOF(tmp130);
+ 23:           assignment   14    6          // a3 = tmp130 : TYPEOF(tmp130);
+ 24:           assignment   15    6          // a2 = tmp130 : TYPEOF(tmp130);
+ 25:           assignment  130    1          // tmp130 = 1: SMALLINT;
+ 26:          unary_minus  131               // tmp131 = -tmp130;
+ 27:           assignment    4    6          // e = tmp131 : TYPEOF(tmp131);
+ 28:           assignment  132    1          // tmp132 = 0: SMALLINT;
+ 29:           assignment   16    6          // ck = tmp132 : TYPEOF(tmp132);
+ 30:           assignment   17    6          // sk = tmp132 : TYPEOF(tmp132);
+ 31:           assignment   18    6          // k3 = tmp132 : TYPEOF(tmp132);
+ 32:           assignment    5    6          // f = tmp132 : TYPEOF(tmp132);
+ 33:           assignment  133    1          // tmp133 = 1: SMALLINT;
+ 34:           assignment    6    6          // g = tmp133 : TYPEOF(tmp133);
+ 35:             jmp_down    0               // goto 113;
+ 36:           assignment  130    6          // tmp130 = g : TYPEOF(g);
+ 37:       multiplication  131  130          // tmp131 = tmp130 * g;
+ 38:           assignment    5    6          // f = tmp131 : TYPEOF(tmp131);
+ 39:           assignment  132    6          // tmp132 = f : TYPEOF(f);
+ 40:       multiplication  133  132          // tmp133 = tmp132 * g;
+ 41:           assignment   18    6          // k3 = tmp133 : TYPEOF(tmp133);
+ 42:           assignment  134    5          // tmp134 = 'sin': STRING;
+ 43:          prop_getter  135   20          // tmp135 = Math[tmp134];
+ 44:           assignment  136    6          // tmp136 = Math : TYPEOF(Math);
+ 45:               call_n  137  135          // 
+ 46:                 meta    1    1          // 
+ 47:                 meta    2    6          // tmp137 = tmp135 (this_arg = tmp136, g);
+ 48:           assignment   17    6          // sk = tmp137 : TYPEOF(tmp137);
+ 49:           assignment  138    5          // tmp138 = 'cos': STRING;
+ 50:          prop_getter  139   20          // tmp139 = Math[tmp138];
+ 51:           assignment  140    6          // tmp140 = Math : TYPEOF(Math);
+ 52:               call_n  141  139          // 
+ 53:                 meta    1    1          // 
+ 54:                 meta    2    6          // tmp141 = tmp139 (this_arg = tmp140, g);
+ 55:           assignment   16    6          // ck = tmp141 : TYPEOF(tmp141);
+ 56:          unary_minus  142               // tmp142 = -e;
+ 57:           assignment    4    6          // e = tmp142 : TYPEOF(tmp142);
+ 58:           assignment  143    5          // tmp143 = 'pow': STRING;
+ 59:          prop_getter  144   20          // tmp144 = Math[tmp143];
+ 60:           assignment  145    6          // tmp145 = Math : TYPEOF(Math);
+ 61:               call_n  146  144          // 
+ 62:                 meta    1    1          // 
+ 63:                 meta    2    6          // 
+ 64:           assignment  146    3          // tmp146 = 0.5: NUMBER;
+ 65:          unary_minus  147               // tmp147 = -tmp146;
+ 66:                 meta    2  147          // tmp146 = tmp144 (this_arg = tmp145, g, tmp147);
+ 67:             addition    1    1          // a2 = a2 + tmp146;
+ 68:           assignment  147    6          // tmp147 = a2 : TYPEOF(a2);
+ 69:           assignment  148    1          // tmp148 = 1: SMALLINT;
+ 70:           assignment  149    6          // tmp149 = g : TYPEOF(g);
+ 71:           assignment  150    6          // tmp150 = g : TYPEOF(g);
+ 72:           assignment  151    1          // tmp151 = 1: SMALLINT;
+ 73:             addition  152  150          // tmp152 = tmp150 + tmp151;
+ 74:       multiplication  153  149          // tmp153 = tmp149 * tmp152;
+ 75:             division  154  148          // tmp154 = tmp148 / tmp153;
+ 76:             addition    3    3          // a3 = a3 + tmp154;
+ 77:           assignment  155    6          // tmp155 = a3 : TYPEOF(a3);
+ 78:           assignment  156    1          // tmp156 = 1: SMALLINT;
+ 79:           assignment  157    6          // tmp157 = k3 : TYPEOF(k3);
+ 80:       multiplication  158  157          // tmp158 = tmp157 * sk;
+ 81:       multiplication  159  158          // tmp159 = tmp158 * sk;
+ 82:             division  160  156          // tmp160 = tmp156 / tmp159;
+ 83:             addition    6    6          // a4 = a4 + tmp160;
+ 84:           assignment  161    6          // tmp161 = a4 : TYPEOF(a4);
+ 85:           assignment  162    1          // tmp162 = 1: SMALLINT;
+ 86:           assignment  163    6          // tmp163 = k3 : TYPEOF(k3);
+ 87:       multiplication  164  163          // tmp164 = tmp163 * ck;
+ 88:       multiplication  165  164          // tmp165 = tmp164 * ck;
+ 89:             division  166  162          // tmp166 = tmp162 / tmp165;
+ 90:             addition    8    8          // a5 = a5 + tmp166;
+ 91:           assignment  167    6          // tmp167 = a5 : TYPEOF(a5);
+ 92:           assignment  168    1          // tmp168 = 1: SMALLINT;
+ 93:             division  169  168          // tmp169 = tmp168 / g;
+ 94:             addition    9    9          // a6 = a6 + tmp169;
+ 95:           assignment  170    6          // tmp170 = a6 : TYPEOF(a6);
+ 96:           assignment  171    1          // tmp171 = 1: SMALLINT;
+ 97:             division  172  171          // tmp172 = tmp171 / f;
+ 98:             addition   11   11          // a7 = a7 + tmp172;
+ 99:           assignment  173    6          // tmp173 = a7 : TYPEOF(a7);
+100:           assignment  174    6          // tmp174 = e : TYPEOF(e);
+101:             division  175  174          // tmp175 = tmp174 / g;
+102:             addition   13   13          // a8 = a8 + tmp175;
+103:           assignment  176    6          // tmp176 = a8 : TYPEOF(a8);
+104:           assignment  177    6          // tmp177 = e : TYPEOF(e);
+105:           assignment  178    1          // tmp178 = 2: SMALLINT;
+106:       multiplication  179  178          // tmp179 = tmp178 * g;
+107:           assignment  180    1          // tmp180 = 1: SMALLINT;
+108:         substraction  181  179          // tmp181 = tmp179 - tmp180;
+109:             division  182  177          // tmp182 = tmp177 / tmp181;
+110:             addition   14   14          // a9 = a9 + tmp182;
+111:           assignment  183    6          // tmp183 = a9 : TYPEOF(a9);
+112:            post_incr  184               // tmp184 = g++;
+113:           assignment  185    6          // tmp185 = g : TYPEOF(g);
+114:   less_or_equal_than  186  185          // tmp186 = tmp185 <= d;
+115:       is_true_jmp_up  186    0          // if (tmp186) goto 36;
+116:           assignment  130    6          // tmp130 = c : TYPEOF(c);
+117:           assignment  131    6          // tmp131 = a6 : TYPEOF(a6);
+118:             addition  132  131          // tmp132 = tmp131 + a7;
+119:             addition  133  132          // tmp133 = tmp132 + a8;
+120:             addition  134  133          // tmp134 = tmp133 + a9;
+121:             addition  135  130          // tmp135 = tmp130 + tmp134;
+122:           assignment   17    6          // a = tmp135 : TYPEOF(tmp135);
+123:           assignment  136    1          // tmp136 = 2: SMALLINT;
+124:       multiplication   18   18          // b = b * tmp136;
+125:           assignment  137    3          // tmp137 = 16384: NUMBER;
+126: greater_or_equal_than  138  137          // tmp138 = tmp137 >= b;
+127:       is_true_jmp_up  138    0          // if (tmp138) goto 14;
+128:           assignment  130    3          // tmp130 = 60.08994194659945: NUMBER;
+129:      not_equal_value  131  130          // tmp131 = tmp130 != a;
+130:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 134;
+131:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected 60.08994194659945 but got ': STRING;
+132:             addition  131  130          // tmp131 = tmp130 + a;
+133:          throw_value                    // throw tmp131;
+134:                  ret                    // ret;
