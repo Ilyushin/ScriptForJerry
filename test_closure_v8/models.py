@@ -3,7 +3,7 @@ import os, time, subprocess, csv
 class analyzing_result:
     path_file, file_name, time, time_closure, time_jerry, size, size_closure, decreased_time, reduced_size, debug = '', '', 0, 0, 0, 0, 0, 0, 0, False
     dir = os.path.dirname(__file__)
-    path_v8 = os.path.join(dir, 'v8_x64.debug/shell') 
+    path_v8 = os.path.join(dir, 'v8_x64/shell') 
     path_closure = os.path.join(dir, 'closure_compiler.jar')
     path_result_folder = os.path.join(dir, 'results')
     
@@ -17,8 +17,8 @@ class analyzing_result:
     def execut_scripts_closure(self, csv_writer):
         
         # get bytecode without any optimizations and calculating number of commands 
-	path_file1 = self.path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes.txt'
-        cmd = self.path_jerry + ' --print_code '+ self.path_file + ' > ' + path_file1
+        path_file1 = self.path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes.txt'
+        cmd = self.path_v8 + ' --print_code '+ self.path_file + ' > ' + path_file1
         
         start = time.time()
         r1 = subprocess.call(cmd, shell=True, stderr=subprocess.STDOUT)
@@ -32,15 +32,16 @@ class analyzing_result:
         path_file3 = self.path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes_optimized.txt'
         
         cmd_closure = 'java -jar ' + self.path_closure + ' --compilation_level ' + self.level + ' --js ' + self.path_file + ' --js_output_file ' + path_file2
-        cmd = self.path_jerry + ' --print_code '+ path_file2+' > ' + path_file3
+        cmd = self.path_v8 + ' --print_code '+ path_file2+' > ' + path_file3
         
         
         start1 = time.time()
-        r3 = subprocess.call(cmd_closure, shell=True)
+        r3 = subprocess.call(cmd_closure, shell=True, stderr=subprocess.STDOUT)
         start2 = time.time()
-        r4 = subprocess.call(cmd, shell=True)
+        r4 = subprocess.call(cmd, shell=True, stderr=subprocess.STDOUT)
         end = time.time()
         
+        #time.sleep(1)
         self.time_closure = round((end - start1) * 1000, 2)
         self.time_jerry = round((end - start2) * 1000, 2)
         self.size_closure = self.get_file_len(path_file3) 
@@ -61,14 +62,15 @@ class analyzing_result:
         
         count_opcodes = 0
         arr_rows = file_sourse.read().split('\n')
-        last_row = arr_rows[len(arr_rows) - 2].strip()
-        try:
-            count_opcodes = int(last_row[:last_row.index(':')])
-        except ValueError:
-            print ValueError
-            print last_row
         
-               
+        count_opcodes = 0
+        id_start_code = 0
+        for id,val in enumerate(arr_rows):
+            if '--- Code ---' in val:
+                id_start_code = id
+                count_opcodes = len(arr_rows[id_start_code:])
+                break  
+            
         file_sourse.close()
         return count_opcodes    
     

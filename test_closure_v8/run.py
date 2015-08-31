@@ -20,6 +20,7 @@ def start_processing():
     #create a csv file for saving result
     csvfile = open(path_result_folder+'/result.csv', 'w+')
     csv_writer = csv.writer(csvfile, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ', quotechar='') 
+    csv_writer.writerow(['Test name,','Runtime (ms),','Runtime with Closure (ms),','Runtime of v8 after Closure (ms),','Size,','Size after Closure,','Decreased working time to (%),','Reduced size at (%)'])
     
     threads = []
     for path in tests:

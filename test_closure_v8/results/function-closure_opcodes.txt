@@ -1,87 +1,681 @@
-// function f()
-  0:                 meta   12  255          // [to be rewritten]
-// {
-//     function g() { }
-// }
-// for (var i = 0; i < 300000; ++i)
-//     f();
-// 
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp255;
-// function f()
-// {
-//     function g() { }
-// }
-// for (var i = 0; i < 300000; ++i)
-  2:             var_decl                    // var i;
-//     f();
-// 
-// function f()
-  0:          func_decl_n  254               // 
-  0:          func_decl_n  254               // function f (); // REWRITE
-  1:                 meta    7  255          // function end: 65536;
-// {
-//     function g() { }
-  2:                 meta   12  255          // [to be rewritten]
-// }
-  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  3:         reg_var_decl  128               // var tmp128 .. tmp255;
-// }
-  0:          func_decl_n  254               // 
-  0:          func_decl_n  254               // function g (); // REWRITE
-  1:                 meta    7  255          // function end: 65536;
-  2:                 meta   12  255          // [to be rewritten]
-  2:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  3:         reg_var_decl  128               // var tmp128 .. tmp255;
-  3:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
-  4:                  ret                    // ret;
-  1:                 meta    7    0          // function end: 5; // REWRITE
-// }
-  3:         reg_var_decl  128               // var tmp128 .. tmp130; // REWRITE
-  4:                  ret                    // ret;
-  1:                 meta    7    0          // function end: 10; // REWRITE
-// for (var i = 0; i < 300000; ++i)
-//     f();
-  3:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  4:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
-  5:             jmp_down  255               // goto 65540;
-  6:               call_n  255  254          // 
-  6:               call_n  130  254          //  // REWRITE
-  7:             pre_incr  131               // tmp131 = ++i;
-  5:             jmp_down    0               // goto 8; // REWRITE
-  8:           assignment  132    6          // tmp132 = i : TYPEOF(i);
-  9:           assignment  133    3          // tmp133 = 300000: NUMBER;
- 10:            less_than  134  132          // tmp134 = tmp132 < tmp133;
- 11:       is_true_jmp_up  134    0          // if (tmp134) goto 6;
-// 
-  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
- 12:                  ret                    // ret;
-LITERALS:
-0x84ec54 [  8] f : STRING
-0x84ec5c [  4] g : MAGIC STRING [id=199] 
-0x84ec60 [  4] i : MAGIC STRING [id=200] 
-0x84ec64 [ 12] 300000 : NUMBER
-0x84ec70 [ 16]  : EMPTY RECORD
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  1:         reg_var_decl  128               // var tmp128 .. tmp134;
-  2:             var_decl                    // var i;
-  3:          func_decl_n    1               // function f ();
-  4:                 meta    7    0          // function end: 13;
-  5:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  6:         reg_var_decl  128               // var tmp128 .. tmp130;
-  7:          func_decl_n    2               // function g ();
-  8:                 meta    7    0          // function end: 12;
-  9:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 10:         reg_var_decl  128               // var tmp128 .. tmp130;
- 11:                  ret                    // ret;
- 12:                  ret                    // ret;
- 13:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 14:           assignment    0    6          // i = tmp130 : TYPEOF(tmp130);
- 15:             jmp_down    0               // goto 18;
- 16:               call_n  130    1          // 
- 17:             pre_incr  131               // tmp131 = ++i;
- 18:           assignment  132    6          // tmp132 = i : TYPEOF(i);
- 19:           assignment  133    3          // tmp133 = 300000: NUMBER;
- 20:            less_than  134  132          // tmp134 = tmp132 < tmp133;
- 21:       is_true_jmp_up  134    0          // if (tmp134) goto 16;
- 22:                  ret                    // ret;
+--- Raw source ---
+function f()
+{
+    function g() { }
+}
+
+for (var i = 0; i < 300000; ++i)
+    f();
+
+
+--- Code ---
+source_position = 0
+kind = FUNCTION
+compiler = full-codegen
+Instructions (size = 504)
+0x2b892963a700     0  55             push rbp                ;; debug: position 0
+0x2b892963a701     1  4889e5         REX.W movq rbp,rsp
+0x2b892963a704     4  56             push rsi
+0x2b892963a705     5  57             push rdi
+0x2b892963a706     6  41ff75a8       push [r13-0x58]
+0x2b892963a70a    10  49ba91e50eecc60a0000 REX.W movq r10,0xac6ec0ee591    ;; object: 0xac6ec0ee591 <FixedArray[4]>
+0x2b892963a714    20  4152           push r10
+0x2b892963a716    22  6a00           push 0x0
+0x2b892963a718    24  b802000000     movl rax,0x2
+0x2b892963a71d    29  48bb10ac8a0001000000 REX.W movq rbx,0x1008aac10
+0x2b892963a727    39  e8f4f4fcff     call 0x2b8929609c20     ;; code: STUB, CEntryStub, minor: 0
+0x2b892963a72c    44  493ba540090000 REX.W cmpq rsp,[r13+0x940]
+0x2b892963a733    51  7305           jnc 58  (0x2b892963a73a)
+0x2b892963a735    53  e8e6c0ffff     call StackCheck  (0x2b8929636820)    ;; code: BUILTIN
+0x2b892963a73a    58  48b80000000000000000 REX.W movq rax,0x0    ;; debug: statement 39
+                                                             ;; debug: statement 44
+0x2b892963a744    68  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963a74e    78  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963a752    82  e8c979ffff     call 0x2b8929632120     ;; code: STORE_IC, UNINITIALIZED
+0x2b892963a757    87  e9d8000000     jmp 308  (0x2b892963a834)
+0x2b892963a75c    92  48b9996d04ecc60a0000 REX.W movq rcx,0xac6ec046d99    ;; debug: statement 76
+                                                             ;; object: 0xac6ec046d99 <String[1]: f>
+0x2b892963a766   102  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963a76a   106  48b80000000004000000 REX.W movq rax,0x400000000
+0x2b892963a774   116  e8875bfeff     call 0x2b8929620300     ;; code: contextual, LOAD_IC, DEFAULT
+0x2b892963a779   121  50             push rax
+0x2b892963a77a   122  49ba894100ecc60a0000 REX.W movq r10,0xac6ec004189    ;; object: 0xac6ec004189 <undefined>
+0x2b892963a784   132  4152           push r10
+0x2b892963a786   134  48ba0000000008000000 REX.W movq rdx,0x800000000
+0x2b892963a790   144  488b7c2408     REX.W movq rdi,[rsp+0x8]
+0x2b892963a795   149  e806c1fdff     call 0x2b89296168a0     ;; code: CALL_IC, DEFAULT
+0x2b892963a79a   154  488b75f8       REX.W movq rsi,[rbp-0x8]
+0x2b892963a79e   158  4883c408       REX.W addq rsp,0x8
+0x2b892963a7a2   162  488945e8       REX.W movq [rbp-0x18],rax
+0x2b892963a7a6   166  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; debug: statement 69
+                                                             ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963a7b0   176  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963a7b4   180  48b80000000006000000 REX.W movq rax,0x600000000
+0x2b892963a7be   190  e83d5bfeff     call 0x2b8929620300     ;; code: contextual, LOAD_IC, DEFAULT
+0x2b892963a7c3   195  a801           test al,0x1
+0x2b892963a7c5   197  7314           jnc 219  (0x2b892963a7db)
+0x2b892963a7c7   199  49ba0000000001000000 REX.W movq r10,0x100000000
+0x2b892963a7d1   209  4903c2         REX.W addq rax,r10
+0x2b892963a7d4   212  711e           jno 244  (0x2b892963a7f4)
+0x2b892963a7d6   214  492bc2         REX.W subq rax,r10
+0x2b892963a7d9   217  eb05           jmp 224  (0x2b892963a7e0)
+0x2b892963a7db   219  e80004ffff     call 0x2b892962abe0     ;; code: STUB, ToNumberStub, minor: 0
+0x2b892963a7e0   224  488bd0         REX.W movq rdx,rax
+0x2b892963a7e3   227  48b80000000001000000 REX.W movq rax,0x100000000
+0x2b892963a7ed   237  e84e85fdff     call 0x2b8929612d40     ;; code: BINARY_OP_IC, UNINITIALIZED (id = 43)
+0x2b892963a7f2   242  a82d           test al,0x2d
+0x2b892963a7f4   244  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963a7fe   254  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963a802   258  e81979ffff     call 0x2b8929632120     ;; code: STORE_IC, UNINITIALIZED
+0x2b892963a807   263  48bbd1e40eecc60a0000 REX.W movq rbx,0xac6ec0ee4d1    ;; object: 0xac6ec0ee4d1 Cell for 6144
+0x2b892963a811   273  83430bff       addl [rbx+0xb],0xff
+0x2b892963a815   277  791d           jns 308  (0x2b892963a834)
+0x2b892963a817   279  e8c4beffff     call InterruptCheck  (0x2b89296366e0)    ;; code: BUILTIN
+0x2b892963a81c   284  48bbd1e40eecc60a0000 REX.W movq rbx,0xac6ec0ee4d1    ;; object: 0xac6ec0ee4d1 Cell for 6144
+0x2b892963a826   294  49ba0000000000180000 REX.W movq r10,0x180000000000
+0x2b892963a830   304  4c895307       REX.W movq [rbx+0x7],r10
+0x2b892963a834   308  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; debug: statement 57
+                                                             ;; debug: position 55
+                                                             ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963a83e   318  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963a842   322  48b80000000006000000 REX.W movq rax,0x600000000
+0x2b892963a84c   332  e8af5afeff     call 0x2b8929620300     ;; code: contextual, LOAD_IC, DEFAULT
+0x2b892963a851   337  50             push rax
+0x2b892963a852   338  48b800000000fa5e8e20 REX.W movq rax,0x208e5efa00000000
+0x2b892963a85c   348  49ba000000001acd8a20 REX.W movq r10,0x208acd1a00000000
+0x2b892963a866   358  4933c2         REX.W xorq rax,r10
+0x2b892963a869   361  5a             pop rdx
+0x2b892963a86a   362  488bca         REX.W movq rcx,rdx
+0x2b892963a86d   365  480bc8         REX.W orq rcx,rax
+0x2b892963a870   368  f6c101         testb rcx,0x1
+0x2b892963a873   371  730e           jnc 387  (0x2b892963a883)
+0x2b892963a875   373  483bd0         REX.W cmpq rdx,rax
+0x2b892963a878   376  0f8cdefeffff   jl 92  (0x2b892963a75c)
+0x2b892963a87e   382  e921000000     jmp 420  (0x2b892963a8a4)
+0x2b892963a883   387  e818d3fdff     call 0x2b8929617ba0     ;; code: COMPARE_IC, UNINITIALIZED (id = 32)
+0x2b892963a888   392  a815           test al,0x15
+0x2b892963a88a   394  eb0f           jmp 411  (0x2b892963a89b)
+0x2b892963a88c   396  493b45c0       REX.W cmpq rax,[r13-0x40]
+0x2b892963a890   400  0f84c6feffff   jz 92  (0x2b892963a75c)
+0x2b892963a896   406  e909000000     jmp 420  (0x2b892963a8a4)
+0x2b892963a89b   411  4885c0         REX.W testq rax,rax
+0x2b892963a89e   414  0f8cb8feffff   jl 92  (0x2b892963a75c)
+0x2b892963a8a4   420  488b45e8       REX.W movq rax,[rbp-0x18]    ;; debug: statement 81
+0x2b892963a8a8   424  48bbd1e40eecc60a0000 REX.W movq rbx,0xac6ec0ee4d1    ;; object: 0xac6ec0ee4d1 Cell for 6144
+0x2b892963a8b2   434  83430bfe       addl [rbx+0xb],0xfe
+0x2b892963a8b6   438  791f           jns 471  (0x2b892963a8d7)
+0x2b892963a8b8   440  50             push rax
+0x2b892963a8b9   441  e822beffff     call InterruptCheck  (0x2b89296366e0)    ;; code: BUILTIN
+0x2b892963a8be   446  58             pop rax
+0x2b892963a8bf   447  48bbd1e40eecc60a0000 REX.W movq rbx,0xac6ec0ee4d1    ;; object: 0xac6ec0ee4d1 Cell for 6144
+0x2b892963a8c9   457  49ba0000000000180000 REX.W movq r10,0x180000000000
+0x2b892963a8d3   467  4c895307       REX.W movq [rbx+0x7],r10
+0x2b892963a8d7   471  c9             leave                   ;; debug: statement 80
+0x2b892963a8d8   472  c20800         ret 0x8
+0x2b892963a8db   475  498b45a8       REX.W movq rax,[r13-0x58]
+0x2b892963a8df   479  e9c4ffffff     jmp 424  (0x2b892963a8a8)
+0x2b892963a8e4   484  0f1f4000       nop
+
+Deoptimization Output Data (deopt points = 0)
+
+Back edges (size = 1)
+ast_id  pc_offset  loop_depth
+    14        284           1
+
+0xac6ec0ee609: [TypeFeedbackInfo]
+ - ic_total_count: 8, ic_with_type_info_count: 0, ic_generic_count: 0
+
+RelocInfo (size = 56)
+0x2b892963a700  position  (0)
+0x2b892963a70c  embedded object  (0xac6ec0ee591 <FixedArray[4]>)
+0x2b892963a728  code target (STUB)  (0x2b8929609c20)
+0x2b892963a736  code target (BUILTIN)  (0x2b8929636820)
+0x2b892963a73a  statement position  (39)
+0x2b892963a73a  statement position  (44)
+0x2b892963a746  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963a753  code target (STORE_IC)  (0x2b8929632120)
+0x2b892963a75c  statement position  (76)
+0x2b892963a75e  embedded object  (0xac6ec046d99 <String[1]: f>)
+0x2b892963a775  code target (LOAD_IC)  (0x2b8929620300)
+0x2b892963a77c  embedded object  (0xac6ec004189 <undefined>)
+0x2b892963a796  code target (CALL_IC)  (0x2b89296168a0)
+0x2b892963a7a6  statement position  (69)
+0x2b892963a7a8  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963a7bf  code target (LOAD_IC)  (0x2b8929620300)
+0x2b892963a7dc  code target (STUB)  (0x2b892962abe0)
+0x2b892963a7ee  code target with id (BINARY_OP_IC)  (0x2b8929612d40) (id=43)
+0x2b892963a7f6  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963a803  code target (STORE_IC)  (0x2b8929632120)
+0x2b892963a809  embedded object  (0xac6ec0ee4d1 Cell for 6144)
+0x2b892963a818  code target (BUILTIN)  (0x2b89296366e0)
+0x2b892963a81e  embedded object  (0xac6ec0ee4d1 Cell for 6144)
+0x2b892963a834  statement position  (57)
+0x2b892963a834  position  (55)
+0x2b892963a836  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963a84d  code target (LOAD_IC)  (0x2b8929620300)
+0x2b892963a884  code target with id (COMPARE_IC)  (0x2b8929617ba0) (id=32)
+0x2b892963a8a4  statement position  (81)
+0x2b892963a8aa  embedded object  (0xac6ec0ee4d1 Cell for 6144)
+0x2b892963a8ba  code target (BUILTIN)  (0x2b89296366e0)
+0x2b892963a8c1  embedded object  (0xac6ec0ee4d1 Cell for 6144)
+0x2b892963a8d7  statement position  (80)
+
+--- End code ---
+--- Raw source ---
+()
+{
+    function g() { }
+}
+
+
+--- Code ---
+source_position = 10
+kind = FUNCTION
+name = f
+compiler = full-codegen
+Instructions (size = 108)
+0x2b892963a960     0  55             push rbp                ;; debug: position 10
+0x2b892963a961     1  4889e5         REX.W movq rbp,rsp
+0x2b892963a964     4  56             push rsi
+0x2b892963a965     5  57             push rdi
+0x2b892963a966     6  41ff75a8       push [r13-0x58]
+0x2b892963a96a    10  48bb61e80eecc60a0000 REX.W movq rbx,0xac6ec0ee861    ;; object: 0xac6ec0ee861 <SharedFunctionInfo g>
+0x2b892963a974    20  e8c78afeff     call 0x2b8929623440     ;; code: STUB, FastNewClosureStub, minor: 0
+0x2b892963a979    25  488945e8       REX.W movq [rbp-0x18],rax
+0x2b892963a97d    29  493ba540090000 REX.W cmpq rsp,[r13+0x940]
+0x2b892963a984    36  7305           jnc 43  (0x2b892963a98b)
+0x2b892963a986    38  e895beffff     call StackCheck  (0x2b8929636820)    ;; code: BUILTIN
+0x2b892963a98b    43  498b45a8       REX.W movq rax,[r13-0x58]
+0x2b892963a98f    47  48bb51e80eecc60a0000 REX.W movq rbx,0xac6ec0ee851    ;; object: 0xac6ec0ee851 Cell for 6144
+0x2b892963a999    57  83430bd1       addl [rbx+0xb],0xd1
+0x2b892963a99d    61  791f           jns 94  (0x2b892963a9be)
+0x2b892963a99f    63  50             push rax
+0x2b892963a9a0    64  e83bbdffff     call InterruptCheck  (0x2b89296366e0)    ;; code: BUILTIN
+0x2b892963a9a5    69  58             pop rax
+0x2b892963a9a6    70  48bb51e80eecc60a0000 REX.W movq rbx,0xac6ec0ee851    ;; object: 0xac6ec0ee851 Cell for 6144
+0x2b892963a9b0    80  49ba0000000000180000 REX.W movq r10,0x180000000000
+0x2b892963a9ba    90  4c895307       REX.W movq [rbx+0x7],r10
+0x2b892963a9be    94  c9             leave                   ;; debug: statement 36
+0x2b892963a9bf    95  c20800         ret 0x8
+0x2b892963a9c2    98  660f1f440000   nop
+
+Deoptimization Output Data (deopt points = 0)
+
+Back edges (size = 0)
+ast_id  pc_offset  loop_depth
+
+0xac6ec0ee931: [TypeFeedbackInfo]
+ - ic_total_count: 0, ic_with_type_info_count: 0, ic_generic_count: 0
+
+RelocInfo (size = 10)
+0x2b892963a960  position  (10)
+0x2b892963a96c  embedded object  (0xac6ec0ee861 <SharedFunctionInfo g>)
+0x2b892963a975  code target (STUB)  (0x2b8929623440)
+0x2b892963a987  code target (BUILTIN)  (0x2b8929636820)
+0x2b892963a991  embedded object  (0xac6ec0ee851 Cell for 6144)
+0x2b892963a9a1  code target (BUILTIN)  (0x2b89296366e0)
+0x2b892963a9a8  embedded object  (0xac6ec0ee851 Cell for 6144)
+0x2b892963a9be  statement position  (36)
+
+--- End code ---
+--- Code ---
+kind = HANDLER
+major_key = <NoCache>Stub
+name = StoreGlobalStub
+compiler = crankshaft
+Instructions (size = 168)
+0x2b892963abc0     0  48bb71ea0eecc60a0000 REX.W movq rbx,0xac6ec0eea71    ;; object: 0xac6ec0eea71 WeakCell for 0xac6ec004311 <Odd Oddball>
+0x2b892963abca    10  488b5b07       REX.W movq rbx,[rbx+0x7]
+0x2b892963abce    14  f6c301         testb rbx,0x1
+0x2b892963abd1    17  0f842e000000   jz 69  (0x2b892963ac05)
+0x2b892963abd7    23  488b7b0f       REX.W movq rdi,[rbx+0xf]
+0x2b892963abdb    27  49bae94100ecc60a0000 REX.W movq r10,0xac6ec0041e9    ;; object: 0xac6ec0041e9 <the hole>
+0x2b892963abe5    37  493bfa         REX.W cmpq rdi,r10
+0x2b892963abe8    40  0f8412000000   jz 64  (0x2b892963ac00)
+0x2b892963abee    46  488bf8         REX.W movq rdi,rax
+0x2b892963abf1    49  40f6c701       testb rdi,0x1
+0x2b892963abf5    53  0f8519000000   jnz 84  (0x2b892963ac14)
+0x2b892963abfb    59  48897b0f       REX.W movq [rbx+0xf],rdi
+0x2b892963abff    63  c3             ret
+0x2b892963ac00    64  e91e000000     jmp 99  (0x2b892963ac23)
+0x2b892963ac05    69  49ba00604029892b0000 REX.W movq r10,0x2b8929406000
+0x2b892963ac0f    79  e81e000000     call 114  (0x2b892963ac32)
+0x2b892963ac14    84  49ba0a604029892b0000 REX.W movq r10,0x2b892940600a
+0x2b892963ac1e    94  e80f000000     call 114  (0x2b892963ac32)
+0x2b892963ac23    99  49ba14604029892b0000 REX.W movq r10,0x2b8929406014
+0x2b892963ac2d   109  e800000000     call 114  (0x2b892963ac32)
+0x2b892963ac32   114  4883ec10       REX.W subq rsp,0x10
+0x2b892963ac36   118  ff742410       push [rsp+0x10]
+0x2b892963ac3a   122  4152           push r10
+0x2b892963ac3c   124  4c8b55f8       REX.W movq r10,[rbp-0x8]
+0x2b892963ac40   128  4c89542418     REX.W movq [rsp+0x18],r10
+0x2b892963ac45   133  48896c2420     REX.W movq [rsp+0x20],rbp
+0x2b892963ac4a   138  488d6c2420     REX.W leaq rbp,[rsp+0x20]
+0x2b892963ac4f   143  49ba0000000006000000 REX.W movq r10,0x600000000
+0x2b892963ac59   153  4c89542410     REX.W movq [rsp+0x10],r10
+0x2b892963ac5e   158  c3             ret
+0x2b892963ac5f   159  90             nop
+
+
+Safepoints (size = 8)
+
+RelocInfo (size = 2)
+0x2b892963abc2  embedded object  (0xac6ec0eea71 WeakCell for 0xac6ec004311 <Odd Oddball>)
+0x2b892963abdd  embedded object  (0xac6ec0041e9 <the hole>)
+
+--- End code ---
+--- Raw source ---
+()
+{
+    function g() { }
+}
+
+
+--- Code ---
+source_position = 10
+kind = FUNCTION
+name = f
+compiler = full-codegen
+Instructions (size = 108)
+0x2b892963aea0     0  55             push rbp                ;; debug: position 10
+0x2b892963aea1     1  4889e5         REX.W movq rbp,rsp
+0x2b892963aea4     4  56             push rsi
+0x2b892963aea5     5  57             push rdi
+0x2b892963aea6     6  41ff75a8       push [r13-0x58]
+0x2b892963aeaa    10  48bb61e80eecc60a0000 REX.W movq rbx,0xac6ec0ee861    ;; object: 0xac6ec0ee861 <SharedFunctionInfo g>
+0x2b892963aeb4    20  e88785feff     call 0x2b8929623440     ;; code: STUB, FastNewClosureStub, minor: 0
+0x2b892963aeb9    25  488945e8       REX.W movq [rbp-0x18],rax
+0x2b892963aebd    29  493ba540090000 REX.W cmpq rsp,[r13+0x940]
+0x2b892963aec4    36  7305           jnc 43  (0x2b892963aecb)
+0x2b892963aec6    38  e855b9ffff     call StackCheck  (0x2b8929636820)    ;; code: BUILTIN
+0x2b892963aecb    43  498b45a8       REX.W movq rax,[r13-0x58]
+0x2b892963aecf    47  48bba1eb0eecc60a0000 REX.W movq rbx,0xac6ec0eeba1    ;; object: 0xac6ec0eeba1 Cell for 6144
+0x2b892963aed9    57  83430bd1       addl [rbx+0xb],0xd1
+0x2b892963aedd    61  791f           jns 94  (0x2b892963aefe)
+0x2b892963aedf    63  50             push rax
+0x2b892963aee0    64  e8fbb7ffff     call InterruptCheck  (0x2b89296366e0)    ;; code: BUILTIN
+0x2b892963aee5    69  58             pop rax
+0x2b892963aee6    70  48bba1eb0eecc60a0000 REX.W movq rbx,0xac6ec0eeba1    ;; object: 0xac6ec0eeba1 Cell for 6144
+0x2b892963aef0    80  49ba0000000000180000 REX.W movq r10,0x180000000000
+0x2b892963aefa    90  4c895307       REX.W movq [rbx+0x7],r10
+0x2b892963aefe    94  c9             leave                   ;; debug: statement 36
+0x2b892963aeff    95  c20800         ret 0x8
+0x2b892963af02    98  660f1f440000   nop
+
+Deoptimization Output Data (deopt points = 3)
+ast id        pc  state
+     2        10  NO_REGISTERS
+     7        25  TOS_REG
+     3        29  NO_REGISTERS
+
+Back edges (size = 0)
+ast_id  pc_offset  loop_depth
+
+0xac6ec0eec11: [TypeFeedbackInfo]
+ - ic_total_count: 0, ic_with_type_info_count: 0, ic_generic_count: 0
+
+RelocInfo (size = 10)
+0x2b892963aea0  position  (10)
+0x2b892963aeac  embedded object  (0xac6ec0ee861 <SharedFunctionInfo g>)
+0x2b892963aeb5  code target (STUB)  (0x2b8929623440)
+0x2b892963aec7  code target (BUILTIN)  (0x2b8929636820)
+0x2b892963aed1  embedded object  (0xac6ec0eeba1 Cell for 6144)
+0x2b892963aee1  code target (BUILTIN)  (0x2b89296366e0)
+0x2b892963aee8  embedded object  (0xac6ec0eeba1 Cell for 6144)
+0x2b892963aefe  statement position  (36)
+
+--- End code ---
+--- Raw source ---
+()
+{
+    function g() { }
+}
+
+
+--- Optimized code ---
+optimization_id = 0
+source_position = 10
+kind = OPTIMIZED_FUNCTION
+name = f
+stack_slots = 1
+compiler = crankshaft
+Instructions (size = 71)
+0x2b892963af80     0  55             push rbp
+0x2b892963af81     1  4889e5         REX.W movq rbp,rsp
+0x2b892963af84     4  56             push rsi
+0x2b892963af85     5  57             push rdi
+0x2b892963af86     6  4883ec08       REX.W subq rsp,0x8
+0x2b892963af8a    10  488b45f8       REX.W movq rax,[rbp-0x8]
+0x2b892963af8e    14  488945e8       REX.W movq [rbp-0x18],rax
+0x2b892963af92    18  488bf0         REX.W movq rsi,rax
+0x2b892963af95    21  493ba540090000 REX.W cmpq rsp,[r13+0x940]
+0x2b892963af9c    28  7305           jnc 35  (0x2b892963afa3)
+0x2b892963af9e    30  e87db8ffff     call StackCheck  (0x2b8929636820)    ;; code: BUILTIN
+0x2b892963afa3    35  48b8894100ecc60a0000 REX.W movq rax,0xac6ec004189    ;; object: 0xac6ec004189 <undefined>
+0x2b892963afad    45  488be5         REX.W movq rsp,rbp
+0x2b892963afb0    48  5d             pop rbp
+0x2b892963afb1    49  c20800         ret 0x8
+
+Inlined functions (count = 0)
+
+Deoptimization Input Data (deopt points = 1)
+ index  ast id    argc     pc
+     0       3       0     35
+
+Safepoints (size = 19)
+0x2b892963afa3    35  1 (sp -> fp)       0
+
+RelocInfo (size = 2)
+0x2b892963af9f  code target (BUILTIN)  (0x2b8929636820)
+0x2b892963afa5  embedded object  (0xac6ec004189 <undefined>)
+
+--- End code ---
+--- Raw source ---
+function f()
+{
+    function g() { }
+}
+
+for (var i = 0; i < 300000; ++i)
+    f();
+
+
+--- Code ---
+source_position = 0
+kind = FUNCTION
+compiler = full-codegen
+Instructions (size = 504)
+0x2b892963b040     0  55             push rbp                ;; debug: position 0
+0x2b892963b041     1  4889e5         REX.W movq rbp,rsp
+0x2b892963b044     4  56             push rsi
+0x2b892963b045     5  57             push rdi
+0x2b892963b046     6  41ff75a8       push [r13-0x58]
+0x2b892963b04a    10  49ba49ed0eecc60a0000 REX.W movq r10,0xac6ec0eed49    ;; object: 0xac6ec0eed49 <FixedArray[4]>
+0x2b892963b054    20  4152           push r10
+0x2b892963b056    22  6a00           push 0x0
+0x2b892963b058    24  b802000000     movl rax,0x2
+0x2b892963b05d    29  48bb10ac8a0001000000 REX.W movq rbx,0x1008aac10
+0x2b892963b067    39  e8b4ebfcff     call 0x2b8929609c20     ;; code: STUB, CEntryStub, minor: 0
+0x2b892963b06c    44  493ba540090000 REX.W cmpq rsp,[r13+0x940]
+0x2b892963b073    51  7305           jnc 58  (0x2b892963b07a)
+0x2b892963b075    53  e8a6b7ffff     call StackCheck  (0x2b8929636820)    ;; code: BUILTIN
+0x2b892963b07a    58  48b80000000000000000 REX.W movq rax,0x0    ;; debug: statement 39
+                                                             ;; debug: statement 44
+0x2b892963b084    68  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963b08e    78  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963b092    82  e88970ffff     call 0x2b8929632120     ;; code: STORE_IC, UNINITIALIZED
+0x2b892963b097    87  e9d8000000     jmp 308  (0x2b892963b174)
+0x2b892963b09c    92  48b9996d04ecc60a0000 REX.W movq rcx,0xac6ec046d99    ;; debug: statement 76
+                                                             ;; object: 0xac6ec046d99 <String[1]: f>
+0x2b892963b0a6   102  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963b0aa   106  48b80000000004000000 REX.W movq rax,0x400000000
+0x2b892963b0b4   116  e84752feff     call 0x2b8929620300     ;; code: contextual, LOAD_IC, DEFAULT
+0x2b892963b0b9   121  50             push rax
+0x2b892963b0ba   122  49ba894100ecc60a0000 REX.W movq r10,0xac6ec004189    ;; object: 0xac6ec004189 <undefined>
+0x2b892963b0c4   132  4152           push r10
+0x2b892963b0c6   134  48ba0000000008000000 REX.W movq rdx,0x800000000
+0x2b892963b0d0   144  488b7c2408     REX.W movq rdi,[rsp+0x8]
+0x2b892963b0d5   149  e8c6b7fdff     call 0x2b89296168a0     ;; code: CALL_IC, DEFAULT
+0x2b892963b0da   154  488b75f8       REX.W movq rsi,[rbp-0x8]
+0x2b892963b0de   158  4883c408       REX.W addq rsp,0x8
+0x2b892963b0e2   162  488945e8       REX.W movq [rbp-0x18],rax
+0x2b892963b0e6   166  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; debug: statement 69
+                                                             ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963b0f0   176  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963b0f4   180  48b80000000006000000 REX.W movq rax,0x600000000
+0x2b892963b0fe   190  e8fd51feff     call 0x2b8929620300     ;; code: contextual, LOAD_IC, DEFAULT
+0x2b892963b103   195  a801           test al,0x1
+0x2b892963b105   197  7314           jnc 219  (0x2b892963b11b)
+0x2b892963b107   199  49ba0000000001000000 REX.W movq r10,0x100000000
+0x2b892963b111   209  4903c2         REX.W addq rax,r10
+0x2b892963b114   212  711e           jno 244  (0x2b892963b134)
+0x2b892963b116   214  492bc2         REX.W subq rax,r10
+0x2b892963b119   217  eb05           jmp 224  (0x2b892963b120)
+0x2b892963b11b   219  e8c0fafeff     call 0x2b892962abe0     ;; code: STUB, ToNumberStub, minor: 0
+0x2b892963b120   224  488bd0         REX.W movq rdx,rax
+0x2b892963b123   227  48b80000000001000000 REX.W movq rax,0x100000000
+0x2b892963b12d   237  e80e7cfdff     call 0x2b8929612d40     ;; code: BINARY_OP_IC, UNINITIALIZED (id = 43)
+0x2b892963b132   242  a82d           test al,0x2d
+0x2b892963b134   244  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963b13e   254  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963b142   258  e8d96fffff     call 0x2b8929632120     ;; code: STORE_IC, UNINITIALIZED
+0x2b892963b147   263  48bb39ed0eecc60a0000 REX.W movq rbx,0xac6ec0eed39    ;; object: 0xac6ec0eed39 Cell for 6144
+0x2b892963b151   273  83430bff       addl [rbx+0xb],0xff
+0x2b892963b155   277  791d           jns 308  (0x2b892963b174)
+0x2b892963b157   279  e884b5ffff     call InterruptCheck  (0x2b89296366e0)    ;; code: BUILTIN
+0x2b892963b15c   284  48bb39ed0eecc60a0000 REX.W movq rbx,0xac6ec0eed39    ;; object: 0xac6ec0eed39 Cell for 6144
+0x2b892963b166   294  49ba0000000000180000 REX.W movq r10,0x180000000000
+0x2b892963b170   304  4c895307       REX.W movq [rbx+0x7],r10
+0x2b892963b174   308  48b979c004ecc60a0000 REX.W movq rcx,0xac6ec04c079    ;; debug: statement 57
+                                                             ;; debug: position 55
+                                                             ;; object: 0xac6ec04c079 <String[1]: i>
+0x2b892963b17e   318  488b5627       REX.W movq rdx,[rsi+0x27]
+0x2b892963b182   322  48b80000000006000000 REX.W movq rax,0x600000000
+0x2b892963b18c   332  e86f51feff     call 0x2b8929620300     ;; code: contextual, LOAD_IC, DEFAULT
+0x2b892963b191   337  50             push rax
+0x2b892963b192   338  48b8000000005f1656f8 REX.W movq rax,0xf856165f00000000
+0x2b892963b19c   348  49ba00000000bf8552f8 REX.W movq r10,0xf85285bf00000000
+0x2b892963b1a6   358  4933c2         REX.W xorq rax,r10
+0x2b892963b1a9   361  5a             pop rdx
+0x2b892963b1aa   362  488bca         REX.W movq rcx,rdx
+0x2b892963b1ad   365  480bc8         REX.W orq rcx,rax
+0x2b892963b1b0   368  f6c101         testb rcx,0x1
+0x2b892963b1b3   371  730e           jnc 387  (0x2b892963b1c3)
+0x2b892963b1b5   373  483bd0         REX.W cmpq rdx,rax
+0x2b892963b1b8   376  0f8cdefeffff   jl 92  (0x2b892963b09c)
+0x2b892963b1be   382  e921000000     jmp 420  (0x2b892963b1e4)
+0x2b892963b1c3   387  e8d8c9fdff     call 0x2b8929617ba0     ;; code: COMPARE_IC, UNINITIALIZED (id = 32)
+0x2b892963b1c8   392  a815           test al,0x15
+0x2b892963b1ca   394  eb0f           jmp 411  (0x2b892963b1db)
+0x2b892963b1cc   396  493b45c0       REX.W cmpq rax,[r13-0x40]
+0x2b892963b1d0   400  0f84c6feffff   jz 92  (0x2b892963b09c)
+0x2b892963b1d6   406  e909000000     jmp 420  (0x2b892963b1e4)
+0x2b892963b1db   411  4885c0         REX.W testq rax,rax
+0x2b892963b1de   414  0f8cb8feffff   jl 92  (0x2b892963b09c)
+0x2b892963b1e4   420  488b45e8       REX.W movq rax,[rbp-0x18]    ;; debug: statement 81
+0x2b892963b1e8   424  48bb39ed0eecc60a0000 REX.W movq rbx,0xac6ec0eed39    ;; object: 0xac6ec0eed39 Cell for 6144
+0x2b892963b1f2   434  83430bfe       addl [rbx+0xb],0xfe
+0x2b892963b1f6   438  791f           jns 471  (0x2b892963b217)
+0x2b892963b1f8   440  50             push rax
+0x2b892963b1f9   441  e8e2b4ffff     call InterruptCheck  (0x2b89296366e0)    ;; code: BUILTIN
+0x2b892963b1fe   446  58             pop rax
+0x2b892963b1ff   447  48bb39ed0eecc60a0000 REX.W movq rbx,0xac6ec0eed39    ;; object: 0xac6ec0eed39 Cell for 6144
+0x2b892963b209   457  49ba0000000000180000 REX.W movq r10,0x180000000000
+0x2b892963b213   467  4c895307       REX.W movq [rbx+0x7],r10
+0x2b892963b217   471  c9             leave                   ;; debug: statement 80
+0x2b892963b218   472  c20800         ret 0x8
+0x2b892963b21b   475  498b45a8       REX.W movq rax,[r13-0x58]
+0x2b892963b21f   479  e9c4ffffff     jmp 424  (0x2b892963b1e8)
+0x2b892963b224   484  0f1f4000       nop
+
+Deoptimization Output Data (deopt points = 29)
+ast id        pc  state
+     2        10  NO_REGISTERS
+     3        44  NO_REGISTERS
+    17        58  NO_REGISTERS
+    27        68  TOS_REG
+    22        87  TOS_REG
+    20        87  NO_REGISTERS
+    18        87  NO_REGISTERS
+    16        92  NO_REGISTERS
+    62        92  NO_REGISTERS
+    60       122  NO_REGISTERS
+    57       154  TOS_REG
+    55       162  TOS_REG
+    50       166  TOS_REG
+    48       166  NO_REGISTERS
+    15       166  NO_REGISTERS
+    47       166  NO_REGISTERS
+    45       195  TOS_REG
+    42       224  TOS_REG
+    41       263  TOS_REG
+    39       263  NO_REGISTERS
+    12       308  NO_REGISTERS
+    14       308  NO_REGISTERS
+    35       308  NO_REGISTERS
+    33       338  NO_REGISTERS
+    36       361  TOS_REG
+    30       396  TOS_REG
+    13       420  NO_REGISTERS
+    65       420  NO_REGISTERS
+    63       424  TOS_REG
+
+Back edges (size = 1)
+ast_id  pc_offset  loop_depth
+    14        284           1
+
+0xac6ec0eefa1: [TypeFeedbackInfo]
+ - ic_total_count: 8, ic_with_type_info_count: 0, ic_generic_count: 0
+
+RelocInfo (size = 56)
+0x2b892963b040  position  (0)
+0x2b892963b04c  embedded object  (0xac6ec0eed49 <FixedArray[4]>)
+0x2b892963b068  code target (STUB)  (0x2b8929609c20)
+0x2b892963b076  code target (BUILTIN)  (0x2b8929636820)
+0x2b892963b07a  statement position  (39)
+0x2b892963b07a  statement position  (44)
+0x2b892963b086  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963b093  code target (STORE_IC)  (0x2b8929632120)
+0x2b892963b09c  statement position  (76)
+0x2b892963b09e  embedded object  (0xac6ec046d99 <String[1]: f>)
+0x2b892963b0b5  code target (LOAD_IC)  (0x2b8929620300)
+0x2b892963b0bc  embedded object  (0xac6ec004189 <undefined>)
+0x2b892963b0d6  code target (CALL_IC)  (0x2b89296168a0)
+0x2b892963b0e6  statement position  (69)
+0x2b892963b0e8  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963b0ff  code target (LOAD_IC)  (0x2b8929620300)
+0x2b892963b11c  code target (STUB)  (0x2b892962abe0)
+0x2b892963b12e  code target with id (BINARY_OP_IC)  (0x2b8929612d40) (id=43)
+0x2b892963b136  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963b143  code target (STORE_IC)  (0x2b8929632120)
+0x2b892963b149  embedded object  (0xac6ec0eed39 Cell for 6144)
+0x2b892963b158  code target (BUILTIN)  (0x2b89296366e0)
+0x2b892963b15e  embedded object  (0xac6ec0eed39 Cell for 6144)
+0x2b892963b174  statement position  (57)
+0x2b892963b174  position  (55)
+0x2b892963b176  embedded object  (0xac6ec04c079 <String[1]: i>)
+0x2b892963b18d  code target (LOAD_IC)  (0x2b8929620300)
+0x2b892963b1c4  code target with id (COMPARE_IC)  (0x2b8929617ba0) (id=32)
+0x2b892963b1e4  statement position  (81)
+0x2b892963b1ea  embedded object  (0xac6ec0eed39 Cell for 6144)
+0x2b892963b1fa  code target (BUILTIN)  (0x2b89296366e0)
+0x2b892963b201  embedded object  (0xac6ec0eed39 Cell for 6144)
+0x2b892963b217  statement position  (80)
+
+--- End code ---
+--- Raw source ---
+function f()
+{
+    function g() { }
+}
+
+for (var i = 0; i < 300000; ++i)
+    f();
+
+
+--- Optimized code ---
+optimization_id = 1
+source_position = 0
+kind = OPTIMIZED_FUNCTION
+stack_slots = 4
+compiler = crankshaft
+Instructions (size = 313)
+0x2b892963b2a0     0  55             push rbp
+0x2b892963b2a1     1  4889e5         REX.W movq rbp,rsp
+0x2b892963b2a4     4  56             push rsi
+0x2b892963b2a5     5  57             push rdi
+0x2b892963b2a6     6  4883ec20       REX.W subq rsp,0x20
+0x2b892963b2aa    10  488b45f8       REX.W movq rax,[rbp-0x8]
+0x2b892963b2ae    14  488945e0       REX.W movq [rbp-0x20],rax
+0x2b892963b2b2    18  488bf0         REX.W movq rsi,rax
+0x2b892963b2b5    21  49bac1ef0eecc60a0000 REX.W movq r10,0xac6ec0eefc1    ;; object: 0xac6ec0eefc1 <FixedArray[4]>
+0x2b892963b2bf    31  4152           push r10
+0x2b892963b2c1    33  6a00           push 0x0
+0x2b892963b2c3    35  b802000000     movl rax,0x2
+0x2b892963b2c8    40  498d9d58ab0afd REX.W leaq rbx,[r13-0x2f554a8]
+0x2b892963b2cf    47  e84ce9fcff     call 0x2b8929609c20     ;; code: STUB, CEntryStub, minor: 0
+0x2b892963b2d4    52  488b75e0       REX.W movq rsi,[rbp-0x20]
+0x2b892963b2d8    56  660f1f840000000000 nop
+0x2b892963b2e1    65  493ba540090000 REX.W cmpq rsp,[r13+0x940]
+0x2b892963b2e8    72  7305           jnc 79  (0x2b892963b2ef)
+0x2b892963b2ea    74  e831b5ffff     call StackCheck  (0x2b8929636820)    ;; code: BUILTIN
+0x2b892963b2ef    79  48b819e80eecc60a0000 REX.W movq rax,0xac6ec0ee819    ;; object: 0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_])
+0x2b892963b2f9    89  4533d2         xorl r10,r10
+0x2b892963b2fc    92  4c89500f       REX.W movq [rax+0xf],r10
+0x2b892963b300    96  e918000000     jmp 125  (0x2b892963b31d)
+0x2b892963b305   101  4883ec18       REX.W subq rsp,0x18
+0x2b892963b309   105  488b45f8       REX.W movq rax,[rbp-0x8]
+0x2b892963b30d   109  488b5510       REX.W movq rdx,[rbp+0x10]
+0x2b892963b311   113  488bd8         REX.W movq rbx,rax
+0x2b892963b314   116  488b45e8       REX.W movq rax,[rbp-0x18]
+0x2b892963b318   120  e912000000     jmp 143  (0x2b892963b32f)
+0x2b892963b31d   125  488b5510       REX.W movq rdx,[rbp+0x10]
+0x2b892963b321   129  488b5de0       REX.W movq rbx,[rbp-0x20]
+0x2b892963b325   133  48b8894100ecc60a0000 REX.W movq rax,0xac6ec004189    ;; object: 0xac6ec004189 <undefined>
+0x2b892963b32f   143  488955d0       REX.W movq [rbp-0x30],rdx
+0x2b892963b333   147  48895dd8       REX.W movq [rbp-0x28],rbx
+0x2b892963b337   151  48b919e80eecc60a0000 REX.W movq rcx,0xac6ec0ee819    ;; debug: position 57
+                                                             ;; object: 0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_])
+0x2b892963b341   161  8b4913         movl rcx,[rcx+0x13]
+0x2b892963b344   164  81f9e0930400   cmpl rcx,0x493e0
+0x2b892963b34a   170  0f8d54000000   jge 260  (0x2b892963b3a4)
+0x2b892963b350   176  49baa8f00eecc60a0000 REX.W movq r10,0xac6ec0ef0a8    ;; debug: position 76
+                                                             ;; property cell
+0x2b892963b35a   186  4d8b12         REX.W movq r10,[r10]
+0x2b892963b35d   189  4152           push r10
+0x2b892963b35f   191  48bf71e70eecc60a0000 REX.W movq rdi,0xac6ec0ee771    ;; object: 0xac6ec0ee771 <JS Function f (SharedFunctionInfo 0xac6ec0ee4e1)>
+0x2b892963b369   201  488b772f       REX.W movq rsi,[rdi+0x2f]
+0x2b892963b36d   205  ff5717         call [rdi+0x17]
+0x2b892963b370   208  48b919e80eecc60a0000 REX.W movq rcx,0xac6ec0ee819    ;; debug: position 57
+                                                             ;; object: 0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_])
+0x2b892963b37a   218  8b5913         movl rbx,[rcx+0x13]     ;; debug: position 69
+0x2b892963b37d   221  83c301         addl rbx,0x1
+0x2b892963b380   224  0f8025000000   jo 267  (0x2b892963b3ab)
+0x2b892963b386   230  8bd3           movl rdx,rbx
+0x2b892963b388   232  48c1e220       REX.W shlq rdx, 32
+0x2b892963b38c   236  48b919e80eecc60a0000 REX.W movq rcx,0xac6ec0ee819    ;; debug: position 57
+                                                             ;; object: 0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_])
+0x2b892963b396   246  4889510f       REX.W movq [rcx+0xf],rdx    ;; debug: position 69
+0x2b892963b39a   250  488b55d0       REX.W movq rdx,[rbp-0x30]
+0x2b892963b39e   254  488b5dd8       REX.W movq rbx,[rbp-0x28]
+0x2b892963b3a2   258  eb93           jmp 151  (0x2b892963b337)
+0x2b892963b3a4   260  488be5         REX.W movq rsp,rbp
+0x2b892963b3a7   263  5d             pop rbp
+0x2b892963b3a8   264  c20800         ret 0x8
+0x2b892963b3ab   267  e878acccff     call 0x2b8929306028     ;; deoptimization bailout 4
+
+Inlined functions (count = 0)
+
+Deoptimization Input Data (deopt points = 5)
+ index  ast id    argc     pc
+     0       3       0     52
+     1       3       0     79
+     2      14       0     -1
+     3      55       0    208
+     4      55       0     -1
+
+Safepoints (size = 41)
+0x2b892963b2d4    52  0010 (sp -> fp)       0
+0x2b892963b2ef    79  0010 (sp -> fp)       1
+0x2b892963b370   208  1100 (sp -> fp)       3
+
+RelocInfo (size = 29)
+0x2b892963b2b7  embedded object  (0xac6ec0eefc1 <FixedArray[4]>)
+0x2b892963b2d0  code target (STUB)  (0x2b8929609c20)
+0x2b892963b2eb  code target (BUILTIN)  (0x2b8929636820)
+0x2b892963b2f1  embedded object  (0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_]))
+0x2b892963b327  embedded object  (0xac6ec004189 <undefined>)
+0x2b892963b337  position  (57)
+0x2b892963b339  embedded object  (0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_]))
+0x2b892963b350  position  (76)
+0x2b892963b352  property cell
+0x2b892963b361  embedded object  (0xac6ec0ee771 <JS Function f (SharedFunctionInfo 0xac6ec0ee4e1)>)
+0x2b892963b370  position  (57)
+0x2b892963b372  embedded object  (0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_]))
+0x2b892963b37a  position  (69)
+0x2b892963b38c  position  (57)
+0x2b892963b38e  embedded object  (0xac6ec0ee819 PropertyCell for 12291 (data, dictionary_index: 168, attrs: [WE_]))
+0x2b892963b396  position  (69)
+0x2b892963b3ac  runtime entry  (deoptimization bailout 4)
+
+--- End code ---
