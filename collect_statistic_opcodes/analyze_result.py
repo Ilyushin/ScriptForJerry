@@ -1,4 +1,4 @@
-import sys, subprocess, os, csv, threading
+import sys, subprocess, os, csv
 
 dir = os.path.dirname(__file__)
 path_result_folder = os.path.join(dir, 'results')
@@ -73,5 +73,5 @@ def process_data(path):
             
 if results_path:
     for path in results_path:
-        threading.Thread(target=process_data, args=(path,)).start() 
+        process_data(path) 
         

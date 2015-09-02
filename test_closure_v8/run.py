@@ -1,4 +1,4 @@
-import models, csv, os, threading
+import models, csv, os
 
 dir = os.path.dirname(__file__)
 path_result_folder = os.path.join(dir, 'results')
@@ -24,15 +24,7 @@ def start_processing():
     
     threads = []
     for path in tests:
-        threads.append(threading.Thread(target=processing_test, args=(path,csv_writer,))) 
-      
-     # Start all threads
-    for t in threads:
-        t.start()
-    
-     # Wait for all of them to finish
-    for t in threads:
-        t.join() 
+        processing_test(path,csv_writer)
          
     csvfile.close()
     print 'success'
