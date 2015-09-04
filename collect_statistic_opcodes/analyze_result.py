@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7
 import sys, subprocess, os, csv
 
 dir = os.path.dirname(__file__)

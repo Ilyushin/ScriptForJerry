@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7
 import models, csv, os
 
 dir = os.path.dirname(__file__)
