@@ -3,7 +3,7 @@ import sys, subprocess, os, csv
 if len(sys.argv) == 1:
     #set parameters
     dir = os.path.dirname(__file__)
-    path_jerry = path_jerry = os.path.join(dir, 'jerry_opcodes')
+    path_jerry = path_jerry = os.path.join(dir, 'jerry')
     path_result_folder = os.path.join(dir, 'results')
     path_tests = os.path.join(dir,'test_files')
         
