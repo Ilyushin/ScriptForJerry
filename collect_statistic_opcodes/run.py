@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-import sys, subprocess, os, csv
+import sys, subprocess, os, csv, analyze_result
 
 if len(sys.argv) == 1:
     #set parameters
@@ -22,4 +22,8 @@ if len(sys.argv) == 1:
             print 'end - '+test
             
     print 'success'
+    
+    print '********SART ANALYZE****************'
+    
+    analyze_result(start())
             

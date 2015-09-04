@@ -5,11 +5,6 @@ dir = os.path.dirname(__file__)
 path_result_folder = os.path.join(dir, 'results')
 path_bytecode = os.path.join(dir, 'bytecode')
 
-results_path = []
-for fn in os.listdir(path_result_folder):
-   if fn.lower().endswith('.csv') and not "_analyze" in fn.lower() :
-       results_path.append(path_result_folder+'/'+fn)
- 
 def get_name_opcodes_dict(file_name):
     file_sourse = open(path_bytecode + '/' + file_name + '_opcodes.txt', "r")
 
@@ -89,9 +84,16 @@ def process_data(path):
         else:
             print 'List of opcodes is empty'    
     print 'finish - '+ path    
-            
-if results_path:
-    for path in results_path:
-        process_data(path)
-    print 'success'     
+
+def start(): 
+    
+    results_path = []
+    for fn in os.listdir(path_result_folder):
+        if fn.lower().endswith('.csv') and not "_analyze" in fn.lower() :
+            results_path.append(path_result_folder+'/'+fn)
+               
+    if results_path:
+        for path in results_path:
+            process_data(path)
+        print 'success'     
  
