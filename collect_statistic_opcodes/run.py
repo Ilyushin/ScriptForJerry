@@ -25,5 +25,5 @@ if len(sys.argv) == 1:
     
     print '********SART ANALYZE****************'
     
-    analyze_result(start())
+    analyze_result.start()
             
