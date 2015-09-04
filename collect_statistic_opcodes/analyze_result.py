@@ -62,13 +62,12 @@ def process_data(path):
         #get name list of opcodes
         dict_opcodes = get_name_opcodes_dict(os.path.splitext(os.path.basename(path))[0])
         
-        if len(dict_opcodes) != 0:
+        if len(dict_opcodes) != 0: 
             csvfile_an = open(path_result_folder+'/'+os.path.splitext(os.path.basename(path))[0]+'_analyze.csv', 'w+')
             csv_writer = csv.writer(csvfile_an, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ', quotechar='')
             csv_writer.writerow(['Name',',Id',',Number of calls',',Min time',',Max time',',Average time'])
             for key, value in result_dict.iteritems():
                 newStr = []
-                print str(key)+'\n'
                 newStr.append(dict_opcodes[str(key)])
                 newStr.append(',' + str(key))
                 newStr.append(',' + str(value[0]))
@@ -82,7 +81,9 @@ def process_data(path):
                 csv_writer.writerow(newStr)
             csvfile_an.close()
         else:
-            print 'List of opcodes is empty'    
+            print 'List of opcodes is empty'
+    print 'opcodes in bytcode - '+str(dict_opcodes) 
+    print 'opcodes after analyze - '+str(result_dict)           
     print 'finish - '+ path    
 
 def start(): 
