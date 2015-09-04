@@ -82,8 +82,8 @@ def process_data(path):
             csvfile_an.close()
         else:
             print 'List of opcodes is empty'
-    print 'opcodes in bytcode - '+str(dict_opcodes) 
-    print 'opcodes after analyze - '+str(result_dict)           
+    print 'opcodes in bytcode - '+str(len(dict_opcodes)) 
+    print 'opcodes after analyze - '+str(len(result_dict))           
     print 'finish - '+ path    
 
 def start(): 
