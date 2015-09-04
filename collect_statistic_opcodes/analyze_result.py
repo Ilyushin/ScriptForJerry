@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-import sys, subprocess, os, csv
+import sys, subprocess, os, csv, gzip
 
 dir = os.path.dirname(__file__)
 path_result_folder = os.path.join(dir, 'results')
@@ -95,5 +95,15 @@ def start():
     if results_path:
         for path in results_path:
             process_data(path)
-        print 'success'     
+        print 'success' 
+        
+    print '********Compress files*****************' 
+    
+    for fn in os.listdir(path_result_folder):
+        if fn.lower().endswith('.csv'):
+            with open(path_result_folder+'/'+fn, 'rb') as f_in:
+                with gzip.open(path_result_folder+'/'+fn+'.gz', 'wb') as f_out:
+                    f_out.writelines(f_in)
+            os.remove(path_result_folder+'/'+fn)
+            print 'remove - '+path_result_folder+'/'+fn 
  
