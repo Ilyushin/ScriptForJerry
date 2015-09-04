@@ -18,12 +18,16 @@ def get_name_opcodes_dict(file_name):
     for row in arr_rows:
         if row[:2] == '//':
             continue
-        arr_row = row.split('  ') 
-        data = [i.replace(':','').strip() for i in arr_row if i.strip()] 
-        if len(data) < 2 or 'x' in data[0]: continue
-                
-        dict_op.setdefault(data[0])
-        dict_op[data[0]] = data[1]      
+        arr_row = row.split(' ') 
+        
+        data = [i for i in arr_row if i.strip()]
+        
+        if len(data) < 2 or  not ':' in data[0]: continue
+         
+        id = data[0].replace(':','').strip()       
+        dict_op.setdefault(id)
+        
+        dict_op[id] = data[1]      
                    
     file_sourse.close()
     return dict_op 
@@ -82,10 +86,12 @@ def process_data(path):
                 
                 csv_writer.writerow(newStr)
             csvfile_an.close()
-        print 'List of opcodes is empty'    
+        else:
+            print 'List of opcodes is empty'    
     print 'finish - '+ path    
             
 if results_path:
     for path in results_path:
-        process_data(path) 
-        
+        process_data(path)
+    print 'success'     
+ 
