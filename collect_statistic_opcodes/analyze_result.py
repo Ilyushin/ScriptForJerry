@@ -83,7 +83,7 @@ def process_data(path):
    
 
 def compress_file(path, path_ar):
-    print path_arprint 
+    print path
     print path_ar
     with open(path, 'rb') as f_in:
         with gzip.open(path_ar, 'wb') as f_out:
