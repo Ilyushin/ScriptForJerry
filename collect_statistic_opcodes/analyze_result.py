@@ -27,8 +27,7 @@ def get_name_opcodes_dict(file_name):
     file_sourse.close()
     return dict_op 
  
-def process_data(path):
-    print 'start - '+ path 
+def process_data(path): 
     with open(path, 'rb') as csvfile:
         csv_reader = csv.reader(csvfile, delimiter=',')           
         #row of the dict consist of following fields:
@@ -82,9 +81,18 @@ def process_data(path):
             csvfile_an.close()
         else:
             print 'List of opcodes is empty'
-    print 'opcodes in bytcode - '+str(len(dict_opcodes)) 
-    print 'opcodes after analyze - '+str(len(result_dict))           
-    print 'finish - '+ path    
+    print str(len(dict_opcodes))+','+str(len(result_dict))+','+ path
+#     print 'opcodes in bytcode - '+str(len(dict_opcodes)) 
+#     print 'opcodes after analyze - '+str(len(result_dict))           
+#     print '______________________________'    
+
+def compress_file(path, path_ar):
+    with open(path, 'rb') as f_in:
+        with gzip.open(path_ar, 'wb') as f_out:
+            f_out.writelines(f_in)
+        os.remove(path)
+        print 'remove - '+path
+    
 
 def start(): 
     
@@ -94,17 +102,22 @@ def start():
             results_path.append(path_result_folder+'/'+fn)
                
     if results_path:
+        threads = []
         for path in results_path:
-            process_data(path)
+            threads.append(threading.Thread(target=process_data, args=(path,))) 
+         
+        # Start all threads
+        for t in threads:
+            t.start()
+    
+        # Wait for all of them to finish
+        for t in threads:
+            t.join()    
         print 'success' 
         
     print '********Compress files*****************' 
     
     for fn in os.listdir(path_result_folder):
         if fn.lower().endswith('.csv'):
-            with open(path_result_folder+'/'+fn, 'rb') as f_in:
-                with gzip.open(path_result_folder+'/'+fn+'.gz', 'wb') as f_out:
-                    f_out.writelines(f_in)
-            os.remove(path_result_folder+'/'+fn)
-            print 'remove - '+path_result_folder+'/'+fn 
+            threading.Thread(target=processing_test, args=(path_result_folder+'/'+fn, path_result_folder+'/'+fn+'.gz',)) 
  

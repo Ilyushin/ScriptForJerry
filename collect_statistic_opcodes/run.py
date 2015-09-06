@@ -23,7 +23,7 @@ if len(sys.argv) == 1:
             
     print 'success'
     
-    print '********SART ANALYZE****************'
+    print '********START ANALYZE****************'
     
     analyze_result.start()
             
