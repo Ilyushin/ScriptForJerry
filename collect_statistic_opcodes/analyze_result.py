@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-import sys, subprocess, os, csv, gzip
+import sys, subprocess, os, csv, gzip, threading
 
 dir = os.path.dirname(__file__)
 path_result_folder = os.path.join(dir, 'results')
@@ -43,9 +43,9 @@ def process_data(path):
         result_dict = {}
         for row in csv_reader:
             l = len(row)
-            if l != 3: continue           
+            if l != 2: continue           
                                  
-            id = int(row[1])-1    
+            id = int(row[1])    
             result_dict.setdefault(id,[0,0,0,0])
             #number
             result_dict[id][0] += 1
