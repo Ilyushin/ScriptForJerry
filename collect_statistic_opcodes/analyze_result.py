@@ -119,5 +119,5 @@ def start():
     
     for fn in os.listdir(path_result_folder):
         if fn.lower().endswith('.csv'):
-            threading.Thread(target=processing_test, args=(path_result_folder+'/'+fn, path_result_folder+'/'+fn+'.gz',)) 
+            threading.Thread(target=compress_file, args=(path_result_folder+'/'+fn, path_result_folder+'/'+fn+'.gz',)) 
  
