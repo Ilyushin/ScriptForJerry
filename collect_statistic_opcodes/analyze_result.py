@@ -45,19 +45,19 @@ def process_data(path):
             l = len(row)
             if l != 2: continue           
                                  
-            id = int(row[1])    
+            id = int(row[0])    
             result_dict.setdefault(id,[0,0,0,0])
             #number
             result_dict[id][0] += 1
             #min
-            if result_dict[id][1] == 0 or result_dict[id][1] > float(row[2]):
+            if result_dict[id][1] == 0 or result_dict[id][1] > float(row[1]):
                result_dict[id][1] = float(row[2]) 
             
             #max
-            if result_dict[id][2] < float(row[2]):
-                result_dict[id][2] = float(row[2])
+            if result_dict[id][2] < float(row[1]):
+                result_dict[id][2] = float(row[1])
             #average
-            result_dict[id][3] += float(row[2])
+            result_dict[id][3] += float(row[1])
        
         #get name list of opcodes
         dict_opcodes = get_name_opcodes_dict(os.path.splitext(os.path.basename(path))[0])
