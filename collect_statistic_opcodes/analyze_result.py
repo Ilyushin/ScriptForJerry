@@ -51,7 +51,7 @@ def process_data(path):
             result_dict[id][0] += 1
             #min
             if result_dict[id][1] == 0 or result_dict[id][1] > float(row[1]):
-               result_dict[id][1] = float(row[2]) 
+               result_dict[id][1] = float(row[1]) 
             
             #max
             if result_dict[id][2] < float(row[1]):
