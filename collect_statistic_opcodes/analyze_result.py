@@ -37,8 +37,6 @@ def process_data(path):
         # - max execution time
         # - average execution time
         
-        #id for opcodes, which doesn't have real id
-        #id_opcode = 1000
         result_dict = {}
         for row in csv_reader:
             l = len(row)
@@ -82,11 +80,10 @@ def process_data(path):
         else:
             print 'List of opcodes is empty'
         print str(len(dict_opcodes))+','+str(len(result_dict))+','+ path
-#     print 'opcodes in bytcode - '+str(len(dict_opcodes)) 
-#     print 'opcodes after analyze - '+str(len(result_dict))           
-#     print '______________________________'    
+   
 
 def compress_file(path, path_ar):
+    print path_arprint path_ar
     with open(path, 'rb') as f_in:
         with gzip.open(path_ar, 'wb') as f_out:
             f_out.writelines(f_in)
