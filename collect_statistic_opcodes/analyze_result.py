@@ -119,5 +119,6 @@ def start():
         if fn.lower().endswith('.csv'):
             path = path_result_folder+'/'+fn
             path_ar = path_result_folder+'/'+fn+'.gz'
-            threading.Thread(target=compress_file, args=(path, path_ar,)) 
+            threading.Thread(target=compress_file, args=(path, path_ar,)).start()
+            
  
