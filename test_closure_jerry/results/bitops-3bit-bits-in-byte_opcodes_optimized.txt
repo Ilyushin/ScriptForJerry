@@ -1,177 +1,167 @@
 // var a,b,c=0;for(a=0;500>a;a++)for(b=0;256>b;b++)var d=c,e=b,f=void 0,f=3&59796>>(e<<1&14),f=f+(3&59796>>(e>>2&14)),f=f+(3&59796>>(e>>5&6)),c=d+f;sum=c;if(512E3!=sum)throw"ERROR: bad result: expected 512000 but got "+sum;
-  0:                 meta   12  255          // [to be rewritten]
+  0:                 meta   12  253  255     // [to be rewritten]
+  1:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  2:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  3:           assignment  254    6  130     // c = tmp130 : TYPEOF(tmp130);
+  4:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  5:           assignment  254    6  130     // a = tmp130 : TYPEOF(tmp130);
+  6:             jmp_down  253  253          // goto 65027;
+  7:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  8:           assignment  254    6  130     // b = tmp130 : TYPEOF(tmp130);
+  9:             jmp_down  253  253          // goto 65030;
+ 10:           assignment  254    6  254     // d = c : TYPEOF(c);
+ 11:           assignment  254    6  254     // e = b : TYPEOF(b);
+ 12:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 13:           assignment  131    6  130     // tmp131 = tmp130 : TYPEOF(tmp130);
+ 14:           assignment  131    0    1     // tmp131 = undefined: SIMPLE;
+ 15:           assignment  254    6  131     // f = tmp131 : TYPEOF(tmp131);
+ 16:           assignment  132    1    3     // tmp132 = 3: SMALLINT;
+ 17:           assignment  133    3  254     // tmp133 = 59796: NUMBER;
+ 18:           assignment  134    6  254     // tmp134 = e : TYPEOF(e);
+ 19:           assignment  135    1    1     // tmp135 = 1: SMALLINT;
+ 20:         b_shift_left  136  134  135     // tmp136 = tmp134 << tmp135;
+ 21:           assignment  137    1   14     // tmp137 = 14: SMALLINT;
+ 22:                b_and  138  136  137     // tmp138 = tmp136 & tmp137;
+ 23:        b_shift_right  139  133  138     // tmp139 = tmp133 >> tmp138;
+ 24:                b_and  140  132  139     // tmp140 = tmp132 & tmp139;
+ 25:           assignment  254    6  140     // f = tmp140 : TYPEOF(tmp140);
+ 26:           assignment  141    6  254     // tmp141 = f : TYPEOF(f);
+ 27:           assignment  142    1    3     // tmp142 = 3: SMALLINT;
+ 28:           assignment  143    3  254     // tmp143 = 59796: NUMBER;
+ 29:           assignment  144    6  254     // tmp144 = e : TYPEOF(e);
+ 30:           assignment  145    1    2     // tmp145 = 2: SMALLINT;
+ 31:        b_shift_right  146  144  145     // tmp146 = tmp144 >> tmp145;
+ 32:           assignment  147    1   14     // tmp147 = 14: SMALLINT;
+ 33:                b_and  148  146  147     // tmp148 = tmp146 & tmp147;
+ 34:        b_shift_right  149  143  148     // tmp149 = tmp143 >> tmp148;
+ 35:                b_and  150  142  149     // tmp150 = tmp142 & tmp149;
+ 36:             addition  151  141  150     // tmp151 = tmp141 + tmp150;
+ 37:           assignment  254    6  151     // f = tmp151 : TYPEOF(tmp151);
+ 38:           assignment  152    6  254     // tmp152 = f : TYPEOF(f);
+ 39:           assignment  153    1    3     // tmp153 = 3: SMALLINT;
+ 40:           assignment  154    3  254     // tmp154 = 59796: NUMBER;
+ 41:           assignment  155    6  254     // tmp155 = e : TYPEOF(e);
+ 42:           assignment  156    1    5     // tmp156 = 5: SMALLINT;
+ 43:        b_shift_right  157  155  156     // tmp157 = tmp155 >> tmp156;
+ 44:           assignment  158    1    6     // tmp158 = 6: SMALLINT;
+ 45:                b_and  159  157  158     // tmp159 = tmp157 & tmp158;
+ 46:        b_shift_right  160  154  159     // tmp160 = tmp154 >> tmp159;
+ 47:                b_and  161  153  160     // tmp161 = tmp153 & tmp160;
+ 48:             addition  162  152  161     // tmp162 = tmp152 + tmp161;
+ 49:           assignment  254    6  162     // f = tmp162 : TYPEOF(tmp162);
+ 50:           assignment  163    6  254     // tmp163 = d : TYPEOF(d);
+ 51:             addition  164  163  254     // tmp164 = tmp163 + f;
+ 52:           assignment  254    6  164     // c = tmp164 : TYPEOF(tmp164);
+ 53:            post_incr  165  254          // tmp165 = b++;
+  9:             jmp_down    0   45          // goto 54; // REWRITE
+ 54:           assignment  166    3  254     // tmp166 = 256: NUMBER;
+ 55:         greater_than  167  166  254     // tmp167 = tmp166 > b;
+ 56:       is_true_jmp_up  167    0   46     // if (tmp167) goto 10;
+ 57:            post_incr  168  254          // tmp168 = a++;
+  6:             jmp_down    0   52          // goto 58; // REWRITE
+ 58:           assignment  169    3  254     // tmp169 = 500: NUMBER;
+ 59:         greater_than  170  169  254     // tmp170 = tmp169 > a;
+ 60:       is_true_jmp_up  170    0   53     // if (tmp170) goto 7;
+ 61:           assignment  254    6  254     // sum = c : TYPEOF(c);
+ 62:           assignment  130    6  254     // tmp130 = c : TYPEOF(c);
+ 63:           assignment  130    3  254     // tmp130 = 512000: NUMBER;
+ 64:      not_equal_value  131  130  254     // tmp131 = tmp130 != sum;
+ 65:    is_false_jmp_down  131  253  253     // if (tmp131 == false) goto 65086;
+ 66:           assignment  130    5  254     // tmp130 = 'ERROR: bad result: expected 512000 but got ': STRING;
+ 67:             addition  131  130  254     // tmp131 = tmp130 + sum;
+ 68:          throw_value  131               // throw tmp131;
 // 
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp255;
-// var a,b,c=0;for(a=0;500>a;a++)for(b=0;256>b;b++)var d=c,e=b,f=void 0,f=3&59796>>(e<<1&14),f=f+(3&59796>>(e>>2&14)),f=f+(3&59796>>(e>>5&6)),c=d+f;sum=c;if(512E3!=sum)throw"ERROR: bad result: expected 512000 but got "+sum;
-  2:             var_decl                    // var a;
-  3:             var_decl                    // var b;
-  4:             var_decl                    // var c;
-  5:             var_decl                    // var d;
-  6:             var_decl                    // var e;
-  7:             var_decl                    // var f;
-// 
-// var a,b,c=0;for(a=0;500>a;a++)for(b=0;256>b;b++)var d=c,e=b,f=void 0,f=3&59796>>(e<<1&14),f=f+(3&59796>>(e>>2&14)),f=f+(3&59796>>(e>>5&6)),c=d+f;sum=c;if(512E3!=sum)throw"ERROR: bad result: expected 512000 but got "+sum;
-  8:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  9:           assignment  254    6          // c = tmp130 : TYPEOF(tmp130);
- 10:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 11:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
- 12:             jmp_down  255               // goto 65547;
- 13:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 14:           assignment  254    6          // b = tmp130 : TYPEOF(tmp130);
- 15:             jmp_down  255               // goto 65550;
- 16:           assignment  254    6          // d = c : TYPEOF(c);
- 17:           assignment  254    6          // e = b : TYPEOF(b);
- 18:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 19:           assignment  131    6          // tmp131 = tmp130 : TYPEOF(tmp130);
- 20:           assignment  131    0          // tmp131 = undefined: SIMPLE;
- 21:           assignment  254    6          // f = tmp131 : TYPEOF(tmp131);
- 22:           assignment  132    1          // tmp132 = 3: SMALLINT;
- 23:           assignment  133    3          // tmp133 = 59796: NUMBER;
- 24:           assignment  134    6          // tmp134 = e : TYPEOF(e);
- 25:           assignment  135    1          // tmp135 = 1: SMALLINT;
- 26:         b_shift_left  136  134          // tmp136 = tmp134 << tmp135;
- 27:           assignment  137    1          // tmp137 = 14: SMALLINT;
- 28:                b_and  138  136          // tmp138 = tmp136 & tmp137;
- 29:        b_shift_right  139  133          // tmp139 = tmp133 >> tmp138;
- 30:                b_and  140  132          // tmp140 = tmp132 & tmp139;
- 31:           assignment  254    6          // f = tmp140 : TYPEOF(tmp140);
- 32:           assignment  141    6          // tmp141 = f : TYPEOF(f);
- 33:           assignment  142    1          // tmp142 = 3: SMALLINT;
- 34:           assignment  143    3          // tmp143 = 59796: NUMBER;
- 35:           assignment  144    6          // tmp144 = e : TYPEOF(e);
- 36:           assignment  145    1          // tmp145 = 2: SMALLINT;
- 37:        b_shift_right  146  144          // tmp146 = tmp144 >> tmp145;
- 38:           assignment  147    1          // tmp147 = 14: SMALLINT;
- 39:                b_and  148  146          // tmp148 = tmp146 & tmp147;
- 40:        b_shift_right  149  143          // tmp149 = tmp143 >> tmp148;
- 41:                b_and  150  142          // tmp150 = tmp142 & tmp149;
- 42:             addition  151  141          // tmp151 = tmp141 + tmp150;
- 43:           assignment  254    6          // f = tmp151 : TYPEOF(tmp151);
- 44:           assignment  152    6          // tmp152 = f : TYPEOF(f);
- 45:           assignment  153    1          // tmp153 = 3: SMALLINT;
- 46:           assignment  154    3          // tmp154 = 59796: NUMBER;
- 47:           assignment  155    6          // tmp155 = e : TYPEOF(e);
- 48:           assignment  156    1          // tmp156 = 5: SMALLINT;
- 49:        b_shift_right  157  155          // tmp157 = tmp155 >> tmp156;
- 50:           assignment  158    1          // tmp158 = 6: SMALLINT;
- 51:                b_and  159  157          // tmp159 = tmp157 & tmp158;
- 52:        b_shift_right  160  154          // tmp160 = tmp154 >> tmp159;
- 53:                b_and  161  153          // tmp161 = tmp153 & tmp160;
- 54:             addition  162  152          // tmp162 = tmp152 + tmp161;
- 55:           assignment  254    6          // f = tmp162 : TYPEOF(tmp162);
- 56:           assignment  163    6          // tmp163 = d : TYPEOF(d);
- 57:             addition  164  163          // tmp164 = tmp163 + f;
- 58:           assignment  254    6          // c = tmp164 : TYPEOF(tmp164);
- 59:            post_incr  165               // tmp165 = b++;
- 15:             jmp_down    0               // goto 60; // REWRITE
- 60:           assignment  166    3          // tmp166 = 256: NUMBER;
- 61:         greater_than  167  166          // tmp167 = tmp166 > b;
- 62:       is_true_jmp_up  167    0          // if (tmp167) goto 16;
- 63:            post_incr  168               // tmp168 = a++;
- 12:             jmp_down    0               // goto 64; // REWRITE
- 64:           assignment  169    3          // tmp169 = 500: NUMBER;
- 65:         greater_than  170  169          // tmp170 = tmp169 > a;
- 66:       is_true_jmp_up  170    0          // if (tmp170) goto 13;
- 67:           assignment  254    6          // sum = c : TYPEOF(c);
- 68:           assignment  130    6          // tmp130 = c : TYPEOF(c);
- 69:           assignment  130    3          // tmp130 = 512000: NUMBER;
- 70:      not_equal_value  131  130          // tmp131 = tmp130 != sum;
- 71:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65606;
- 72:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected 512000 but got ': STRING;
- 73:             addition  131  130          // tmp131 = tmp130 + sum;
- 74:          throw_value                    // throw tmp131;
-// 
- 71:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 75; // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp170; // REWRITE
- 75:                  ret                    // ret;
+ 65:    is_false_jmp_down  131    0    4     // if (tmp131 == false) goto 69; // REWRITE
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128  170    0     // var tmp128 .. tmp170; // REWRITE
+ 69:                  ret                    // ret;
 LITERALS:
-0x84ec54 [  8] a : STRING
-0x84ec5c [  8] b : STRING
-0x84ec64 [  8] c : STRING
-0x84ec6c [ 12] 500 : NUMBER
-0x84ec78 [ 12] 256 : NUMBER
-0x84ec98 [  8] d : STRING
-0x84eca0 [  8] e : STRING
-0x84eca8 [  8] f : STRING
-0x84ecb0 [ 12] 59796 : NUMBER
-0x84ecbc [ 12] sum : STRING
-0x84ecdc [ 12] 512000 : NUMBER
-0x84ece8 [ 52] ERROR: bad result: expected 512000 but got  : STRING
-0x84ed30 [ 16]  : EMPTY RECORD
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  1:         reg_var_decl  128               // var tmp128 .. tmp170;
-  2:             var_decl                    // var a;
-  3:             var_decl                    // var b;
-  4:             var_decl                    // var c;
-  5:             var_decl                    // var d;
-  6:             var_decl                    // var e;
-  7:             var_decl                    // var f;
-  8:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  9:           assignment    2    6          // c = tmp130 : TYPEOF(tmp130);
- 10:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 11:           assignment    0    6          // a = tmp130 : TYPEOF(tmp130);
- 12:             jmp_down    0               // goto 64;
- 13:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 14:           assignment    1    6          // b = tmp130 : TYPEOF(tmp130);
- 15:             jmp_down    0               // goto 60;
- 16:           assignment    3    6          // d = c : TYPEOF(c);
- 17:           assignment    4    6          // e = b : TYPEOF(b);
- 18:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 19:           assignment  131    6          // tmp131 = tmp130 : TYPEOF(tmp130);
- 20:           assignment  131    0          // tmp131 = undefined: SIMPLE;
- 21:           assignment    5    6          // f = tmp131 : TYPEOF(tmp131);
- 22:           assignment  132    1          // tmp132 = 3: SMALLINT;
- 23:           assignment  133    3          // tmp133 = 59796: NUMBER;
- 24:           assignment  134    6          // tmp134 = e : TYPEOF(e);
- 25:           assignment  135    1          // tmp135 = 1: SMALLINT;
- 26:         b_shift_left  136  134          // tmp136 = tmp134 << tmp135;
- 27:           assignment  137    1          // tmp137 = 14: SMALLINT;
- 28:                b_and  138  136          // tmp138 = tmp136 & tmp137;
- 29:        b_shift_right  139  133          // tmp139 = tmp133 >> tmp138;
- 30:                b_and  140  132          // tmp140 = tmp132 & tmp139;
- 31:           assignment    5    6          // f = tmp140 : TYPEOF(tmp140);
- 32:           assignment  141    6          // tmp141 = f : TYPEOF(f);
- 33:           assignment  142    1          // tmp142 = 3: SMALLINT;
- 34:           assignment  143    3          // tmp143 = 59796: NUMBER;
- 35:           assignment  144    6          // tmp144 = e : TYPEOF(e);
- 36:           assignment  145    1          // tmp145 = 2: SMALLINT;
- 37:        b_shift_right  146  144          // tmp146 = tmp144 >> tmp145;
- 38:           assignment  147    1          // tmp147 = 14: SMALLINT;
- 39:                b_and  148  146          // tmp148 = tmp146 & tmp147;
- 40:        b_shift_right  149  143          // tmp149 = tmp143 >> tmp148;
- 41:                b_and  150  142          // tmp150 = tmp142 & tmp149;
- 42:             addition  151  141          // tmp151 = tmp141 + tmp150;
- 43:           assignment    5    6          // f = tmp151 : TYPEOF(tmp151);
- 44:           assignment  152    6          // tmp152 = f : TYPEOF(f);
- 45:           assignment  153    1          // tmp153 = 3: SMALLINT;
- 46:           assignment  154    3          // tmp154 = 59796: NUMBER;
- 47:           assignment  155    6          // tmp155 = e : TYPEOF(e);
- 48:           assignment  156    1          // tmp156 = 5: SMALLINT;
- 49:        b_shift_right  157  155          // tmp157 = tmp155 >> tmp156;
- 50:           assignment  158    1          // tmp158 = 6: SMALLINT;
- 51:                b_and  159  157          // tmp159 = tmp157 & tmp158;
- 52:        b_shift_right  160  154          // tmp160 = tmp154 >> tmp159;
- 53:                b_and  161  153          // tmp161 = tmp153 & tmp160;
- 54:             addition  162  152          // tmp162 = tmp152 + tmp161;
- 55:           assignment    5    6          // f = tmp162 : TYPEOF(tmp162);
- 56:           assignment  163    6          // tmp163 = d : TYPEOF(d);
- 57:             addition  164  163          // tmp164 = tmp163 + f;
- 58:           assignment    2    6          // c = tmp164 : TYPEOF(tmp164);
- 59:            post_incr  165               // tmp165 = b++;
- 60:           assignment  166    3          // tmp166 = 256: NUMBER;
- 61:         greater_than  167  166          // tmp167 = tmp166 > b;
- 62:       is_true_jmp_up  167    0          // if (tmp167) goto 16;
- 63:            post_incr  168               // tmp168 = a++;
- 64:           assignment  169    3          // tmp169 = 500: NUMBER;
- 65:         greater_than  170  169          // tmp170 = tmp169 > a;
- 66:       is_true_jmp_up  170    0          // if (tmp170) goto 13;
- 67:           assignment    2    6          // sum = c : TYPEOF(c);
- 68:           assignment  130    6          // tmp130 = c : TYPEOF(c);
- 69:           assignment  130    3          // tmp130 = 512000: NUMBER;
- 70:      not_equal_value  131  130          // tmp131 = tmp130 != sum;
- 71:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 75;
- 72:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected 512000 but got ': STRING;
- 73:             addition  131  130          // tmp131 = tmp130 + sum;
- 74:          throw_value                    // throw tmp131;
+0x8a54c4 [  8] a : STRING
+0x8a54cc [  8] b : STRING
+0x8a54d4 [  8] c : STRING
+0x8a54dc [ 12] 500 : NUMBER
+0x8a54e8 [ 12] 256 : NUMBER
+0x8a54f4 [  8] d : STRING
+0x8a54fc [  8] e : STRING
+0x8a5508 [  8] f : STRING
+0x8a5510 [ 12] 59796 : NUMBER
+0x8a551c [ 12] sum : STRING
+0x8a5528 [ 12] 512000 : NUMBER
+0x8a5534 [ 52] ERROR: bad result: expected 512000 but got  : STRING
+0x8a556c [ 20]  : EMPTY RECORD
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128  170    0     // var tmp128 .. tmp170;
+  2:             var_decl    0               // var a;
+  3:             var_decl    1               // var b;
+  4:             var_decl    2               // var c;
+  5:             var_decl    3               // var d;
+  6:             var_decl    4               // var e;
+  7:             var_decl    5               // var f;
+  8:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  9:           assignment    2    6  130     // c = tmp130 : TYPEOF(tmp130);
+ 10:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 11:           assignment    0    6  130     // a = tmp130 : TYPEOF(tmp130);
+ 12:             jmp_down    0   52          // goto 64;
+ 13:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 14:           assignment    1    6  130     // b = tmp130 : TYPEOF(tmp130);
+ 15:             jmp_down    0   45          // goto 60;
+ 16:           assignment    3    6    2     // d = c : TYPEOF(c);
+ 17:           assignment    4    6    1     // e = b : TYPEOF(b);
+ 18:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 19:           assignment  131    6  130     // tmp131 = tmp130 : TYPEOF(tmp130);
+ 20:           assignment  131    0    1     // tmp131 = undefined: SIMPLE;
+ 21:           assignment    5    6  131     // f = tmp131 : TYPEOF(tmp131);
+ 22:           assignment  132    1    3     // tmp132 = 3: SMALLINT;
+ 23:           assignment  133    3    6     // tmp133 = 59796: NUMBER;
+ 24:           assignment  134    6    4     // tmp134 = e : TYPEOF(e);
+ 25:           assignment  135    1    1     // tmp135 = 1: SMALLINT;
+ 26:         b_shift_left  136  134  135     // tmp136 = tmp134 << tmp135;
+ 27:           assignment  137    1   14     // tmp137 = 14: SMALLINT;
+ 28:                b_and  138  136  137     // tmp138 = tmp136 & tmp137;
+ 29:        b_shift_right  139  133  138     // tmp139 = tmp133 >> tmp138;
+ 30:                b_and  140  132  139     // tmp140 = tmp132 & tmp139;
+ 31:           assignment    5    6  140     // f = tmp140 : TYPEOF(tmp140);
+ 32:           assignment  141    6    5     // tmp141 = f : TYPEOF(f);
+ 33:           assignment  142    1    3     // tmp142 = 3: SMALLINT;
+ 34:           assignment  143    3    6     // tmp143 = 59796: NUMBER;
+ 35:           assignment  144    6    4     // tmp144 = e : TYPEOF(e);
+ 36:           assignment  145    1    2     // tmp145 = 2: SMALLINT;
+ 37:        b_shift_right  146  144  145     // tmp146 = tmp144 >> tmp145;
+ 38:           assignment  147    1   14     // tmp147 = 14: SMALLINT;
+ 39:                b_and  148  146  147     // tmp148 = tmp146 & tmp147;
+ 40:        b_shift_right  149  143  148     // tmp149 = tmp143 >> tmp148;
+ 41:                b_and  150  142  149     // tmp150 = tmp142 & tmp149;
+ 42:             addition  151  141  150     // tmp151 = tmp141 + tmp150;
+ 43:           assignment    5    6  151     // f = tmp151 : TYPEOF(tmp151);
+ 44:           assignment  152    6    5     // tmp152 = f : TYPEOF(f);
+ 45:           assignment  153    1    3     // tmp153 = 3: SMALLINT;
+ 46:           assignment  154    3    6     // tmp154 = 59796: NUMBER;
+ 47:           assignment  155    6    4     // tmp155 = e : TYPEOF(e);
+ 48:           assignment  156    1    5     // tmp156 = 5: SMALLINT;
+ 49:        b_shift_right  157  155  156     // tmp157 = tmp155 >> tmp156;
+ 50:           assignment  158    1    6     // tmp158 = 6: SMALLINT;
+ 51:                b_and  159  157  158     // tmp159 = tmp157 & tmp158;
+ 52:        b_shift_right  160  154  159     // tmp160 = tmp154 >> tmp159;
+ 53:                b_and  161  153  160     // tmp161 = tmp153 & tmp160;
+ 54:             addition  162  152  161     // tmp162 = tmp152 + tmp161;
+ 55:           assignment    5    6  162     // f = tmp162 : TYPEOF(tmp162);
+ 56:           assignment  163    6    3     // tmp163 = d : TYPEOF(d);
+ 57:             addition  164  163    5     // tmp164 = tmp163 + f;
+ 58:           assignment    2    6  164     // c = tmp164 : TYPEOF(tmp164);
+ 59:            post_incr  165    1          // tmp165 = b++;
+ 60:           assignment  166    3    7     // tmp166 = 256: NUMBER;
+ 61:         greater_than  167  166    1     // tmp167 = tmp166 > b;
+ 62:       is_true_jmp_up  167    0   46     // if (tmp167) goto 16;
+ 63:            post_incr  168    0          // tmp168 = a++;
+ 64:           assignment  169    3    0     // tmp169 = 500: NUMBER;
+ 65:         greater_than  170  169    1     // tmp170 = tmp169 > a;
+ 66:       is_true_jmp_up  170    0   53     // if (tmp170) goto 13;
+ 67:           assignment    2    6    3     // sum = c : TYPEOF(c);
+ 68:           assignment  130    6    3     // tmp130 = c : TYPEOF(c);
+ 69:           assignment  130    3    4     // tmp130 = 512000: NUMBER;
+ 70:      not_equal_value  131  130    2     // tmp131 = tmp130 != sum;
+ 71:    is_false_jmp_down  131    0    4     // if (tmp131 == false) goto 75;
+ 72:           assignment  130    5    5     // tmp130 = 'ERROR: bad result: expected 512000 but got ': STRING;
+ 73:             addition  131  130    2     // tmp131 = tmp130 + sum;
+ 74:          throw_value  131               // throw tmp131;
  75:                  ret                    // ret;

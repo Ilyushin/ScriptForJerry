@@ -1,67 +1,52 @@
 // var count = 6000000;
-  0:                 meta   12  255          // [to be rewritten]
+  0:                 meta   12  253  255     // [to be rewritten]
+  1:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  2:           assignment  130    3  254     // tmp130 = 6000000: NUMBER;
+  3:           assignment  254    6  130     // count = tmp130 : TYPEOF(tmp130);
 // var sum = 0;
+  4:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  5:           assignment  254    6  130     // sum = tmp130 : TYPEOF(tmp130);
 // for (var i = 0; i < count; i++) {
+  6:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  7:           assignment  254    6  130     // i = tmp130 : TYPEOF(tmp130);
+  8:             jmp_down  253  253          // goto 65029;
 //     sum = i + count;
+  9:           assignment  130    6  254     // tmp130 = i : TYPEOF(i);
+ 10:             addition  131  130  254     // tmp131 = tmp130 + count;
+ 11:           assignment  254    6  131     // sum = tmp131 : TYPEOF(tmp131);
 // }
+ 12:            post_incr  132  254          // tmp132 = i++;
+  8:             jmp_down    0    5          // goto 13; // REWRITE
+ 13:           assignment  133    6  254     // tmp133 = i : TYPEOF(i);
+ 14:            less_than  134  133  254     // tmp134 = tmp133 < count;
+ 15:       is_true_jmp_up  134    0    6     // if (tmp134) goto 9;
 // 
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp255;
-// var count = 6000000;
-  2:             var_decl                    // var count;
-// var sum = 0;
-  3:             var_decl                    // var sum;
-// for (var i = 0; i < count; i++) {
-  4:             var_decl                    // var i;
-//     sum = i + count;
-// }
-// 
-// var count = 6000000;
-  5:           assignment  130    3          // tmp130 = 6000000: NUMBER;
-  6:           assignment  254    6          // count = tmp130 : TYPEOF(tmp130);
-// var sum = 0;
-  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  8:           assignment  254    6          // sum = tmp130 : TYPEOF(tmp130);
-// for (var i = 0; i < count; i++) {
-  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 10:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
- 11:             jmp_down  255               // goto 65546;
-//     sum = i + count;
- 12:           assignment  130    6          // tmp130 = i : TYPEOF(i);
- 13:             addition  131  130          // tmp131 = tmp130 + count;
- 14:           assignment  254    6          // sum = tmp131 : TYPEOF(tmp131);
-// }
- 15:            post_incr  132               // tmp132 = i++;
- 11:             jmp_down    0               // goto 16; // REWRITE
- 16:           assignment  133    6          // tmp133 = i : TYPEOF(i);
- 17:            less_than  134  133          // tmp134 = tmp133 < count;
- 18:       is_true_jmp_up  134    0          // if (tmp134) goto 12;
-// 
-  1:         reg_var_decl  128               // var tmp128 .. tmp134; // REWRITE
- 19:                  ret                    // ret;
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128  134    0     // var tmp128 .. tmp134; // REWRITE
+ 16:                  ret                    // ret;
 LITERALS:
-0x84ec54 [ 12] count : STRING
-0x84ec60 [ 12] 6000000 : NUMBER
-0x84ec6c [ 12] sum : STRING
-0x84ec78 [  4] i : MAGIC STRING [id=200] 
-0x84ec7c [  4]  : EMPTY RECORD
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  1:         reg_var_decl  128               // var tmp128 .. tmp134;
-  2:             var_decl                    // var count;
-  3:             var_decl                    // var sum;
-  4:             var_decl                    // var i;
-  5:           assignment  130    3          // tmp130 = 6000000: NUMBER;
-  6:           assignment    0    6          // count = tmp130 : TYPEOF(tmp130);
-  7:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  8:           assignment    1    6          // sum = tmp130 : TYPEOF(tmp130);
-  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 10:           assignment    2    6          // i = tmp130 : TYPEOF(tmp130);
- 11:             jmp_down    0               // goto 16;
- 12:           assignment  130    6          // tmp130 = i : TYPEOF(i);
- 13:             addition  131  130          // tmp131 = tmp130 + count;
- 14:           assignment    1    6          // sum = tmp131 : TYPEOF(tmp131);
- 15:            post_incr  132               // tmp132 = i++;
- 16:           assignment  133    6          // tmp133 = i : TYPEOF(i);
- 17:            less_than  134  133          // tmp134 = tmp133 < count;
- 18:       is_true_jmp_up  134    0          // if (tmp134) goto 12;
+0x8a54c4 [ 12] count : STRING
+0x8a54d0 [ 12] 6000000 : NUMBER
+0x8a54dc [ 12] sum : STRING
+0x8a54e8 [  4] i : MAGIC STRING [id=207] 
+0x8a54ec [ 20]  : EMPTY RECORD
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128  134    0     // var tmp128 .. tmp134;
+  2:             var_decl    0               // var count;
+  3:             var_decl    1               // var sum;
+  4:             var_decl    2               // var i;
+  5:           assignment  130    3    3     // tmp130 = 6000000: NUMBER;
+  6:           assignment    0    6  130     // count = tmp130 : TYPEOF(tmp130);
+  7:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  8:           assignment    1    6  130     // sum = tmp130 : TYPEOF(tmp130);
+  9:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 10:           assignment    2    6  130     // i = tmp130 : TYPEOF(tmp130);
+ 11:             jmp_down    0    5          // goto 16;
+ 12:           assignment  130    6    2     // tmp130 = i : TYPEOF(i);
+ 13:             addition  131  130    0     // tmp131 = tmp130 + count;
+ 14:           assignment    1    6  131     // sum = tmp131 : TYPEOF(tmp131);
+ 15:            post_incr  132    2          // tmp132 = i++;
+ 16:           assignment  133    6    2     // tmp133 = i : TYPEOF(i);
+ 17:            less_than  134  133    0     // tmp134 = tmp133 < count;
+ 18:       is_true_jmp_up  134    0    6     // if (tmp134) goto 12;
  19:                  ret                    // ret;

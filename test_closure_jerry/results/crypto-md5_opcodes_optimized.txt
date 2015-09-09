@@ -1,1 +1,0 @@
-Assertion 'Syscall' failed at syscall_3 (/home/john/git/jerryscript/jerry-libc/target/linux/jerry-libc-target.c:116).

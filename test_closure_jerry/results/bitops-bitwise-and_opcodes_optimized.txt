@@ -1,64 +1,58 @@
 // bitwiseAndValue=4294967296;for(var a=0;6E5>a;a++)bitwiseAndValue&=a;var b=bitwiseAndValue;if(0!=b)throw"ERROR: bad result: expected 0 but got "+b;
-  0:                 meta   12  255          // [to be rewritten]
+  0:                 meta   12  253  255     // [to be rewritten]
+  1:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  2:           assignment  130    3  254     // tmp130 = 4294967296: NUMBER;
+  3:           assignment  254    6  130     // bitwiseAndValue = tmp130 : TYPEOF(tmp130);
+  4:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  5:           assignment  254    6  130     // a = tmp130 : TYPEOF(tmp130);
+  6:             jmp_down  253  253          // goto 65027;
+  7:                b_and  254  254  254     // bitwiseAndValue = bitwiseAndValue & a;
+  8:           assignment  130    6  254     // tmp130 = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+  9:            post_incr  131  254          // tmp131 = a++;
+  6:             jmp_down    0    4          // goto 10; // REWRITE
+ 10:           assignment  132    3  254     // tmp132 = 600000: NUMBER;
+ 11:         greater_than  133  132  254     // tmp133 = tmp132 > a;
+ 12:       is_true_jmp_up  133    0    5     // if (tmp133) goto 7;
+ 13:           assignment  254    6  254     // b = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+ 14:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 15:      not_equal_value  131  130  254     // tmp131 = tmp130 != b;
+ 16:    is_false_jmp_down  131  253  253     // if (tmp131 == false) goto 65037;
+ 17:           assignment  130    5  254     // tmp130 = 'ERROR: bad result: expected 0 but got ': STRING;
+ 18:             addition  131  130  254     // tmp131 = tmp130 + b;
+ 19:          throw_value  131               // throw tmp131;
 // 
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp255;
-// bitwiseAndValue=4294967296;for(var a=0;6E5>a;a++)bitwiseAndValue&=a;var b=bitwiseAndValue;if(0!=b)throw"ERROR: bad result: expected 0 but got "+b;
-  2:             var_decl                    // var a;
-  3:             var_decl                    // var b;
-// 
-// bitwiseAndValue=4294967296;for(var a=0;6E5>a;a++)bitwiseAndValue&=a;var b=bitwiseAndValue;if(0!=b)throw"ERROR: bad result: expected 0 but got "+b;
-  4:           assignment  130    3          // tmp130 = 4294967296: NUMBER;
-  5:           assignment  254    6          // bitwiseAndValue = tmp130 : TYPEOF(tmp130);
-  6:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  7:           assignment  254    6          // a = tmp130 : TYPEOF(tmp130);
-  8:             jmp_down  255               // goto 65543;
-  9:                b_and  254  254          // bitwiseAndValue = bitwiseAndValue & a;
- 10:           assignment  130    6          // tmp130 = bitwiseAndValue : TYPEOF(bitwiseAndValue);
- 11:            post_incr  131               // tmp131 = a++;
-  8:             jmp_down    0               // goto 12; // REWRITE
- 12:           assignment  132    3          // tmp132 = 600000: NUMBER;
- 13:         greater_than  133  132          // tmp133 = tmp132 > a;
- 14:       is_true_jmp_up  133    0          // if (tmp133) goto 9;
- 15:           assignment  254    6          // b = bitwiseAndValue : TYPEOF(bitwiseAndValue);
- 16:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 17:      not_equal_value  131  130          // tmp131 = tmp130 != b;
- 18:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65553;
- 19:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected 0 but got ': STRING;
- 20:             addition  131  130          // tmp131 = tmp130 + b;
- 21:          throw_value                    // throw tmp131;
-// 
- 18:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 22; // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp133; // REWRITE
- 22:                  ret                    // ret;
+ 16:    is_false_jmp_down  131    0    4     // if (tmp131 == false) goto 20; // REWRITE
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128  133    0     // var tmp128 .. tmp133; // REWRITE
+ 20:                  ret                    // ret;
 LITERALS:
-0x84ec54 [ 24] bitwiseAndValue : STRING
-0x84ec6c [ 12] 4294967296„ : NUMBER
-0x84ec78 [  8] a : STRING
-0x84ec94 [ 12] 600000 : NUMBER
-0x84eca0 [  8] b : STRING
-0x84eca8 [ 44] ERROR: bad result: expected 0 but got  : STRING
-0x84ece8 [ 24]  : EMPTY RECORD
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  1:         reg_var_decl  128               // var tmp128 .. tmp133;
-  2:             var_decl                    // var a;
-  3:             var_decl                    // var b;
-  4:           assignment  130    3          // tmp130 = 4294967296: NUMBER;
-  5:           assignment    3    6          // bitwiseAndValue = tmp130 : TYPEOF(tmp130);
-  6:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  7:           assignment    0    6          // a = tmp130 : TYPEOF(tmp130);
-  8:             jmp_down    0               // goto 12;
-  9:                b_and    3    3          // bitwiseAndValue = bitwiseAndValue & a;
- 10:           assignment  130    6          // tmp130 = bitwiseAndValue : TYPEOF(bitwiseAndValue);
- 11:            post_incr  131               // tmp131 = a++;
- 12:           assignment  132    3          // tmp132 = 600000: NUMBER;
- 13:         greater_than  133  132          // tmp133 = tmp132 > a;
- 14:       is_true_jmp_up  133    0          // if (tmp133) goto 9;
- 15:           assignment    1    6          // b = bitwiseAndValue : TYPEOF(bitwiseAndValue);
- 16:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 17:      not_equal_value  131  130          // tmp131 = tmp130 != b;
- 18:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 22;
- 19:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected 0 but got ': STRING;
- 20:             addition  131  130          // tmp131 = tmp130 + b;
- 21:          throw_value                    // throw tmp131;
+0x8a54c4 [ 24] bitwiseAndValue : STRING
+0x8a54dc [ 12] 4294967296 : NUMBER
+0x8a54e8 [  8] a : STRING
+0x8a54f0 [ 12] 600000 : NUMBER
+0x8a54fc [  8] b : STRING
+0x8a5508 [ 44] ERROR: bad result: expected 0 but got  : STRING
+0x8a5534 [ 12]  : EMPTY RECORD
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128  133    0     // var tmp128 .. tmp133;
+  2:             var_decl    0               // var a;
+  3:             var_decl    1               // var b;
+  4:           assignment  130    3    2     // tmp130 = 4294967296: NUMBER;
+  5:           assignment    3    6  130     // bitwiseAndValue = tmp130 : TYPEOF(tmp130);
+  6:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  7:           assignment    0    6  130     // a = tmp130 : TYPEOF(tmp130);
+  8:             jmp_down    0    4          // goto 12;
+  9:                b_and    3    3    0     // bitwiseAndValue = bitwiseAndValue & a;
+ 10:           assignment  130    6    3     // tmp130 = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+ 11:            post_incr  131    0          // tmp131 = a++;
+ 12:           assignment  132    3    4     // tmp132 = 600000: NUMBER;
+ 13:         greater_than  133  132    0     // tmp133 = tmp132 > a;
+ 14:       is_true_jmp_up  133    0    5     // if (tmp133) goto 9;
+ 15:           assignment    1    6    3     // b = bitwiseAndValue : TYPEOF(bitwiseAndValue);
+ 16:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+ 17:      not_equal_value  131  130    1     // tmp131 = tmp130 != b;
+ 18:    is_false_jmp_down  131    0    4     // if (tmp131 == false) goto 22;
+ 19:           assignment  130    5    5     // tmp130 = 'ERROR: bad result: expected 0 but got ': STRING;
+ 20:             addition  131  130    1     // tmp131 = tmp130 + b;
+ 21:          throw_value  131               // throw tmp131;
  22:                  ret                    // ret;

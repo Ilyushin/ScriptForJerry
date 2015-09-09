@@ -1,654 +1,129 @@
 // /* The Great Computer Language Shootout
 // 
 // function TreeNode(left,right,item){
-  0:                 meta   12  255          // [to be rewritten]
+  0:                 meta   12  253  255     // [to be rewritten]
+  1:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  0:          func_decl_n  254  253          // 
+  1:                 meta    2  254  255     // 
+  2:                 meta    2  254  255     // 
+  3:                 meta    2  254  255     // 
+  0:          func_decl_n  254    3          //  // REWRITE
+  4:                 meta    7  253  253     // function end: 65025;
 //    this.left = left;
+  5:                 meta   12  253  255     // [to be rewritten]
+  6:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  7:         this_binding  130               // tmp130 = this;
+  8:           assignment  131    5  254     // tmp131 = 'left': STRING;
+  9:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+  9:          prop_setter  130  131  254     // tmp130[tmp131] = left;
 //    this.right = right;
+ 10:         this_binding  130               // tmp130 = this;
+ 11:           assignment  131    5  254     // tmp131 = 'right': STRING;
+ 12:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+ 12:          prop_setter  130  131  254     // tmp130[tmp131] = right;
 //    this.item = item;
+ 13:         this_binding  130               // tmp130 = this;
+ 14:           assignment  131    5  254     // tmp131 = 'item': STRING;
+ 15:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+ 15:          prop_setter  130  131  254     // tmp130[tmp131] = item;
 // }
-// TreeNode.prototype.itemCheck = function(){
-//    if (this.left==null) return this.item;
-//    else return this.item + this.left.itemCheck() - this.right.itemCheck();
-// }
-// function bottomUpTree(item,depth){
-//    if (depth>0){
-//       return new TreeNode(
-//           bottomUpTree(2*item-1, depth-1)
-//          ,bottomUpTree(2*item, depth-1)
-//          ,item
-//       );
-//    }
-//    else {
-//       return new TreeNode(null,null,item);
-//    }
-// }
-// var ret = 0;
-// for ( var n = 4; n <= 7; n += 1 ) {
-//     var minDepth = 4;
-//     var maxDepth = Math.max(minDepth + 2, n);
-//     var stretchDepth = maxDepth + 1;
-//     
-//     var check = bottomUpTree(0,stretchDepth).itemCheck();
-//     
-//     var longLivedTree = bottomUpTree(0,maxDepth);
-//     for (var depth=minDepth; depth<=maxDepth; depth+=2){
-//         var iterations = 1 << (maxDepth - depth + minDepth);
-//         check = 0;
-//         for (var i=1; i<=iterations; i++){
-//             check += bottomUpTree(i,depth).itemCheck();
-//             check += bottomUpTree(-i,depth).itemCheck();
-//         }
-//     }
-//     ret += longLivedTree.itemCheck();
-// }
-// var expected = -4;
-// if (ret != expected)
-//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp255;
-//    this.left = left;
-//    this.right = right;
-//    this.item = item;
-// }
-// TreeNode.prototype.itemCheck = function(){
-//    if (this.left==null) return this.item;
-//    else return this.item + this.left.itemCheck() - this.right.itemCheck();
-// }
-// function bottomUpTree(item,depth){
-//    if (depth>0){
-//       return new TreeNode(
-//           bottomUpTree(2*item-1, depth-1)
-//          ,bottomUpTree(2*item, depth-1)
-//          ,item
-//       );
-//    }
-//    else {
-//       return new TreeNode(null,null,item);
-//    }
-// }
-// var ret = 0;
-  2:             var_decl                    // var ret;
-// for ( var n = 4; n <= 7; n += 1 ) {
-  3:             var_decl                    // var n;
-//     var minDepth = 4;
-  4:             var_decl                    // var minDepth;
-//     var maxDepth = Math.max(minDepth + 2, n);
-  5:             var_decl                    // var maxDepth;
-//     var stretchDepth = maxDepth + 1;
-  6:             var_decl                    // var stretchDepth;
-//     
-//     var check = bottomUpTree(0,stretchDepth).itemCheck();
-  7:             var_decl                    // var check;
-//     
-//     var longLivedTree = bottomUpTree(0,maxDepth);
-  8:             var_decl                    // var longLivedTree;
-//     for (var depth=minDepth; depth<=maxDepth; depth+=2){
-  9:             var_decl                    // var depth;
-//         var iterations = 1 << (maxDepth - depth + minDepth);
- 10:             var_decl                    // var iterations;
-//         check = 0;
-//         for (var i=1; i<=iterations; i++){
- 11:             var_decl                    // var i;
-//             check += bottomUpTree(i,depth).itemCheck();
-//             check += bottomUpTree(-i,depth).itemCheck();
-//         }
-//     }
-//     ret += longLivedTree.itemCheck();
-// }
-// var expected = -4;
- 12:             var_decl                    // var expected;
-// if (ret != expected)
-//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
-  0:          func_decl_n  254               // 
-  1:                 meta    2  254          // 
-  2:                 meta    2  254          // 
-  3:                 meta    2  254          // 
-  0:          func_decl_n  254               //  // REWRITE
-  4:                 meta    7  255          // function end: 65539;
-//    this.left = left;
-  5:                 meta   12  255          // [to be rewritten]
-//    this.right = right;
-//    this.item = item;
-// }
-  5:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  6:         reg_var_decl  128               // var tmp128 .. tmp255;
-//    this.right = right;
-//    this.item = item;
-// }
-  7:         this_binding                    // tmp130 = this;
-  8:           assignment  131    5          // tmp131 = 'left': STRING;
-  9:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-  9:          prop_setter  130  131          // tmp130[tmp131] = left;
-//    this.right = right;
- 10:         this_binding                    // tmp130 = this;
- 11:           assignment  131    5          // tmp131 = 'right': STRING;
- 12:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 12:          prop_setter  130  131          // tmp130[tmp131] = right;
-//    this.item = item;
- 13:         this_binding                    // tmp130 = this;
- 14:           assignment  131    5          // tmp131 = 'item': STRING;
- 15:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 15:          prop_setter  130  131          // tmp130[tmp131] = item;
-// }
-  6:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+  5:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  6:         reg_var_decl  128  132    0     // var tmp128 .. tmp132; // REWRITE
  16:                  ret                    // ret;
-  4:                 meta    7    0          // function end: 17; // REWRITE
+  4:                 meta    7    0   13     // function end: 17; // REWRITE
 // TreeNode.prototype.itemCheck = function(){
- 13:           assignment  130    5          // tmp130 = 'prototype': STRING;
- 14:          prop_getter  131  254          // tmp131 = TreeNode[tmp130];
- 15:           assignment  132    5          // tmp132 = 'itemCheck': STRING;
- 16:          prop_getter  133  131          // tmp133 = tmp131[tmp132];
- 16:          func_expr_n  255  255          // 
- 16:          func_expr_n  134  255          // tmp134 = function (); // REWRITE
- 17:                 meta    7  255          // function end: 65552;
+  2:           assignment  130    5  254     // tmp130 = 'prototype': STRING;
+  3:          prop_getter  131  254  130     // tmp131 = TreeNode[tmp130];
+  4:           assignment  132    5  254     // tmp132 = 'itemCheck': STRING;
+  5:          prop_getter  133  131  132     // tmp133 = tmp131[tmp132];
+  0:          func_expr_n  253  255  253     // 
+  0:          func_expr_n  134  255    0     // tmp134 = function (); // REWRITE
+  1:                 meta    7  253  253     // function end: 65022;
 //    if (this.left==null) return this.item;
- 18:                 meta   12  255          // [to be rewritten]
+  2:                 meta   12  253  255     // [to be rewritten]
+  3:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  4:         this_binding  130               // tmp130 = this;
+  5:           assignment  131    5  254     // tmp131 = 'left': STRING;
+  6:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+  7:           assignment  133    0    2     // tmp133 = null: SIMPLE;
+  8:          equal_value  134  132  133     // tmp134 = tmp132 == tmp133;
+  9:    is_false_jmp_down  134  253  253     // if (tmp134 == false) goto 65030;
+ 10:         this_binding  130               // tmp130 = this;
+ 11:           assignment  131    5  254     // tmp131 = 'item': STRING;
+ 12:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+ 13:               retval  132               // return tmp132;
 //    else return this.item + this.left.itemCheck() - this.right.itemCheck();
+ 14:             jmp_down  253  253          // goto 65035;
+  9:    is_false_jmp_down  134    0    6     // if (tmp134 == false) goto 15; // REWRITE
+ 15:         this_binding  130               // tmp130 = this;
+ 16:           assignment  131    5  254     // tmp131 = 'item': STRING;
+ 17:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+ 18:         this_binding  133               // tmp133 = this;
+ 19:           assignment  134    5  254     // tmp134 = 'left': STRING;
+ 20:          prop_getter  135  133  134     // tmp135 = tmp133[tmp134];
+ 21:           assignment  136    5  254     // tmp136 = 'itemCheck': STRING;
+ 22:          prop_getter  137  135  136     // tmp137 = tmp135[tmp136];
+ 23:               call_n  253  137  253     // 
+ 24:                 meta    1    1  135     // 
+ 23:               call_n  138  137    0     //  // REWRITE
+ 25:             addition  139  132  138     // tmp139 = tmp132 + tmp138;
+ 26:         this_binding  140               // tmp140 = this;
+ 27:           assignment  141    5  254     // tmp141 = 'right': STRING;
+ 28:          prop_getter  142  140  141     // tmp142 = tmp140[tmp141];
+ 29:           assignment  143    5  254     // tmp143 = 'itemCheck': STRING;
+ 30:          prop_getter  144  142  143     // tmp144 = tmp142[tmp143];
+ 31:               call_n  253  144  253     // 
+ 32:                 meta    1    1  142     // 
+ 31:               call_n  145  144    0     //  // REWRITE
+ 33:         substraction  146  139  145     // tmp146 = tmp139 - tmp145;
+ 34:               retval  146               // return tmp146;
+ 14:             jmp_down    0   21          // goto 35; // REWRITE
 // }
- 18:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
- 19:         reg_var_decl  128               // var tmp128 .. tmp255;
-//    else return this.item + this.left.itemCheck() - this.right.itemCheck();
-// }
- 20:         this_binding                    // tmp130 = this;
- 21:           assignment  131    5          // tmp131 = 'left': STRING;
- 22:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 23:           assignment  133    0          // tmp133 = null: SIMPLE;
- 24:          equal_value  134  132          // tmp134 = tmp132 == tmp133;
- 25:    is_false_jmp_down  134  255          // if (tmp134 == false) goto 65560;
- 26:         this_binding                    // tmp130 = this;
- 27:           assignment  131    5          // tmp131 = 'item': STRING;
- 28:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 29:               retval                    // return tmp132;
-//    else return this.item + this.left.itemCheck() - this.right.itemCheck();
- 30:             jmp_down  255               // goto 65565;
- 25:    is_false_jmp_down  134    0          // if (tmp134 == false) goto 31; // REWRITE
- 31:         this_binding                    // tmp130 = this;
- 32:           assignment  131    5          // tmp131 = 'item': STRING;
- 33:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 34:         this_binding                    // tmp133 = this;
- 35:           assignment  134    5          // tmp134 = 'left': STRING;
- 36:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
- 37:           assignment  136    5          // tmp136 = 'itemCheck': STRING;
- 38:          prop_getter  137  135          // tmp137 = tmp135[tmp136];
- 39:               call_n  255  137          // 
- 40:                 meta    1    1          // 
- 39:               call_n  138  137          //  // REWRITE
- 41:             addition  139  132          // tmp139 = tmp132 + tmp138;
- 42:         this_binding                    // tmp140 = this;
- 43:           assignment  141    5          // tmp141 = 'right': STRING;
- 44:          prop_getter  142  140          // tmp142 = tmp140[tmp141];
- 45:           assignment  143    5          // tmp143 = 'itemCheck': STRING;
- 46:          prop_getter  144  142          // tmp144 = tmp142[tmp143];
- 47:               call_n  255  144          // 
- 48:                 meta    1    1          // 
- 47:               call_n  145  144          //  // REWRITE
- 49:         substraction  146  139          // tmp146 = tmp139 - tmp145;
- 50:               retval                    // return tmp146;
- 30:             jmp_down    0               // goto 51; // REWRITE
-// }
- 19:         reg_var_decl  128               // var tmp128 .. tmp146; // REWRITE
- 51:                  ret                    // ret;
- 17:                 meta    7    0          // function end: 52; // REWRITE
+  2:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  3:         reg_var_decl  128  146    0     // var tmp128 .. tmp146; // REWRITE
+ 35:                  ret                    // ret;
+  1:                 meta    7    0   35     // function end: 36; // REWRITE
 // function bottomUpTree(item,depth){
- 52:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
-  0:          func_decl_n  254               // 
-  1:                 meta    2  254          // 
-  2:                 meta    2  254          // 
-  0:          func_decl_n  254               //  // REWRITE
-  3:                 meta    7  255          // function end: 65538;
+ 41:          prop_setter  131  132  134     // tmp131[tmp132] = tmp134;
+  0:          func_decl_n  254  253          // 
+  1:                 meta    2  254  255     // 
+  2:                 meta    2  254  255     // 
+  0:          func_decl_n  254    2          //  // REWRITE
+  3:                 meta    7  253  253     // function end: 65024;
 //    if (depth>0){
-  4:                 meta   12  255          // [to be rewritten]
+  4:                 meta   12  253  255     // [to be rewritten]
+  5:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  6:           assignment  130    6  254     // tmp130 = depth : TYPEOF(depth);
+  7:           assignment  131    1    0     // tmp131 = 0: SMALLINT;
+  8:         greater_than  132  130  131     // tmp132 = tmp130 > tmp131;
+  9:    is_false_jmp_down  132  253  253     // if (tmp132 == false) goto 65030;
 //       return new TreeNode(
+ 10:          construct_n  253  254  253     // 
 //           bottomUpTree(2*item-1, depth-1)
+ 11:               call_n  253  254  253     // 
+ 12:           assignment  130    1    2     // tmp130 = 2: SMALLINT;
+ 13:       multiplication  131  130  254     // tmp131 = tmp130 * item;
+ 14:           assignment  132    1    1     // tmp132 = 1: SMALLINT;
+ 15:         substraction  133  131  132     // tmp133 = tmp131 - tmp132;
+ 16:                 meta    2  133  255     // 
+ 17:           assignment  130    6  254     // tmp130 = depth : TYPEOF(depth);
+ 18:           assignment  131    1    1     // tmp131 = 1: SMALLINT;
+ 19:         substraction  132  130  131     // tmp132 = tmp130 - tmp131;
+ 20:                 meta    2  132  255     // 
+ 11:               call_n  130  254    2     //  // REWRITE
 //          ,bottomUpTree(2*item, depth-1)
+ 21:                 meta    2  130  255     // 
+ 22:               call_n  253  254  253     // 
+ 23:           assignment  130    1    2     // tmp130 = 2: SMALLINT;
+ 24:       multiplication  131  130  254     // tmp131 = tmp130 * item;
+ 25:                 meta    2  131  255     // 
+ 26:           assignment  130    6  254     // tmp130 = depth : TYPEOF(depth);
+ 27:           assignment  131    1    1     // tmp131 = 1: SMALLINT;
+ 28:         substraction  132  130  131     // tmp132 = tmp130 - tmp131;
+ 29:                 meta    2  132  255     // 
+ 22:               call_n  130  254    2     //  // REWRITE
 //          ,item
+ 30:                 meta    2  130  255     // 
 //       );
-//    }
-//    else {
-//       return new TreeNode(null,null,item);
-//    }
-// }
-  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  5:         reg_var_decl  128               // var tmp128 .. tmp255;
-//       return new TreeNode(
-//           bottomUpTree(2*item-1, depth-1)
-//          ,bottomUpTree(2*item, depth-1)
-//          ,item
-//       );
-//    }
-//    else {
-//       return new TreeNode(null,null,item);
-//    }
-// }
-  6:           assignment  130    6          // tmp130 = depth : TYPEOF(depth);
-  7:           assignment  131    1          // tmp131 = 0: SMALLINT;
-  8:         greater_than  132  130          // tmp132 = tmp130 > tmp131;
-  9:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65544;
-//       return new TreeNode(
- 10:          construct_n  255  254          // 
-//           bottomUpTree(2*item-1, depth-1)
- 11:               call_n  255  254          // 
- 12:           assignment  130    1          // tmp130 = 2: SMALLINT;
- 13:       multiplication  131  130          // tmp131 = tmp130 * item;
- 14:           assignment  132    1          // tmp132 = 1: SMALLINT;
- 15:         substraction  133  131          // tmp133 = tmp131 - tmp132;
- 16:                 meta    2  133          // 
- 17:           assignment  130    6          // tmp130 = depth : TYPEOF(depth);
- 18:           assignment  131    1          // tmp131 = 1: SMALLINT;
- 19:         substraction  132  130          // tmp132 = tmp130 - tmp131;
- 20:                 meta    2  132          // 
- 11:               call_n  130  254          //  // REWRITE
-//          ,bottomUpTree(2*item, depth-1)
- 21:                 meta    2  130          // 
- 22:               call_n  255  254          // 
- 23:           assignment  130    1          // tmp130 = 2: SMALLINT;
- 24:       multiplication  131  130          // tmp131 = tmp130 * item;
- 25:                 meta    2  131          // 
- 26:           assignment  130    6          // tmp130 = depth : TYPEOF(depth);
- 27:           assignment  131    1          // tmp131 = 1: SMALLINT;
- 28:         substraction  132  130          // tmp132 = tmp130 - tmp131;
- 29:                 meta    2  132          // 
- 22:               call_n  130  254          //  // REWRITE
-//          ,item
- 30:                 meta    2  130          // 
-//       );
- 31:                 meta    2  254          // tmp130 = hz (tmp131, tmp132, tmp130, hz);
- 10:          construct_n  130  254          //  // REWRITE
- 32:               retval                    // return tmp130;
-//    }
-//    else {
- 33:             jmp_down  255               // goto 65568;
-  9:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 34; // REWRITE
-//       return new TreeNode(null,null,item);
- 34:          construct_n  255  254          // 
- 35:           assignment  130    0          // tmp130 = null: SIMPLE;
- 36:                 meta    2  130          // 
- 37:           assignment  130    0          // tmp130 = null: SIMPLE;
- 38:                 meta    2  130          // 
- 39:                 meta    2  254          // 
- 34:          construct_n  130  254          //  // REWRITE
- 40:               retval                    // return tmp130;
-//    }
- 33:             jmp_down    0               // goto 41; // REWRITE
-// }
-  5:         reg_var_decl  128               // var tmp128 .. tmp133; // REWRITE
- 41:                  ret                    // ret;
-  3:                 meta    7    0          // function end: 42; // REWRITE
-// var ret = 0;
- 53:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 54:           assignment  254    6          // ret = tmp130 : TYPEOF(tmp130);
-// for ( var n = 4; n <= 7; n += 1 ) {
- 55:           assignment  130    1          // tmp130 = 4: SMALLINT;
- 56:           assignment  254    6          // n = tmp130 : TYPEOF(tmp130);
- 57:             jmp_down  255               // goto 65592;
-//     var minDepth = 4;
- 58:           assignment  130    1          // tmp130 = 4: SMALLINT;
- 59:           assignment  254    6          // minDepth = tmp130 : TYPEOF(tmp130);
-//     var maxDepth = Math.max(minDepth + 2, n);
- 60:           assignment  130    5          // tmp130 = 'max': STRING;
- 61:          prop_getter  131  254          // tmp131 = Math[tmp130];
- 62:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
- 63:               call_n  255  131          // 
- 64:                 meta    1    1          // 
- 65:           assignment  133    6          // tmp133 = minDepth : TYPEOF(minDepth);
- 66:           assignment  134    1          // tmp134 = 2: SMALLINT;
- 67:             addition  135  133          // tmp135 = tmp133 + tmp134;
- 68:                 meta    2  135          // 
- 69:                 meta    2  254          // 
- 63:               call_n  133  131          //  // REWRITE
- 70:           assignment  254    6          // maxDepth = tmp133 : TYPEOF(tmp133);
-//     var stretchDepth = maxDepth + 1;
- 71:           assignment  130    6          // tmp130 = maxDepth : TYPEOF(maxDepth);
- 72:           assignment  131    1          // tmp131 = 1: SMALLINT;
- 73:             addition  132  130          // tmp132 = tmp130 + tmp131;
- 74:           assignment  254    6          // stretchDepth = tmp132 : TYPEOF(tmp132);
-//     
-//     var check = bottomUpTree(0,stretchDepth).itemCheck();
- 75:               call_n  255  254          // 
- 76:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 77:                 meta    2  130          // 
- 78:                 meta    2  254          // 
- 75:               call_n  130  254          //  // REWRITE
- 79:           assignment  131    5          // tmp131 = 'itemCheck': STRING;
- 80:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 81:               call_n  255  132          // 
- 82:                 meta    1    1          // 
- 81:               call_n  133  132          //  // REWRITE
- 83:           assignment  254    6          // check = tmp133 : TYPEOF(tmp133);
-//     
-//     var longLivedTree = bottomUpTree(0,maxDepth);
- 84:               call_n  255  254          // 
- 85:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 86:                 meta    2  130          // 
- 87:                 meta    2  254          // 
- 84:               call_n  130  254          //  // REWRITE
- 88:           assignment  254    6          // longLivedTree = tmp130 : TYPEOF(tmp130);
-//     for (var depth=minDepth; depth<=maxDepth; depth+=2){
- 89:           assignment  254    6          // depth = minDepth : TYPEOF(minDepth);
- 90:             jmp_down  255               // goto 65625;
-//         var iterations = 1 << (maxDepth - depth + minDepth);
- 91:           assignment  130    1          // tmp130 = 1: SMALLINT;
- 92:           assignment  131    6          // tmp131 = maxDepth : TYPEOF(maxDepth);
- 93:         substraction  132  131          // tmp132 = tmp131 - depth;
- 94:             addition  133  132          // tmp133 = tmp132 + minDepth;
- 95:         b_shift_left  134  130          // tmp134 = tmp130 << tmp133;
- 96:           assignment  254    6          // iterations = tmp134 : TYPEOF(tmp134);
-//         check = 0;
- 97:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 98:           assignment  254    6          // check = tmp130 : TYPEOF(tmp130);
-//         for (var i=1; i<=iterations; i++){
- 99:           assignment  130    1          // tmp130 = 1: SMALLINT;
-100:           assignment  254    6          // i = tmp130 : TYPEOF(tmp130);
-101:             jmp_down  255               // goto 65636;
-//             check += bottomUpTree(i,depth).itemCheck();
-102:               call_n  255  254          // 
-103:                 meta    2  254          // 
-104:                 meta    2  254          // 
-102:               call_n  130  254          //  // REWRITE
-105:           assignment  131    5          // tmp131 = 'itemCheck': STRING;
-106:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-107:               call_n  255  132          // 
-108:                 meta    1    1          // 
-107:               call_n  133  132          //  // REWRITE
-109:             addition  254  254          // check = check + tmp133;
-110:           assignment  134    6          // tmp134 = check : TYPEOF(check);
-//             check += bottomUpTree(-i,depth).itemCheck();
-111:               call_n  255  254          // 
-112:          unary_minus  130               // tmp130 = -i;
-113:                 meta    2  130          // 
-114:                 meta    2  254          // 
-111:               call_n  130  254          //  // REWRITE
-115:           assignment  131    5          // tmp131 = 'itemCheck': STRING;
-116:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-117:               call_n  255  132          // 
-118:                 meta    1    1          // 
-117:               call_n  133  132          //  // REWRITE
-119:             addition  254  254          // check = check + tmp133;
-120:           assignment  134    6          // tmp134 = check : TYPEOF(check);
-//         }
-121:            post_incr  135               // tmp135 = i++;
-101:             jmp_down    0               // goto 122; // REWRITE
-122:           assignment  136    6          // tmp136 = i : TYPEOF(i);
-123:   less_or_equal_than  137  136          // tmp137 = tmp136 <= iterations;
-124:       is_true_jmp_up  137    0          // if (tmp137) goto 102;
-//     }
-125:           assignment  138    1          // tmp138 = 2: SMALLINT;
-126:             addition  254  254          // depth = depth + tmp138;
- 90:             jmp_down    0               // goto 127; // REWRITE
-127:           assignment  139    6          // tmp139 = depth : TYPEOF(depth);
-128:   less_or_equal_than  140  139          // tmp140 = tmp139 <= maxDepth;
-129:       is_true_jmp_up  140    0          // if (tmp140) goto 91;
-//     ret += longLivedTree.itemCheck();
-130:           assignment  130    5          // tmp130 = 'itemCheck': STRING;
-131:          prop_getter  131  254          // tmp131 = longLivedTree[tmp130];
-132:           assignment  132    6          // tmp132 = longLivedTree : TYPEOF(longLivedTree);
-133:               call_n  255  131          // 
-134:                 meta    1    1          // 
-133:               call_n  133  131          //  // REWRITE
-135:             addition  254  254          // ret = ret + tmp133;
-136:           assignment  134    6          // tmp134 = ret : TYPEOF(ret);
-// }
-137:           assignment  135    1          // tmp135 = 1: SMALLINT;
-138:             addition  254  254          // n = n + tmp135;
- 57:             jmp_down    0               // goto 139; // REWRITE
-139:           assignment  136    6          // tmp136 = n : TYPEOF(n);
-140:           assignment  137    1          // tmp137 = 7: SMALLINT;
-141:   less_or_equal_than  138  136          // tmp138 = tmp136 <= tmp137;
-142:       is_true_jmp_up  138    0          // if (tmp138) goto 58;
-// var expected = -4;
-143:           assignment  130    1          // tmp130 = 4: SMALLINT;
-144:          unary_minus  131               // tmp131 = -tmp130;
-145:           assignment  254    6          // expected = tmp131 : TYPEOF(tmp131);
-// if (ret != expected)
-146:           assignment  130    6          // tmp130 = ret : TYPEOF(ret);
-147:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
-148:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65683;
-//     throw "ERROR: bad result: expected " + expected + " but got " + ret;
-149:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
-150:             addition  131  130          // tmp131 = tmp130 + expected;
-151:           assignment  132    5          // tmp132 = ' but got ': STRING;
-152:             addition  133  131          // tmp133 = tmp131 + tmp132;
-153:             addition  134  133          // tmp134 = tmp133 + ret;
-154:          throw_value                    // throw tmp134;
-148:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 155; // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp140; // REWRITE
-155:                  ret                    // ret;
-LITERALS:
-0x84ec54 [ 16] TreeNode : STRING
-0x84ec64 [ 12] left : STRING
-0x84ec70 [ 12] right : STRING
-0x84ec7c [ 12] item : STRING
-0x84ec9c [  4] prototype : MAGIC STRING [id=2] 
-0x84eca0 [ 16] itemCheck : STRING
-0x84ecb0 [ 20] bottomUpTree : STRING
-0x84ecd8 [ 12] depth : STRING
-0x84ece4 [ 12] ret : STRING
-0x84ecf0 [  8] n : STRING
-0x84ecf8 [ 16] minDepth : STRING
-0x84ed1c [ 16] maxDepth : STRING
-0x84ed2c [  4] Math : MAGIC STRING [id=44] 
-0x84ed30 [  4] max : MAGIC STRING [id=93] 
-0x84ed34 [ 20] stretchDepth : STRING
-0x84ed5c [ 12] check : STRING
-0x84ed68 [ 20] longLivedTree : STRING
-0x84ed7c [ 16] iterations : STRING
-0x84eda0 [  4] i : MAGIC STRING [id=200] 
-0x84eda4 [ 16] expected : STRING
-0x84edb4 [ 36] ERROR: bad result: expected  : STRING
-0x84edec [ 16]  but got  : STRING
-0x84edfc [  4]  : EMPTY RECORD
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  1:         reg_var_decl  128               // var tmp128 .. tmp140;
-  2:             var_decl                    // var ret;
-  3:             var_decl                    // var n;
-  4:             var_decl                    // var minDepth;
-  5:             var_decl                    // var maxDepth;
-  6:             var_decl                    // var stretchDepth;
-  7:             var_decl                    // var check;
-  8:             var_decl                    // var longLivedTree;
-  9:             var_decl                    // var depth;
- 10:             var_decl                    // var iterations;
- 11:             var_decl                    // var i;
- 12:             var_decl                    // var expected;
- 13:          func_decl_n   11               // 
- 14:                 meta    2   12          // 
- 15:                 meta    2   13          // 
- 16:                 meta    2   14          // function TreeNode (left, right, item);
- 17:                 meta    7    0          // function end: 30;
- 18:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 19:         reg_var_decl  128               // var tmp128 .. tmp132;
- 20:         this_binding                    // tmp130 = this;
- 21:           assignment  131    5          // tmp131 = 'left': STRING;
- 22:          prop_setter  130  131          // tmp130[tmp131] = left;
- 23:         this_binding                    // tmp130 = this;
- 24:           assignment  131    5          // tmp131 = 'right': STRING;
- 25:          prop_setter  130  131          // tmp130[tmp131] = right;
- 26:         this_binding                    // tmp130 = this;
- 27:           assignment  131    5          // tmp131 = 'item': STRING;
- 28:          prop_setter  130  131          // tmp130[tmp131] = item;
- 29:                  ret                    // ret;
- 30:          func_decl_n   15               // 
- 31:                 meta    2   14          // 
- 32:                 meta    2    7          // function bottomUpTree (item, depth);
- 33:                 meta    7    0          // function end: 72;
- 34:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 35:         reg_var_decl  128               // var tmp128 .. tmp133;
- 36:           assignment  130    6          // tmp130 = depth : TYPEOF(depth);
- 37:           assignment  131    1          // tmp131 = 0: SMALLINT;
- 38:         greater_than  132  130          // tmp132 = tmp130 > tmp131;
- 39:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 64;
- 40:          construct_n  130   11          // 
- 41:               call_n  130   15          // 
- 42:           assignment  130    1          // tmp130 = 2: SMALLINT;
- 43:       multiplication  131  130          // tmp131 = tmp130 * item;
- 44:           assignment  132    1          // tmp132 = 1: SMALLINT;
- 45:         substraction  133  131          // tmp133 = tmp131 - tmp132;
- 46:                 meta    2  133          // 
- 47:           assignment  130    6          // tmp130 = depth : TYPEOF(depth);
- 48:           assignment  131    1          // tmp131 = 1: SMALLINT;
- 49:         substraction  132  130          // tmp132 = tmp130 - tmp131;
- 50:                 meta    2  132          // tmp130 = bottomUpTree (tmp133, tmp132);
- 51:                 meta    2  130          // 
- 52:               call_n  130   15          // 
- 53:           assignment  130    1          // tmp130 = 2: SMALLINT;
- 54:       multiplication  131  130          // tmp131 = tmp130 * item;
- 55:                 meta    2  131          // 
- 56:           assignment  130    6          // tmp130 = depth : TYPEOF(depth);
- 57:           assignment  131    1          // tmp131 = 1: SMALLINT;
- 58:         substraction  132  130          // tmp132 = tmp130 - tmp131;
- 59:                 meta    2  132          // tmp130 = bottomUpTree (tmp131, tmp132);
- 60:                 meta    2  130          // 
- 61:                 meta    2   14          // 
- 62:               retval                    // return tmp130;
- 63:             jmp_down    0               // goto 71;
- 64:          construct_n  130    0          // 
- 65:           assignment  130    0          // tmp130 = null: SIMPLE;
- 66:                 meta    2  130          // 
- 67:           assignment  130    0          // tmp130 = null: SIMPLE;
- 68:                 meta    2  130          // 
- 69:                 meta    2    1          // tmp130 = new TreeNode (tmp130, tmp130, item);
- 70:               retval                    // return tmp130;
- 71:                  ret                    // ret;
- 72:           assignment  130    5          // tmp130 = 'prototype': STRING;
- 73:          prop_getter  131    0          // tmp131 = TreeNode[tmp130];
- 74:           assignment  132    5          // tmp132 = 'itemCheck': STRING;
- 75:          func_expr_n  134  255          // tmp134 = function ();
- 76:                 meta    7    0          // function end: 111;
- 77:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 78:         reg_var_decl  128               // var tmp128 .. tmp146;
- 79:         this_binding                    // tmp130 = this;
- 80:           assignment  131    5          // tmp131 = 'left': STRING;
- 81:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 82:           assignment  133    0          // tmp133 = null: SIMPLE;
- 83:          equal_value  134  132          // tmp134 = tmp132 == tmp133;
- 84:    is_false_jmp_down  134    0          // if (tmp134 == false) goto 90;
- 85:         this_binding                    // tmp130 = this;
- 86:           assignment  131    5          // tmp131 = 'item': STRING;
- 87:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 88:               retval                    // return tmp132;
- 89:             jmp_down    0               // goto 110;
- 90:         this_binding                    // tmp130 = this;
- 91:           assignment  131    5          // tmp131 = 'item': STRING;
- 92:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 93:         this_binding                    // tmp133 = this;
- 94:           assignment  134    5          // tmp134 = 'left': STRING;
- 95:          prop_getter  135  133          // tmp135 = tmp133[tmp134];
- 96:           assignment  136    5          // tmp136 = 'itemCheck': STRING;
- 97:          prop_getter  137  135          // tmp137 = tmp135[tmp136];
- 98:               call_n  138  137          // 
- 99:                 meta    1    1          // tmp138 = tmp137 (this_arg = tmp135);
-100:             addition  139  132          // tmp139 = tmp132 + tmp138;
-101:         this_binding                    // tmp140 = this;
-102:           assignment  141    5          // tmp141 = 'right': STRING;
-103:          prop_getter  142  140          // tmp142 = tmp140[tmp141];
-104:           assignment  143    5          // tmp143 = 'itemCheck': STRING;
-105:          prop_getter  144  142          // tmp144 = tmp142[tmp143];
-106:               call_n  145  144          // 
-107:                 meta    1    1          // tmp145 = tmp144 (this_arg = tmp142);
-108:         substraction  146  139          // tmp146 = tmp139 - tmp145;
-109:               retval                    // return tmp146;
-110:                  ret                    // ret;
-111:          prop_setter  131  132          // tmp131[tmp132] = tmp134;
-112:           assignment  130    1          // tmp130 = 0: SMALLINT;
-113:           assignment    6    6          // ret = tmp130 : TYPEOF(tmp130);
-114:           assignment  130    1          // tmp130 = 4: SMALLINT;
-115:           assignment    7    6          // n = tmp130 : TYPEOF(tmp130);
-116:             jmp_down    0               // goto 198;
-117:           assignment  130    1          // tmp130 = 4: SMALLINT;
-118:           assignment    8    6          // minDepth = tmp130 : TYPEOF(tmp130);
-119:           assignment  130    5          // tmp130 = 'max': STRING;
-120:          prop_getter  131   10          // tmp131 = Math[tmp130];
-121:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
-122:               call_n  133  131          // 
-123:                 meta    1    1          // 
-124:           assignment  133    6          // tmp133 = minDepth : TYPEOF(minDepth);
-125:           assignment  134    1          // tmp134 = 2: SMALLINT;
-126:             addition  135  133          // tmp135 = tmp133 + tmp134;
-127:                 meta    2  135          // 
-128:                 meta    2    0          // tmp133 = tmp131 (this_arg = tmp132, tmp135, n);
-129:           assignment    1    6          // maxDepth = tmp133 : TYPEOF(tmp133);
-130:           assignment  130    6          // tmp130 = maxDepth : TYPEOF(maxDepth);
-131:           assignment  131    1          // tmp131 = 1: SMALLINT;
-132:             addition  132  130          // tmp132 = tmp130 + tmp131;
-133:           assignment    2    6          // stretchDepth = tmp132 : TYPEOF(tmp132);
-134:               call_n  130    3          // 
-135:           assignment  130    1          // tmp130 = 0: SMALLINT;
-136:                 meta    2  130          // 
-137:                 meta    2    2          // tmp130 = bottomUpTree (tmp130, stretchDepth);
-138:           assignment  131    5          // tmp131 = 'itemCheck': STRING;
-139:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-140:               call_n  133  132          // 
-141:                 meta    1    1          // tmp133 = tmp132 (this_arg = tmp130);
-142:           assignment    5    6          // check = tmp133 : TYPEOF(tmp133);
-143:               call_n  130    3          // 
-144:           assignment  130    1          // tmp130 = 0: SMALLINT;
-145:                 meta    2  130          // 
-146:                 meta    2    1          // tmp130 = bottomUpTree (tmp130, maxDepth);
-147:           assignment    6    6          // longLivedTree = tmp130 : TYPEOF(tmp130);
-148:           assignment    7    6          // depth = minDepth : TYPEOF(minDepth);
-149:             jmp_down    0               // goto 186;
-150:           assignment  130    1          // tmp130 = 1: SMALLINT;
-151:           assignment  131    6          // tmp131 = maxDepth : TYPEOF(maxDepth);
-152:         substraction  132  131          // tmp132 = tmp131 - depth;
-153:             addition  133  132          // tmp133 = tmp132 + minDepth;
-154:         b_shift_left  134  130          // tmp134 = tmp130 << tmp133;
-155:           assignment    9    6          // iterations = tmp134 : TYPEOF(tmp134);
-156:           assignment  130    1          // tmp130 = 0: SMALLINT;
-157:           assignment    5    6          // check = tmp130 : TYPEOF(tmp130);
-158:           assignment  130    1          // tmp130 = 1: SMALLINT;
-159:           assignment   10    6          // i = tmp130 : TYPEOF(tmp130);
-160:             jmp_down    0               // goto 181;
-161:               call_n  130    3          // 
-162:                 meta    2   10          // 
-163:                 meta    2    7          // tmp130 = bottomUpTree (i, depth);
-164:           assignment  131    5          // tmp131 = 'itemCheck': STRING;
-165:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-166:               call_n  133  132          // 
-167:                 meta    1    1          // tmp133 = tmp132 (this_arg = tmp130);
-168:             addition    5    5          // check = check + tmp133;
-169:           assignment  134    6          // tmp134 = check : TYPEOF(check);
-170:               call_n  130    3          // 
-171:          unary_minus  130               // tmp130 = -i;
-172:                 meta    2  130          // 
-173:                 meta    2    7          // tmp130 = bottomUpTree (tmp130, depth);
-174:           assignment  131    5          // tmp131 = 'itemCheck': STRING;
-175:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-176:               call_n  133  132          // 
-177:                 meta    1    1          // tmp133 = tmp132 (this_arg = tmp130);
-178:             addition    5    5          // check = check + tmp133;
-179:           assignment  134    6          // tmp134 = check : TYPEOF(check);
-180:            post_incr  135               // tmp135 = i++;
-181:           assignment  136    6          // tmp136 = i : TYPEOF(i);
-182:   less_or_equal_than  137  136          // tmp137 = tmp136 <= iterations;
-183:       is_true_jmp_up  137    0          // if (tmp137) goto 161;
-184:           assignment  138    1          // tmp138 = 2: SMALLINT;
-185:             addition    7    7          // depth = depth + tmp138;
-186:           assignment  139    6          // tmp139 = depth : TYPEOF(depth);
-187:   less_or_equal_than  140  139          // tmp140 = tmp139 <= maxDepth;
-188:       is_true_jmp_up  140    0          // if (tmp140) goto 150;
-189:           assignment  130    5          // tmp130 = 'itemCheck': STRING;
-190:          prop_getter  131    6          // tmp131 = longLivedTree[tmp130];
-191:           assignment  132    6          // tmp132 = longLivedTree : TYPEOF(longLivedTree);
-192:               call_n  133  131          // 
-193:                 meta    1    1          // tmp133 = tmp131 (this_arg = tmp132);
-194:             addition    0    0          // ret = ret + tmp133;
-195:           assignment  134    6          // tmp134 = ret : TYPEOF(ret);
-196:           assignment  135    1          // tmp135 = 1: SMALLINT;
-197:             addition    1    1          // n = n + tmp135;
-198:           assignment  136    6          // tmp136 = n : TYPEOF(n);
-199:           assignment  137    1          // tmp137 = 7: SMALLINT;
-200:   less_or_equal_than  138  136          // tmp138 = tmp136 <= tmp137;
-201:       is_true_jmp_up  138    0          // if (tmp138) goto 117;
-202:           assignment  130    1          // tmp130 = 4: SMALLINT;
-203:          unary_minus  131               // tmp131 = -tmp130;
-204:           assignment    2    6          // expected = tmp131 : TYPEOF(tmp131);
-205:           assignment  130    6          // tmp130 = ret : TYPEOF(ret);
-206:      not_equal_value  131  130          // tmp131 = tmp130 != expected;
-207:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 214;
-208:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected ': STRING;
-209:             addition  131  130          // tmp131 = tmp130 + expected;
-210:           assignment  132    5          // tmp132 = ' but got ': STRING;
-211:             addition  133  131          // tmp133 = tmp131 + tmp132;
-212:             addition  134  133          // tmp134 = tmp133 + ret;
-213:          throw_value                    // throw tmp134;
-214:                  ret                    // ret;
+ 31:                 meta    2  254  255     // tmp130 = ICE: Assertion 'lit_ids != NULL' failed at /home/john/git/jerry/jerry-core/vm/pretty-printer.cpp(var_to_str):102.
+Error: ERR_FAILED_INTERNAL_ASSERTION

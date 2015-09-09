@@ -1,371 +1,99 @@
 // function c(a,b,m){this.left=a;this.right=b;this.item=m}function d(a){return null==a.left?a.item:a.item+d(a.left)-d(a.right)}function e(a,b){return 0<b?new c(e(2*a-1,b-1),e(2*a,b-1),a):new c(null,null,a)}for(var f=0,g=4;7>=g;g+=1){for(var h=Math.max(6,g),k=e(0,h),l=4;l<=h;l+=2)for(var n=1<<h-l+4,p=1;p<=n;p++);f+=d(k)}if(-4!=f)throw"ERROR: bad result: expected -4 but got "+f;
-  0:                 meta   12  255          // [to be rewritten]
-// 
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp255;
-// function c(a,b,m){this.left=a;this.right=b;this.item=m}function d(a){return null==a.left?a.item:a.item+d(a.left)-d(a.right)}function e(a,b){return 0<b?new c(e(2*a-1,b-1),e(2*a,b-1),a):new c(null,null,a)}for(var f=0,g=4;7>=g;g+=1){for(var h=Math.max(6,g),k=e(0,h),l=4;l<=h;l+=2)for(var n=1<<h-l+4,p=1;p<=n;p++);f+=d(k)}if(-4!=f)throw"ERROR: bad result: expected -4 but got "+f;
-  2:             var_decl                    // var f;
-  3:             var_decl                    // var g;
-  4:             var_decl                    // var h;
-  5:             var_decl                    // var k;
-  6:             var_decl                    // var l;
-  7:             var_decl                    // var n;
-  8:             var_decl                    // var p;
-// 
-// function c(a,b,m){this.left=a;this.right=b;this.item=m}function d(a){return null==a.left?a.item:a.item+d(a.left)-d(a.right)}function e(a,b){return 0<b?new c(e(2*a-1,b-1),e(2*a,b-1),a):new c(null,null,a)}for(var f=0,g=4;7>=g;g+=1){for(var h=Math.max(6,g),k=e(0,h),l=4;l<=h;l+=2)for(var n=1<<h-l+4,p=1;p<=n;p++);f+=d(k)}if(-4!=f)throw"ERROR: bad result: expected -4 but got "+f;
-  0:          func_decl_n  254               // 
-  1:                 meta    2  254          // 
-  2:                 meta    2  254          // 
-  3:                 meta    2  254          // 
-  0:          func_decl_n  254               //  // REWRITE
-  4:                 meta    7  255          // function end: 65539;
-  5:                 meta   12  255          // [to be rewritten]
-  5:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  6:         reg_var_decl  128               // var tmp128 .. tmp255;
-  7:         this_binding                    // tmp130 = this;
-  8:           assignment  131    5          // tmp131 = 'left': STRING;
-  9:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
-  9:          prop_setter  130  131          // tmp130[tmp131] = a;
- 10:         this_binding                    // tmp130 = this;
- 11:           assignment  131    5          // tmp131 = 'right': STRING;
- 12:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 12:          prop_setter  130  131          // tmp130[tmp131] = b;
- 13:         this_binding                    // tmp130 = this;
- 14:           assignment  131    5          // tmp131 = 'item': STRING;
- 15:          prop_getter  132  130          // tmp132 = tmp130[tmp131];
- 15:          prop_setter  130  131          // tmp130[tmp131] = m;
-  6:         reg_var_decl  128               // var tmp128 .. tmp132; // REWRITE
+  0:                 meta   12  253  255     // [to be rewritten]
+  1:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  0:          func_decl_n  254  253          // 
+  1:                 meta    2  254  255     // 
+  2:                 meta    2  254  255     // 
+  3:                 meta    2  254  255     // 
+  0:          func_decl_n  254    3          //  // REWRITE
+  4:                 meta    7  253  253     // function end: 65025;
+  5:                 meta   12  253  255     // [to be rewritten]
+  6:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  7:         this_binding  130               // tmp130 = this;
+  8:           assignment  131    5  254     // tmp131 = 'left': STRING;
+  9:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+  9:          prop_setter  130  131  254     // tmp130[tmp131] = a;
+ 10:         this_binding  130               // tmp130 = this;
+ 11:           assignment  131    5  254     // tmp131 = 'right': STRING;
+ 12:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+ 12:          prop_setter  130  131  254     // tmp130[tmp131] = b;
+ 13:         this_binding  130               // tmp130 = this;
+ 14:           assignment  131    5  254     // tmp131 = 'item': STRING;
+ 15:          prop_getter  132  130  131     // tmp132 = tmp130[tmp131];
+ 15:          prop_setter  130  131  254     // tmp130[tmp131] = m;
+  5:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  6:         reg_var_decl  128  132    0     // var tmp128 .. tmp132; // REWRITE
  16:                  ret                    // ret;
-  4:                 meta    7    0          // function end: 17; // REWRITE
-  0:          func_decl_n  254               // 
-  1:                 meta    2  254          // 
-  0:          func_decl_n  254               //  // REWRITE
-  2:                 meta    7  255          // function end: 65537;
-  3:                 meta   12  255          // [to be rewritten]
-  3:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  4:         reg_var_decl  128               // var tmp128 .. tmp255;
-  5:           assignment  130    0          // tmp130 = null: SIMPLE;
-  6:           assignment  131    5          // tmp131 = 'left': STRING;
-  7:          prop_getter  132  254          // tmp132 = a[tmp131];
-  8:          equal_value  133  130          // tmp133 = tmp130 == tmp132;
-  9:    is_false_jmp_down  133  255          // if (tmp133 == false) goto 65544;
- 10:           assignment  134    5          // tmp134 = 'item': STRING;
- 11:          prop_getter  135  254          // tmp135 = a[tmp134];
- 12:           assignment  136    6          // tmp136 = tmp135 : TYPEOF(tmp135);
- 13:             jmp_down  255               // goto 65548;
-  9:    is_false_jmp_down  133    0          // if (tmp133 == false) goto 14; // REWRITE
- 14:           assignment  137    5          // tmp137 = 'item': STRING;
- 15:          prop_getter  138  254          // tmp138 = a[tmp137];
- 16:               call_n  255  254          // 
- 17:           assignment  139    5          // tmp139 = 'left': STRING;
- 18:          prop_getter  140  254          // tmp140 = a[tmp139];
- 19:                 meta    2  140          // 
- 16:               call_n  139  254          //  // REWRITE
- 20:             addition  140  138          // tmp140 = tmp138 + tmp139;
- 21:               call_n  255  254          // 
- 22:           assignment  141    5          // tmp141 = 'right': STRING;
- 23:          prop_getter  142  254          // tmp142 = a[tmp141];
- 24:                 meta    2  142          // 
- 21:               call_n  141  254          //  // REWRITE
- 25:         substraction  142  140          // tmp142 = tmp140 - tmp141;
- 26:           assignment  136    6          // tmp136 = tmp142 : TYPEOF(tmp142);
- 13:             jmp_down    0               // goto 27; // REWRITE
- 27:               retval                    // return tmp136;
-  4:         reg_var_decl  128               // var tmp128 .. tmp142; // REWRITE
+  4:                 meta    7    0   13     // function end: 17; // REWRITE
+  0:          func_decl_n  254  253          // 
+  1:                 meta    2  254  255     // 
+  0:          func_decl_n  254    1          //  // REWRITE
+  2:                 meta    7  253  253     // function end: 65023;
+  3:                 meta   12  253  255     // [to be rewritten]
+  4:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  5:           assignment  130    0    2     // tmp130 = null: SIMPLE;
+  6:           assignment  131    5  254     // tmp131 = 'left': STRING;
+  7:          prop_getter  132  254  131     // tmp132 = a[tmp131];
+  8:          equal_value  133  130  132     // tmp133 = tmp130 == tmp132;
+  9:    is_false_jmp_down  133  253  253     // if (tmp133 == false) goto 65030;
+ 10:           assignment  134    5  254     // tmp134 = 'item': STRING;
+ 11:          prop_getter  135  254  134     // tmp135 = a[tmp134];
+ 12:           assignment  136    6  135     // tmp136 = tmp135 : TYPEOF(tmp135);
+ 13:             jmp_down  253  253          // goto 65034;
+  9:    is_false_jmp_down  133    0    5     // if (tmp133 == false) goto 14; // REWRITE
+ 14:           assignment  137    5  254     // tmp137 = 'item': STRING;
+ 15:          prop_getter  138  254  137     // tmp138 = a[tmp137];
+ 16:               call_n  253  254  253     // 
+ 17:           assignment  139    5  254     // tmp139 = 'left': STRING;
+ 18:          prop_getter  140  254  139     // tmp140 = a[tmp139];
+ 19:                 meta    2  140  255     // 
+ 16:               call_n  139  254    1     //  // REWRITE
+ 20:             addition  140  138  139     // tmp140 = tmp138 + tmp139;
+ 21:               call_n  253  254  253     // 
+ 22:           assignment  141    5  254     // tmp141 = 'right': STRING;
+ 23:          prop_getter  142  254  141     // tmp142 = a[tmp141];
+ 24:                 meta    2  142  255     // 
+ 21:               call_n  141  254    1     //  // REWRITE
+ 25:         substraction  142  140  141     // tmp142 = tmp140 - tmp141;
+ 26:           assignment  136    6  142     // tmp136 = tmp142 : TYPEOF(tmp142);
+ 13:             jmp_down    0   14          // goto 27; // REWRITE
+ 27:               retval  136               // return tmp136;
+  3:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  4:         reg_var_decl  128  142    0     // var tmp128 .. tmp142; // REWRITE
  28:                  ret                    // ret;
-  2:                 meta    7    0          // function end: 29; // REWRITE
-  0:          func_decl_n  254               // 
-  1:                 meta    2  254          // 
-  2:                 meta    2  254          // 
-  0:          func_decl_n  254               //  // REWRITE
-  3:                 meta    7  255          // function end: 65538;
-  4:                 meta   12  255          // [to be rewritten]
-  4:                 meta   12    6          // [no 'arguments'] [no 'eval']  // REWRITE
-  5:         reg_var_decl  128               // var tmp128 .. tmp255;
-  6:           assignment  130    1          // tmp130 = 0: SMALLINT;
-  7:            less_than  131  130          // tmp131 = tmp130 < b;
-  8:    is_false_jmp_down  131  255          // if (tmp131 == false) goto 65543;
-  9:          construct_n  255  254          // 
- 10:               call_n  255  254          // 
- 11:           assignment  132    1          // tmp132 = 2: SMALLINT;
- 12:       multiplication  133  132          // tmp133 = tmp132 * a;
- 13:           assignment  134    1          // tmp134 = 1: SMALLINT;
- 14:         substraction  135  133          // tmp135 = tmp133 - tmp134;
- 15:                 meta    2  135          // 
- 16:           assignment  132    6          // tmp132 = b : TYPEOF(b);
- 17:           assignment  133    1          // tmp133 = 1: SMALLINT;
- 18:         substraction  134  132          // tmp134 = tmp132 - tmp133;
- 19:                 meta    2  134          // 
- 10:               call_n  132  254          //  // REWRITE
- 20:                 meta    2  132          // 
- 21:               call_n  255  254          // 
- 22:           assignment  132    1          // tmp132 = 2: SMALLINT;
- 23:       multiplication  133  132          // tmp133 = tmp132 * a;
- 24:                 meta    2  133          // 
- 25:           assignment  132    6          // tmp132 = b : TYPEOF(b);
- 26:           assignment  133    1          // tmp133 = 1: SMALLINT;
- 27:         substraction  134  132          // tmp134 = tmp132 - tmp133;
- 28:                 meta    2  134          // 
- 21:               call_n  132  254          //  // REWRITE
- 29:                 meta    2  132          // 
- 30:                 meta    2  254          // tmp132 = hz (tmp133, tmp134, tmp132, hz);
-  9:          construct_n  132  254          //  // REWRITE
- 31:           assignment  133    6          // tmp133 = tmp132 : TYPEOF(tmp132);
- 32:             jmp_down  255               // goto 65567;
-  8:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 33; // REWRITE
- 33:          construct_n  255  254          // 
- 34:           assignment  134    0          // tmp134 = null: SIMPLE;
- 35:                 meta    2  134          // 
- 36:           assignment  134    0          // tmp134 = null: SIMPLE;
- 37:                 meta    2  134          // 
- 38:                 meta    2  254          // 
- 33:          construct_n  134  254          //  // REWRITE
- 39:           assignment  133    6          // tmp133 = tmp134 : TYPEOF(tmp134);
- 32:             jmp_down    0               // goto 40; // REWRITE
- 40:               retval                    // return tmp133;
-  5:         reg_var_decl  128               // var tmp128 .. tmp135; // REWRITE
- 41:                  ret                    // ret;
-  3:                 meta    7    0          // function end: 42; // REWRITE
-  9:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 10:           assignment  254    6          // f = tmp130 : TYPEOF(tmp130);
- 11:           assignment  131    1          // tmp131 = 4: SMALLINT;
- 12:           assignment  254    6          // g = tmp131 : TYPEOF(tmp131);
- 13:             jmp_down  255               // goto 65548;
- 14:           assignment  130    5          // tmp130 = 'max': STRING;
- 15:          prop_getter  131  254          // tmp131 = Math[tmp130];
- 16:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
- 17:               call_n  255  131          // 
- 18:                 meta    1    1          // 
- 19:           assignment  133    1          // tmp133 = 6: SMALLINT;
- 20:                 meta    2  133          // 
- 21:                 meta    2  254          // 
- 17:               call_n  133  131          //  // REWRITE
- 22:           assignment  254    6          // h = tmp133 : TYPEOF(tmp133);
- 23:               call_n  255  254          // 
- 24:           assignment  134    1          // tmp134 = 0: SMALLINT;
- 25:                 meta    2  134          // 
- 26:                 meta    2  254          // 
- 23:               call_n  134  254          //  // REWRITE
- 27:           assignment  254    6          // k = tmp134 : TYPEOF(tmp134);
- 28:           assignment  135    1          // tmp135 = 4: SMALLINT;
- 29:           assignment  254    6          // l = tmp135 : TYPEOF(tmp135);
- 30:             jmp_down  255               // goto 65565;
- 31:           assignment  130    1          // tmp130 = 1: SMALLINT;
- 32:           assignment  131    6          // tmp131 = h : TYPEOF(h);
- 33:         substraction  132  131          // tmp132 = tmp131 - l;
- 34:           assignment  133    1          // tmp133 = 4: SMALLINT;
- 35:             addition  134  132          // tmp134 = tmp132 + tmp133;
- 36:         b_shift_left  135  130          // tmp135 = tmp130 << tmp134;
- 37:           assignment  254    6          // n = tmp135 : TYPEOF(tmp135);
- 38:           assignment  136    1          // tmp136 = 1: SMALLINT;
- 39:           assignment  254    6          // p = tmp136 : TYPEOF(tmp136);
- 40:             jmp_down  255               // goto 65575;
- 41:            post_incr  130               // tmp130 = p++;
- 40:             jmp_down    0               // goto 42; // REWRITE
- 42:           assignment  131    6          // tmp131 = p : TYPEOF(p);
- 43:   less_or_equal_than  132  131          // tmp132 = tmp131 <= n;
- 44:       is_true_jmp_up  132    0          // if (tmp132) goto 41;
- 45:           assignment  133    1          // tmp133 = 2: SMALLINT;
- 46:             addition  254  254          // l = l + tmp133;
- 30:             jmp_down    0               // goto 47; // REWRITE
- 47:           assignment  134    6          // tmp134 = l : TYPEOF(l);
- 48:   less_or_equal_than  135  134          // tmp135 = tmp134 <= h;
- 49:       is_true_jmp_up  135    0          // if (tmp135) goto 31;
- 50:               call_n  255  254          // 
- 51:                 meta    2  254          // 
- 50:               call_n  130  254          //  // REWRITE
- 52:             addition  254  254          // f = f + tmp130;
- 53:           assignment  131    6          // tmp131 = f : TYPEOF(f);
- 54:           assignment  132    1          // tmp132 = 1: SMALLINT;
- 55:             addition  254  254          // g = g + tmp132;
- 13:             jmp_down    0               // goto 56; // REWRITE
- 56:           assignment  133    1          // tmp133 = 7: SMALLINT;
- 57: greater_or_equal_than  134  133          // tmp134 = tmp133 >= g;
- 58:       is_true_jmp_up  134    0          // if (tmp134) goto 14;
- 59:           assignment  130    1          // tmp130 = 4: SMALLINT;
- 60:          unary_minus  131               // tmp131 = -tmp130;
- 61:      not_equal_value  132  131          // tmp132 = tmp131 != f;
- 62:    is_false_jmp_down  132  255          // if (tmp132 == false) goto 65597;
- 63:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected -4 but got ': STRING;
- 64:             addition  131  130          // tmp131 = tmp130 + f;
- 65:          throw_value                    // throw tmp131;
-// 
- 62:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 66; // REWRITE
-  1:         reg_var_decl  128               // var tmp128 .. tmp136; // REWRITE
- 66:                  ret                    // ret;
-LITERALS:
-0x84ec54 [  8] c : STRING
-0x84ec5c [  8] a : STRING
-0x84ec64 [  8] b : STRING
-0x84ec6c [  4] m : MAGIC STRING [id=201] 
-0x84ec70 [ 12] left : STRING
-0x84ec7c [ 12] right : STRING
-0x84ec9c [ 12] item : STRING
-0x84eca8 [  8] d : STRING
-0x84ecb0 [  8] e : STRING
-0x84ecb8 [  8] f : STRING
-0x84ecd4 [  4] g : MAGIC STRING [id=199] 
-0x84ecd8 [  8] h : STRING
-0x84ece0 [  4] Math : MAGIC STRING [id=44] 
-0x84ece4 [  4] max : MAGIC STRING [id=93] 
-0x84ece8 [  8] k : STRING
-0x84ecf0 [  8] l : STRING
-0x84ecf8 [  8] n : STRING
-0x84ed14 [  8] p : STRING
-0x84ed1c [ 48] ERROR: bad result: expected -4 but got  : STRING
-0x84ed60 [ 32]  : EMPTY RECORD
-  0:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
-  1:         reg_var_decl  128               // var tmp128 .. tmp136;
-  2:             var_decl                    // var f;
-  3:             var_decl                    // var g;
-  4:             var_decl                    // var h;
-  5:             var_decl                    // var k;
-  6:             var_decl                    // var l;
-  7:             var_decl                    // var n;
-  8:             var_decl                    // var p;
-  9:          func_decl_n    7               // 
- 10:                 meta    2    8          // 
- 11:                 meta    2    9          // 
- 12:                 meta    2   10          // function c (a, b, m);
- 13:                 meta    7    0          // function end: 26;
- 14:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 15:         reg_var_decl  128               // var tmp128 .. tmp132;
- 16:         this_binding                    // tmp130 = this;
- 17:           assignment  131    5          // tmp131 = 'left': STRING;
- 18:          prop_setter  130  131          // tmp130[tmp131] = a;
- 19:         this_binding                    // tmp130 = this;
- 20:           assignment  131    5          // tmp131 = 'right': STRING;
- 21:          prop_setter  130  131          // tmp130[tmp131] = b;
- 22:         this_binding                    // tmp130 = this;
- 23:           assignment  131    5          // tmp131 = 'item': STRING;
- 24:          prop_setter  130  131          // tmp130[tmp131] = m;
- 25:                  ret                    // ret;
- 26:          func_decl_n   14               // 
- 27:                 meta    2    8          // function d (a);
- 28:                 meta    7    0          // function end: 55;
- 29:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 30:         reg_var_decl  128               // var tmp128 .. tmp142;
- 31:           assignment  130    0          // tmp130 = null: SIMPLE;
- 32:           assignment  131    5          // tmp131 = 'left': STRING;
- 33:          prop_getter  132    8          // tmp132 = a[tmp131];
- 34:          equal_value  133  130          // tmp133 = tmp130 == tmp132;
- 35:    is_false_jmp_down  133    0          // if (tmp133 == false) goto 40;
- 36:           assignment  134    5          // tmp134 = 'item': STRING;
- 37:          prop_getter  135    8          // tmp135 = a[tmp134];
- 38:           assignment  136    6          // tmp136 = tmp135 : TYPEOF(tmp135);
- 39:             jmp_down    0               // goto 53;
- 40:           assignment  137    5          // tmp137 = 'item': STRING;
- 41:          prop_getter  138    8          // tmp138 = a[tmp137];
- 42:               call_n  139   14          // 
- 43:           assignment  139    5          // tmp139 = 'left': STRING;
- 44:          prop_getter  140    8          // tmp140 = a[tmp139];
- 45:                 meta    2  140          // tmp139 = d (tmp140);
- 46:             addition  140  138          // tmp140 = tmp138 + tmp139;
- 47:               call_n  141   14          // 
- 48:           assignment  141    5          // tmp141 = 'right': STRING;
- 49:          prop_getter  142    8          // tmp142 = a[tmp141];
- 50:                 meta    2  142          // tmp141 = d (tmp142);
- 51:         substraction  142  140          // tmp142 = tmp140 - tmp141;
- 52:           assignment  136    6          // tmp136 = tmp142 : TYPEOF(tmp142);
- 53:               retval                    // return tmp136;
- 54:                  ret                    // ret;
- 55:          func_decl_n   15               // 
- 56:                 meta    2    8          // 
- 57:                 meta    2    9          // function e (a, b);
- 58:                 meta    7    0          // function end: 97;
- 59:                 meta   12    6          // [no 'arguments'] [no 'eval'] 
- 60:         reg_var_decl  128               // var tmp128 .. tmp135;
- 61:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 62:            less_than  131  130          // tmp131 = tmp130 < b;
- 63:    is_false_jmp_down  131    0          // if (tmp131 == false) goto 88;
- 64:          construct_n  132    0          // 
- 65:               call_n  132    1          // 
- 66:           assignment  132    1          // tmp132 = 2: SMALLINT;
- 67:       multiplication  133  132          // tmp133 = tmp132 * a;
- 68:           assignment  134    1          // tmp134 = 1: SMALLINT;
- 69:         substraction  135  133          // tmp135 = tmp133 - tmp134;
- 70:                 meta    2  135          // 
- 71:           assignment  132    6          // tmp132 = b : TYPEOF(b);
- 72:           assignment  133    1          // tmp133 = 1: SMALLINT;
- 73:         substraction  134  132          // tmp134 = tmp132 - tmp133;
- 74:                 meta    2  134          // tmp132 = e (tmp135, tmp134);
- 75:                 meta    2  132          // 
- 76:               call_n  132    1          // 
- 77:           assignment  132    1          // tmp132 = 2: SMALLINT;
- 78:       multiplication  133  132          // tmp133 = tmp132 * a;
- 79:                 meta    2  133          // 
- 80:           assignment  132    6          // tmp132 = b : TYPEOF(b);
- 81:           assignment  133    1          // tmp133 = 1: SMALLINT;
- 82:         substraction  134  132          // tmp134 = tmp132 - tmp133;
- 83:                 meta    2  134          // tmp132 = e (tmp133, tmp134);
- 84:                 meta    2  132          // 
- 85:                 meta    2    2          // 
- 86:           assignment  133    6          // tmp133 = tmp132 : TYPEOF(tmp132);
- 87:             jmp_down    0               // goto 95;
- 88:          construct_n  134    0          // 
- 89:           assignment  134    0          // tmp134 = null: SIMPLE;
- 90:                 meta    2  134          // 
- 91:           assignment  134    0          // tmp134 = null: SIMPLE;
- 92:                 meta    2  134          // 
- 93:                 meta    2    2          // tmp134 = new c (tmp134, tmp134, a);
- 94:           assignment  133    6          // tmp133 = tmp134 : TYPEOF(tmp134);
- 95:               retval                    // return tmp133;
- 96:                  ret                    // ret;
- 97:           assignment  130    1          // tmp130 = 0: SMALLINT;
- 98:           assignment    4    6          // f = tmp130 : TYPEOF(tmp130);
- 99:           assignment  131    1          // tmp131 = 4: SMALLINT;
-100:           assignment    5    6          // g = tmp131 : TYPEOF(tmp131);
-101:             jmp_down    0               // goto 144;
-102:           assignment  130    5          // tmp130 = 'max': STRING;
-103:          prop_getter  131    7          // tmp131 = Math[tmp130];
-104:           assignment  132    6          // tmp132 = Math : TYPEOF(Math);
-105:               call_n  133  131          // 
-106:                 meta    1    1          // 
-107:           assignment  133    1          // tmp133 = 6: SMALLINT;
-108:                 meta    2  133          // 
-109:                 meta    2    5          // tmp133 = tmp131 (this_arg = tmp132, tmp133, g);
-110:           assignment    8    6          // h = tmp133 : TYPEOF(tmp133);
-111:               call_n  134    1          // 
-112:           assignment  134    1          // tmp134 = 0: SMALLINT;
-113:                 meta    2  134          // 
-114:                 meta    2    8          // tmp134 = e (tmp134, h);
-115:           assignment    9    6          // k = tmp134 : TYPEOF(tmp134);
-116:           assignment  135    1          // tmp135 = 4: SMALLINT;
-117:           assignment   10    6          // l = tmp135 : TYPEOF(tmp135);
-118:             jmp_down    0               // goto 135;
-119:           assignment  130    1          // tmp130 = 1: SMALLINT;
-120:           assignment  131    6          // tmp131 = h : TYPEOF(h);
-121:         substraction  132  131          // tmp132 = tmp131 - l;
-122:           assignment  133    1          // tmp133 = 4: SMALLINT;
-123:             addition  134  132          // tmp134 = tmp132 + tmp133;
-124:         b_shift_left  135  130          // tmp135 = tmp130 << tmp134;
-125:           assignment   11    6          // n = tmp135 : TYPEOF(tmp135);
-126:           assignment  136    1          // tmp136 = 1: SMALLINT;
-127:           assignment   12    6          // p = tmp136 : TYPEOF(tmp136);
-128:             jmp_down    0               // goto 130;
-129:            post_incr  130               // tmp130 = p++;
-130:           assignment  131    6          // tmp131 = p : TYPEOF(p);
-131:   less_or_equal_than  132  131          // tmp132 = tmp131 <= n;
-132:       is_true_jmp_up  132    0          // if (tmp132) goto 129;
-133:           assignment  133    1          // tmp133 = 2: SMALLINT;
-134:             addition    2    2          // l = l + tmp133;
-135:           assignment  134    6          // tmp134 = l : TYPEOF(l);
-136:   less_or_equal_than  135  134          // tmp135 = tmp134 <= h;
-137:       is_true_jmp_up  135    0          // if (tmp135) goto 119;
-138:               call_n  130    4          // 
-139:                 meta    2    5          // tmp130 = d (k);
-140:             addition    6    6          // f = f + tmp130;
-141:           assignment  131    6          // tmp131 = f : TYPEOF(f);
-142:           assignment  132    1          // tmp132 = 1: SMALLINT;
-143:             addition    7    7          // g = g + tmp132;
-144:           assignment  133    1          // tmp133 = 7: SMALLINT;
-145: greater_or_equal_than  134  133          // tmp134 = tmp133 >= g;
-146:       is_true_jmp_up  134    0          // if (tmp134) goto 102;
-147:           assignment  130    1          // tmp130 = 4: SMALLINT;
-148:          unary_minus  131               // tmp131 = -tmp130;
-149:      not_equal_value  132  131          // tmp132 = tmp131 != f;
-150:    is_false_jmp_down  132    0          // if (tmp132 == false) goto 154;
-151:           assignment  130    5          // tmp130 = 'ERROR: bad result: expected -4 but got ': STRING;
-152:             addition  131  130          // tmp131 = tmp130 + f;
-153:          throw_value                    // throw tmp131;
-154:                  ret                    // ret;
+  2:                 meta    7    0   27     // function end: 29; // REWRITE
+  0:          func_decl_n  254  253          // 
+  1:                 meta    2  254  255     // 
+  2:                 meta    2  254  255     // 
+  0:          func_decl_n  254    2          //  // REWRITE
+  3:                 meta    7  253  253     // function end: 65024;
+  4:                 meta   12  253  255     // [to be rewritten]
+  5:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  6:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  7:            less_than  131  130  254     // tmp131 = tmp130 < b;
+  8:    is_false_jmp_down  131  253  253     // if (tmp131 == false) goto 65029;
+  9:          construct_n  253  254  253     // 
+ 10:               call_n  253  254  253     // 
+ 11:           assignment  132    1    2     // tmp132 = 2: SMALLINT;
+ 12:       multiplication  133  132  254     // tmp133 = tmp132 * a;
+ 13:           assignment  134    1    1     // tmp134 = 1: SMALLINT;
+ 14:         substraction  135  133  134     // tmp135 = tmp133 - tmp134;
+ 15:                 meta    2  135  255     // 
+ 16:           assignment  132    6  254     // tmp132 = b : TYPEOF(b);
+ 17:           assignment  133    1    1     // tmp133 = 1: SMALLINT;
+ 18:         substraction  134  132  133     // tmp134 = tmp132 - tmp133;
+ 19:                 meta    2  134  255     // 
+ 10:               call_n  132  254    2     //  // REWRITE
+ 20:                 meta    2  132  255     // 
+ 21:               call_n  253  254  253     // 
+ 22:           assignment  132    1    2     // tmp132 = 2: SMALLINT;
+ 23:       multiplication  133  132  254     // tmp133 = tmp132 * a;
+ 24:                 meta    2  133  255     // 
+ 25:           assignment  132    6  254     // tmp132 = b : TYPEOF(b);
+ 26:           assignment  133    1    1     // tmp133 = 1: SMALLINT;
+ 27:         substraction  134  132  133     // tmp134 = tmp132 - tmp133;
+ 28:                 meta    2  134  255     // 
+ 21:               call_n  132  254    2     //  // REWRITE
+ 29:                 meta    2  132  255     // 
+ 30:                 meta    2  254  255     // tmp132 = ICE: Assertion 'lit_ids != NULL' failed at /home/john/git/jerry/jerry-core/vm/pretty-printer.cpp(var_to_str):102.
+Error: ERR_FAILED_INTERNAL_ASSERTION
