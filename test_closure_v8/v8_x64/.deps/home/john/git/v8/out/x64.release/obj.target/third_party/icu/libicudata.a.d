@@ -1,0 +1,1 @@
+cmd_/home/john/git/v8/out/x64.release/obj.target/third_party/icu/libicudata.a := rm -f /home/john/git/v8/out/x64.release/obj.target/third_party/icu/libicudata.a && ar crsT /home/john/git/v8/out/x64.release/obj.target/third_party/icu/libicudata.a /home/john/git/v8/out/x64.release/obj.target/icudata/third_party/icu/linux/icudtl_dat.o

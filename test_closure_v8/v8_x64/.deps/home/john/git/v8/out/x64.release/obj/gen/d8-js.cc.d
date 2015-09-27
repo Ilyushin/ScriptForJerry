@@ -1,0 +1,1 @@
+cmd_/home/john/git/v8/out/x64.release/obj/gen/d8-js.cc := LD_LIBRARY_PATH=/home/john/git/v8/out/x64.release/lib.host:/home/john/git/v8/out/x64.release/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd ../src; mkdir -p /home/john/git/v8/out/x64.release/obj/gen; python ../tools/js2c.py "/home/john/git/v8/out/x64.release/obj/gen/d8-js.cc" D8 d8.js macros.py
