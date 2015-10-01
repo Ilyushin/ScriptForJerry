@@ -1,8 +1,10 @@
-import os, time, subprocess, csv
+#!/usr/bin/python2.7
+import csv, os, sys, time, subprocess, csv
+
+dir = os.path.dirname(__file__)
 
 class analyzing_result:
     path_file, file_name, time, time_closure, time_jerry, size, size_closure, decreased_time, reduced_size, debug = '', '', 0, 0, 0, 0, 0, 0, 0, False
-    dir = os.path.dirname(__file__)
     path_jerry_debug = os.path.join(dir, 'jerry_debug') 
     path_jerry = os.path.join(dir, 'jerry')
     path_closure = os.path.join(dir, 'closure_compiler.jar')
@@ -94,13 +96,51 @@ class analyzing_result:
         newStr.append(',' + str(self.reduced_size))
                 
         csv_writer.writerow(newStr)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+#read path to tests from command prompt
+if len(sys.argv) > 1:
+    path_tests = sys.argv[1]
+else:
+    path_tests = os.path.join(dir,'test_files')
+ 
+#read path to a result folder from command prompt   
+if len(sys.argv) > 2:
+    path_result_folder = sys.argv[2]
+    if os.path.isfile(path_result_folder):
+        print "Wrong the result folder!"
+        sys.exit()
+else:   
+    path_result_folder = os.path.join(dir, 'results')
+
+
+tests = []
+if os.path.isfile(path_tests):
+    tests.append(path_tests)
+else:
+    for fn in os.listdir(path_tests):
+       if fn.lower().endswith('.js'):
+           tests.append(path_tests+'/'+fn)
+            
+def processing_test(path, log):
+    print '*********start - '+path
+    an_result = analyzing_result(path,'ADVANCED_OPTIMIZATIONS')
+    an_result.execut_scripts_closure(log)
+    print '*********finish - '+path
+
+def start_processing():
+    #create a csv file for saving result
+    csvfile = open(path_result_folder+'/result.csv', 'w+')
+    csv_writer = csv.writer(csvfile, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ', quotechar='') 
+    
+    threads = []
+    for path in tests:
+        processing_test(path,csv_writer) 
+      
+    csvfile.close()
+    print 'success'
+  
+if len(tests) == 0:
+    print "Tests are empty!"
+else:
+    start_processing()
+    
