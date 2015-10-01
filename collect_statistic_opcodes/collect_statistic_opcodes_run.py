@@ -1,8 +1,26 @@
 #!/usr/bin/python2.7
-import sys, subprocess, os, csv, gzip, threading
+import sys, subprocess, os, csv,subprocess, gzip, threading
 
 dir = os.path.dirname(__file__)
-path_result_folder = os.path.join(dir, 'results')
+
+#set parameters
+path_jerry = os.path.join(dir, 'jerry')
+
+#read path to tests from command prompt
+if len(sys.argv) > 1:
+    path_tests = sys.argv[1]
+else:
+    path_tests = os.path.join(dir,'test_files')
+
+#read path to a result folder from command prompt   
+if len(sys.argv) > 2:
+    path_result_folder = sys.argv[2]
+    if os.path.isfile(path_result_folder):
+        print "Wrong the result folder!"
+        sys.exit()
+else:   
+    path_result_folder = os.path.join(dir, 'results')
+    
 path_bytecode = os.path.join(dir, 'bytecode')
 
 def get_name_opcodes_dict(file_name):
@@ -91,7 +109,7 @@ def compress_file(path, path_ar):
             print 'remove - '+path
     
 
-def start(): 
+def analyze_result_start(): 
     
     results_path = []
     for fn in os.listdir(path_result_folder):
@@ -114,10 +132,43 @@ def start():
         
     print '********Compress files*****************' 
     
+    threads = []
     for fn in os.listdir(path_result_folder):
         if fn.lower().endswith('.csv'):
             path = path_result_folder+'/'+fn
             path_ar = path_result_folder+'/'+fn+'.gz'
-            threading.Thread(target=compress_file, args=(path, path_ar,)).start()
+            threads.append(threading.Thread(target=compress_file, args=(path, path_ar,)))
+    
+    if len(threads) > 0:
+        # Start all threads
+        for t in threads:
+            t.start()
+    
+        # Wait for all of them to finish
+        for t in threads:
+            t.join()    
+        print 'success' 
             
- 
+
+tests = []
+if os.path.isfile(path_tests):
+    tests.append(path_tests)
+else:
+    for fn in os.listdir(path_tests):
+       if fn.lower().endswith('.js'):
+           tests.append(path_tests+'/'+fn)
+  
+if tests:
+    for test in tests:
+        file_name = os.path.basename(test)
+        cmd = path_jerry + ' ' + test+' >'+path_result_folder+'/'+file_name.split('.')[0]+'.csv'
+        print 'start - '+test
+        r = subprocess.call(cmd, shell=True)
+        print 'end - '+test
+        
+print 'success'
+
+print '********START ANALYZE****************'
+
+analyze_result_start()
+            

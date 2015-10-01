@@ -97,6 +97,7 @@ class analyzing_result:
                 
         csv_writer.writerow(newStr)
 
+
 #read path to tests from command prompt
 if len(sys.argv) > 1:
     path_tests = sys.argv[1]
