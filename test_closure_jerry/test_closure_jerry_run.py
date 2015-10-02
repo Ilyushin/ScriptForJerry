@@ -3,12 +3,28 @@ import csv, os, sys, time, subprocess, csv
 
 dir = os.path.dirname(__file__)
 
+#read path to tests from command prompt
+path_tests = ''
+if len(sys.argv) > 1:
+    path_tests = sys.argv[1]
+else:
+    path_tests = os.path.join(dir,'test_files')
+
+#read path to a result folder from command prompt
+path_result_folder = ''    
+if len(sys.argv) > 2:
+    path_result_folder = sys.argv[2]
+    if os.path.isfile(path_result_folder):
+        print "Wrong the result folder!"
+        sys.exit()
+else:   
+    path_result_folder = os.path.join(dir, 'results')
+
 class analyzing_result:
     path_file, file_name, time, time_closure, time_jerry, size, size_closure, decreased_time, reduced_size, debug = '', '', 0, 0, 0, 0, 0, 0, 0, False
     path_jerry_debug = os.path.join(dir, 'jerry_debug') 
     path_jerry = os.path.join(dir, 'jerry')
     path_closure = os.path.join(dir, 'closure_compiler.jar')
-    path_result_folder = os.path.join(dir, 'results')
     
     def __init__(self, path_file, level):
         self.path_file = path_file
@@ -29,14 +45,14 @@ class analyzing_result:
         self.time = round((end - start) * 1000, 2)
         
         # for calculating number of commands
-        path_file1 = self.path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes.txt'  
+        path_file1 = path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes.txt'  
         cmd = self.path_jerry_debug + ' ' + self.path_file + ' --show-opcodes > ' + path_file1
         r2 = subprocess.call(cmd, shell=True, stderr=subprocess.STDOUT)
         self.size = self.get_file_len(path_file1)
     
         # get bytecode using Google Closure as an optimizing compiler    
-        path_file2 = self.path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_optimized_js.js'
-        path_file3 = self.path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes_optimized.txt'
+        path_file2 = path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_optimized_js.js'
+        path_file3 = path_result_folder + '/' + os.path.splitext(self.file_name)[0] + '_opcodes_optimized.txt'
         
         cmd_closure = 'java -jar ' + self.path_closure + ' --compilation_level ' + self.level + ' --js ' + self.path_file + ' --js_output_file ' + path_file2
         cmd = self.path_jerry + ' ' + path_file2
@@ -98,20 +114,7 @@ class analyzing_result:
         csv_writer.writerow(newStr)
 
 
-#read path to tests from command prompt
-if len(sys.argv) > 1:
-    path_tests = sys.argv[1]
-else:
-    path_tests = os.path.join(dir,'test_files')
- 
-#read path to a result folder from command prompt   
-if len(sys.argv) > 2:
-    path_result_folder = sys.argv[2]
-    if os.path.isfile(path_result_folder):
-        print "Wrong the result folder!"
-        sys.exit()
-else:   
-    path_result_folder = os.path.join(dir, 'results')
+
 
 
 tests = []
