@@ -1,0 +1,67 @@
+// var sum=0;
+  0:                 meta   12  253  255     // [to be rewritten]
+  1:         reg_var_decl  128  253  253     // var tmp128 .. tmp253;
+  2:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  3:           assignment  254    6  130     // sum = tmp130 : TYPEOF(tmp130);
+// for (var i=0; i<100; i++)
+//   sum+=Math.sin(Math.PI / 2);
+  4:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  5:           assignment  254    6  130     // i = tmp130 : TYPEOF(tmp130);
+  6:             jmp_down  253  253          // goto 65027;
+  7:           assignment  130    5  254     // tmp130 = 'sin': STRING;
+  8:          prop_getter  131  254  130     // tmp131 = Math[tmp130];
+  9:           assignment  132    6  254     // tmp132 = Math : TYPEOF(Math);
+ 10:               call_n  253  131  253     // 
+ 11:                 meta    1    1  132     // 
+ 12:           assignment  133    5  254     // tmp133 = 'PI': STRING;
+ 13:          prop_getter  134  254  133     // tmp134 = Math[tmp133];
+ 14:           assignment  135    1    2     // tmp135 = 2: SMALLINT;
+ 15:             division  136  134  135     // tmp136 = tmp134 / tmp135;
+ 16:                 meta    2  136  255     // 
+ 10:               call_n  133  131    1     //  // REWRITE
+ 17:             addition  254  254  133     // sum = sum + tmp133;
+ 18:           assignment  134    6  254     // tmp134 = sum : TYPEOF(sum);
+ 19:            post_incr  135  254          // tmp135 = i++;
+  6:             jmp_down    0   14          // goto 20; // REWRITE
+ 20:           assignment  136    6  254     // tmp136 = i : TYPEOF(i);
+ 21:           assignment  137    1  100     // tmp137 = 100: SMALLINT;
+ 22:            less_than  138  136  137     // tmp138 = tmp136 < tmp137;
+ 23:       is_true_jmp_up  138    0   16     // if (tmp138) goto 7;
+// 
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval']  // REWRITE
+  1:         reg_var_decl  128  138    0     // var tmp128 .. tmp138; // REWRITE
+ 24:                  ret                    // ret;
+LITERALS:
+0x8a54c4 [ 12] sum : STRING
+0x8a54d0 [  4] i : MAGIC STRING [id=207] 
+0x8a54d4 [  4] Math : MAGIC STRING [id=44] 
+0x8a54d8 [  4] sin : MAGIC STRING [id=99] 
+0x8a54dc [  4] PI : MAGIC STRING [id=81] 
+0x8a54e0 [ 32]  : EMPTY RECORD
+  0:                 meta   12    6  255     // [no 'arguments'] [no 'eval'] 
+  1:         reg_var_decl  128  138    0     // var tmp128 .. tmp138;
+  2:             var_decl    0               // var sum;
+  3:             var_decl    1               // var i;
+  4:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  5:           assignment    0    6  130     // sum = tmp130 : TYPEOF(tmp130);
+  6:           assignment  130    1    0     // tmp130 = 0: SMALLINT;
+  7:           assignment    1    6  130     // i = tmp130 : TYPEOF(tmp130);
+  8:             jmp_down    0   14          // goto 22;
+  9:           assignment  130    5    2     // tmp130 = 'sin': STRING;
+ 10:          prop_getter  131    3  130     // tmp131 = Math[tmp130];
+ 11:           assignment  132    6    3     // tmp132 = Math : TYPEOF(Math);
+ 12:               call_n  133  131    1     // 
+ 13:                 meta    1    1  132     // 
+ 14:           assignment  133    5    4     // tmp133 = 'PI': STRING;
+ 15:          prop_getter  134    3  133     // tmp134 = Math[tmp133];
+ 16:           assignment  135    1    2     // tmp135 = 2: SMALLINT;
+ 17:             division  136  134  135     // tmp136 = tmp134 / tmp135;
+ 18:                 meta    2  136  255     // tmp133 = tmp131 (this_arg = tmp132, tmp136);
+ 19:             addition    0    0  133     // sum = sum + tmp133;
+ 20:           assignment  134    6    0     // tmp134 = sum : TYPEOF(sum);
+ 21:            post_incr  135    1          // tmp135 = i++;
+ 22:           assignment  136    6    1     // tmp136 = i : TYPEOF(i);
+ 23:           assignment  137    1  100     // tmp137 = 100: SMALLINT;
+ 24:            less_than  138  136  137     // tmp138 = tmp136 < tmp137;
+ 25:       is_true_jmp_up  138    0   16     // if (tmp138) goto 9;
+ 26:                  ret                    // ret;
