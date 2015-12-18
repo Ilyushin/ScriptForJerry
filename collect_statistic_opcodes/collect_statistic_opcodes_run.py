@@ -60,7 +60,7 @@ def process_data(path):
             l = len(row)
             if l != 2: continue           
                                  
-            id = int(row[0])-1    
+            id = int(row[0])
             result_dict.setdefault(id,[0,0,0,0])
             #number
             result_dict[id][0] += 1
