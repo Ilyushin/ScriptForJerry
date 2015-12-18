@@ -82,19 +82,25 @@ def process_data(path):
         if len(dict_opcodes) != 0: 
             csvfile_an = open(path_result_folder+'/'+os.path.splitext(os.path.basename(path))[0]+'_analyze.csv', 'w+')
             csv_writer = csv.writer(csvfile_an, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ', quotechar='')
-            csv_writer.writerow(['Name',',Id',',Number of calls',',Min time',',Max time',',Average time',',All time'])
+            csv_writer.writerow(['Name',';Id',';Number of calls',';Min time',';Max time',';Average time',';All time',';Percentage of the total time'])
+
+            total_time = 0;
+            for key,value in result_dict.iteritems():
+                total_time += value[3]
+
             for key, value in result_dict.iteritems():
                 newStr = []
                 newStr.append(dict_opcodes[str(key)])
-                newStr.append(',' + str(key))
-                newStr.append(',' + str(value[0]))
-                newStr.append(',' + '{0:.6f}'.format(value[1]))
-                newStr.append(',' + '{0:.6f}'.format(value[2]))
+                newStr.append(';' + str(key))
+                newStr.append(';' + str(value[0]))
+                newStr.append(';' + '{0:.6f}'.format(value[1]))
+                newStr.append(';' + '{0:.6f}'.format(value[2]))
                 if value[1] == 0:
-                    newStr.append(',' + '{0:.15f}'.format(value[3]))
+                    newStr.append(';' + '{0:.15f}'.format(value[3]))
                 else:
-                    newStr.append(',' + '{0:.15f}'.format(value[3]/value[0]))
-                newStr.append(','+ '{0:.15f}'.format(value[3]))
+                    newStr.append(';' + '{0:.15f}'.format(value[3]/value[0]))
+                newStr.append(';'+ '{0:.15f}'.format(value[3]))
+                newStr.append(';'+ '{0:.15f}'.format((value[3]*100)/total_time))
                 csv_writer.writerow(newStr)
             csvfile_an.close()
         else:
