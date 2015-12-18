@@ -61,7 +61,7 @@ def process_data(path):
             if l != 2: continue           
                                  
             id = int(row[0])
-            result_dict.setdefault(id,[0,0,0,0])
+            result_dict.setdefault(id,[0,0,0,0,0])
             #number
             result_dict[id][0] += 1
             #min
@@ -73,6 +73,8 @@ def process_data(path):
                 result_dict[id][2] = float(row[1])
             #average
             result_dict[id][3] += float(row[1])
+            #all time
+            #result_dict[id][4] += float(row[1])
        
         #get name list of opcodes
         dict_opcodes = get_name_opcodes_dict(os.path.splitext(os.path.basename(path))[0])
@@ -80,7 +82,7 @@ def process_data(path):
         if len(dict_opcodes) != 0: 
             csvfile_an = open(path_result_folder+'/'+os.path.splitext(os.path.basename(path))[0]+'_analyze.csv', 'w+')
             csv_writer = csv.writer(csvfile_an, delimiter=' ', quoting=csv.QUOTE_NONE, escapechar=' ', quotechar='')
-            csv_writer.writerow(['Name',',Id',',Number of calls',',Min time',',Max time',',Average time'])
+            csv_writer.writerow(['Name',',Id',',Number of calls',',Min time',',Max time',',Average time',',All time'])
             for key, value in result_dict.iteritems():
                 newStr = []
                 newStr.append(dict_opcodes[str(key)])
@@ -89,10 +91,10 @@ def process_data(path):
                 newStr.append(',' + '{0:.6f}'.format(value[1]))
                 newStr.append(',' + '{0:.6f}'.format(value[2]))
                 if value[1] == 0:
-                    newStr.append(',' + '{0:.15f}'.format(value[2])) 
+                    newStr.append(',' + '{0:.15f}'.format(value[3]))
                 else:
-                    newStr.append(',' + '{0:.15f}'.format(value[2]/value[0]))
-                
+                    newStr.append(',' + '{0:.15f}'.format(value[3]/value[0]))
+                newStr.append(','+ '{0:.15f}'.format(value[3]))
                 csv_writer.writerow(newStr)
             csvfile_an.close()
         else:
